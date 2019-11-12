@@ -664,7 +664,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 
 		var/frequency = 0
 		var/id = null
-		var/datum/radio_frequency/radio_connection
+		var/tmp/datum/radio_frequency/radio_connection
 
 		atmos_init()
 			..()

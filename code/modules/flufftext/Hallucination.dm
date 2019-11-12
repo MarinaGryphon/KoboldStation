@@ -353,8 +353,8 @@ var/list/non_fakeattack_weapons = list(/obj/item/weapon/gun/projectile, /obj/ite
 	/obj/item/toy/syndicateballoon, /obj/item/weapon/gun/energy/captain,\
 	/obj/item/weapon/hand_tele, /obj/item/weapon/rfd/construction, /obj/item/weapon/tank/jetpack,\
 	/obj/item/clothing/under/rank/captain, /obj/item/weapon/aicard,\
-	/obj/item/clothing/shoes/magboots, /obj/item/blueprints, /obj/item/weapon/disk/nuclear,\
-	/obj/item/clothing/suit/space/void, /obj/item/weapon/tank)
+	/obj/item/clothing/shoes/magboots, /obj/item/blueprints, /obj/item/clothing/suit/space/void,\
+	/obj/item/weapon/tank)
 
 /proc/fake_attack(var/mob/living/target)
 	var/mob/living/carbon/human/clone = null

@@ -53,17 +53,6 @@
 			L.Weaken(3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
-/mob/living/simple_animal/hostile/faithless/cult
-	faction = "cult"
-	appearance_flags = NO_CLIENT_COLOR
-
-/mob/living/simple_animal/hostile/faithless/cult/cultify()
-	return
-
-/mob/living/simple_animal/hostile/faithless/cult/Life()
-	..()
-	check_horde()
-
 /mob/living/simple_animal/hostile/faithless/wizard
 	name = "lost soul"
 	desc = "The result of a dark bargain."
@@ -78,7 +67,7 @@
 	harm_intent_damage = 0
 	melee_damage_lower = 25
 	melee_damage_upper = 25
-	var/list/darkform_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	var/list/darkform_spells = list(/spell/aoe_turf/conjure/forcewall)
 
 /mob/living/simple_animal/hostile/faithless/wizard/Initialize()
 	. = ..()

@@ -227,7 +227,7 @@
 
 	var/frequency = 0
 	var/id = null
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 /obj/machinery/atmospherics/valve/digital/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -299,7 +299,7 @@
 			else
 				open()
 
-/obj/machinery/atmospherics/valve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/valve/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.iswrench())
 		return ..()
 	if (istype(src, /obj/machinery/atmospherics/valve/digital))

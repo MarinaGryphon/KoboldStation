@@ -218,10 +218,6 @@
 			dismantle_verb = P.drill_verb
 			dismantle_sound = P.drill_sound
 			cut_delay -= P.digspeed
-		else if(istype(W,/obj/item/weapon/melee/arm_blade/))
-			dismantle_sound = "pickaxe"
-			dismantle_verb = "slicing and stabbing"
-			cut_delay *= 1.5
 
 		if(dismantle_verb)
 

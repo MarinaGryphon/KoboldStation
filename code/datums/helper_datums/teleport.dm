@@ -278,8 +278,7 @@
 		else if(istype(teleatom, /mob/living/simple_animal/shade/bluespace))
 			var/mob/living/simple_animal/shade/bluespace/BS = teleatom
 			for(var/mob/living/L in destturf)
-				if(!L.mind && !isvaurca(L))
-
+				if(!L.mind)
 					if(BS.message_countdown >= 200)
 						to_chat(BS, "<span class='notice'><b>You feel relief wash over you as your harried spirit fills into \the [L] like water into a vase.</b></span>")
 						BS.mind.transfer_to(L)
@@ -337,21 +336,7 @@
 	return 1
 
 /datum/teleport/instant/science/teleportChecks()
-	if(istype(teleatom, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks get teleported --NeoFite
-		teleatom.visible_message("<span class='danger'>\The [teleatom] bounces off of the portal!</span>")
-		return 0
-
-
 	if(isobserver(teleatom)) // do not teleport ghosts
-		return 0
-
-
-	if(!isemptylist(teleatom.search_contents_for(/obj/item/weapon/disk/nuclear)))
-		if(istype(teleatom, /mob/living))
-			var/mob/living/MM = teleatom
-			MM.visible_message("<span class='danger'>\The [MM] bounces off of the portal!</span>","<span class='warning'>Something you are carrying seems to be unable to pass through the portal. Better drop it if you want to go through.</span>")
-		else
-			teleatom.visible_message("<span class='danger'>\The [teleatom] bounces off of the portal!</span>")
 		return 0
 
 	if(isAdminLevel(destination.z)) //centcomm z-level

@@ -130,12 +130,6 @@
 	outfit = /datum/outfit/admin/deathsquad/leader
 	mob_name_prefix = "Ldr. "
 
-/datum/ghostspawner/human/ert/deathsquad/post_spawn(mob/user)
-	var/datum/martial_art/sol_combat/F = new/datum/martial_art/sol_combat(null)
-	F.teach(user)
-
-	return ..()
-
 /datum/ghostspawner/human/ert/commando
 	name = "Syndicate Commando"
 	short_name = "syndc"
@@ -151,12 +145,6 @@
 	max_count = 1
 	desc = "The leader of the Syndicate's elite commandos."
 	outfit = /datum/outfit/admin/deathsquad/syndicate/leader
-
-/datum/ghostspawner/human/ert/commando/post_spawn(mob/user)
-	var/datum/martial_art/sol_combat/F = new/datum/martial_art/sol_combat(null)
-	F.teach(user)
-
-	return ..()
 
 //Kataphract ERT
 /datum/ghostspawner/human/ert/kataphract

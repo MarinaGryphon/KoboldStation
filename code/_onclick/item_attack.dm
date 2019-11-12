@@ -85,11 +85,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/power = force
 	if(HULK in user.mutations)
 		power *= 2
-	if(ishuman(user))
-		var/mob/living/carbon/human/X = user
-		if(ishuman(target))
-			if(X.martial_art && X.martial_art.weapon_affinity && istype(src, X.martial_art.weapon_affinity))
-				perform_technique(target, X, hit_zone)
 
 	return target.hit_with_weapon(src, user, power, hit_zone)
 

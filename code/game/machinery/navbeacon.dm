@@ -89,7 +89,7 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 
 	proc/post_signal()
 
-		var/datum/radio_frequency/frequency = SSradio.return_frequency(freq)
+		var/tmp/datum/radio_frequency/frequency = SSradio.return_frequency(freq)
 
 		if(!frequency) return
 
@@ -116,7 +116,7 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 
 			updateicon()
 
-		else if (istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
+		else if (istype(I, /obj/item/card/id)||istype(I, /obj/item/device/pda))
 			if(open)
 				if (src.allowed(user))
 					src.locked = !src.locked

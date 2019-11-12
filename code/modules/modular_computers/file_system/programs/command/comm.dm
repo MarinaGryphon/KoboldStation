@@ -136,7 +136,7 @@
 		if("announce")
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
-					var/obj/item/weapon/card/id/id_card = user.GetIdCard()
+					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
@@ -318,7 +318,7 @@ Command action procs
 */
 /proc/post_display_status(var/command, var/data1, var/data2)
 
-	var/datum/radio_frequency/frequency = SSradio.return_frequency(1435)
+	var/tmp/datum/radio_frequency/frequency = SSradio.return_frequency(1435)
 
 	if(!frequency) return
 

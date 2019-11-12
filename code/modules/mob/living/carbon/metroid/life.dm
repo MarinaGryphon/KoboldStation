@@ -221,9 +221,6 @@
 				if(isslime(L) || L.stat == DEAD) // Ignore other slimes and dead mobs
 					continue
 
-				if(isskrell(L)) // we do not attack skrell - lore reason.
-					continue
-
 				if(L in Friends) // No eating friends!
 					continue
 

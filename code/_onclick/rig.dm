@@ -59,13 +59,10 @@
 /mob/living/silicon/ai/can_use_rig()
 	return carded
 
-/mob/living/silicon/pai/can_use_rig()
-	return loc == card
-
 /mob/living/proc/HardsuitClickOn(var/atom/A, var/alert_ai = 0)
 	if(!can_use_rig() || !canClick())
 		return 0
-	var/obj/item/weapon/rig/rig = get_rig()
+	var/obj/item/rig/rig = get_rig()
 	if(istype(rig) && !rig.offline && rig.selected_module)
 		if(src != rig.wearer)
 			if(rig.ai_can_move_suit(src, check_user_module = 1))

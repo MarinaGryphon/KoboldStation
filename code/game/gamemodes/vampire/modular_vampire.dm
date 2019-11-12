@@ -1,6 +1,13 @@
 var/list/vampirepower_types = typesof(/datum/power/vampire) - /datum/power/vampire
 var/list/datum/power/vampire/vampirepowers = list()
 
+/datum/power
+	var/name = "Power"
+	var/desc = "Placeholder"
+	var/helptext = ""
+	var/isVerb = TRUE	//Is it an active or passive power?
+	var/verbpath //Path to a verb that contains the effects.
+
 /datum/power/vampire
 	var/blood_cost = 0
 

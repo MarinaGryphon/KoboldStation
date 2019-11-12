@@ -30,7 +30,7 @@
 	data["status_message"] = status_message
 
 	//Pass the ID Data
-	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
+	var/obj/item/card/id/user_id_card = user.GetIdCard()
 	last_user_name = GetNameAndAssignmentFromId(user_id_card)
 	data["username"] = last_user_name
 
@@ -240,7 +240,7 @@
 
 /datum/nano_module/program/civilian/cargocontrol/proc/post_signal(var/command) //Old code right here - Used to send a refresh command to the status screens incargo
 
-	var/datum/radio_frequency/frequency = SSradio.return_frequency(1435)
+	var/tmp/datum/radio_frequency/frequency = SSradio.return_frequency(1435)
 
 	if(!frequency) return
 

@@ -13,12 +13,10 @@
 	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
 
 	artifact_find_type = pick(\
-	1;/obj/machinery/wish_granter,\
 	5;/obj/machinery/power/supermatter,\
 	5;/obj/structure/constructshell,\
 	5;/obj/machinery/syndicate_beacon,\
 	25;/obj/machinery/power/supermatter/shard,\
-	50;/obj/structure/cult/pylon,\
 	100;/obj/machinery/auto_cloner,\
 	100;/obj/machinery/giga_drill,\
 	100;/obj/machinery/replicator,\
@@ -66,8 +64,8 @@
 			to_chat(user, "<span class='notice'>\icon[P] [src] has been excavated to a depth of [2*src.excavation_level]cm.</span>")
 		return
 
-	if (istype(W, /obj/item/weapon/pickaxe))
-		var/obj/item/weapon/pickaxe/P = W
+	if (istype(W, /obj/item/pickaxe))
+		var/obj/item/pickaxe/P = W
 
 		if(last_act + P.digspeed > world.time)//prevents message spam
 			return
@@ -109,18 +107,18 @@
 	. = ..()
 	if(istype(AM,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
-		if((istype(H.l_hand,/obj/item/weapon/pickaxe)) && (!H.hand))
-			var/obj/item/weapon/pickaxe/P = H.l_hand
+		if((istype(H.l_hand,/obj/item/pickaxe)) && (!H.hand))
+			var/obj/item/pickaxe/P = H.l_hand
 			if(P.autodrill)
 				attackby(H.l_hand,H)
-		else if((istype(H.r_hand,/obj/item/weapon/pickaxe)) && H.hand)
-			var/obj/item/weapon/pickaxe/P = H.r_hand
+		else if((istype(H.r_hand,/obj/item/pickaxe)) && H.hand)
+			var/obj/item/pickaxe/P = H.r_hand
 			if(P.autodrill)
 				attackby(H.r_hand,H)
 
 	else if(istype(AM,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/weapon/pickaxe))
+		if(istype(R.module_active,/obj/item/pickaxe))
 			attackby(R.module_active,R)
 
 	else if(istype(AM,/obj/mecha))

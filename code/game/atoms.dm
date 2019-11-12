@@ -2,15 +2,15 @@
 	layer = 2
 	var/level = 2
 	var/flags = 0
-	var/list/fingerprints
-	var/list/fingerprintshidden
-	var/fingerprintslast = null
-	var/list/blood_DNA
-	var/list/other_DNA
-	var/other_DNA_type = null
-	var/was_bloodied
-	var/blood_color
-	var/last_bumped = 0
+	var/tmp/list/fingerprints
+	var/tmp/list/fingerprintshidden
+	var/tmp/fingerprintslast = null
+	var/tmp/list/blood_DNA
+	var/tmp/list/other_DNA
+	var/tmp/other_DNA_type = null
+	var/tmp/was_bloodied
+	var/tmp/blood_color
+	var/tmp/last_bumped = 0
 	var/pass_flags = 0
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
@@ -18,14 +18,16 @@
 	var/fluorescent // Shows up under a UV light.
 
 	///Chemistry.
-	var/datum/reagents/reagents = null
+	var/tmp/datum/reagents/reagents = null
+	var/list/reagents_to_add
+	var/list/reagent_data
 
 	//var/chem_is_open_container = 0
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
 
 	//Detective Work, used for the duplicate data points kept in the scanners
-	var/list/original_atom
+	var/tmp/list/original_atom
 
 	var/gfi_layer_rotation = GFI_ROTATION_DEFAULT
 

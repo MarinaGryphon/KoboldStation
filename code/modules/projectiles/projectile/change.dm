@@ -13,12 +13,6 @@
 	if(istype(M, /mob/living) && M.stat != DEAD)
 		if(M.transforming)
 			return
-		if(M.has_brain_worms())
-			return //Borer stuff - RR
-
-		if(istype(M, /mob/living/carbon/human/apparition))
-			visible_message("<span class='caution'>\The [src] doesn't seem to affect [M] in any way.</span>")
-			return
 
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M
@@ -26,7 +20,7 @@
 				qdel(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
-				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
+				if(istype(W, /obj/item/implant))	//TODO: Carn. give implants a dropped() or something
 					qdel(W)
 					continue
 				M.drop_from_inventory(W)

@@ -259,8 +259,6 @@
 		if (M.mind && M.mind.vampire)
 			var/datum/vampire/vampire = M.mind.vampire
 			vampire.frenzy += removed * 5
-		else if(M.mind && cult.is_antagonist(M.mind) && prob(10))
-			cult.remove_antagonist(M.mind)
 	if(alien && alien == IS_UNDEAD)
 		M.adjust_fire_stacks(10)
 		M.IgniteMob()
@@ -518,32 +516,6 @@
 			randmutg(M)
 		M.UpdateAppearance()
 		stored_value -= 5
-
-/datum/reagent/plexium
-	name = "Plexium"
-	id = "plexium"
-	description = "A yellow, fowl smelling liquid that seems to affect the brain in strange ways."
-	reagent_state = LIQUID
-	color = "#888822"
-	metabolism = 1 //1u every second
-	taste_description = "brain freeze"
-	var/stored_value = 0 //Internal value. Every 5 units equals a dosage.
-
-/datum/reagent/plexium/initial_effect(var/mob/living/carbon/M, var/alien)
-	stored_value = metabolism
-
-/datum/reagent/plexium/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
-	var/obj/item/organ/brain/B = H.internal_organs_by_name["brain"]
-	if(B && H.species && H.species.has_organ["brain"] && !isipc(H))
-		stored_value += removed
-		if(stored_value >= 5)
-			if(prob(50) && !B.has_trauma_type(BRAIN_TRAUMA_MILD))
-				B.gain_trauma_type(BRAIN_TRAUMA_MILD)
-			else if(prob(50) && !B.has_trauma_type(BRAIN_TRAUMA_SEVERE))
-				B.gain_trauma_type(BRAIN_TRAUMA_SEVERE)
-			else if(prob(50) && !B.has_trauma_type(BRAIN_TRAUMA_SPECIAL))
-				B.gain_trauma_type(BRAIN_TRAUMA_SPECIAL)
-			stored_value -= 5
 
 /datum/reagent/venenum
 	name = "Venenum"
@@ -803,6 +775,7 @@
 	qdel(src)
 	return
 
+/*
 /datum/reagent/love_potion
 	name = "Philter of Love"
 	id = "love"
@@ -820,6 +793,7 @@
 	var/obj/item/organ/brain/B = H.internal_organs_by_name["brain"]
 	if(!H.has_trauma_type(/datum/brain_trauma/special/love))
 		B.gain_trauma(/datum/brain_trauma/special/love,FALSE)
+*/
 
 /datum/reagent/bottle_lightning
 	name = "Bottled Lightning"

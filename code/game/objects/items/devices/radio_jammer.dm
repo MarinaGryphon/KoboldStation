@@ -64,7 +64,7 @@ proc/within_jamming_range(var/atom/test) // tests if an object is near a radio j
 /obj/item/device/radiojammer/improvised
 	name = "improvised radio jammer"
 	desc = "An awkward bundle of wires, batteries, and radio transmitters."
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/obj/item/device/assembly_holder/assembly_holder
 	// 10 seconds of operation on a standard cell. 200 (roughly 3 minutes) on a super cap.
 	var/power_drain_per_second = 100
@@ -75,7 +75,7 @@ proc/within_jamming_range(var/atom/test) // tests if an object is near a radio j
 	icon_state_inactive = "improvised_jammer_inactive"
 
 
-/obj/item/device/radiojammer/improvised/New(var/obj/item/device/assembly_holder/incoming_holder, var/obj/item/weapon/cell/incoming_cell, var/mob/user)
+/obj/item/device/radiojammer/improvised/New(var/obj/item/device/assembly_holder/incoming_holder, var/obj/item/cell/incoming_cell, var/mob/user)
 	..()
 	cell = incoming_cell
 	assembly_holder = incoming_holder

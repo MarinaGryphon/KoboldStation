@@ -7,18 +7,10 @@
 	var/locked
 	var/obj/machinery/body_scanconsole/connected
 	var/list/allowed_species = list(
-		"Human",
-		"Off-Worlder Human",
-		"Skrell",
+		"Kobold",
 		"Unathi",
-		"Aut'akh Unathi",
-		"Tajara",
-		"M'sai Tajara",
-		"Zhan-Khazan Tajara",
-		"Vaurca Worker",
-		"Vaurca Warrior",
-		"Diona",
-		"Monkey"
+		"Human",
+		"Dragon"
 	)
 	name = "Body Scanner"
 	desc = "A state-of-the-art medical diagnostics machine. Guaranteed detection of all your bodily ailments or your money back!"
@@ -27,9 +19,9 @@
 	density = 1
 	anchored = 1
 	component_types = list(
-			/obj/item/weapon/circuitboard/bodyscanner,
-			/obj/item/weapon/stock_parts/capacitor = 2,
-			/obj/item/weapon/stock_parts/scanning_module = 2,
+			/obj/item/circuitboard/bodyscanner,
+			/obj/item/stock_parts/capacitor = 2,
+			/obj/item/stock_parts/scanning_module = 2,
 			/obj/item/device/healthanalyzer
 		)
 
@@ -110,7 +102,7 @@
 	return
 
 /obj/machinery/bodyscanner/attackby(obj/item/weapon/grab/G, mob/user)
-	if ((!( istype(G, /obj/item/weapon/grab) ) || !( isliving(G.affecting) )))
+	if ((!( istype(G, /obj/item/grab) ) || !( isliving(G.affecting) )))
 		return
 	if (src.occupant)
 		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
@@ -239,7 +231,7 @@
 
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/connected
-	var/known_implants = list(/obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking)
+	var/known_implants = list(/obj/item/implant/chem, /obj/item/implant/death_alarm, /obj/item/implant/loyalty, /obj/item/implant/tracking)
 	var/collapse_desc = ""
 	var/broken_desc = ""
 	name = "Body Scanner Console"
@@ -249,9 +241,9 @@
 	density = 0
 	anchored = 1
 	component_types = list(
-			/obj/item/weapon/circuitboard/bodyscannerconsole,
-			/obj/item/weapon/stock_parts/scanning_module = 2,
-			/obj/item/weapon/stock_parts/console_screen
+			/obj/item/circuitboard/bodyscannerconsole,
+			/obj/item/stock_parts/scanning_module = 2,
+			/obj/item/stock_parts/console_screen
 		)
 
 
@@ -315,7 +307,7 @@
 
 	// shouldn't be reachable if occupant is invalid
 	if (href_list["print"])
-		var/obj/item/weapon/paper/R = new(src.loc)
+		var/obj/item/paper/R = new(src.loc)
 		R.color = "#eeffe8"
 		R.set_content_unsafe("Scan ([src.connected.occupant])", format_occupant_data(src.connected.get_occupant_data()))
 

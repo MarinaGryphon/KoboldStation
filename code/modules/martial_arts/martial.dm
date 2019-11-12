@@ -170,12 +170,12 @@
 		A.set_dir(i)
 		playsound(A.loc, 'sound/weapons/punch1.ogg', 15, 1, -1)
 
-/obj/item/martial_manual
-	name = "SolCom manual"
-	desc = "A manual designated to teach the user about the martial art of solarian combat, a style based on traditional human martial arts."
-	icon = 'icons/obj/library.dmi'
-	icon_state ="cqcmanual"
-	var/martial_art = /datum/martial_art/sol_combat
+/obj/item/martial_manual/unathi
+	name = "kis khan scroll"
+	desc = "A parched scroll.It seems to be drawings of some sort of martial art involving tails."
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "scroll2"
+	var/martial_art = /datum/martial_art/kis_khan
 
 /obj/item/martial_manual/attack_self(mob/user as mob)
 	if(!ishuman(user))

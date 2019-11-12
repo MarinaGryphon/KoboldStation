@@ -34,7 +34,9 @@
 #define ARCHAEO_REMAINS_ROBOT 33
 #define ARCHAEO_REMAINS_XENO 34
 #define ARCHAEO_GASMASK 35
-#define MAX_ARCHAEO 35
+#define ARCHAEO_KEY 36
+#define ARCHAEO_CRATE 37
+#define MAX_ARCHAEO 37
 //eggs
 //droppings
 //footprints
@@ -122,11 +124,11 @@
 			return "carbon"
 		if(ARCHAEO_GASMASK)
 			return "carbon"
-	return "phoron"
+	return "iron"
 
 //see /turf/simulated/mineral/New() in code/modules/mining/mine_turfs.dm
 /proc/get_random_digsite_type()
-	return pick(100;DIGSITE_GARDEN,95;DIGSITE_ANIMAL,90;DIGSITE_HOUSE,85;DIGSITE_TECHNICAL,80;DIGSITE_TEMPLE,75;DIGSITE_WAR)
+	return pick(70;DIGSITE_GARDEN,75;DIGSITE_WAR,80;DIGSITE_TEMPLE,85;DIGSITE_ANIMAL,90;DIGSITE_HOUSE,100;DIGSITE_TECHNICAL)
 
 /proc/get_random_find_type(var/digsite)
 
@@ -156,26 +158,29 @@
 			100;ARCHAEO_PEN,
 			100;ARCHAEO_LIGHTER,
 			100;ARCHAEO_BOX,
+			75;ARCHAEO_CRATE,
 			75;ARCHAEO_GASMASK,
 			75;ARCHAEO_COIN,
 			75;ARCHAEO_UNKNOWN,
 			50;ARCHAEO_SHARD,
 			50;ARCHAEO_RODS,
-			25;ARCHAEO_METAL
+			25;ARCHAEO_METAL,
+			25;ARCHAEO_STOCKPARTS
 			)
 		if(DIGSITE_TECHNICAL)
 			find_type = pick(
-			125;ARCHAEO_GASMASK,
+			125;ARCHAEO_STOCKPARTS,
 			100;ARCHAEO_METAL,
 			100;ARCHAEO_GASTANK,
 			100;ARCHAEO_TELEBEACON,
 			100;ARCHAEO_TOOL,
-			100;ARCHAEO_STOCKPARTS,
+			75;ARCHAEO_CRATE,
 			75;ARCHAEO_SHARD,
 			75;ARCHAEO_RODS,
 			75;ARCHAEO_UNKNOWN,
 			50;ARCHAEO_HANDCUFFS,
-			50;ARCHAEO_BEARTRAP
+			50;ARCHAEO_BEARTRAP,
+			50;ARCHAEO_GASMASK
 			)
 		if(DIGSITE_TEMPLE)
 			find_type = pick(
@@ -210,74 +215,32 @@
 			50;ARCHAEO_GASMASK,
 			25;ARCHAEO_HANDCUFFS,
 			25;ARCHAEO_BEARTRAP,
-			25;ARCHAEO_TOOL
+			25;ARCHAEO_TOOL,
+			25;ARCHAEO_KEY,
+			20;ARCHAEO_CRATE
 			)
 	return find_type
 
 var/list/responsive_carriers = list(
-	"carbon", 
+	"carbon",
 	"potassium",
-	"hydrogen", 
-	"nitrogen", 
-	"mercury", 
-	"iron", 
-	"chlorine", 
-	"phosphorus", 
+	"hydrogen",
+	"nitrogen",
+	"mercury",
+	"iron",
+	"chlorine",
+	"phosphorus",
 	"phoron"
 	)
 
 var/list/finds_as_strings = list(
-	"Trace organic cells", 
-	"Long exposure particles", 
-	"Trace water particles", 
-	"Crystalline structures", 
-	"Metallic derivative", 
-	"Metallic composite", 
-	"Metamorphic/igneous rock composite", 
+	"Trace organic cells",
+	"Long exposure particles",
+	"Trace water particles",
+	"Crystalline structures",
+	"Metallic derivative",
+	"Metallic composite",
+	"Metamorphic/igneous rock composite",
 	"Metamorphic/sedimentary rock composite",
-	"Anomalous material" 
+	"Anomalous material"
 	)
-
-#undef ARCHAEO_BOWL
-#undef ARCHAEO_URN
-#undef ARCHAEO_CUTLERY
-#undef ARCHAEO_STATUETTE
-#undef ARCHAEO_INSTRUMENT
-#undef ARCHAEO_KNIFE
-#undef ARCHAEO_COIN
-#undef ARCHAEO_HANDCUFFS
-#undef ARCHAEO_BEARTRAP
-#undef ARCHAEO_LIGHTER
-#undef ARCHAEO_BOX
-#undef ARCHAEO_GASTANK
-#undef ARCHAEO_TOOL
-#undef ARCHAEO_METAL
-#undef ARCHAEO_PEN
-#undef ARCHAEO_CRYSTAL
-#undef ARCHAEO_CULTBLADE
-#undef ARCHAEO_TELEBEACON
-#undef ARCHAEO_CLAYMORE
-#undef ARCHAEO_CULTROBES
-#undef ARCHAEO_SOULSTONE
-#undef ARCHAEO_SHARD
-#undef ARCHAEO_RODS
-#undef ARCHAEO_STOCKPARTS
-#undef ARCHAEO_KATANA
-#undef ARCHAEO_LASER
-#undef ARCHAEO_GUN
-#undef ARCHAEO_UNKNOWN
-#undef ARCHAEO_FOSSIL
-#undef ARCHAEO_SHELL
-#undef ARCHAEO_PLANT
-#undef ARCHAEO_REMAINS_HUMANOID
-#undef ARCHAEO_REMAINS_ROBOT
-#undef ARCHAEO_REMAINS_XENO
-#undef ARCHAEO_GASMASK
-#undef MAX_ARCHAEO
-
-#undef DIGSITE_GARDEN
-#undef DIGSITE_ANIMAL
-#undef DIGSITE_HOUSE
-#undef DIGSITE_TECHNICAL
-#undef DIGSITE_TEMPLE
-#undef DIGSITE_WAR

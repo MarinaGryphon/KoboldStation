@@ -1,6 +1,6 @@
 var/datum/controller/subsystem/xenoarch/SSxenoarch
 
-#define XENOARCH_SPAWN_CHANCE 0.5
+#define XENOARCH_SPAWN_CHANCE 2
 #define DIGSITESIZE_LOWER 4
 #define DIGSITESIZE_UPPER 12
 #define ARTIFACTSPAWNNUM_LOWER 6

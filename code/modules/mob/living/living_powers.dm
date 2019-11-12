@@ -23,11 +23,6 @@
 
 		if((!(src.Adjacent(C)) || C == src)) continue//cant steal nymphs right out of other gestalts
 
-		if (C.is_diona() == DIONA_NYMPH)
-			var/mob/living/carbon/alien/diona/D = C
-			if (D.gestalt)
-				continue
-
 		if (C in src)	// Just no.
 			continue
 

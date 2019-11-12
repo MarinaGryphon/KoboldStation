@@ -29,7 +29,6 @@
 	/obj/structure/closet/acloset,\
 	/mob/living/simple_animal/hostile/mimic,\
 	/mob/living/simple_animal/hostile/viscerator,\
-	/mob/living/simple_animal/hostile/hivebot,\
 	/obj/item/device/analyzer,\
 	/obj/item/device/camera,\
 	/obj/item/device/flash,\
@@ -37,35 +36,34 @@
 	/obj/item/device/healthanalyzer,\
 	/obj/item/device/breath_analyzer,\
 	/obj/item/device/multitool,\
-	/obj/item/device/paicard,\
 	/obj/item/device/radio,\
 	/obj/item/device/radio/headset,\
 	/obj/item/device/radio/beacon,\
-	/obj/item/weapon/autopsy_scanner,\
-	/obj/item/weapon/bikehorn,\
-	/obj/item/weapon/bonesetter,\
-	/obj/item/weapon/material/hatchet/butch,\
-	/obj/item/weapon/caution,\
-	/obj/item/weapon/caution/cone,\
-	/obj/item/weapon/crowbar,\
-	/obj/item/weapon/clipboard,\
-	/obj/item/weapon/cell,\
-	/obj/item/weapon/circular_saw,\
-	/obj/item/weapon/material/hatchet,\
-	/obj/item/weapon/handcuffs,\
-	/obj/item/weapon/hemostat,\
-	/obj/item/weapon/material/knife,\
-	/obj/item/weapon/flame/lighter,\
-	/obj/item/weapon/light/bulb,\
-	/obj/item/weapon/light/tube,\
-	/obj/item/weapon/pickaxe,\
-	/obj/item/weapon/shovel,\
-	/obj/item/weapon/weldingtool,\
-	/obj/item/weapon/wirecutters,\
-	/obj/item/weapon/wrench,\
-	/obj/item/weapon/screwdriver,\
-	/obj/item/weapon/grenade/chem_grenade/cleaner,\
-	/obj/item/weapon/grenade/chem_grenade/metalfoam\
+	/obj/item/autopsy_scanner,\
+	/obj/item/bikehorn,\
+	/obj/item/bonesetter,\
+	/obj/item/material/hatchet/butch,\
+	/obj/item/caution,\
+	/obj/item/caution/cone,\
+	/obj/item/crowbar,\
+	/obj/item/clipboard,\
+	/obj/item/cell,\
+	/obj/item/circular_saw,\
+	/obj/item/material/hatchet,\
+	/obj/item/handcuffs,\
+	/obj/item/hemostat,\
+	/obj/item/material/knife,\
+	/obj/item/flame/lighter,\
+	/obj/item/light/bulb,\
+	/obj/item/light/tube,\
+	/obj/item/pickaxe,\
+	/obj/item/shovel,\
+	/obj/item/weldingtool,\
+	/obj/item/wirecutters,\
+	/obj/item/wrench,\
+	/obj/item/screwdriver,\
+	/obj/item/grenade/chem_grenade/cleaner,\
+	/obj/item/grenade/chem_grenade/metalfoam\
 	)
 
 	var/quantity = rand(5,15)

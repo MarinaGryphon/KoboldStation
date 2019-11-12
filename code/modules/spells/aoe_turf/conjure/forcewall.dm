@@ -44,7 +44,7 @@
 
 /obj/effect/forcefield/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(istype(I, /obj/item/weapon/nullrod))
+	if(istype(I, /obj/item/nullrod))
 		to_chat(user, "<span class='notice'>\the [src] dissipates at the touch of the \the [I].</span>")
 		qdel(src)
 
@@ -52,8 +52,3 @@
 	icon_state = "empty"
 	name = "invisible wall"
 	desc = "You have a bad feeling about this."
-
-/obj/effect/forcefield/cultify()
-	new /obj/effect/forcefield/cult(get_turf(src))
-	qdel(src)
-	return

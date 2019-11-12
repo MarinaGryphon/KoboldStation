@@ -143,19 +143,6 @@
 		new /obj/item/device/radio/headset/heads/cmo(src)
 
 
-/obj/structure/closet/secure_closet/animal
-	name = "animal control closet"
-	req_access = list(access_surgery)
-
-
-	fill()
-		..()
-		new /obj/item/device/assembly/signaler(src)
-		new /obj/item/device/radio/electropack(src)
-		new /obj/item/device/radio/electropack(src)
-		new /obj/item/device/radio/electropack(src)
-
-
 /obj/structure/closet/secure_closet/chemical
 	name = "chemistry equipment closet"
 	desc = "Contains equipment useful to chemists."

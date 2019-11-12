@@ -2,7 +2,7 @@
 	data = list(
 		"donor" = null,
 		"viruses" = null,
-		"species" = "Human",
+		"species" = "Kobold",
 		"blood_DNA" = null,
 		"blood_type" = null,
 		"blood_colour" = "#A10808",
@@ -218,8 +218,8 @@
 		T.wet_floor(WET_TYPE_WATER,volume)
 
 /datum/reagent/water/touch_obj(var/obj/O)
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
-		var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
+	if(istype(O, /obj/item/reagent_containers/food/snacks/monkeycube))
+		var/obj/item/reagent_containers/food/snacks/monkeycube/cube = O
 		if(!cube.wrapped)
 			cube.Expand()
 

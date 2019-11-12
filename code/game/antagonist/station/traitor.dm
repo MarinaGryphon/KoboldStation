@@ -28,67 +28,13 @@ var/datum/antagonist/traitor/traitors
 		return 0
 	return 1
 
-/datum/antagonist/traitor/create_objectives(var/datum/mind/traitor)
-	if(!..())
-		return
-
-	if(istype(traitor.current, /mob/living/silicon))
-		var/datum/objective/assassinate/kill_objective = new
-		kill_objective.owner = traitor
-		kill_objective.find_target()
-		traitor.objectives += kill_objective
-
-		var/datum/objective/survive/survive_objective = new
-		survive_objective.owner = traitor
-		traitor.objectives += survive_objective
-
-		if(prob(10))
-			var/datum/objective/block/block_objective = new
-			block_objective.owner = traitor
-			traitor.objectives += block_objective
-	else
-		switch(rand(1,100))
-			if(1 to 33)
-				var/datum/objective/assassinate/kill_objective = new
-				kill_objective.owner = traitor
-				kill_objective.find_target()
-				traitor.objectives += kill_objective
-			if(34 to 50)
-				var/datum/objective/brig/brig_objective = new
-				brig_objective.owner = traitor
-				brig_objective.find_target()
-				traitor.objectives += brig_objective
-			if(51 to 66)
-				var/datum/objective/harm/harm_objective = new
-				harm_objective.owner = traitor
-				harm_objective.find_target()
-				traitor.objectives += harm_objective
-			else
-				var/datum/objective/steal/steal_objective = new
-				steal_objective.owner = traitor
-				steal_objective.find_target()
-				traitor.objectives += steal_objective
-		switch(rand(1,100))
-			if(1 to 100)
-				if (!(locate(/datum/objective/escape) in traitor.objectives))
-					var/datum/objective/escape/escape_objective = new
-					escape_objective.owner = traitor
-					traitor.objectives += escape_objective
-
-			else
-				if (!(locate(/datum/objective/hijack) in traitor.objectives))
-					var/datum/objective/hijack/hijack_objective = new
-					hijack_objective.owner = traitor
-					traitor.objectives += hijack_objective
-	return
-
 /datum/antagonist/traitor/equip(var/mob/living/carbon/human/traitor_mob)
 	if(istype(traitor_mob, /mob/living/silicon)) // this needs to be here because ..() returns false if the mob isn't human
 		add_law_zero(traitor_mob)
 		if(isrobot(traitor_mob))
 			var/mob/living/silicon/robot/R = traitor_mob
 			R.overclockavailable = 1
-			R.emagged = 1		
+			R.emagged = 1
 			R.verbs += /mob/living/silicon/robot/proc/ResetSecurityCodes
 			R.verbs += /mob/living/silicon/robot/proc/toggle_overclock
 		return 1

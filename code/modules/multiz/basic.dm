@@ -10,7 +10,7 @@
 	// Due to the offsets of how connections are stored v.s. how z-levels are indexed, some magic number silliness happened.
 	for(var/i = (z - height) to (z - 2))
 		SSatlas.z_levels |= (1 << i)
-	qdel(src)
+	//qdel(src) // Nah. We need you.
 
 /obj/effect/landmark/map_data/Destroy()
 	SSatlas.height_markers -= src

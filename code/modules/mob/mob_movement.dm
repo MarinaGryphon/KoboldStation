@@ -325,7 +325,7 @@
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
-		if (mob_is_human && (istype(mob:l_hand, /obj/item/weapon/grab) || istype(mob:r_hand, /obj/item/weapon/grab)))
+		if (mob_is_human && (istype(mob:l_hand, /obj/item/grab) || istype(mob:r_hand, /obj/item/grab)))
 			move_delay = max(move_delay, world.time + 7)
 			var/list/L = mob.ret_grab()
 			if(istype(L, /list))
@@ -362,12 +362,12 @@
 		else
 			. = mob.SelfMove(n, direct)
 
-		for (var/obj/item/weapon/grab/G in list(mob:l_hand, mob:r_hand))
+		for (var/obj/item/grab/G in list(mob:l_hand, mob:r_hand))
 			if (G.state == GRAB_NECK)
 				mob.set_dir(reverse_dir[direct])
 			G.adjust_position()
 
-		for (var/obj/item/weapon/grab/G in mob.grabbed_by)
+		for (var/obj/item/grab/G in mob.grabbed_by)
 			G.adjust_position()
 
 		moving = 0
@@ -415,23 +415,6 @@
 			if(istype(T, /turf/simulated/wall/phoron) || istype(T, /turf/simulated/wall/ironphoron))
 				to_chat(mob, "<span class='warning'>\The [T] obstructs your movement!</span>")
 				return
-
-			for(var/mob/living/L in T)
-				if(L.is_diona() == DIONA_WORKER)
-					to_chat(mob, "<span class='danger'>You struggle briefly as you are photovored into \the [L], trapped within a nymphomatic husk!</span>")
-					var/mob/living/carbon/alien/diona/D = new /mob/living/carbon/alien/diona(L)
-					var/mob/living/simple_animal/shade/bluespace/BS = mob
-					if (!(/mob/living/carbon/proc/echo_eject in L.verbs))
-						L.verbs.Add(/mob/living/carbon/proc/echo_eject)
-					BS.mind.transfer_to(D)
-					D.echo = 1
-					D.stat = CONSCIOUS
-					D.gestalt = L
-					D.sync_languages(D.gestalt)
-					D.update_verbs()
-					D.forceMove(L)
-					qdel(BS)
-					return
 
 			mob.forceMove(get_step(mob, direct))
 			mob.dir = direct

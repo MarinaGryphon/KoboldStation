@@ -5,7 +5,7 @@
 	var/climbable
 	var/breakable
 	var/parts
-	var/list/climbers
+	var/tmp/list/climbers
 
 /obj/structure/Destroy()
 	if(parts)

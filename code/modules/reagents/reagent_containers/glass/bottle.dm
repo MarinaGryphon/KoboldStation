@@ -11,7 +11,6 @@
 	possible_transfer_amounts = list(5,10,15,25,30,60)
 	flags = 0
 	volume = 60
-	var/list/reagents_to_add
 
 /obj/item/weapon/reagent_containers/glass/bottle/on_reagent_change()
 	update_icon()
@@ -32,9 +31,6 @@
 	. = ..()
 	if(!icon_state)
 		icon_state = "bottle-[rand(1,4)]"
-
-	for(var/v in reagents_to_add)
-		reagents.add_reagent(v, reagents_to_add[v])
 
 	update_icon()
 
@@ -65,7 +61,7 @@
 	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
 	icon_state = "bottle-4"
 	reagents_to_add = list("inaprovaline" = 60)
-	
+
 
 /obj/item/weapon/reagent_containers/glass/bottle/toxin
 	name = "toxin bottle"
@@ -114,88 +110,6 @@
 	desc = "A small bottle."
 	icon_state = "bottle-4"
 	reagents_to_add = list("diethylamine" = 60)
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus
-	name = "virus bottle"
-	desc = "A small bottle. Contains some virus."
-	icon_state = "bottle-4"
-	var/datum/disease/disease
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/Initialize()
-	var/datum/disease/F = new disease(0)
-	var/list/data = list("viruses"= list(F))
-	if(!icon_state)
-		icon_state = "bottle-[rand(1,4)]"
-	reagents.add_reagent("blood", 20, data)
-	
-	update_icon()
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/flu_virion
-	name = "Flu virion culture bottle"
-	desc = "A small bottle. Contains H13N1 flu virion culture in synthblood medium."
-	disease = /datum/disease/advance/flu	
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/epiglottis_virion
-	name = "Epiglottis virion culture bottle"
-	desc = "A small bottle. Contains Epiglottis virion culture in synthblood medium."
-	disease = /datum/disease/advance/voice_change
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/liver_enhance_virion
-	name = "Liver enhancement virion culture bottle"
-	desc = "A small bottle. Contains liver enhancement virion culture in synthblood medium."
-	disease = /datum/disease/advance/heal
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/hullucigen_virion
-	name = "Hullucigen virion culture bottle"
-	desc = "A small bottle. Contains hullucigen virion culture in synthblood medium."
-	icon = 'icons/obj/chemical.dmi'
-	disease =  /datum/disease/advance/hullucigen
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/pierrot_throat
-	name = "Pierrot's Throat culture bottle"
-	desc = "A small bottle. Contains H0NI<42 virion culture in synthblood medium."
-	disease = /datum/disease/pierrot_throat
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/cold
-	name = "Rhinovirus culture bottle"
-	desc = "A small bottle. Contains XY-rhinovirus culture in synthblood medium."
-	disease = /datum/disease/advance/cold
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/random
-	name = "Random culture bottle"
-	desc = "A small bottle. Contains a random disease."
-	disease = /datum/disease/advance
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/retrovirus
-	name = "Retrovirus culture bottle"
-	desc = "A small bottle. Contains a retrovirus culture in a synthblood medium."
-	disease = /datum/disease/dna_retrovirus
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/gbs
-	name = "GBS culture bottle"
-	desc = "A small bottle. Contains Gravitokinetic Bipotential SADS+ culture in synthblood medium."//Or simply - General BullShit
-	disease = /datum/disease/gbs
-	amount_per_transfer_from_this = 5
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/fake_gbs
-	name = "GBS culture bottle"
-	desc = "A small bottle. Contains Gravitokinetic Bipotential SADS- culture in synthblood medium."//Or simply - General BullShit
-	disease = /datum/disease/fake_gbs
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/brainrot
-	name = "Brainrot culture bottle"
-	desc = "A small bottle. Contains Cryptococcus Cosmosis culture in synthblood medium."
-	disease = /datum/disease/brainrot
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/magnitis
-	name = "Magnitis culture bottle"
-	desc = "A small bottle. Contains a small dosage of Fukkos Miracos."
-	disease = /datum/disease/magnitis
-
-/obj/item/weapon/reagent_containers/glass/bottle/with_virus/wizarditis
-	name = "Wizarditis culture bottle"
-	desc = "A small bottle. Contains a sample of Rincewindus Vulgaris."
-	disease = /datum/disease/wizarditis
 
 /obj/item/weapon/reagent_containers/glass/bottle/pacid
 	name = "Polytrinic Acid Bottle"

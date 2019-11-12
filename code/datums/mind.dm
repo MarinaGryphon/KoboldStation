@@ -48,9 +48,6 @@
 	var/datum/job/assigned_job
 	var/datum/faction/selected_faction
 
-	var/list/datum/objective/objectives = list()
-	var/list/datum/objective/special_verbs = list()
-
 	var/has_been_rev = 0//Tracks if this mind has been a rev or not
 
 	var/datum/faction/faction 			//associated faction
@@ -88,9 +85,6 @@
 	if(!istype(new_character))
 		world.log <<  "## DEBUG: transfer_to(): Some idiot has tried to transfer_to( a non mob/living mob. Please inform Carn"
 	if(current)					//remove ourself from our old body's mind variable
-		if(changeling)
-			current.remove_changeling_powers()
-			current.verbs -= /datum/changeling/proc/EvolutionMenu
 		if(vampire)
 			current.remove_vampire_powers()
 		current.mind = null
@@ -107,8 +101,6 @@
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
 
-	if(changeling)
-		new_character.make_changeling()
 	if(vampire)
 		new_character.make_vampire()
 	if(active)
@@ -129,14 +121,6 @@
 	if(ambitions)
 		output += "<HR><B>Ambitions:</B> [ambitions]<br>"
 
-	if(objectives.len>0)
-		output += "<HR><B>Objectives:</B>"
-
-		var/obj_count = 1
-		for(var/datum/objective/objective in objectives)
-			output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			obj_count++
-
 	recipient << browse(output,"window=memory")
 
 /datum/mind/proc/edit_memory()
@@ -153,23 +137,7 @@
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		out += "[antag.get_panel_entry(src)]"
 	out += "</table><hr>"
-	out += "<b>Objectives</b></br>"
 
-	if(objectives && objectives.len)
-		var/num = 1
-		for(var/datum/objective/O in objectives)
-			out += "<b>Objective #[num]:</b> [O.explanation_text] "
-			if(O.completed)
-				out += "(<font color='green'>complete</font>)"
-			else
-				out += "(<font color='red'>incomplete</font>)"
-			out += " <a href='?src=\ref[src];obj_completed=\ref[O]'>\[toggle\]</a>"
-			out += " <a href='?src=\ref[src];obj_delete=\ref[O]'>\[remove\]</a><br>"
-			num++
-		out += "<br><a href='?src=\ref[src];obj_announce=1'>\[announce objectives\]</a>"
-
-	else
-		out += "None."
 	out += "<br><a href='?src=\ref[src];obj_add=1'>\[add\]</a>"
 	out += "<b>Ambitions:</b> [ambitions ? ambitions : "None"] <a href='?src=\ref[src];amb_edit=\ref[src]'>\[edit\]</a></br>"
 	usr << browse(out, "window=edit_memory[src]")
@@ -218,137 +186,6 @@
 		src.ambitions = sanitize(new_ambition)
 		to_chat(src.current, "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [src.ambitions]</span>")
 
-	else if (href_list["obj_edit"] || href_list["obj_add"])
-		var/datum/objective/objective
-		var/objective_pos
-		var/def_value
-
-		if (href_list["obj_edit"])
-			objective = locate(href_list["obj_edit"])
-			if (!objective) return
-			objective_pos = objectives.Find(objective)
-
-			//Text strings are easy to manipulate. Revised for simplicity.
-			var/temp_obj_type = "[objective.type]"//Convert path into a text string.
-			def_value = copytext(temp_obj_type, 19)//Convert last part of path into an objective keyword.
-			if(!def_value)//If it's a custom objective, it will be an empty string.
-				def_value = "custom"
-
-		var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "mercenary", "capture", "absorb", "custom")
-		if (!new_obj_type) return
-
-		var/datum/objective/new_objective = null
-
-		switch (new_obj_type)
-			if ("assassinate","protect","debrain", "harm", "brig")
-				//To determine what to name the objective in explanation text.
-				var/objective_type_capital = uppertext(copytext(new_obj_type, 1,2))//Capitalize first letter.
-				var/objective_type_text = copytext(new_obj_type, 2)//Leave the rest of the text.
-				var/objective_type = "[objective_type_capital][objective_type_text]"//Add them together into a text string.
-
-				var/list/possible_targets = list("Free objective")
-				for(var/datum/mind/possible_target in SSticker.minds)
-					if ((possible_target != src) && istype(possible_target.current, /mob/living/carbon/human))
-						possible_targets += possible_target.current
-
-				var/mob/def_target = null
-				var/objective_list[] = list(/datum/objective/assassinate, /datum/objective/protect, /datum/objective/debrain)
-				if (objective&&(objective.type in objective_list) && objective:target)
-					def_target = objective:target.current
-
-				var/new_target = input("Select target:", "Objective target", def_target) as null|anything in possible_targets
-				if (!new_target) return
-
-				var/objective_path = text2path("/datum/objective/[new_obj_type]")
-				var/mob/living/M = new_target
-				if (!istype(M) || !M.mind || new_target == "Free objective")
-					new_objective = new objective_path
-					new_objective.owner = src
-					new_objective:target = null
-					new_objective.explanation_text = "Free objective"
-				else
-					new_objective = new objective_path
-					new_objective.owner = src
-					new_objective:target = M.mind
-					new_objective.explanation_text = "[objective_type] [M.real_name], the [M.mind.special_role ? M.mind:special_role : M.mind:assigned_role]."
-
-			if ("prevent")
-				new_objective = new /datum/objective/block
-				new_objective.owner = src
-
-			if ("hijack")
-				new_objective = new /datum/objective/hijack
-				new_objective.owner = src
-
-			if ("escape")
-				new_objective = new /datum/objective/escape
-				new_objective.owner = src
-
-			if ("survive")
-				new_objective = new /datum/objective/survive
-				new_objective.owner = src
-
-			if ("mercenary")
-				new_objective = new /datum/objective/nuclear
-				new_objective.owner = src
-
-			if ("steal")
-				if (!istype(objective, /datum/objective/steal))
-					new_objective = new /datum/objective/steal
-					new_objective.owner = src
-				else
-					new_objective = objective
-				var/datum/objective/steal/steal = new_objective
-				if (!steal.select_target())
-					return
-
-			if("download","capture","absorb")
-				var/def_num
-				if(objective&&objective.type==text2path("/datum/objective/[new_obj_type]"))
-					def_num = objective.target_amount
-
-				var/target_number = input("Input target number:", "Objective", def_num) as num|null
-				if (isnull(target_number))//Ordinarily, you wouldn't need isnull. In this case, the value may already exist.
-					return
-
-				switch(new_obj_type)
-					if("download")
-						new_objective = new /datum/objective/download
-						new_objective.explanation_text = "Download [target_number] research levels."
-					if("capture")
-						new_objective = new /datum/objective/capture
-						new_objective.explanation_text = "Accumulate [target_number] capture points."
-					if("absorb")
-						new_objective = new /datum/objective/absorb
-						new_objective.explanation_text = "Absorb [target_number] compatible genomes."
-				new_objective.owner = src
-				new_objective.target_amount = target_number
-
-			if ("custom")
-				var/expl = sanitize(input("Custom objective:", "Objective", objective ? objective.explanation_text : "") as text|null)
-				if (!expl) return
-				new_objective = new /datum/objective
-				new_objective.owner = src
-				new_objective.explanation_text = expl
-
-		if (!new_objective) return
-
-		if (objective)
-			objectives -= objective
-			objectives.Insert(objective_pos, new_objective)
-		else
-			objectives += new_objective
-
-	else if (href_list["obj_delete"])
-		var/datum/objective/objective = locate(href_list["obj_delete"])
-		if(!istype(objective))	return
-		objectives -= objective
-
-	else if(href_list["obj_completed"])
-		var/datum/objective/objective = locate(href_list["obj_completed"])
-		if(!istype(objective))	return
-		objective.completed = !objective.completed
-
 	else if(href_list["implant"])
 		var/mob/living/carbon/human/H = current
 
@@ -356,7 +193,7 @@
 
 		switch(href_list["implant"])
 			if("remove")
-				for(var/obj/item/weapon/implant/loyalty/I in H.contents)
+				for(var/obj/item/implant/loyalty/I in H.contents)
 					for(var/obj/item/organ/external/organs in H.organs)
 						if(I in organs.implants)
 							qdel(I)
@@ -426,13 +263,6 @@
 					if (!isnull(crystals))
 						if (suplink)
 							suplink.uses = crystals
-
-	else if (href_list["obj_announce"])
-		var/obj_count = 1
-		to_chat(current, "<span class='notice'>Your current objectives:</span>")
-		for(var/datum/objective/objective in objectives)
-			to_chat(current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
-			obj_count++
 	edit_memory()
 
 /datum/mind/proc/find_syndicate_uplink()
@@ -458,7 +288,7 @@
 	var/is_currently_brigged = 0
 	if(istype(T.loc,/area/security/brig))
 		is_currently_brigged = 1
-		for(var/obj/item/weapon/card/id/card in current)
+		for(var/obj/item/card/id/card in current)
 			is_currently_brigged = 0
 			break // if they still have ID they're not brigged
 		for(var/obj/item/device/pda/P in current)
@@ -481,11 +311,8 @@
 	role_alt_title =  null
 	assigned_job =    null
 	//faction =       null //Uncommenting this causes a compile error due to 'undefined type', fucked if I know.
-	changeling =      null
 	vampire =         null
 	initial_account = null
-	objectives =      list()
-	special_verbs =   list()
 	has_been_rev =    0
 	rev_cooldown =    0
 	brigged_since =   -1

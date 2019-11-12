@@ -45,13 +45,6 @@
 			to_chat(src, "<span class='warning'>\The [blocked] is in the way!</span>")
 			return
 
-	//This check is exploit prevention.
-	//Nymphs have seperate mechanics for gaining biomass from other diona
-	//This check prevents the exploit of almost-devouring a nymph, and then absorbing it to gain double biomass
-	if (victim.is_diona() && src.is_diona())
-		to_chat(src, "<span class='warning'>You can't eat other diona!</span>")
-		return 0
-
 	if (!src.Adjacent(victim))
 		to_chat(src, "<span class='warning'>That creature is too far away, move closer!</span>")
 		return 0

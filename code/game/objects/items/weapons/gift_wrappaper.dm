@@ -102,7 +102,6 @@
 		/obj/item/toy/sword,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/device/paicard,
 		/obj/item/device/violin,
 		/obj/item/weapon/storage/belt/utility/full,
 		/obj/item/clothing/accessory/horrible)
@@ -180,7 +179,6 @@
 		/obj/item/toy/prize/phazon,
 		/obj/item/toy/prize/ripley,
 		/obj/item/toy/prize/seraph,
-		/obj/item/device/paicard,
 		/obj/item/clothing/accessory/horrible,
 		/obj/item/device/camera,
 		/obj/item/bluespace_crystal,
@@ -217,7 +215,6 @@
 		/obj/item/weapon/ore/coal,
 		/obj/item/weapon/ore/coal,
 		/obj/item/weapon/stamp/clown,
-		/obj/item/organ/heart/skrell,
 		/obj/item/latexballon)
 
 	var/atom/movable/I = new gift_type(get_turf(M))
@@ -249,7 +246,6 @@
 		/obj/item/toy/sword,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/device/paicard,
 		/obj/item/clothing/accessory/horrible,
 		/obj/item/weapon/storage/box/donkpockets,
 		/obj/item/weapon/reagent_containers/food/drinks/teapot,
@@ -270,7 +266,6 @@
 		/obj/item/weapon/contraband/poster,
 		/obj/item/clothing/head/hardhat/red/atmos,
 		/mob/living/bot/cleanbot,
-		/obj/item/vaurca/box,
 		/obj/item/device/binoculars,
 		/obj/item/device/camera,
 		/obj/item/device/gps,
@@ -278,7 +273,6 @@
 		/obj/random/loot,
 		/obj/random/contraband,
 		/obj/item/weapon/autochisel,
-		/obj/item/weapon/melee/vaurca/rock,
 		/obj/item/weapon/ore/coal,
 		/obj/item/weapon/ore/coal,
 		/obj/item/weapon/ore/coal,
@@ -315,12 +309,10 @@
 		/mob/living/simple_animal/chick,
 		/mob/living/simple_animal/corgi/puppy,
 		/mob/living/simple_animal/mushroom,
-		/mob/living/carbon/human/monkey/nupnup,
 		/obj/item/weapon/xmasgift/medium,
 		/obj/item/weapon/tank/jetpack,
 		/obj/item/toy/plushie/drone,
 		/obj/item/toy/plushie/ivancarp,
-		/obj/item/weapon/grenade/spawnergrenade/vaurca,
 		/obj/item/weapon/ore/coal,
 		/obj/item/weapon/ore/coal,
 		/obj/item/weapon/ore/coal,
@@ -328,8 +320,6 @@
 		/mob/living/simple_animal/crab,
 		/mob/living/simple_animal/parrot,
 		/mob/living/simple_animal/hostile/commanded/dog/pug,
-		/obj/item/clothing/suit/space/void/vaurca,
-		/obj/item/clothing/head/helmet/space/void/vaurca,
 		/obj/item/target/alien)
 
 	var/atom/movable/I = new gift_type(get_turf(M))

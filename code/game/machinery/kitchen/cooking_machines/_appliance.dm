@@ -204,9 +204,6 @@
 	else if(istype(check, /obj/item/weapon/reagent_containers/glass))
 		to_chat(user, "<span class='warning'>That would probably break [src].</span>")
 		return 0
-	else if(istype(check, /obj/item/weapon/disk/nuclear))
-		to_chat(user, "<span class='warning'>You can't cook that.</span>")
-		return 0
 	else if(I.iscrowbar() || I.isscrewdriver() || istype(I, /obj/item/weapon/storage/part_replacer))
 		return 0
 	else if(!istype(check) && !istype(check, /obj/item/weapon/holder))

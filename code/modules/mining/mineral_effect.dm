@@ -6,10 +6,12 @@
 	density = 0
 	anchored = 1
 	var/ore_key
-	var/image/scanner_image
+	var/tmp/image/scanner_image
 
 /obj/effect/mineral/Initialize(mapload, var/ore/M)
 	. = ..()
+	if(!M || ore_key)
+		return
 	name = "[M.display_name] deposit"
 	ore_key = M.name
 	icon_state = "rock_[ore_key]"

@@ -40,10 +40,10 @@
 /obj/machinery/anti_bluespace/default_part_replacement()
 	return 0
 
-/obj/machinery/anti_bluespace/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
+/obj/machinery/anti_bluespace/default_deconstruction_screwdriver(var/mob/user, var/obj/item/screwdriver/S)
 	return 0
 
-/obj/machinery/anti_bluespace/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
+/obj/machinery/anti_bluespace/default_deconstruction_crowbar(var/mob/user, var/obj/item/crowbar/C)
 	return 0
 
 /obj/machinery/anti_bluespace/proc/do_break()

@@ -51,7 +51,7 @@
 	if (istype(user, /mob/living))
 		var/mob/living/L = user
 
-		if (istype(L, /mob/living/carbon/alien/diona) || istype(L, /mob/living/simple_animal) || istype(L, /mob/living/carbon/human))//Monkey-like things do attack_generic, not crew
+		if (istype(L, /mob/living/simple_animal) || istype(L, /mob/living/carbon/human))//Monkey-like things do attack_generic, not crew
 			if(contents.len && !locate(/obj/item/weapon/reagent_containers/food) in src) // you can tear open empty boxes for nesting material, or for food
 				to_chat(user, span("warning", "There's no food in that box!"))
 				return
@@ -605,7 +605,6 @@
 
 /obj/item/weapon/storage/box/snack/fill()
 	var/list/snacks = list(
-			/obj/item/weapon/reagent_containers/food/snacks/koisbar_clean,
 			/obj/item/weapon/reagent_containers/food/snacks/candy,
 			/obj/item/weapon/reagent_containers/food/snacks/candy_corn,
 			/obj/item/weapon/reagent_containers/food/snacks/chips,
@@ -621,12 +620,10 @@
 			/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,
 			/obj/item/weapon/reagent_containers/food/snacks/cracker,
 			/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
-			/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks,
 			/obj/item/weapon/reagent_containers/food/snacks/tastybread,
 			/obj/item/weapon/reagent_containers/food/snacks/meatsnack,
 			/obj/item/weapon/reagent_containers/food/snacks/maps,
 			/obj/item/weapon/reagent_containers/food/snacks/nathisnack,
-			/obj/item/weapon/reagent_containers/food/snacks/adhomian_can,
 			/obj/item/weapon/reagent_containers/food/snacks/tuna
 	)
 	for (var/i = 0,i<7,i++)
@@ -656,11 +653,6 @@
 	desc = "A box filled with a combat inhaler and several large empty inhaler cartridges."
 	icon_state = "box_inhalers"
 	starts_with = list(/obj/item/weapon/reagent_containers/inhaler = 8)
-
-/obj/item/weapon/storage/box/clams
-	name = "box of Ras'val clam"
-	desc = "A box filled with clams from the Ras'val sea, imported by Njadra'Akhar Enterprises."
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/clam = 5)
 
 /obj/item/weapon/storage/box/produce
 	name = "produce box"

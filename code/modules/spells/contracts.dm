@@ -17,10 +17,6 @@
 		to_chat(user, "You can't contract with yourself!")
 		return
 
-	if(iscultist(user))
-		to_chat(user, "Your soul already belongs to other powers!")
-		return
-
 	var/ans = alert(user,"The contract clearly states that signing this contract will bind your soul to \the [contract_master]. Are you sure you want to continue?","[src]","Yes","No")
 
 	if(ans == "Yes")
@@ -165,11 +161,6 @@
 	name = "charge contract"
 	path = /spell/aoe_turf/charge
 	desc = "This contract is made of 100% post-consumer wizard."
-
-/obj/item/weapon/contract/boon/wizard/gestalt
-	name = "conjure gestalt contract"
-	path = /spell/aoe_turf/conjure/grove/gestalt
-	desc = "This contract is a druid's favorite."
 
 /obj/item/weapon/contract/boon/wizard/statue
 	name = "flesh to stone contract"

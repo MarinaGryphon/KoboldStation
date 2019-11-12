@@ -53,14 +53,6 @@
 		flick("e_flash", M.flash)
 		M.Stun(2)
 		M.Weaken(10)
-			//Vaurca damage 15/01/16
-		var/mob/living/carbon/human/H = M
-		if(isvaurca(H))
-			var/obj/item/organ/eyes/E = H.get_eyes()
-			if(!E)
-				return
-
-			E.flash_act()
 
 //Now applying sound
 	if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))

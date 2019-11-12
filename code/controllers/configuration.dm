@@ -269,7 +269,7 @@ var/list/gamemode_cache = list()
 	var/access_warn_vms = 0
 
 	var/sun_accuracy = 8
-	var/sun_target_z = 7
+	var/sun_target_z = 3
 
 	var/cargo_load_items_from = "json"
 	var/merchant_chance = 20 //Chance, in percentage, of the merchant job slot being open at round start

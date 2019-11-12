@@ -15,8 +15,6 @@
 	if(ishuman(parent))
 		var/mob/living/carbon/human/H = parent
 		metabolism_type = H.species.reagent_tag
-	else if (istype(parent, /mob/living/carbon/alien/diona))
-		metabolism_type = IS_DIONA
 
 	for(var/datum/reagent/current in reagent_list)
 		current.on_mob_life(parent, metabolism_type, metabolism_class)

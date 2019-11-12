@@ -1,13 +1,11 @@
 /datum/species/human
 	name = "Human"
-	hide_name = TRUE
 	short_name = "hum"
 	name_plural = "Humans"
 	bodytype = "Human"
 	age_max = 125
 	economic_modifier = 12
 
-	primitive_form = "Monkey"
 	unarmed_types = list(
 		/datum/unarmed_attack/stomp,
 		/datum/unarmed_attack/kick,
@@ -21,9 +19,11 @@
 	megacorporations have sparked secretive factions to fight their influence, while there is always the risk of someone digging too \
 	deep into the secrets of the galaxy..."
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SOL_COMMON)
+	secondary_langs = list(LANGUAGE_HUMAN)
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
-	mob_size = 9
+	mob_size = 13
+	size_multiplier_x = 1.4
+	size_multiplier_y = 1.6 
 	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SOCKS | HAS_SKIN_PRESET
 	remains_type = /obj/effect/decal/remains/human
@@ -38,6 +38,5 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/tie_hair)
 
-	zombie_type = "Zombie"
 	base_color = "#25032"
 	character_color_presets = list("Dark" = "#000000", "Warm" = "#250302", "Cold" = "#1e1e29")

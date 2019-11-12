@@ -28,7 +28,7 @@
 	if(check_streak(A,D))
 		return 1
 	D.grabbedby(A,1)
-	var/obj/item/weapon/grab/G = A.get_active_hand()
+	var/obj/item/grab/G = A.get_active_hand()
 	if(G && prob(50))
 		G.state = GRAB_AGGRESSIVE
 		D.visible_message("<span class='danger'>[A] gets a strong grip on [D]!</span>")
@@ -97,10 +97,3 @@
 	to_chat(usr, "<span class='notice'>Tail Sweep</span>: Harm Harm Disarm. Trips the victim with your tail, rendering them prone and unable to move for a short time.")
 	to_chat(usr, "<span class='notice'>Swift Disarm</span>: Disarm Disarm Grab. Strikes your target's weapon, trying to disarm it from their hands.")
 	to_chat(usr, "<span class='notice'>Hammering Strike</span>: Disarm Harm Disarm. Delivers a strikes that will push the target away from you.")
-
-/obj/item/martial_manual/unathi
-	name = "kis khan scroll"
-	desc = "A parched scroll.It seems to be drawings of some sort of martial art involving tails."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "scroll2"
-	martial_art = /datum/martial_art/kis_khan

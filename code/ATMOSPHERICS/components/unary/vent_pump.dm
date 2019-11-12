@@ -43,7 +43,7 @@
 	var/welded = 0 // Added for aliens -- TLE
 
 	var/frequency = 1439
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 	var/radio_filter_out
 	var/radio_filter_in
@@ -66,7 +66,7 @@
 	external_pressure_bound_default = 0
 	internal_pressure_bound = 2000
 	internal_pressure_bound_default = 2000
-	pressure_checks = 2
+	pressure_checks = PRESSURE_CHECK_INTERNAL
 	pressure_checks_default = 2
 
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
@@ -346,7 +346,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
 	if(W.iswelder())
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if (!WT.welding)
 			to_chat(user, "<span class='danger'>\The [WT] must be turned on!</span>")
 		else if (WT.remove_fuel(0,user))
@@ -384,7 +384,7 @@
 	if(old_stat != stat)
 		update_icon()
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.iswrench())
 		return ..()
 	if (!(stat & NOPOWER) && use_power)

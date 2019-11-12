@@ -18,7 +18,7 @@
 	return ..()
 
 /obj/item/radio/integrated/proc/post_signal(var/freq, var/key, var/value, var/key2, var/value2, var/key3, var/value3, s_filter)
-	var/datum/radio_frequency/frequency = SSradio.return_frequency(freq)
+	var/tmp/datum/radio_frequency/frequency = SSradio.return_frequency(freq)
 
 	if(!frequency) return
 
@@ -38,9 +38,9 @@
 /obj/item/radio/integrated/proc/generate_menu()
 
 /obj/item/radio/integrated/beepsky
-	var/list/botlist = null		// list of bots
-	var/mob/living/bot/secbot/active 	// the active bot; if null, show bot list
-	var/list/botstatus			// the status signal sent by the bot
+	var/tmp/list/botlist = null		// list of bots
+	var/tmp/mob/living/bot/secbot/active 	// the active bot; if null, show bot list
+	var/tmp/list/botstatus			// the status signal sent by the bot
 
 	var/control_freq = BOT_FREQ
 
@@ -203,7 +203,7 @@
 	var/frequency = 1457
 	var/code = 30.0
 	var/last_transmission
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 /obj/item/radio/integrated/signal/Initialize()
 	. = ..()

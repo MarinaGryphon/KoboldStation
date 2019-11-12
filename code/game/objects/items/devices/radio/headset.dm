@@ -50,12 +50,6 @@
 		if (translate_binary)
 			var/datum/language/binary = all_languages["Robot Talk"]
 			binary.broadcast(M, message)
-		if (translate_hive)
-			var/datum/language/hivemind = all_languages["Hivemind"]
-			hivemind.broadcast(M, message)
-		if (translate_hivenet)
-			var/datum/language/bug = all_languages[LANGUAGE_VAURCA]
-			bug.broadcast(M, message)
 		return null
 
 	return ..()

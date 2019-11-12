@@ -16,12 +16,6 @@
 		return STATUS_CLOSE
 	return STATUS_UPDATE									// Ghosts can view updates
 
-/mob/living/silicon/pai/default_can_use_topic(var/src_object)
-	if((src_object == src || src_object == radio) && !stat)
-		return STATUS_INTERACTIVE
-	else
-		return ..()
-
 /mob/living/silicon/robot/default_can_use_topic(var/src_object)
 	. = shared_nano_interaction()
 	if(. <= STATUS_DISABLED)

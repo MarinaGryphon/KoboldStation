@@ -26,10 +26,6 @@
 	folders["yellow folder"] = /obj/item/weapon/folder/yellow
 	gear_tweaks += new/datum/gear_tweak/path(folders)
 
-/datum/gear/utility/paicard
-	display_name = "personal AI device"
-	path = /obj/item/device/paicard
-
 /datum/gear/utility/wallet
 	display_name = "wallet, orange"
 	path = 	/obj/item/weapon/storage/wallet

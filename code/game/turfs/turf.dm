@@ -24,19 +24,19 @@
 
 	var/footstep_sound = "defaultstep"
 
-	var/list/decals
+	var/tmp/list/decals
 
 	var/is_hole		// If true, turf will be treated as space or a hole
 	var/tmp/turf/baseturf
 
-	var/roof_type = null // The turf type we spawn as a roof.
+	var/tmp/roof_type = null // The turf type we spawn as a roof.
 	var/tmp/roof_flags = 0
 
 	var/movement_cost = 0 // How much the turf slows down movement, if any.
 
 	//Mining resources (for the large drills).
 	var/has_resources
-	var/list/resources
+	var/tmp/list/resources
 
 	// Plating data.
 	var/base_name = "plating"
@@ -318,11 +318,6 @@ var/const/enterloopsanity = 100
 		for(var/obj/effect/O in src)
 			if(istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
 				qdel(O)
-			if(istype(O,/obj/effect/rune))
-				var/obj/effect/rune/R = O
-				// Only show message for visible runes
-				if (R.visibility)
-					to_chat(user, "<span class='warning'>No matter how well you wash, the bloody symbols remain!</span>")
 	else
 		to_chat(user, "<span class='warning'>\The [source] is too dry to wash that.</span>")
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
@@ -417,7 +412,7 @@ var/const/enterloopsanity = 100
 		return
 	if(istype(O, /obj/screen))
 		return
-	if(user.restrained() || user.stat || user.stunned || user.paralysis || !user.lying)
+	if(user.restrained() || user.stat || user.stunned || user.paralysis)
 		return
 	if((!(istype(O, /atom/movable)) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O)))
 		return

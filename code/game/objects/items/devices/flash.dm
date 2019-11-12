@@ -67,15 +67,6 @@
 	var/flashfail = 0
 
 	if(iscarbon(M))
-		if (M.is_diona())
-			var/mob/living/carbon/C = M
-			var/datum/dionastats/DS = C.get_dionastats()
-			DS.stored_energy += 10
-			flick("e_flash", M.flash)
-			M.Weaken(5)
-			M.eye_blind = 5
-			return
-
 		var/safety = M:eyecheck(TRUE)
 		if(safety <= 0)
 			flick("e_flash", M.flash)
@@ -167,8 +158,8 @@
 
 	for(var/mob/living/carbon/M in oviewers(3, null))
 		if(prob(50))
-			if (locate(/obj/item/weapon/cloaking_device, M))
-				for(var/obj/item/weapon/cloaking_device/S in M)
+			if (locate(/obj/item/cloaking_device, M))
+				for(var/obj/item/cloaking_device/S in M)
 					S.active = 0
 					S.icon_state = "shield0"
 		var/safety = M.eyecheck(TRUE)

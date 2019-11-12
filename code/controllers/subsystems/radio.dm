@@ -113,7 +113,7 @@ var/datum/controller/subsystem/radio/SSradio
 
 /datum/controller/subsystem/radio/proc/add_object(obj/device, new_frequency, filter = null)
 	var/f_text = num2text(new_frequency)
-	var/datum/radio_frequency/frequency = frequencies[f_text]
+	var/tmp/datum/radio_frequency/frequency = frequencies[f_text]
 
 	if(!frequency)
 		frequency = new
@@ -125,7 +125,7 @@ var/datum/controller/subsystem/radio/SSradio
 
 /datum/controller/subsystem/radio/proc/remove_object(obj/device, old_frequency)
 	var/f_text = num2text(old_frequency)
-	var/datum/radio_frequency/frequency = frequencies[f_text]
+	var/tmp/datum/radio_frequency/frequency = frequencies[f_text]
 
 	if(frequency)
 		frequency.remove_listener(device)
@@ -138,7 +138,7 @@ var/datum/controller/subsystem/radio/SSradio
 
 /datum/controller/subsystem/radio/proc/return_frequency(new_frequency)
 	var/f_text = num2text(new_frequency)
-	var/datum/radio_frequency/frequency = frequencies[f_text]
+	var/tmp/datum/radio_frequency/frequency = frequencies[f_text]
 
 	if(!frequency)
 		frequency = new

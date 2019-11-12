@@ -40,9 +40,12 @@
 	var/tail                                             // Name of tail state in species effects icon file.
 	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
 	var/tail_hair
+	var/tail_transform = list("NORTH" = 0, "EAST" = 0)   // south and west are negative
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/mob_size	= MOB_MEDIUM
+	var/size_multiplier_x = 1
+	var/size_multiplier_y = 1
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted
@@ -51,13 +54,13 @@
 	var/light_power
 
 	// Language/culture vars.
-	var/default_language = "Ceti Basic"		 // Default language is used when 'say' is used without modifiers.
-	var/language = "Ceti Basic"        		 // Default racial language, if any.
+	var/default_language = LANGUAGE_KOBOLD		 // Default language is used when 'say' is used without modifiers.
+	var/language = LANGUAGE_KOBOLD        		 // Default racial language, if any.
 	var/list/secondary_langs = list()        // The names of secondary languages that are available to this species.
 	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                   // The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0          // How many secondary languages are available to select at character creation
-	var/name_language = "Ceti Basic"	    // The language to use when determining names for this species, or null to use the first name/last name generator
+	var/name_language = LANGUAGE_KOBOLD	    // The language to use when determining names for this species, or null to use the first name/last name generator
 
 	// Combat vars.
 	var/total_health = 100                   // Point at which the mob will enter crit.
@@ -324,14 +327,6 @@
 		for(var/obj/item/organ/I in H.internal_organs)
 			I.robotize()
 
-	if(isvaurca(H))
-		for (var/obj/item/organ/external/E in H.organs)
-			if ((E.status & ORGAN_CUT_AWAY) || (E.status & ORGAN_DESTROYED))
-				continue
-			E.status |= ORGAN_ADV_ROBOT
-		for(var/obj/item/organ/I in H.internal_organs)
-			I.status |= ORGAN_ADV_ROBOT
-
 /datum/species/proc/tap(var/mob/living/carbon/human/H,var/mob/living/target)
 	var/t_his = "their"
 	switch(target.gender)
@@ -386,6 +381,8 @@
 	H.mob_size = mob_size
 	H.mouth_size = mouth_size || 2
 	H.eat_types = allowed_eat_types
+	H.size_multiplier_x = size_multiplier_x
+	H.size_multiplier_y = size_multiplier_y
 	if(!kpg)
 		if(islesserform(H))
 			H.dna.SetSEState(MONKEYBLOCK,1)
@@ -446,11 +443,7 @@
 
 	if(!H.druggy)
 		H.see_in_dark = (H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight + H.equipment_darkness_modifier, 8)
-		if(H.seer)
-			var/obj/effect/rune/R = locate() in H.loc
-			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				H.see_invisible = SEE_INVISIBLE_CULT
-		if(H.see_invisible != SEE_INVISIBLE_CULT && H.equipment_see_invis)
+		if(H.equipment_see_invis)
 			H.see_invisible = min(H.see_invisible, H.equipment_see_invis)
 
 	if(H.equipment_tint_total >= TINT_BLIND)

@@ -26,7 +26,7 @@
 
 		. += AM.get_mob()
 
-proc/random_hair_style(gender, species = "Human")
+proc/random_hair_style(gender, species = "Kobold")
 	var/h_style = "Bald"
 
 	var/list/valid_hairstyles = list()
@@ -45,7 +45,7 @@ proc/random_hair_style(gender, species = "Human")
 
 	return h_style
 
-proc/random_facial_hair_style(gender, species = "Human")
+proc/random_facial_hair_style(gender, species = "Kobold")
 	var/f_style = "Shaved"
 
 	var/list/valid_facialhairstyles = list()
@@ -65,14 +65,14 @@ proc/random_facial_hair_style(gender, species = "Human")
 
 		return f_style
 
-proc/sanitize_name(name, species = "Human")
+proc/sanitize_name(name, species = "Kobold")
 	var/datum/species/current_species
 	if(species)
 		current_species = all_species[species]
 
 	return current_species ? current_species.sanitize_name(name) : sanitizeName(name)
 
-proc/random_name(gender, species = "Human")
+proc/random_name(gender, species = "Kobold")
 
 	var/datum/species/current_species
 	if(species)
@@ -171,7 +171,7 @@ Proc for attack log creation, because really why not
 	return (thing in R.module.modules)
 
 /proc/get_exposed_defense_zone(var/atom/movable/target)
-	var/obj/item/weapon/grab/G = locate() in target
+	var/obj/item/grab/G = locate() in target
 	if(G && G.state >= GRAB_NECK) //works because mobs are currently not allowed to upgrade to NECK if they are grabbing two people.
 		return pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
 	else

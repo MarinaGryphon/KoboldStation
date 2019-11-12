@@ -47,9 +47,9 @@
 	//var/last_charge			= 0
 
 	//For icon overlay updates
-	var/last_disp
-	var/last_chrg
-	var/last_onln
+	var/tmp/last_disp
+	var/tmp/last_chrg
+	var/tmp/last_onln
 
 	var/input_cut = 0
 	var/input_pulsed = 0
@@ -61,14 +61,14 @@
 	var/open_hatch = 0
 	var/name_tag = null
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
-	var/obj/machinery/power/terminal/terminal = null
+	var/tmp/obj/machinery/power/terminal/terminal = null
 	var/should_be_mapped = 0 // If this is set to 0 it will send out warning on New()
-	var/datum/effect_system/sparks/big_spark
-	var/datum/effect_system/sparks/small_spark
+	var/tmp/datum/effect_system/sparks/big_spark
+	var/tmp/datum/effect_system/sparks/small_spark
 
-	var/time = 0
+	var/tmp/time = 0
 	var/charge_mode = 0
-	var/last_time = 1
+	var/tmp/last_time = 1
 
 /obj/machinery/power/smes/drain_power(var/drain_check, var/surge, var/amount = 0)
 
@@ -293,7 +293,7 @@
 	ui_interact(user)
 
 
-/obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/power/smes/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(W.isscrewdriver())
 		if(!open_hatch)
 			open_hatch = 1

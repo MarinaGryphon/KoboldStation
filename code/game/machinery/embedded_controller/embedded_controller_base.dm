@@ -54,7 +54,7 @@ obj/machinery/embedded_controller/radio/Destroy()
 
 	var/frequency = 1379
 	var/radio_filter = null
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 	unacidable = 1
 
 /obj/machinery/embedded_controller/radio/Initialize()

@@ -15,7 +15,7 @@
 	s_tone = null
 	skin_color = null
 	hair_color = null
-	if(status & ORGAN_ROBOT && !(isipc(human)) && !(isautakh(human)))
+	if(status & ORGAN_ROBOT && !isipc(human))
 		return
 	if(species && human.species && species.name != human.species.name)
 		return
@@ -158,7 +158,7 @@
 						mob_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
 					else
 						mob_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-				
+
 
 			apply_markings()
 

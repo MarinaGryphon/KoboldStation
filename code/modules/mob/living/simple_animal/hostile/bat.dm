@@ -8,7 +8,7 @@
 	icon_gib = "bat_dead"
 	speak_chance = 0
 	turns_per_move = 3
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	meat_type = /obj/item/reagent_containers/food/snacks/meat
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
@@ -71,17 +71,3 @@
 		if(prob(15))
 			L.Stun(1)
 			L.visible_message("<span class='danger'>\the [src] scares \the [L]!</span>")
-
-/mob/living/simple_animal/hostile/scarybat/cult
-	faction = "cult"
-	supernatural = 1
-	tameable = FALSE
-	appearance_flags = NO_CLIENT_COLOR
-
-/mob/living/simple_animal/hostile/scarybat/cult/cultify()
-	return
-
-/mob/living/simple_animal/hostile/scarybat/cult/Life()
-	..()
-	check_horde()
-

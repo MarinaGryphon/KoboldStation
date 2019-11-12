@@ -4,6 +4,16 @@
 	var/rare_val = 0.7              // Threshold for rare metal, set in new as percentage of cell_range.
 	var/chunk_size = 4              // Size each cell represents on map
 
+/datum/random_map/noise/ore/deep
+	descriptor = "deep ore distribution map"
+	deep_val = 0.6              // Threshold for deep metals, set in new as percentage of cell_range.
+	rare_val = 0.5              // Threshold for rare metal, set in new as percentage of cell_range.
+
+/datum/random_map/noise/ore/surface
+	descriptor = "surface ore distribution map"
+	deep_val = 0.9              // Threshold for deep metals, set in new as percentage of cell_range.
+	rare_val = 0.8              // Threshold for rare metal, set in new as percentage of cell_range.
+
 /datum/random_map/noise/ore/New()
 	rare_val = cell_range * rare_val
 	deep_val = cell_range * deep_val

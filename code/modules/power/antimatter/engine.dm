@@ -41,7 +41,7 @@
 	if( (stat & BROKEN) || !connected)
 		return
 
-	if(istype(F, /obj/item/weapon/fuel/H))
+	if(istype(F, /obj/item/fuel/H))
 		if(injecting)
 			to_chat(user, "There's already a fuel rod in the injector!")
 			return
@@ -52,10 +52,10 @@
 		F = null
 		spawn( 300 )
 			injecting = 0
-			new/obj/item/weapon/fuel(src.loc)
+			new/obj/item/fuel(src.loc)
 			connected.H_fuel += fuel
 
-	if(istype(F, /obj/item/weapon/fuel/antiH))
+	if(istype(F, /obj/item/fuel/antiH))
 		if(injecting)
 			to_chat(user, "There's already a fuel rod in the injector!")
 			return
@@ -66,7 +66,7 @@
 		F = null
 		spawn( 300 )
 			injecting = 0
-			new /obj/item/weapon/fuel(src.loc)
+			new /obj/item/fuel(src.loc)
 			connected.antiH_fuel += fuel
 
 	return

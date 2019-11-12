@@ -17,7 +17,7 @@ var/global/datum/robolimb/basic_robolimb
 	var/unavailable_at_chargen                           // If set, not available at chargen.
 	var/list/species_can_use = list(
 		"Human",
-		"Skrell",
+		"Kobold",
 		"Tajara",
 		"Zhan-Khazan Tajara",
 		"M'sai Tajara",
@@ -71,26 +71,9 @@ var/global/datum/robolimb/basic_robolimb
 	unavailable_at_chargen = 1
 	linked_frame = "Hephaestus G1 Industrial Frame"
 
-/datum/robolimb/terminator
-	company = PROSTHETIC_HK
-	desc = "A ludicrously expensive and EMP shielded component, these types of limbs are best suited for highly specialized cyborgs."
-	icon = 'icons/mob/human_races/ipc/r_terminator.dmi'
-	unavailable_at_chargen = 1
-
 /datum/robolimb/human
 	company = PROSTHETIC_SYNTHSKIN
 	desc = "This limb is designed to mimic the Human form. It does so with moderate success."
 	icon = 'icons/mob/human_races/human/r_human.dmi'
 	species_can_use = list("Human")
 	linked_frame = "Shell Frame"
-
-/datum/robolimb/autakh
-	company = PROSTHETIC_AUTAKH
-	desc = "This limb has been designed by the Aut'akh sect, it was created to interact exclusively with their bodies and implants."
-	icon = 'icons/mob/human_races/unathi/r_autakh.dmi'
-	species_can_use = list("Aut'akh Unathi")
-	linked_frame = "Aut'akh Unathi"
-	unavailable_at_chargen = 1
-	paintable = 1
-	brute_mod = 1
-	burn_mod = 1

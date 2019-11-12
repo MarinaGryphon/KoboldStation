@@ -526,8 +526,6 @@ datum/projectile_data
 /proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
 	if(enabled_spooking)
 		return 1
-	else
-		return (cult.current_antagonists.len > spookiness_threshold)
 
 /proc/remove_images_from_clients(image/I, list/show_to)
 	for(var/client/C in show_to)

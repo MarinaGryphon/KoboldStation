@@ -33,6 +33,12 @@
 	item_state = "gas_alt_alt"
 	icon_state = "gas_alt_alt"
 
+/obj/item/clothing/mask/gas/alt/respirator
+	name = "respirator"
+	desc = "A respirator that clings tightly to the face, preventing kobolds from getting CO2 poisoning from being outside on Naarvat. Won't help loamers or elves much, and does nothing for gases other than CO2."
+	filtered_gases = list("carbon_dioxide")
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
 /obj/item/clothing/mask/gas/old
 	desc = "A face-covering mask that can be connected to an air supply. Seems to be an old, outdated design."
 	filtered_gases = list("sleeping_agent")

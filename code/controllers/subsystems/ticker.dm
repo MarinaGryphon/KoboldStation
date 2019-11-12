@@ -167,7 +167,7 @@ var/datum/controller/subsystem/ticker/SSticker
 		game_finished = (emergency_shuttle.returned() || mode.station_was_nuked)
 		mode_finished = (!post_game && mode.check_finished())
 	else
-		game_finished = (mode.check_finished() || (emergency_shuttle.returned() && emergency_shuttle.evac == 1)) || universe_has_ended
+		game_finished = mode.check_finished() || (emergency_shuttle.returned() && emergency_shuttle.evac == 1)
 		mode_finished = game_finished
 
 	if(!mode.explosion_in_progress && game_finished && (mode_finished || post_game))
@@ -178,17 +178,9 @@ var/datum/controller/subsystem/ticker/SSticker
 		spawn(50)
 			callHook("roundend")
 
-			if (universe_has_ended)
-				if(mode.station_was_nuked)
-					feedback_set_details("end_proper","nuke")
-				else
-					feedback_set_details("end_proper","universe destroyed")
-				if(!delay_end)
-					to_world("<span class='notice'><b>Rebooting due to destruction of station in [restart_timeout/10] seconds</b></span>")
-			else
-				feedback_set_details("end_proper","proper completion")
-				if(!delay_end)
-					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
+			feedback_set_details("end_proper","proper completion")
+			if(!delay_end)
+				to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
 
 			var/wait_for_tickets
 			var/delay_notified = 0

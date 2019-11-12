@@ -10,12 +10,12 @@
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/damage = 0
-	var/damage_overlay = 0
+	var/tmp/damage_overlay = 0
 	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
-	var/material/material
-	var/material/reinf_material
+	var/tmp/material/material
+	var/tmp/material/reinf_material
 	var/last_state
 	var/construction_stage
 	var/use_standard_smoothing
@@ -26,6 +26,9 @@
 	var/tmp/image/fake_wall_image
 	var/tmp/cached_adjacency
 
+	var/materialtype
+	var/rmaterialtype
+
 	smooth = SMOOTH_TRUE | SMOOTH_NO_CLEAR_ICON
 
 // Walls always hide the stuff below them.
@@ -35,7 +38,12 @@
 	for(var/obj/O in src)
 		O.hide(1)
 
-/turf/simulated/wall/Initialize(mapload, var/materialtype, var/rmaterialtype)
+/turf/simulated/wall/Write(var/savefile/F)
+	. = ..()
+	materialtype = material?.name
+	rmaterialtype = reinf_material?.name
+
+/turf/simulated/wall/Initialize(mapload)
 	. = ..()
 	if(!use_set_icon_state)
 		icon_state = "blank"
@@ -67,10 +75,7 @@
 
 	var/proj_damage = Proj.get_structure_damage()
 
-	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(proj_damage, 100)
-
-	take_damage(damage)
+	take_damage(proj_damage)
 	return
 
 /turf/simulated/wall/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)

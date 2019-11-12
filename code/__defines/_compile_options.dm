@@ -2,4 +2,4 @@
 								// 1 will enable set background. 0 will disable set background.
 
 // If defined, the sunlight system is enabled. Caution: this uses a LOT of memory.
-//#define ENABLE_SUNLIGHT
+#define ENABLE_SUNLIGHT

@@ -38,27 +38,3 @@
 			to_chat(src, "<span class='warning'>It doesn't seem to be as effective as you hoped.</span>")
 		else
 			to_chat(B.host_brain, "<span class='danger'><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></span>")
-
-/mob/living/carbon/proc/spawn_larvae()
-	set category = "Abilities"
-	set name = "Reproduce"
-	set desc = "Spawn several young."
-
-	var/mob/living/simple_animal/borer/B = has_brain_worms()
-
-	if(!B)
-		return
-
-	if(B.chemicals >= 100)
-		to_chat(src, "<span class='warning'>Your host twitches and quivers as you rapidly excrete a larva from your sluglike body.</span>")
-		visible_message("<span class='warning'>[src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</span>")
-		B.chemicals -= 100
-		B.has_reproduced = 1
-
-		new /obj/effect/decal/cleanable/vomit(get_turf(src))
-		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-		new /mob/living/simple_animal/borer(get_turf(src))
-
-	else
-		to_chat(src, "You do not have enough chemicals stored to reproduce.")
-		return

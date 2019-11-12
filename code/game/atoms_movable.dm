@@ -1,25 +1,25 @@
 /atom/movable
 	layer = 3
-	var/last_move = null
+	var/tmp/last_move = null
 	var/anchored = 0
 	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
 	var/l_move_time = 1
 	var/m_flag = 1
-	var/throwing = 0
-	var/thrower
-	var/turf/throw_source = null
-	var/throw_speed = 2
-	var/throw_range = 7
-	var/moved_recently = 0
-	var/mob/pulledby = null
+	var/tmp/throwing = 0
+	var/tmp/thrower
+	var/tmp/turf/throw_source = null
+	var/tmp/throw_speed = 2
+	var/tmp/throw_range = 7
+	var/tmp/moved_recently = 0
+	var/tmp/mob/pulledby = null
 	var/item_state = null // Base name of the image used for when the item is in someone's hand. Suffixes are added to this. Doubles as legacy overlay_state.
 	var/overlay_state = null // Base name of the image used for when the item is worn. Suffixes are added to this. Important for icon flipping as _flip is added at the end of the value.
 	//Also used on holdable mobs for the same info related to their held version
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
 
 	var/can_hold_mob = FALSE
-	var/list/contained_mobs
+	var/tmp/list/contained_mobs
 
 // We don't really need this, and apparently defining it slows down GC.
 /*/atom/movable/Del()
@@ -223,10 +223,6 @@
 		else if (y >= (world.maxy - TRANSITIONEDGE + 1))
 			y = TRANSITIONEDGE + 1
 			x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
-
-		if(istype(SSticker.mode, /datum/game_mode/nuclear)) //only really care if the game mode is nuclear
-			var/datum/game_mode/nuclear/G = SSticker.mode
-			G.check_nuke_disks()
 
 		spawn(0)
 			if(loc) loc.Entered(src)

@@ -1,5 +1,5 @@
 language: generic
-sudo: false
+os: linux
 
 env:
   global:
@@ -9,10 +9,8 @@ env:
     FLYWAY_BUILD="5.2.4"
     NODE_VERSION=10
     RUST_G_VERSION="0.4.1"
-  matrix:
-    - USE_MAP=aurora
-    - USE_MAP=runtime
-    - USE_MAP=exodus
+  jobs:
+    - USE_MAP=kobold
 
 cache:
   directories:

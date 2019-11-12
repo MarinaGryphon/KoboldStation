@@ -208,7 +208,7 @@
 				M.death()
 				spark(M, 3, alldirs)
 			else if(iscarbon(M) && M.contents.len)
-				for(var/obj/item/weapon/holder/H in M.contents)
+				for(var/obj/item/holder/H in M.contents)
 					if(!H.contained)
 						continue
 
@@ -248,7 +248,7 @@
 				M.gib()
 				spark(M, 3, alldirs)
 			else if(iscarbon(M) && M.contents.len)
-				for(var/obj/item/weapon/holder/H in M.contents)
+				for(var/obj/item/holder/H in M.contents)
 					if(!H.contained)
 						continue
 
@@ -328,41 +328,6 @@
 	..()
 
 
-
-//Beams of magical veil energy fired by empowered pylons. Some inbuilt armor penetration cuz magic.
-//Ablative armor is still overwhelmingly useful
-//These beams are very weak but rapid firing, ~twice per second.
-/obj/item/projectile/beam/cult
-	name = "energy bolt"
-	//For projectiles name is only shown in onhit messages, so its more of a layman's description
-	//of what the projectile looks like
-	damage = 3.5 //Very weak
-	accuracy = 4 //Guided by magic, unlikely to miss
-	eyeblur = 0 //Not bright or blinding
-	var/mob/living/ignore
-
-	muzzle_type = /obj/effect/projectile/muzzle/cult
-	tracer_type = /obj/effect/projectile/tracer/cult
-	impact_type = /obj/effect/projectile/impact/cult
-
-/obj/item/projectile/beam/cult/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
-	//Harmlessly passes through cultists and constructs
-	if (target_mob == ignore)
-		return 0
-	if (iscult(target_mob))
-		return 0
-
-	return ..()
-
-/obj/item/projectile/beam/cult/heavy
-	name = "glowing energy bolt"
-	damage = 10 //Stronger and better armor penetration, though still much weaker than a typical laser
-	armor_penetration = 10
-
-	muzzle_type = /obj/effect/projectile/muzzle/cult/heavy
-	tracer_type = /obj/effect/projectile/tracer/cult/heavy
-	impact_type = /obj/effect/projectile/impact/cult/heavy
-
 /obj/item/projectile/beam/energy_net
 	name = "energy net projection"
 	icon_state = "xray"
@@ -378,7 +343,7 @@
 	..()
 
 /obj/item/projectile/beam/energy_net/proc/do_net(var/mob/M)
-	var/obj/item/weapon/energy_net/net = new (get_turf(M))
+	var/obj/item/energy_net/net = new (get_turf(M))
 	net.throw_impact(M)
 
 /obj/item/projectile/beam/tachyon

@@ -13,7 +13,7 @@
 	var/id_tag = null
 
 	var/frequency = 1379
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 /obj/machinery/mech_sensor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(!src.enabled()) return 1

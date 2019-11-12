@@ -13,74 +13,26 @@
 	tag = text("landmark*[]", name)
 
 	switch(name)			//some of these are probably obsolete
-		if("monkey")
-			monkeystart += loc
-			delete_me = 1
-			return
 		if("start")
 			newplayer_start = get_turf(loc)
-			delete_me = 1
 			return
 		if("JoinLate")
 			latejoin += loc
-			delete_me = 1
-			return
-		if("KickoffLocation")
-			kickoffsloc += loc
-			delete_me = 1
 			return
 		if("JoinLateGateway")
 			latejoin_gateway += loc
-			delete_me = 1
 			return
 		if("JoinLateCryo")
 			latejoin_cryo += loc
-			delete_me = 1
 			return
 		if("JoinLateCyborg")
 			latejoin_cyborg += loc
-			delete_me = 1
 			return
 		if("JoinLateMerchant")
 			latejoin_merchant += loc
-			delete_me = 1
-			return
-		if("prisonwarp")
-			prisonwarp += loc
-			delete_me = 1
-			return
-		if("Holding Facility")
-			holdingfacility += loc
-		if("tdome1")
-			tdome1 += loc
-		if("tdome2")
-			tdome2 += loc
-		if("tdomeadmin")
-			tdomeadmin += loc
-		if("tdomeobserve")
-			tdomeobserve += loc
-		if("prisonsecuritywarp")
-			prisonsecuritywarp += loc
-			delete_me = 1
-			return
-		if("xeno_spawn")
-			xeno_spawn += loc
-			delete_me = 1
-			return
-		if("endgame_exit")
-			endgame_safespawns += loc
-			delete_me = 1
-			return
-		if("bluespacerift")
-			endgame_exits += loc
-			delete_me = 1
 			return
 		if("asteroid spawn")
 			asteroid_spawn += loc
-			delete_me = 1
-			return
-		if("skrell_entry")
-			dream_entries += loc
 			delete_me = 1
 			return
 
@@ -107,9 +59,8 @@
 	invisibility = 101
 
 /obj/effect/landmark/start/New()
-	..()
+	. = ..()
 	tag = "start*[name]"
-
 	return 1
 
 //Costume spawner landmarks
@@ -124,7 +75,7 @@
 /obj/effect/landmark/costume/chicken/New()
 	new /obj/item/clothing/suit/chickensuit(src.loc)
 	new /obj/item/clothing/head/chicken(src.loc)
-	new /obj/item/weapon/reagent_containers/food/snacks/egg(src.loc)
+	new /obj/item/reagent_containers/food/snacks/egg(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/gladiator/New()
@@ -178,7 +129,7 @@
 	var/CHOICE= pick( /obj/item/clothing/head/bowler, /obj/item/clothing/head/that)
 	new CHOICE(src.loc)
 	new /obj/item/clothing/shoes/black(src.loc)
-	new /obj/item/weapon/cane(src.loc)
+	new /obj/item/cane(src.loc)
 	new /obj/item/clothing/under/sl_suit(src.loc)
 	new /obj/item/clothing/mask/fakemoustache(src.loc)
 	delete_me = 1
@@ -231,13 +182,13 @@
 /obj/effect/landmark/costume/cutewitch/New()
 	new /obj/item/clothing/under/sundress(src.loc)
 	new /obj/item/clothing/head/witchwig(src.loc)
-	new /obj/item/weapon/staff/broom(src.loc)
+	new /obj/item/staff/broom(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/fakewizard/New()
 	new /obj/item/clothing/suit/wizrobe/fake(src.loc)
 	new /obj/item/clothing/head/wizard/fake(src.loc)
-	new /obj/item/weapon/staff/(src.loc)
+	new /obj/item/staff/(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/sexyclown/New()

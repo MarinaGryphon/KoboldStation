@@ -31,7 +31,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	signallers = list()
 	src.holder = holder
 	if(!istype(holder, holder_type))
-		CRASH("Our holder is null/the wrong type!")
+		CRASH("Our holder is null/the wrong type: [holder] is not [holder_type]!")
 		return
 
 	// Generate new wires

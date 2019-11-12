@@ -26,10 +26,6 @@
 	display_name = "cardemon booster pack"
 	path = /obj/item/weapon/pack/cardemon
 
-/datum/gear/spaceball_pack
-	display_name = "spaceball booster pack"
-	path = /obj/item/weapon/pack/spaceball
-
 /datum/gear/flask
 	display_name = "flask"
 	path = /obj/item/weapon/reagent_containers/food/drinks/flask/barflask

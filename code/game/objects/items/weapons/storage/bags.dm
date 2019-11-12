@@ -40,7 +40,6 @@
 	max_w_class = 2
 	max_storage_space = 56
 	can_hold = null // any
-	cant_hold = list(/obj/item/weapon/disk/nuclear)
 	drop_sound = 'sound/items/drop/wrapper.ogg'
 
 /obj/item/weapon/storage/bag/trash/update_icon()
@@ -108,7 +107,6 @@
 	w_class = 4
 	max_w_class = 2
 	can_hold = null // any
-	cant_hold = list(/obj/item/weapon/disk/nuclear)
 	drop_sound = 'sound/items/drop/wrapper.ogg'
 
 // -----------------------------

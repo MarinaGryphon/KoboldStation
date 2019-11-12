@@ -10,7 +10,7 @@
 	var/fixture_type = "tube"
 	var/sheets_refunded = 2
 	var/obj/machinery/light/newlight = null
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/cell_connectors = TRUE
 
 /obj/machinery/light_construct/Initialize()
@@ -132,7 +132,7 @@
 			qdel(src)
 			return
 
-	if (istype(W, /obj/item/weapon/cell))
+	if (istype(W, /obj/item/cell))
 		if (!cell_connectors)
 			to_chat(user, "<span class='notice'>[src] does not have power cell connectors.</span>")
 			return

@@ -333,8 +333,6 @@ mob/living/simple_animal/hostile/hitby(atom/movable/AM as mob|obj,var/speed = TH
 			var/obj/structure/simple_door/D = A
 			if(D.density)
 				D.Open()
-		else if(istype(A,/obj/structure/cult/pylon))
-			A.attack_generic(src, rand(melee_damage_lower, melee_damage_upper))
 		else if(istype(A, /obj/structure/window) || istype(A, /obj/structure/closet) || istype(A, /obj/structure/table) || istype(A, /obj/structure/grille))
 			A.attack_generic(src, rand(melee_damage_lower, melee_damage_upper))
 	Move(T)

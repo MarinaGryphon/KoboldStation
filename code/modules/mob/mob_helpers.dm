@@ -22,13 +22,6 @@
 /mob/living/silicon/isSynthetic()
 	return 1
 
-/mob/proc/isMonkey()
-	return 0
-
-/mob/living/carbon/human/isMonkey()
-	return istype(species, /datum/species/monkey)
-
-
 /proc/ishuman_species(A)
 	if(istype(A, /mob/living/carbon/human) && (A:get_species() == "Human"))
 		return 1
@@ -37,57 +30,7 @@
 /proc/isunathi(A)
 	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
-		switch(H.get_species())
-			if ("Unathi")
-				return 1
-			if("Aut'akh Unathi")
-				return 1
-			if ("Unathi Zombie")
-				return 1
-	return 0
-
-/proc/isautakh(A)
-	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
-		if(H.get_species() == "Aut'akh Unathi")
-			return 1
-	return 0
-
-/proc/istajara(A)
-	if(istype(A, /mob/living/carbon/human))
-		switch(A:get_species())
-			if ("Tajara")
-				return 1
-			if("Zhan-Khazan Tajara")
-				return 1
-			if("M'sai Tajara")
-				return 1
-			if ("Tajara Zombie")
-				return 1
-	return 0
-
-/proc/isskrell(A)
-	if(istype(A, /mob/living/carbon/human))
-		switch(A:get_species())
-			if ("Skrell")
-				return 1
-			if ("Skrell Zombie")
-				return 1
-	return 0
-
-/proc/isvaurca(A)
-	if(istype(A, /mob/living/carbon/human))
-		switch(A:get_species())
-			if("Vaurca Worker")
-				return 1
-			if("Vaurca Warrior")
-				return 1
-			if("Vaurca Breeder")
-				return 1
-			if("Vaurca Warform")
-				return 1
-			if("V'krexi")
-				return 1
+		return H.get_species() == "Unathi"
 	return 0
 
 /proc/isipc(A)
@@ -95,28 +38,6 @@
 	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
 		. = H.species && (H.species.flags & IS_MECHANICAL)
-
-/proc/isvox(A)
-	if(istype(A, /mob/living/carbon/human))
-		switch(A:get_species())
-			if ("Vox")
-				return 1
-			if ("Vox Pariah")
-				return 1
-			if ("Vox Armalis")
-				return 1
-	return 0
-
-/mob/proc/is_diona()
-	//returns which type of diona we are, or zero
-	if (istype(src, /mob/living/carbon/human))
-		var/mob/living/carbon/human/T = src
-		if (istype(T.species, /datum/species/diona) || istype(src, /mob/living/carbon/human/diona))
-			return DIONA_WORKER
-
-	if (istype(src, /mob/living/carbon/alien/diona))
-		return DIONA_NYMPH
-	return 0
 
 /proc/isskeleton(A)
 	if(istype(A, /mob/living/carbon/human) && (A:get_species() == "Skeleton"))
@@ -197,7 +118,7 @@ proc/getsensorlevel(A)
 	if(exclude_apprentice)
 		return mind && mind.assigned_role == "Space Wizard"
 	else
-		return mind && (mind.assigned_role == "Space Wizard" || mind.assigned_role == "Apprentice")
+		return mind?.assigned_role == "Space Wizard" || (!exclude_apprentice && mind?.assigned_role == "Apprentice")
 
 /mob/proc/is_berserk()
 	return FALSE
@@ -696,7 +617,7 @@ proc/is_blind(A)
 		if(istype(belt, /obj/item/weapon/gun) || istype(belt, /obj/item/weapon/melee))
 			threatcount += 2
 
-		if(species.name != "Human")
+		if(species.name != "Kobold")
 			threatcount += 2
 
 	if(check_records || check_arrest)
@@ -1149,9 +1070,6 @@ proc/is_blind(A)
 	return vessel
 
 /mob/living/carbon/human/get_vessel(create = FALSE)
-	. = vessel
-
-/mob/living/carbon/alien/diona/get_vessel(create = FALSE)
 	. = vessel
 
 #define POSESSIVE_PRONOUN	0

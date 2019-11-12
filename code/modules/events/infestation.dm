@@ -47,17 +47,6 @@
 	chosen_mob = pickweight(possible_mobs)
 
 	switch(chosen_mob)
-		if(INFESTATION_HIVEBOTS)
-			event_name = "Hivebot Invasion"
-			chosen_verb = "have invaded"
-			chosen_scan_type = "Bluespace readings"
-			var/list/beacon_types = list(
-				/mob/living/simple_animal/hostile/hivebotbeacon = 1,
-				/mob/living/simple_animal/hostile/hivebotbeacon/toxic = 1,
-				/mob/living/simple_animal/hostile/hivebotbeacon/incendiary = 1
-			)
-			chosen_mob_types += pickweight(beacon_types)
-
 		if(INFESTATION_SPACE_BATS)
 			event_name = "Space Bat Nest"
 			chosen_verb = "have been breeding in"

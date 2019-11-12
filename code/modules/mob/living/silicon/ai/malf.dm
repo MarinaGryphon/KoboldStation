@@ -100,22 +100,6 @@
 		if(!shutup)
 			to_chat(src, "Shutting down APU... DONE")
 
-// Returns percentage of AI's remaining backup capacitor charge (maxhealth - oxyloss).
-/mob/living/silicon/ai/proc/backup_capacitor()
-	return ((200 - getOxyLoss()) / 2)
-
-// Returns percentage of AI's remaining hardware integrity (maxhealth - (bruteloss + fireloss))
-/mob/living/silicon/ai/proc/hardware_integrity()
-	return (health-config.health_threshold_dead)/2
-
-// Shows capacitor charge and hardware integrity information to the AI in Status tab.
-/mob/living/silicon/ai/show_system_integrity()
-	if(!src.stat)
-		stat("Hardware integrity", "[hardware_integrity()]%")
-		stat("Internal capacitor", "[backup_capacitor()]%")
-	else
-		stat("Systems nonfunctional")
-
 // Shows AI Malfunction related information to the AI.
 /mob/living/silicon/ai/show_malf_ai()
 	if(src.is_malf())
@@ -134,8 +118,3 @@
 			else if(system_override == 2)
 				stat("SYSTEM OVERRIDE COMPLETED")
 
-// Cleaner proc for creating powersupply for an AI.
-/mob/living/silicon/ai/proc/create_powersupply()
-	if(psupply)
-		qdel(psupply)
-	psupply = new/obj/machinery/ai_powersupply(src)

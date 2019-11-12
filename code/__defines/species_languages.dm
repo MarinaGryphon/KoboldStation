@@ -33,39 +33,15 @@
 #define HAS_SKIN_PRESET   0x100  // Skin color presets selectable in character generation.
 
 // Tau-Ceti basic, language common to all crew.
-#define LANGUAGE_TCB "Ceti Basic"
+#define LANGUAGE_KOBOLD "Tunnelspeak"
 
 // Species languages
-#define LANGUAGE_SOL_COMMON "Sol Common"
-#define LANGUAGE_UNATHI "Sinta'unathi"
-#define LANGUAGE_SIIK_MAAS "Siik'maas"
-#define LANGUAGE_SIIK_TAJR "Siik'tajr"
-#define LANGUAGE_SIGN_TAJARA "Nal'rasan"
-#define LANGUAGE_YA_SSA "Ya'ssa"
-#define LANGUAGE_DELVAHII "Delvahhi"
-#define LANGUAGE_SKRELLIAN "Nral'Malic"
-#define LANGUAGE_ROOTSONG "Rootsong"
-#define LANGUAGE_TRADEBAND "Tradeband"
-#define LANGUAGE_GUTTER "Freespeak"
-#define LANGUAGE_VAURCA "Hivenet"
-#define LANGUAGE_AZAZIBA "Sinta'azaziba"
+#define LANGUAGE_DRAGON "Draconic"
+#define LANGUAGE_LIZARD "Lizardspeak"
+#define LANGUAGE_HUMAN  "Loamin"
+
+// Other languages
 #define LANGUAGE_SIGN "Sign Language"
-
-// Antag Languages
-#define LANGUAGE_VOX "Vox-pidgin"
-#define LANGUAGE_CHANGELING "Changeling"
-#define LANGUAGE_BORER "Cortical Link"
-#define LANGUAGE_CULT "Cult"		// NOT CULTISTS!
-#define LANGUAGE_OCCULT "Occult"
-#define LANGUAGE_TERMINATOR "Hephaestus Darkcomms"	// HKs.
-
-// Lesser-form Languages
-#define LANGUAGE_GIBBERING "Gibbering"			// alberyk
-#define LANGUAGE_CHIMPANZEE "Chimpanzee"	// human
-#define LANGUAGE_NEAERA "Neaera"			// skrell
-#define LANGUAGE_STOK "Stok"				// unathi
-#define LANGUAGE_FARWA "Farwa"				// tajara
-#define LANGUAGE_BUG "V'krexi"				// vaurca
 
 // Synth Languages
 #define LANGUAGE_ROBOT "Robot Talk"

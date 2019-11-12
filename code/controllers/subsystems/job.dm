@@ -664,6 +664,9 @@
 
 	var/datum/spawnpoint/spawnpos
 
+	if(H.client.prefs.xpos && H.client.prefs.ypos && H.client.prefs.zpos)
+		H.forceMove(locate(H.client.prefs.xpos, H.client.prefs.ypos, H.client.prefs.zpos))
+
 	if(H.client.prefs.spawnpoint)
 		spawnpos = SSatlas.spawn_locations[H.client.prefs.spawnpoint]
 
@@ -682,23 +685,13 @@
 	Debug("LS/([H]): Completed, spawning at area [H.loc.loc].")
 
 /datum/controller/subsystem/jobs/proc/DespawnMob(mob/living/carbon/human/H)
-	//Update any existing objectives involving this mob.
-	for(var/datum/objective/O in all_objectives)
-		// We don't want revs to get objectives that aren't for heads of staff. Letting
-		// them win or lose based on cryo is silly so we remove the objective.
-		if(O.target == H.mind)
-			if(O.owner && O.owner.current)
-				to_chat(O.owner.current, "<span class='warning'>You get the feeling your target is no longer within your reach...</span>")
-			qdel(O)
-
 	//Handle job slot/tater cleanup.
 	if (H.mind)
 		var/job = H.mind.assigned_role
 
 		FreeRole(job)
 
-		if(H.mind.objectives.len)
-			qdel(H.mind.objectives)
+		if(H.mind.special_role)
 			H.mind.special_role = null
 
 	// Delete them from datacore.
@@ -808,7 +801,7 @@
 	Debug("EIS/([H]): Entry.")
 	if (LAZYLEN(items))
 		Debug("EIS/([H]): [items.len] items.")
-		var/obj/item/weapon/storage/B = locate() in H
+		var/obj/item/storage/B = locate() in H
 		if (B)
 			for (var/thing in items)
 				to_chat(H, "<span class='notice'>Placing \the [thing] in your [B.name]!</span>")
@@ -825,14 +818,17 @@
 
 /datum/controller/subsystem/jobs/proc/get_roundstart_spawnpoint(var/rank)
 	var/list/loc_list = list()
+	var/list/backup_locs = list()
 	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name == "start")
+			backup_locs += sloc
 		if(sloc.name != rank)	continue
 		if(locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc
-	if(loc_list.len)
+	if(LAZYLEN(loc_list))
 		return pick(loc_list)
 	else
-		return locate("start*[rank]") // use old stype
+		return locate("start*[rank]") || locate("start*start") // use old stype; if that fails, use any generic one
 
 /datum/controller/subsystem/jobs/proc/GetFaction(mob/living/carbon/human/H)
 	var/faction_name = H?.client?.prefs?.faction

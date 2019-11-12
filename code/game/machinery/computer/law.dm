@@ -6,7 +6,7 @@
 	light_color = LIGHT_COLOR_GREEN
 
 	icon_screen = "command"
-	circuit = /obj/item/weapon/circuitboard/aiupload
+	circuit = /obj/item/circuitboard/aiupload
 	var/mob/living/silicon/ai/current = null
 	var/opened = 0
 
@@ -30,8 +30,8 @@
 	if(isNotStationLevel(src.z))
 		to_chat(user, "<span class='danger'>Unable to establish a connection:</span>")
 		return
-	if(istype(O, /obj/item/weapon/aiModule))
-		var/obj/item/weapon/aiModule/M = O
+	if(istype(O, /obj/item/aiModule))
+		var/obj/item/aiModule/M = O
 		M.install(src)
 	else
 		..()
@@ -63,7 +63,7 @@
 	light_color = LIGHT_COLOR_GREEN
 
 	icon_screen = "command"
-	circuit = /obj/item/weapon/circuitboard/borgupload
+	circuit = /obj/item/circuitboard/borgupload
 	var/mob/living/silicon/robot/current = null
 
 
@@ -71,7 +71,7 @@
 	if(isNotStationLevel(src.z))
 		to_chat(user, "<span class='danger'>Unable to establish a connection:</span>")
 		return
-	if(istype(module, /obj/item/weapon/aiModule))
+	if(istype(module, /obj/item/aiModule))
 		module.install(src)
 	else
 		return ..()

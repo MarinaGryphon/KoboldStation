@@ -7,6 +7,7 @@
 	var/list/admin_levels = list()   // Z-levels for admin functionality (Centcom, shuttle transit, etc)
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
 	var/list/player_levels = list()  // Z-levels a character can typically reach
+	var/list/persist_levels = list() // Z-levels that have swapmaps saved and loaded.
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/restricted_levels = list()  // Z-levels that dont allow ghosts to randomly move around
 
@@ -66,6 +67,8 @@
 	var/list/lobby_screens = list("title") // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
 
 	var/has_space_ruins = FALSE	//if this map picks and creates a space ruin
+	
+	var/persist = FALSE // Does this map have persistence?
 
 /datum/map/New()
 	if(!map_levels)

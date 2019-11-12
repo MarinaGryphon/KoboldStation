@@ -56,7 +56,7 @@
 	var/tmp/top_right_corner
 	var/tmp/bottom_left_corner
 	var/tmp/bottom_right_corner
-	var/list/canSmoothWith = null // TYPE PATHS I CAN SMOOTH WITH~~~~~ If this is null and atom is smooth, it smooths only with itself
+	var/tmp/list/canSmoothWith = null // TYPE PATHS I CAN SMOOTH WITH~~~~~ If this is null and atom is smooth, it smooths only with itself
 
 /atom/movable
 	var/can_be_unanchored = 0

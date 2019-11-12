@@ -5,6 +5,12 @@
 /hook/startup
 
 /**
+ * Shutdown hook.
+ * Called in world.dm when the server stops.
+ */
+/hook/shutdown
+
+/**
  * Roundstart hook.
  * Called in gameticker.dm when a round starts.
  */
@@ -68,14 +74,14 @@
 /**
  * Employee reassignment hook.
  * Called in card.dm when someone's card is reassigned at the HoP's desk.
- * Parameters: var/obj/item/weapon/card/id
+ * Parameters: var/obj/item/card/id
  */
 /hook/reassign_employee
 
 /**
  * Employee suspension hook.
  * Called in card.dm when someone's card is suspended at the HoP's desk.
- * Parameters: var/obj/item/weapon/card/id
+ * Parameters: var/obj/item/card/id
  */
 /hook/suspend_employee
 

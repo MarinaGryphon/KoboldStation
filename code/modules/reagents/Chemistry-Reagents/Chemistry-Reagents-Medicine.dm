@@ -176,10 +176,7 @@
 	breathe_mul = 2
 
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.adjustToxLoss(removed * 6)
-	else
-		M.adjustOxyLoss(-15 * removed)
+	M.adjustOxyLoss(-15 * removed)
 
 	holder.remove_reagent("lexorin", 2 * removed)
 
@@ -197,10 +194,7 @@
 	breathe_mul = 2
 
 /datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.adjustToxLoss(removed * 9)
-	else
-		M.adjustOxyLoss(-300 * removed)
+	M.adjustOxyLoss(-300 * removed)
 
 	holder.remove_reagent("lexorin", 3 * removed)
 
@@ -568,14 +562,7 @@
 	var/last_taste_time = -10000
 
 /datum/reagent/hyronalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.is_diona())
-		if(last_taste_time + 950 < world.time) // Not to spam message
-			to_chat(M, "<span class='danger'>Your body withers as you feel a searing pain throughout.</span>")
-			last_taste_time = world.time
-		metabolism = REM * 0.22
-		M.adjustToxLoss(45 * removed) // Tested numbers myself
-	else
-		M.apply_radiation(-30 * removed)
+	M.apply_radiation(-30 * removed)
 
 /datum/reagent/arithrazine
 	name = "Arithrazine"
@@ -591,17 +578,10 @@
 	var/last_taste_time = -10000
 
 /datum/reagent/arithrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.is_diona())
-		if(last_taste_time + 450 < world.time) // Not to spam message
-			to_chat(M, "<span class='danger'>Your body withers as you feel a searing pain throughout.</span>")
-			last_taste_time = world.time
-		metabolism = REM * 0.195
-		M.adjustToxLoss(115 * removed) // Tested numbers myself
-	else
-		M.apply_radiation(-70 * removed)
-		M.adjustToxLoss(-10 * removed)
-		if(prob(60))
-			M.take_organ_damage(4 * removed, 0)
+	M.apply_radiation(-70 * removed)
+	M.adjustToxLoss(-10 * removed)
+	if(prob(60))
+		M.take_organ_damage(4 * removed, 0)
 
 /datum/reagent/deltamivir
 	name = "Deltamivir"
@@ -773,9 +753,6 @@
 	var/list/goodmessage = list() //Messages when all your brain traumas are cured.
 	var/list/badmessage = list() //Messages when you still have at least one brain trauma it's suppose to cure.
 	var/list/worstmessage = list() //Messages when the user is at possible risk for more trauma
-	var/list/suppress_traumas  //List of brain traumas that the medication temporarily suppresses, with the key being the brain trauma and the value being the minimum dosage required to cure. Negative values means that the trauma is temporarily gained on the value instead.
-	var/list/dosage_traumas //List of brain traumas that the medication permanently adds at these dosages, with the key being the brain trauma and the value being base percent chance to add.
-	var/list/withdrawal_traumas //List of withdrawl effects that the medication permanently adds during withdrawl, with the key being the brain trauma, and the value being the base percent chance to add.
 	var/list/suppressing_reagents = list() // List of reagents that suppress the withdrawal effects, with the key being the reagent and the vlue being the minimum dosage required to suppress.
 
 	fallback_specific_heat = 1.5
@@ -788,7 +765,6 @@
 	//If in the case that a cigarette has a lower transfer rate than the metabolism rate, then message spam will occur since it's starting and stopping constantly.
 	//This also prevents the whole code from working if the dosage is very small.
 
-	var/hastrauma = 0 //whether or not the brain has trauma
 	var/obj/item/organ/brain/B = H.internal_organs_by_name["brain"]
 	var/bac = H.get_blood_alcohol()
 
@@ -796,43 +772,23 @@
 		H.hallucination = max(H.hallucination, bac * 400)
 
 	if(B) //You won't feel anything if you don't have a brain.
-		for(var/datum/brain_trauma/BT in B.traumas)
-			var/goal_volume = suppress_traumas[BT]
-			if (volume >= goal_volume) // If the dosage is greater than the goal, then suppress the trauma.
-				if(!BT.suppressed && !BT.permanent)
-					BT.suppressed = 1
-					BT.on_lose()
-			else if(volume < goal_volume-1 && goal_volume > 0) // -1 So it doesn't spam back and forth constantly if reagents are being metabolized
-				if(BT.suppressed)
-					BT.suppressed = 0
-					BT.on_gain()
-					hastrauma = 1
-		for(var/datum/brain_trauma/BT in dosage_traumas)
-			var/percentchance = max(0,dosage_traumas[BT] - dose*10) // If you've been taking this medication for a while then side effects are rarer.
-			if(!H.has_trauma_type(BT) && prob(percentchance))
-				B.gain_trauma(BT,FALSE)
 		if(volume < max_dose*0.25) //If you haven't been taking your regular dose, then cause issues.
-			var/suppress_withdrawl = FALSE
+			var/suppress_withdrawal = FALSE
 			for(var/k in suppressing_reagents)
 				var/datum/reagent/v = suppressing_reagents[k]
 				if(H.reagents.has_reagent(v,k))
-					suppress_withdrawl = TRUE
+					suppress_withdrawal = TRUE
 					break
-			if(!suppress_withdrawl)
+			if(!suppress_withdrawal)
 				if (H.shock_stage < 20 && worstmessage.len)
 					to_chat(H,"<span class='danger'>[pick(worstmessage)]</span>")
 				messagedelay = initial(messagedelay) * 0.25
-				for(var/k in withdrawal_traumas)
-					var/datum/brain_trauma/BT = k
-					var/percentchance = max(withdrawal_traumas[k] * (dose/20)) //The higher the dosage, the more likely it is do get withdrawal traumas.
-					if(!H.has_trauma_type(BT) && prob(percentchance))
-						B.gain_trauma(BT,FALSE)
-		else if(hastrauma || volume < max_dose*0.5) //If your current dose is not high enough, then alert the player.
-			if (H.shock_stage < 10 && badmessage.len)
+		else if(volume < max_dose*0.5) //If your current dose is not high enough, then alert the player.
+			if (badmessage.len)
 				to_chat(H,"<span class='warning'>[pick(badmessage)]</span>")
 			messagedelay = initial(messagedelay) * 0.5
 		else
-			if (H.shock_stage < 5 && goodmessage.len)
+			if (goodmessage.len)
 				to_chat(H,"<span class='good'>[pick(goodmessage)]</span>")
 			messagedelay = initial(messagedelay)
 
@@ -851,10 +807,6 @@
 	goodmessage = list("You feel good.","You feel relaxed.","You feel alert and focused.")
 	badmessage = list("You start to crave nicotine...")
 	worstmessage = list("You need your nicotine fix!")
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/phobia = 0.1,
-		/datum/brain_trauma/mild/muscle_weakness/ = 0.05
-	)
 	conflicting_reagent = null
 	min_dose = 0.0064 * REM
 	var/datum/modifier/modifier
@@ -880,18 +832,6 @@
 	goodmessage = list("You feel focused.","You feel like you have no distractions.","You feel willing to work.")
 	badmessage = list("You feel a little distracted...","You feel slight agitation...","You feel a dislike towards work...")
 	worstmessage = list("You feel completely distrtacted...","You feel like you don't want to work...","You think you see things...")
-	suppress_traumas  = list(
-		/datum/brain_trauma/special/imaginary_friend = 20,
-		/datum/brain_trauma/mild/hallucinations = 10,
-		/datum/brain_trauma/mild/phobia/ = 10
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 5
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/phobia/ = 5,
-		/datum/brain_trauma/mild/hallucinations = 2
-	)
 
 /datum/reagent/mental/fluvoxamine
 	name = "Fluvoxamine"
@@ -905,19 +845,6 @@
 	goodmessage = list("You do not feel the need to worry about simple things.","You feel calm and level-headed.","You feel fine.")
 	badmessage = list("You feel a little blue.","You feel slight agitation...","You feel a little nervous...")
 	worstmessage = list("You worry about the littlest thing...","You feel like you are at risk...","You think you see things...")
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/phobia/ = 2,
-		/datum/brain_trauma/severe/split_personality = 10,
-		/datum/brain_trauma/special/imaginary_friend = 20,
-		/datum/brain_trauma/mild/muscle_weakness = 10
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 5
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/phobia/ = 5,
-		/datum/brain_trauma/mild/hallucinations = 2
-	)
 
 /datum/reagent/mental/sertraline
 	name = "Sertraline"
@@ -931,16 +858,6 @@
 	goodmessage = list("You feel fine.","You feel rational.","You feel decent.")
 	badmessage = list("You feel a little blue.","You feel slight agitation...","You feel a little nervous...")
 	worstmessage = list("You worry about the littlest thing...","You feel like you are at risk...","You think you see things...")
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/phobia/ = 2
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 5
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/phobia/ = 10,
-		/datum/brain_trauma/mild/hallucinations = 5
-	)
 	suppressing_reagents = list(/datum/reagent/mental/fluvoxamine = 5)
 
 /datum/reagent/mental/escitalopram
@@ -955,17 +872,6 @@
 	goodmessage = list("You feel relaxed.","You feel at ease.","You feel care free.")
 	badmessage = list("You feel worried.","You feel slight agitation.","You feel nervous.")
 	worstmessage = list("You worry about the littlest thing...","You feel like you are at risk...","You think you see things...")
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/phobia/ = 1,
-		/datum/brain_trauma/severe/monophobia = 5
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 5
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/phobia/ = 10,
-		/datum/brain_trauma/mild/hallucinations = 10
-	)
 	suppressing_reagents = list(
 		/datum/reagent/mental/fluvoxamine = 5,
 		/datum/reagent/mental/sertraline = 5
@@ -984,16 +890,6 @@
 	badmessage = list("You worry about the littlest thing.","You feel like you are at risk.","You think you see things.")
 	worstmessage = list("You start to overreact to sounds and movement...","Your hear dangerous thoughts in your head...","You are really starting to see things...")
 	messagedelay = ANTIDEPRESSANT_MESSAGE_DELAY * 0.75
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/phobia/ = 5
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 5
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/phobia/ = 25,
-		/datum/brain_trauma/mild/hallucinations = 50
-	)
 	suppressing_reagents = list(
 		/datum/reagent/mental/escitalopram = 5,
 		/datum/reagent/mental/fluvoxamine = 10,
@@ -1018,18 +914,6 @@
 	badmessage = list("You worry about the littlest thing.","Your head starts to feel weird...","You think you see things.")
 	worstmessage = list("You start to overreact to sounds and movement...","Your head feels really weird.","You are really starting to see things...")
 	messagedelay = ANTIDEPRESSANT_MESSAGE_DELAY * 0.75
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/concussion = 5,
-		/datum/brain_trauma/mild/phobia/ = 5
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 5
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/phobia/ = 25,
-		/datum/brain_trauma/mild/hallucinations = 25,
-		/datum/brain_trauma/mild/concussion = 10
-	)
 	suppressing_reagents = list(
 		/datum/reagent/mental/paroxetine = 5,
 		/datum/reagent/mental/escitalopram = 5,
@@ -1050,18 +934,6 @@
 	badmessage = list("You worry about the littlest thing.","You think you see things.")
 	worstmessage = list("You start to overreact to sounds and movement...","You are really starting to see things...")
 	messagedelay = ANTIDEPRESSANT_MESSAGE_DELAY * 0.75
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/phobia = 5,
-		/datum/brain_trauma/mild/stuttering = 2,
-		/datum/brain_trauma/severe/monophobia = 5
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 10
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/phobia/ = 25,
-		/datum/brain_trauma/mild/hallucinations = 25
-	)
 	suppressing_reagents = list(
 		/datum/reagent/mental/duloxetine = 5,
 		/datum/reagent/mental/paroxetine = 5,
@@ -1083,26 +955,6 @@
 	badmessage = list("You start hearing voices...","You think you see things...","You feel really upset...","You want attention...")
 	worstmessage = list("You think you start seeing things...","You swear someone inside you spoke to you...","You hate feeling alone...","You feel really upset...")
 	messagedelay = ANTIDEPRESSANT_MESSAGE_DELAY * 0.5
-	suppress_traumas  = list(
-		/datum/brain_trauma/severe/split_personality = 5,
-		/datum/brain_trauma/special/imaginary_friend = 10,
-		/datum/brain_trauma/mild/stuttering = 2,
-		/datum/brain_trauma/mild/speech_impediment = 5,
-		/datum/brain_trauma/severe/monophobia = 5,
-		/datum/brain_trauma/mild/hallucinations = 5,
-		/datum/brain_trauma/mild/muscle_spasms = 10,
-		/datum/brain_trauma/mild/tourettes = 10
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/severe/pacifism = 25
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 100,
-		/datum/brain_trauma/severe/split_personality = 10,
-		/datum/brain_trauma/special/imaginary_friend = 20,
-		/datum/brain_trauma/mild/tourettes = 50,
-		/datum/brain_trauma/severe/monophobia = 50
-	)
 	suppressing_reagents = list(
 		/datum/reagent/mental/venlafaxine = 20,
 		/datum/reagent/mental/duloxetine = 20,
@@ -1123,23 +975,6 @@
 	badmessage = list("You start hearing voices...","You think you see things...","You want a friend...")
 	worstmessage = list("You think you start seeing things...","You swear someone inside you spoke to you...")
 	messagedelay = ANTIDEPRESSANT_MESSAGE_DELAY * 0.5
-	suppress_traumas  = list(
-		/datum/brain_trauma/severe/split_personality = 5,
-		/datum/brain_trauma/special/imaginary_friend = 10,
-		/datum/brain_trauma/mild/stuttering = 1,
-		/datum/brain_trauma/mild/speech_impediment = 2,
-		/datum/brain_trauma/severe/monophobia = 2,
-		/datum/brain_trauma/mild/muscle_spasms = 5,
-		/datum/brain_trauma/mild/tourettes = 10
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/severe/pacifism = 25
-	)
-	withdrawal_traumas = list(
-		/datum/brain_trauma/mild/hallucinations = 200,
-		/datum/brain_trauma/severe/split_personality = 50,
-		/datum/brain_trauma/special/imaginary_friend = 50
-	)
 	suppressing_reagents = list(
 		/datum/reagent/mental/venlafaxine = 20,
 		/datum/reagent/mental/duloxetine = 20,
@@ -1160,12 +995,6 @@
 	goodmessage = list("You feel like you have nothing to hide.","You feel compelled to spill your secrets.","You feel like you can trust those around you.")
 	badmessage = list()
 	worstmessage = list()
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/tourettes = 1
-	)
-	dosage_traumas = list(
-		/datum/brain_trauma/severe/pacifism = 25
-	)
 	messagedelay = 30
 	ingest_mul = 0 //Stomach acid will melt the nanobots
 
@@ -1184,9 +1013,6 @@
 	goodmessage = list("You feel great.","You feel full of energy.","You feel alert and focused.")
 	badmessage = list("You can't think straight...","You're sweating heavily...","Your heart is racing...")
 	worstmessage = list("You feel incredibly lightheaded!","You feel incredibly dizzy!")
-	suppress_traumas  = list(
-		/datum/brain_trauma/mild/muscle_weakness/ = 0.01
-	)
 	var/datum/modifier/modifier
 
 /datum/reagent/mental/bugjuice/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -1202,40 +1028,10 @@
 	M.make_dizzy(10)
 
 	if (prob(10))
-		to_chat(M, pick("You feel nauseous", "Ugghh....", "Your stomach churns uncomfortably", "You feel like you're about to throw up", "You feel queasy","You feel pressure in your abdomen"))
+		to_chat(M, pick("You feel nauseous!", "Ugh...", "Your stomach churns uncomfortably!", "You feel like you're about to throw up!", "You feel queasy!","You feel pressure in your abdomen!"))
 
 	if (prob(dose))
 		M.vomit()
-
-
-/datum/reagent/mental/kokoreed
-	name = "Koko Reed Juice"
-	id = "kokoreed"
-	description = "Juice from the Koko reed plant. Caused unique mental effects in unathi"
-	reagent_state = LIQUID
-	color = "#008000"
-	metabolism = 0.0016 * REM
-	overdose = 3
-	data = 0
-	taste_description = "sugar"
-	goodmessage = list("You feel pleasantly warm.","You feel like you've been basking in the sun.","You feel focused and warm...")
-	badmessage = list()
-	worstmessage = list()
-	suppress_traumas  = list()
-	conflicting_reagent = null
-	min_dose = 0.0064 * REM
-	var/datum/modifier/modifier
-
-/datum/reagent/mental/kokoreed/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	. = ..()
-	if(M.bodytemperature > 310)
-		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
-
-/datum/reagent/mental/kokoreed/overdose(var/mob/living/carbon/M, var/alien, var/removed, var/scale)
-	. = ..()
-	if(isunathi(M))
-		if (!modifier)
-			modifier = M.add_modifier(/datum/modifier/stimulant, MODIFIER_REAGENT, src, _strength = 1, override = MODIFIER_OVERRIDE_STRENGTHEN)
 
 /datum/reagent/mannitol
 	name = "Mannitol"
@@ -1248,16 +1044,8 @@
 	scannable = 1
 	taste_description = "bitterness"
 	metabolism_min = REM * 0.25
-	var/list/curable_traumas = list(
-		/datum/brain_trauma/mild/dumbness/,
-		/datum/brain_trauma/severe/blindness/,
-		/datum/brain_trauma/severe/paralysis/,
-		/datum/brain_trauma/severe/total_colorblind/,
-		/datum/brain_trauma/severe/aphasia/
-	)
 
 /datum/reagent/mannitol/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 	var/chance = dose*removed
 	if(M.bodytemperature < 170)
@@ -1265,19 +1053,6 @@
 		M.adjustBrainLoss(-30 * removed)
 	else
 		M.adjustBrainLoss(-10 * removed)
-
-	if(prob(chance))
-		M.cure_trauma_type(pick(curable_traumas))
-
-
-
-//Things that are not cured/treated by medication:
-//Gerstmann Syndrome
-//Cerebral Near-Blindness
-//Mutism
-//Cerebral Blindness
-//Narcolepsy
-//Discoordination
 
 /datum/reagent/calomel
 	name = "Calomel"
@@ -1443,36 +1218,21 @@
 			M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
 			M.vomit()
 
-/datum/reagent/potassium_hydrophoro
-	name = "Potassium Hydrophoride"
-	id = "potassium_hydrophoro"
-	description = "A liquid compound that can miraculously restores hydration when injected directly into the bloodstream. Excellent at solving severe hydration problems, however the effects of an overdose are to be noted."
+/datum/reagent/saline
+	name = "Saline"
+	id = "saline"
+	description = "A liquid compound that can miraculously restores hydration when injected directly into the bloodstream. Excellent at solving severe hydration problems. Yeah, it's just saline."
 	reagent_state = LIQUID
 	color = "#1ca9c9"
 	taste_description = "numbness"
 	unaffected_species = IS_MACHINE
 
-/datum/reagent/potassium_hydrophoro/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VAURCA)
-		if( (M.hydration / M.max_hydration) > CREW_HYDRATION_OVERHYDRATED)
-			M.adjustHydrationLoss(removed*2)
-		else
-			M.adjustHydrationLoss(-removed*5)
+/datum/reagent/saline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if( (M.hydration > M.max_hydration) > CREW_HYDRATION_OVERHYDRATED)
+		overdose(M,alien,removed,0)
+		M.adjustHydrationLoss(-removed*2)
 	else
-		if( (M.hydration > M.max_hydration) > CREW_HYDRATION_OVERHYDRATED)
-			overdose(M,alien,removed,0)
-			M.adjustHydrationLoss(-removed*2)
-		else
-			M.adjustHydrationLoss(-removed*5)
-
-/datum/reagent/potassium_hydrophoro/overdose(var/mob/living/carbon/M, var/alien, var/removed, var/scale)
-	if(alien != IS_VAURCA) //Vaurca can't overdose on this
-		if(scale >= 1) //Overdose by too much of the chemical
-			M.adjustToxLoss(1*removed*scale)
-
-		if (ishuman(M) && prob(10))
-			var/mob/living/carbon/human/H = M
-			H.delayed_vomit()
+		M.adjustHydrationLoss(-removed*5)
 
 /datum/reagent/coagulant
 	name = "Coagulant"

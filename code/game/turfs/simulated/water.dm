@@ -219,8 +219,8 @@
 	else
 		O.clean_blood()
 
-	if(istype(O, /obj/item/weapon/light))
-		var/obj/item/weapon/light/L = O
+	if(istype(O, /obj/item/light))
+		var/obj/item/light/L = O
 		L.brightness_color = initial(L.brightness_color)
 		L.update()
 	else if(istype(O, /obj/machinery/light))
@@ -234,5 +234,5 @@
 		var/turf/tile = loc
 		loc.clean_blood()
 		for(var/obj/effect/E in tile)
-			if(istype(E,/obj/effect/rune) || istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
+			if(istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
 				qdel(E)

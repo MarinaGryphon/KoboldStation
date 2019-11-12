@@ -33,7 +33,6 @@
 		/obj/item/weapon/gun/energy/captain                 = TRADER_THIS_TYPE,
 		/obj/item/weapon/hand_tele                          = TRADER_THIS_TYPE,
 		/obj/item/blueprints                                = TRADER_THIS_TYPE,
-		/obj/item/weapon/disk/nuclear                       = TRADER_THIS_TYPE,
 		/obj/item/weapon/reagent_containers/hypospray       = TRADER_ALL,
 		/obj/item/weapon/card/id/captains_spare             = TRADER_THIS_TYPE,
 		/obj/item/weapon/gun/projectile/heavysniper/tranq   = TRADER_THIS_TYPE,
@@ -101,10 +100,8 @@
 		/obj/item/weapon/gun/energy/rifle/pulse         = TRADER_THIS_TYPE
 	)
 
-	blacklisted_trade_items = list(/datum/species/monkey, /datum/species/machine, /datum/species/bug, /datum/species/diona)
-
 	speech = list(
-		"hail_generic"         = "H-hello. Can you hear me? G-good... I have... specific needs... I have a lot to t-trade with you in return of course.",
+		"hail_generic"         = "H-hello. Can you hear me? G-good... I have... specific needs... I have a lot to t-trade with you in return, of course...",
 		"hail_deny"            = "--CONNECTION SEVERED--",
 		"trade_complete"       = "Hahahahahahaha! Thankyouthankyouthankyou!",
 		"trade_no_money"       = "I d-don't NEED cash.",
@@ -119,75 +116,6 @@
 	)
 
 	mob_transfer_message = "<span class='danger'>You are transported to ORIGIN, and with a sickening thud, you fall unconscious, never to wake again.</span>"
-
-
-/datum/trader/ship/unique/rock
-	name = "Bobo"
-	origin = "Floating rock"
-
-	possible_wanted_items = list(
-		/obj/item/weapon/ore = TRADER_ALL
-	)
-	possible_trading_items = list(
-		/obj/machinery/power/supermatter                = TRADER_ALL,
-		/obj/item/custom_ka_upgrade/barrels/supermatter = TRADER_THIS_TYPE,
-		/obj/item/weapon/aiModule                       = TRADER_SUBTYPES_ONLY
-	)
-
-	speech = list(
-		"hail_generic"         = "Blub am MERCHANT. Blub hunger for things. Boo bring them to blub, yes?",
-		"hail_deny"            = "Blub does not want to speak to boo.",
-		"trade_complete"       = "Blub likes to trade!",
-		"trade_no_money"       = "Boo try to give Blub paper. Blub does not want paper.",
-		"trade_not_enough"     = "Blub hungry for bore than that.",
-		"trade_found_unwanted" = "Blub only wants bocks. Give bocks.",
-		"trade_refuse"         = "No, Blub will not do that. Blub wants bocks, yes? Give bocks.",
-		"how_much"             = "Blub wants bocks. Boo give bocks. Blub gives stuff blub found.",
-		"what_want"            = "Blub wants bocks. Big bocks, small bocks. Shiny bocks!",
-		"compliment_deny"      = "Blub is just MERCHANT. What do boo mean?",
-		"compliment_accept"    = "Boo are a bood berson!",
-		"insult_good"          = "Blub do not understand. Blub thought we were briends.",
-		"insult_bad"           = "Blub feels bad now."
-	)
-
-/datum/trader/ship/unique/vaurca
-	origin = "The Hive Shop"
-	name_language = LANGUAGE_VAURCA
-
-	possible_wanted_items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/koisbar          = TRADER_THIS_TYPE,
-		/obj/item/weapon/reagent_containers/food/snacks/koisbar_clean    = TRADER_THIS_TYPE,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/kois       = TRADER_THIS_TYPE,
-		/obj/item/stack/material/phoron                                  = TRADER_THIS_TYPE
-	)
-
-	possible_trading_items = list(
-		/obj/item/clothing/mask/breath/vaurca            = TRADER_THIS_TYPE,
-		/obj/item/weapon/melee/energy/vaurca             = TRADER_THIS_TYPE,
-		/obj/item/vaurca/box                             = TRADER_THIS_TYPE,
-		/obj/item/weapon/melee/vaurca/rock               = TRADER_THIS_TYPE,
-		/obj/item/weapon/grenade/spawnergrenade/vaurca   = TRADER_THIS_TYPE,
-		/obj/item/clothing/suit/space/void/vaurca        = TRADER_THIS_TYPE,
-		/obj/item/clothing/head/helmet/space/void/vaurca = TRADER_THIS_TYPE,
-		/obj/item/clothing/shoes/magboots/vox/vaurca     = TRADER_THIS_TYPE,
-		/obj/item/weapon/gun/energy/vaurca/blaster       = TRADER_THIS_TYPE
-	)
-
-	speech = list(
-		"hail_generic"         = "Greetingzz.",
-		"hail_deny"            = "I'm zzorry, we do not want to zzzpeak to you.",
-		"trade_complete"       = "Enjoy it, zzzir!",
-		"trade_no_money"       = "I have no uzzze vhor creditzzz.",
-		"trade_not_enough"     = "I want more, zzzzir.",
-		"trade_found_unwanted" = "That izzz not what I want.",
-		"how_much"             = "We need k'oizz or vhoron, zzzir.",
-		"what_want"            = "K'oizzz or vhoron.",
-		"compliment_deny"      = "No kind wordzzzz...",
-		"compliment_accept"    = "I appreciate kind wordzzz.",
-		"insult_good"          = "Your humor izzz odd.",
-		"insult_bad"           = "I do not take inzzultzz kindly."
-	)
-
 
 /datum/trader/ship/unique/bluespace
 	name = "Maximus Crane"

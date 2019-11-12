@@ -30,7 +30,7 @@
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(W.iswelder() )
-			var/obj/item/weapon/weldingtool/WT = W
+			var/obj/item/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
 				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
@@ -44,17 +44,17 @@
 
 	if(thermite)
 		if(W.iswelder() )
-			var/obj/item/weapon/weldingtool/WT = W
+			var/obj/item/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
 				thermitemelt(user)
 				return
 
-		else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+		else if(istype(W, /obj/item/gun/energy/plasmacutter))
 			thermitemelt(user)
 			return
 
-		else if( istype(W, /obj/item/weapon/melee/energy/blade) )
-			var/obj/item/weapon/melee/energy/blade/EB = W
+		else if( istype(W, /obj/item/melee/energy/blade) )
+			var/obj/item/melee/energy/blade/EB = W
 
 			spark(EB, 5)
 			to_chat(user, "<span class='notice'>You slash \the [src] with \the [EB]; the thermite ignites!</span>")
@@ -64,7 +64,7 @@
 			thermitemelt(user)
 			return
 
-	if(!istype(W, /obj/item/weapon/reagent_containers))
+	if(!istype(W, /obj/item/reagent_containers))
 		return attack_hand(user)
 
 /turf/simulated/wall/shuttle/cardinal

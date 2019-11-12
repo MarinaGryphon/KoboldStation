@@ -18,18 +18,18 @@
 	var/speak_chance = 0
 	var/list/emote_hear = list()	//Hearable emotes
 	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
-	var/list/emote_sounds = list()
+	var/tmp/list/emote_sounds = list()
 	var/sound_time = TRUE
 
 	var/turns_per_move = 1
-	var/turns_since_move = 0
+	var/tmp/turns_since_move = 0
 	universal_speak = 0		//No, just no.
 	var/meat_amount = 0
 	var/meat_type
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = 1	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
-	var/atom/movement_target = null//Thing we're moving towards
+	var/tmp/atom/movement_target = null//Thing we're moving towards
 	var/turns_since_scan = 0
 
 	//Interaction
@@ -107,20 +107,20 @@
 	var/flying = FALSE //if they can fly, which stops them from falling down and allows z-space travel
 
 	var/has_udder = FALSE
-	var/datum/reagents/udder = null
+	var/tmp/datum/reagents/udder = null
 	var/milk_type = "milk"
 
-	var/list/butchering_products	//if anything else is created when butchering this creature, like bones and leather
+	var/tmp/list/butchering_products	//if anything else is created when butchering this creature, like bones and leather
 
 /mob/living/simple_animal/proc/beg(var/atom/thing, var/atom/holder)
 	visible_emote("gazes longingly at [holder]'s [thing]",0)
 
-/mob/living/simple_animal/proc/steal_food(var/obj/item/weapon/reagent_containers/food/snacks/F, var/mob/living/carbon/human/H)
+/mob/living/simple_animal/proc/steal_food(var/obj/item/reagent_containers/food/snacks/F, var/mob/living/carbon/human/H)
 	if(!F || !H)
 		return
 	H.visible_message(
-						span("warning", "\the [src] grabs \the [F] with its teeth and steals it from \the [H] hands. Taking a bite and dropping it on the floor."),
-						span("warning", "\the [src] grabs \the [F] with its teeth and steals it from your hands. Taking a bite and dropping it on the floor.")
+						span("warning", "\the [src] grabs \the [F] with its teeth and steals it from \the [H]'s hands, taking a bite and dropping it on the floor."),
+						span("warning", "\the [src] grabs \the [F] with its teeth and steals it from your hands, taking a bite and dropping it on the floor.")
 	)
 	H.drop_from_inventory(F)
 	UnarmedAttack(F)
@@ -408,7 +408,7 @@ mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 			if (!attempt_grab(M))
 				return
 
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
+			var/obj/item/grab/G = new /obj/item/grab(M, src)
 
 			M.put_in_active_hand(G)
 
@@ -430,7 +430,7 @@ mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(has_udder)
-		var/obj/item/weapon/reagent_containers/glass/G = O
+		var/obj/item/reagent_containers/glass/G = O
 		if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 			if(udder.total_volume <= 0)
 				to_chat(user, "<span class='warning'>The udder is dry.</span>")
@@ -442,19 +442,19 @@ mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 			udder.trans_id_to(G, milk_type , rand(5,10))
 			return
 
-	if(istype(O, /obj/item/weapon/reagent_containers) || istype(O, /obj/item/stack/medical) || istype(O,/obj/item/weapon/gripper/))
+	if(istype(O, /obj/item/reagent_containers) || istype(O, /obj/item/stack/medical) || istype(O,/obj/item/gripper/))
 		..()
 		poke()
 
 	else if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/kitchen/utensil/knife)|| istype(O, /obj/item/weapon/material/hatchet))
+		if(istype(O, /obj/item/material/knife) || istype(O, /obj/item/material/kitchen/utensil/knife)|| istype(O, /obj/item/material/hatchet))
 			harvest(user)
 	else
 		attacked_with_item(O, user)
 
 //TODO: refactor mob attackby(), attacked_by(), and friends.
 /mob/living/simple_animal/proc/attacked_with_item(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/trap/animal))
+	if(istype(O, /obj/item/trap/animal))
 		O.attack(src, user)
 		return
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -467,7 +467,7 @@ mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 		var/damage = O.force
 		if (O.damtype == HALLOSS)
 			damage = 0
-		if(supernatural && istype(O,/obj/item/weapon/nullrod))
+		if(supernatural && istype(O,/obj/item/nullrod))
 			damage *= 2
 			purge = 3
 
@@ -639,7 +639,7 @@ mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 				foodtarget = 0
 				stop_automated_movement = 0
 				if (can_eat())
-					for(var/obj/item/weapon/reagent_containers/food/snacks/S in oview(src,7))
+					for(var/obj/item/reagent_containers/food/snacks/S in oview(src,7))
 						if(isturf(S.loc) || ishuman(S.loc))
 							movement_target = S
 							foodtarget = 1
@@ -647,12 +647,12 @@ mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 
 					//Look for food in people's hand
 					if (!movement_target && beg_for_food)
-						var/obj/item/weapon/reagent_containers/food/snacks/F = null
+						var/obj/item/reagent_containers/food/snacks/F = null
 						for(var/mob/living/carbon/human/H in oview(src,scan_range))
-							if(istype(H.l_hand, /obj/item/weapon/reagent_containers/food/snacks))
+							if(istype(H.l_hand, /obj/item/reagent_containers/food/snacks))
 								F = H.l_hand
 
-							if(istype(H.r_hand, /obj/item/weapon/reagent_containers/food/snacks))
+							if(istype(H.r_hand, /obj/item/reagent_containers/food/snacks))
 								F = H.r_hand
 
 							if (F)

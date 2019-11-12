@@ -16,6 +16,7 @@ var/datum/controller/subsystem/atlas/SSatlas
 	var/list/mapload_callbacks = list()
 	var/map_override	// If set, SSatlas will forcibly load this map. If the map does not exist, mapload will fail and SSatlas will panic.
 	var/list/spawn_locations = list()
+	var/loaded_save = FALSE
 
 	var/list/connected_z_cache = list()
 	var/z_levels = 0	// Each bit represents a connection between adjacent levels.  So the first bit means levels 1 and 2 are connected.
@@ -97,13 +98,22 @@ var/datum/controller/subsystem/atlas/SSatlas
 		log_ss("atlas", "Loading '[mfile]'.")
 		time = world.time
 
-		mfile = "[directory][mfile]"
-
 		var/target_z = 0
 		if (overwrite_default_z && first_dmm)
 			target_z = 1
 			first_dmm = FALSE
 			log_ss("atlas", "Overwriting first Z.")
+
+		if(fexists("map_[current_map.path][.+1].txt") || fexists("map_[current_map.path][.+1].sav"))
+			log_ss("atlas", "Loading map savefile for [current_map.path][.+1]...")
+			if(SwapMaps_LoadChunk("[current_map.path][.+1]", locate(1, 1, .+1)))
+				log_ss("atlas", "Loaded existing savefile for [current_map.path][.+1].")
+				loaded_save = TRUE
+				.++
+				log_ss("atlas", "Loaded save in [(world.time - time)/10] seconds.")
+				continue
+		// we couldn't load a savefile, so load the map proper
+		mfile = "[directory][mfile]"
 
 		if (!maploader.load_map(file(mfile), 0, 0, target_z, no_changeturf = TRUE))
 			log_ss("atlas", "Failed to load '[mfile]'!")
@@ -111,7 +121,6 @@ var/datum/controller/subsystem/atlas/SSatlas
 			log_ss("atlas", "Loaded level in [(world.time - time)/10] seconds.")
 
 		.++
-		CHECK_TICK
 
 /datum/controller/subsystem/atlas/proc/setup_multiz()
 	for (var/thing in height_markers)

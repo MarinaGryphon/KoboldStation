@@ -205,6 +205,7 @@ var/list/world_api_rate_limit = list()
 	else if (!world.TgsAvailable() && hard_reset)
 		hard_reset = FALSE
 
+	callHook("shutdown")
 	SSpersist_config.save_to_file("data/persistent_config.json")
 	Master.Shutdown()
 
@@ -213,7 +214,7 @@ var/list/world_api_rate_limit = list()
 			C << link("byond://[config.server]")
 
 	world.TgsReboot()
-
+	
 	if (hard_reset)
 		log_misc("World hard rebooted at [time_stamp()].")
 		shutdown_logging()

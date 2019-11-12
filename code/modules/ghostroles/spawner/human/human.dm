@@ -13,7 +13,7 @@
 	var/datum/outfit/outfit = null //Outfit to equip
 	var/list/species_outfits = list() //Outfit overwrite for the species
 	var/uses_species_whitelist = TRUE //Do you need the whitelist to play the species?
-	var/possible_species = list("Human")
+	var/possible_species = list("Kobold")
 	var/possible_genders = list(MALE,FEMALE)
 	var/allow_appearance_change = APPEARANCE_PLASTICSURGERY
 

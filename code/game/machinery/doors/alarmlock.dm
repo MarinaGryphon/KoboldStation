@@ -5,7 +5,7 @@
 	opacity = 0
 	glass = 1
 
-	var/datum/radio_frequency/air_connection
+	var/tmp/datum/radio_frequency/air_connection
 	var/air_frequency = 1437
 	autoclose = 0
 

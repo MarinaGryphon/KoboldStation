@@ -251,7 +251,7 @@ var/list/name_to_material
 // As above.
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/weapon/material/shard(target, src.name)
+		return new /obj/item/material/shard(target, src.name)
 
 // Used by walls and weapons to determine if they break or not.
 /material/proc/is_brittle()
@@ -391,19 +391,6 @@ var/list/name_to_material
 	icon_colour = "#666666"
 	golem = "Steel Golem"
 	hitsound = 'sound/weapons/smash.ogg'
-
-/material/diona
-	name = "biomass"
-	icon_colour = null
-	stack_type = null
-	icon_base = "biomass"
-	integrity = 600
-
-/material/diona/place_dismantled_product()
-	return
-
-/material/diona/place_dismantled_girder(var/turf/target)
-	spawn_diona_nymph(target)
 
 /material/steel/holographic
 	name = "holo" + DEFAULT_WALL_MATERIAL

@@ -13,8 +13,9 @@
 	var/open = 0
 	var/recent_fault = 0
 	var/power_output = 1
+	var/max_power_output = 5
 	has_special_power_checks = TRUE
-	var/datum/looping_sound/generator/soundloop
+	var/tmp/datum/looping_sound/generator/soundloop
 
 /obj/machinery/power/port_gen/Initialize()
 	. = ..()
@@ -45,7 +46,40 @@
 		icon_state = initial(icon_state)
 		handleInactive()
 
-/obj/machinery/power/powered()
+/obj/machinery/power/port_gen/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(!active)
+		if(O.iswrench())
+
+			if(!anchored)
+				connect_to_network()
+				to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
+			else
+				disconnect_from_network()
+				to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
+
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			anchored = !anchored
+
+		else if(O.isscrewdriver())
+			open = !open
+			playsound(src.loc, O.usesound, 50, 1)
+			if(open)
+				to_chat(user, "<span class='notice'>You open the access panel.</span>")
+			else
+				to_chat(user, "<span class='notice'>You close the access panel.</span>")
+		else if(O.iscrowbar() && open)
+			var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+			for(var/obj/item/I in component_parts)
+				I.forceMove(src.loc)
+			DropFuel()
+
+			new_frame.state = 2
+			new_frame.icon_state = "box_1"
+			qdel(src)
+	. = ..()
+
+
+/obj/machinery/power/port_gen/powered()
 	return 1 //doesn't require an external power source
 
 /obj/machinery/power/port_gen/attack_hand(mob/user as mob)
@@ -85,8 +119,50 @@
 			stat &= ~EMPED
 
 /obj/machinery/power/port_gen/proc/explode()
+	DropFuel() // so liquid fuel generators are messier
 	explosion(src.loc, -1, 3, 5, -1)
 	qdel(src)
+
+
+// A power generator that runs off of welder fuel.
+/obj/machinery/power/port_gen/fuel
+	name = "Liquid-Fueled Generator"
+	desc = "An emergency generator for power. In emergencies. Seriously, it's for emergencies."
+
+/obj/machinery/power/port_gen/fuel/Initialize()
+	. = ..()
+	create_reagents(50) // equal to a circuit one
+
+/obj/machinery/power/port_gen/fuel/HasFuel()
+	return reagents?.has_reagent("fuel")
+
+/obj/machinery/power/port_gen/fuel/UseFuel()
+	return reagents?.remove_reagent("fuel", power_output)
+
+/obj/machinery/power/port_gen/fuel/DropFuel()
+	return reagents?.splash_turf(get_turf(src))
+
+/obj/machinery/power/port_gen/fuel/attack_hand(mob/user as mob)
+	active = FALSE
+	if(IsBroken())
+		update_icon()
+		soundloop.stop()
+		power_output = 0
+		return
+	power_output = (power_output + 1) % max_power_output
+	to_chat(src, span("notice", "You [power_output > 0 ? "raise" : "lower"] the power level to [power_output]."))
+	if(power_output > 0)
+		active = TRUE
+		return
+
+/obj/machinery/power/port_gen/fuel/examine(mob/user)
+	if(!..(user, 1))
+		return
+	if(active)
+		to_chat(usr, span("notice", "The generator is on, consuming [power_output] units of fuel per second. It has [reagents.get_reagent_amount("fuel")] units of fuel left."))
+	else
+		to_chat(usr, span("notice", "The generator is off."))
+	if(IsBroken()) to_chat(user, span("warning", "\The [src] seems to have broken down."))
 
 #define TEMPERATURE_DIVISOR 40
 #define TEMPERATURE_CHANGE_MAX 20
@@ -98,7 +174,7 @@
 
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
-	var/board_path = "/obj/item/weapon/circuitboard/pacman"
+	var/board_path = "/obj/item/circuitboard/pacman"
 
 	/*
 		These values were chosen so that the generator can run safely up to 80 kW
@@ -107,7 +183,7 @@
 		Setting to 5 or higher can only be done temporarily before the generator overheats.
 	*/
 	power_gen = 20000			//Watts output per power_output level
-	var/max_power_output = 5	//The maximum power setting without emagging.
+	max_power_output = 5	//The maximum power setting without emagging.
 	var/max_safe_output = 4		// For UI use, maximal output that won't cause overheat.
 	var/time_per_sheet = 96		//fuel efficiency - how long 1 sheet lasts at power level 1
 	var/max_sheets = 100 		//max capacity of the hopper
@@ -120,10 +196,10 @@
 	var/overheating = 0		//if this gets high enough the generator explodes
 
 	component_types = list(
-		/obj/item/weapon/stock_parts/matter_bin,
-		/obj/item/weapon/stock_parts/micro_laser,
+		/obj/item/stock_parts/matter_bin,
+		/obj/item/stock_parts/micro_laser,
 		/obj/item/stack/cable_coil = 2,
-		/obj/item/weapon/stock_parts/capacitor
+		/obj/item/stock_parts/capacitor
 	)
 
 /obj/machinery/power/port_gen/pacman/Initialize()
@@ -140,10 +216,10 @@
 /obj/machinery/power/port_gen/pacman/RefreshParts()
 	var/temp_rating = 0
 
-	for(var/obj/item/weapon/stock_parts/SP in component_parts)
-		if(istype(SP, /obj/item/weapon/stock_parts/matter_bin))
+	for(var/obj/item/stock_parts/SP in component_parts)
+		if(istype(SP, /obj/item/stock_parts/matter_bin))
 			max_sheets = SP.rating * SP.rating * 50
-		else if(istype(SP, /obj/item/weapon/stock_parts/micro_laser) || istype(SP, /obj/item/weapon/stock_parts/capacitor))
+		else if(istype(SP, /obj/item/stock_parts/micro_laser) || istype(SP, /obj/item/stock_parts/capacitor))
 			temp_rating += SP.rating
 
 	power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
@@ -409,7 +485,7 @@
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
-	board_path = "/obj/item/weapon/circuitboard/pacman/super"
+	board_path = "/obj/item/circuitboard/pacman/super"
 
 /obj/machinery/power/port_gen/pacman/super/UseFuel()
 	//produces a tiny amount of radiation when in use
@@ -444,7 +520,7 @@
 	time_per_sheet = 576
 	max_temperature = 800
 	temperature_gain = 90
-	board_path = "/obj/item/weapon/circuitboard/pacman/mrs"
+	board_path = "/obj/item/circuitboard/pacman/mrs"
 
 /obj/machinery/power/port_gen/pacman/mrs/explode()
 	//no special effects, but the explosion is pretty big (same as a supermatter shard).

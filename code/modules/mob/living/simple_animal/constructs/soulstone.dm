@@ -1,6 +1,3 @@
-/obj/item/device/soulstone/cultify()
-	return
-
 /obj/item/device/soulstone
 	name = "soul stone shard"
 	icon = 'icons/obj/wizard.dmi'
@@ -18,12 +15,6 @@
 /obj/item/device/soulstone/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	if(!istype(M, /mob/living/carbon/human))//If target is not a human.
 		return ..()
-	if(istype(M, /mob/living/carbon/human/apparition))
-		return..()
-
-	if(M.has_brain_worms()) //Borer stuff - RR
-		to_chat(user, "<span class='warning'>This being is corrupted by an alien intelligence and cannot be soul trapped.</span>")
-		return..()
 
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their soul captured with [src.name] by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to capture the soul of [M.name] ([M.ckey])</font>")
@@ -84,14 +75,6 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct"
 	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
-
-/obj/structure/constructshell/cultify()
-	return
-
-/obj/structure/constructshell/cult
-	appearance_flags = NO_CLIENT_COLOR
-	icon_state = "construct-cult"
-	desc = "This eerie contraption looks like it would come alive if supplied with a missing ingredient."
 
 /obj/structure/constructshell/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/device/soulstone))
@@ -186,8 +169,6 @@
 		if("Juggernaut")
 			var/mob/living/simple_animal/construct/armoured/Z = new /mob/living/simple_animal/construct/armoured (get_turf(T.loc))
 			Z.key = A.key
-			if(iscultist(U))
-				cult.add_antagonist(Z.mind)
 			qdel(T)
 			to_chat(Z, "<B>You are playing a Juggernaut. Though slow, you can withstand extreme punishment, and rip apart enemies and walls alike.</B>")
 			to_chat(Z, "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>")
@@ -196,8 +177,6 @@
 		if("Wraith")
 			var/mob/living/simple_animal/construct/wraith/Z = new /mob/living/simple_animal/construct/wraith (get_turf(T.loc))
 			Z.key = A.key
-			if(iscultist(U))
-				cult.add_antagonist(Z.mind)
 			qdel(T)
 			to_chat(Z, "<B>You are playing a Wraith. Though relatively fragile, you are fast, deadly, and even able to phase through walls.</B>")
 			to_chat(Z, "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>")
@@ -206,8 +185,6 @@
 		if("Artificer")
 			var/mob/living/simple_animal/construct/builder/Z = new /mob/living/simple_animal/construct/builder (get_turf(T.loc))
 			Z.key = A.key
-			if(iscultist(U))
-				cult.add_antagonist(Z.mind)
 			qdel(T)
 			to_chat(Z, "<B>You are playing an Artificer. You are incredibly weak and fragile, but you are able to construct fortifications, repair allied constructs (by clicking on them), and even create new constructs</B>")
 			to_chat(Z, "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>")

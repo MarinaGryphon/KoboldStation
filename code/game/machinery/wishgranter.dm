@@ -84,16 +84,6 @@
 				playsound(user, 'sound/hallucinations/wail.ogg', 40, 1)
 				sleep(30)
 				to_chat(user, "<span class='warning'>Your mind is assaulted by endless horrors, your only desire is to end it, you must fulfill the Wish Granter's desires!</span>")
-				var/datum/objective/nuclear/nuclear = new
-				nuclear.owner = user.mind
-				user.mind.objectives += nuclear
-				var/obj_count = 1
-				for(var/datum/objective/OBJ in user.mind.objectives)
-					to_chat(user, "<B>Objective #[obj_count]</B>: [OBJ.explanation_text]")
-					obj_count++
-				for(var/obj/machinery/nuclearbomb/station/N in SSmachinery.all_machines)
-					to_chat(user, "<span class='warning'>[N.r_code]...!</span>")
-					user.mind.store_memory("<B>Nuclear Bomb Code</B>: [N.r_code]", 0, 0)
 			if("I want peace")
 				to_chat(user, "<B>Your wish is granted...</B>")
 				to_chat(user, "Everything lies silently and then the station, its crew and troubles are gone in a blink of light. You found peace at last.")

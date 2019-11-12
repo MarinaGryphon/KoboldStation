@@ -5,7 +5,7 @@
 // ===
 /area
 	var/global/global_uid = 0
-	var/uid
+	var/tmp/uid
 	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
 	var/fire = null
 	var/atmosalm = 0
@@ -35,11 +35,11 @@
 	var/nevergravity = 0
 
 	var/has_gravity = 1
-	var/obj/machinery/power/apc/apc = null
+	var/tmp/obj/machinery/power/apc/apc = null
 //	var/list/lights				// list of all lights on this area
-	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
-	var/air_doors_activated = 0
-	var/list/ambience = list(
+	var/tmp/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
+	var/tmp/air_doors_activated = 0
+	var/tmp/list/ambience = list(
 		'sound/ambience/ambigen1.ogg',
 		'sound/ambience/ambigen3.ogg',
 		'sound/ambience/ambigen4.ogg',
@@ -53,10 +53,10 @@
 		'sound/ambience/ambigen12.ogg',
 		'sound/ambience/ambigen14.ogg'
 	)
-	var/list/forced_ambience = null
+	var/tmp/list/forced_ambience = null
 	var/loop_ambience = TRUE
 	var/sound_env = STANDARD_STATION
-	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+	var/tmp/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
 	var/no_light_control = 0		// if 1, lights in area cannot be toggled with light controller
 	var/allow_nightmode = 0	// if 1, lights in area will be darkened by the night mode controller
 	var/station_area = 0

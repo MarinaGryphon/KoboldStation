@@ -60,8 +60,8 @@
 
 
 /obj/machinery/gumballmachine/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/spacecash))
-		var/obj/item/weapon/spacecash/C = W
+	if (istype(W, /obj/item/spacecash))
+		var/obj/item/spacecash/C = W
 		if(!on)
 			to_chat(user, span("warning", "\The [src] has no power!"))
 			return
@@ -80,7 +80,7 @@
 
 			if(changeleftover)
 				spawn_money(changeleftover, src.loc, user)
-	if(istype(W, /obj/item/weapon) && user.a_intent == I_HURT && !istype(W, /obj/item/weapon/spacecash))
+	if(istype(W, /obj/item/weapon) && user.a_intent == I_HURT && !istype(W, /obj/item/spacecash))
 		if(broken)
 			return
 		if(prob(25))

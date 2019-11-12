@@ -201,7 +201,7 @@ INITIALIZE_IMMEDIATE(/mob/abstract/new_player)
 		if(!(S.spawn_flags & CAN_JOIN))
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play on the station."))
 			return 0
-
+		
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 		return
 
@@ -488,7 +488,7 @@ INITIALIZE_IMMEDIATE(/mob/abstract/new_player)
 		chosen_species = all_species[client.prefs.species]
 
 	if(!chosen_species)
-		return "Human"
+		return "Kobold"
 
 	if(is_species_whitelisted(chosen_species) || has_admin_rights())
 		if (reference)
@@ -496,7 +496,7 @@ INITIALIZE_IMMEDIATE(/mob/abstract/new_player)
 		else
 			return chosen_species.name
 
-	return "Human"
+	return "Kobold"
 
 /mob/abstract/new_player/get_gender()
 	if(!client || !client.prefs)

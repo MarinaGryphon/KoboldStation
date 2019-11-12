@@ -99,12 +99,6 @@
 	item_cost = 14
 	path = /obj/item/supply_beacon
 
-/datum/uplink_item/item/tools/advancedpinpointer
-	name = "Advanced pinpointer"
-	item_cost = 15
-	path = /obj/item/weapon/pinpointer/advpinpointer
-	desc = "An advanced pinpointer that can find any target with DNA along with various other items."
-
 /datum/uplink_item/item/tools/syndieborg
 	name = "Syndicate Cyborg Teleporter"
 	item_cost = 35

@@ -15,10 +15,10 @@
 	explosion_resistance = 10
 	var/aiControlDisabled = 0 //If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
 	var/hackProof = 0 // if 1, this door can't be hacked by the AI
-	var/electrified_until = 0			//World time when the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
-	var/main_power_lost_until = 0	 	//World time when main power is restored.
-	var/backup_power_lost_until = -1	//World time when backup power is restored.
-	var/next_beep_at = 0				//World time when we may next beep due to doors being blocked by mobs
+	var/tmp/electrified_until = 0			//World time when the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
+	var/tmp/main_power_lost_until = 0	 	//World time when main power is restored.
+	var/tmp/backup_power_lost_until = -1	//World time when backup power is restored.
+	var/tmp/next_beep_at = 0				//World time when we may next beep due to doors being blocked by mobs
 	var/spawnPowerRestoreRunning = 0
 	var/welded = null
 	var/locked = 0
@@ -38,22 +38,22 @@
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
 	var/secured_wires = 0
-	var/datum/wires/airlock/wires = null
+	var/tmp/datum/wires/airlock/wires = null
 	var/obj/item/device/magnetic_lock/bracer = null
 	var/panel_visible_while_open = FALSE
 
-	var/open_sound_powered = 'sound/machines/airlock.ogg'
-	var/close_sound_powered = 'sound/machines/airlockclose.ogg'
-	var/open_sound_unpowered = 'sound/machines/airlock_open_force.ogg'
-	var/close_sound_unpowered = 'sound/machines/airlock_close_force.ogg'
+	var/tmp/open_sound_powered = 'sound/machines/airlock.ogg'
+	var/tmp/close_sound_powered = 'sound/machines/airlockclose.ogg'
+	var/tmp/open_sound_unpowered = 'sound/machines/airlock_open_force.ogg'
+	var/tmp/close_sound_unpowered = 'sound/machines/airlock_close_force.ogg'
 
-	var/bolts_dropping = 'sound/machines/boltsdown.ogg'
-	var/bolts_rising = 'sound/machines/boltsup.ogg'
+	var/tmp/bolts_dropping = 'sound/machines/boltsdown.ogg'
+	var/tmp/bolts_rising = 'sound/machines/boltsup.ogg'
 
 	hashatch = 1
 
 	var/_wifi_id
-	var/datum/wifi/receiver/button/door/wifi_receiver
+	var/tmp/datum/wifi/receiver/button/door/wifi_receiver
 	var/has_set_boltlight = FALSE
 
 	var/insecure = 1 //if the door is insecure it will open when power runs out
@@ -461,7 +461,7 @@ About the new airlock wires panel:
 					return
 			else /*if(src.justzap)*/
 				return
-		else if(user.hallucination > 50 && prob(10) && src.operating == 0 && !user.is_diona() && !user.isSynthetic())
+		else if(user.hallucination > 50 && prob(10) && src.operating == 0 && !user.isSynthetic())
 			to_chat(user, "<span class='danger'>You feel a powerful shock course through your body!</span>")
 			user.halloss += 10
 			user.stunned += 10
@@ -1067,11 +1067,6 @@ About the new airlock wires panel:
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
 	else if(!repairing && C.iscrowbar())
-		if(istype(C, /obj/item/weapon/melee/arm_blade))
-			if(!arePowerSystemsOn()) //if this check isn't done and empty, the armblade will never be used to hit the airlock
-			else if(!(stat & BROKEN))
-				..()
-				return
 		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && !src.locked)))
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")

@@ -186,8 +186,6 @@
 /datum/outfit/admin/deathsquad/leader
 	name = "Asset Protection Lead"
 
-	l_pocket = /obj/item/weapon/pinpointer
-
 /datum/outfit/admin/deathsquad/syndicate
 	name = "Syndicate Commando"
 
@@ -202,7 +200,6 @@
 
 	belt_contents = list(
 		/obj/item/ammo_magazine/c762 = 3,
-		/obj/item/weapon/pinpointer = 1,
 		/obj/item/weapon/shield/energy = 1,
 		/obj/item/weapon/handcuffs = 1,
 		/obj/item/weapon/grenade/flashbang = 1,
@@ -214,8 +211,6 @@
 
 /datum/outfit/admin/deathsquad/syndicate/leader
 	name = "Syndicate Commando Lead"
-
-	l_pocket = /obj/item/weapon/pinpointer
 
 /datum/outfit/admin/deathsquad/get_id_access()
 	return get_all_accesses()

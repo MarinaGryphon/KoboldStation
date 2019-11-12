@@ -769,7 +769,7 @@
 	seed_name = "banana"
 	display_name = "banana tree"
 	chems = list("banana" = list(10,10))
-	trash_type = /obj/item/weapon/bananapeel
+	trash_type = /obj/item/bananapeel
 	kitchen_tag = "banana"
 
 /datum/seed/banana/setup_traits()
@@ -792,7 +792,7 @@
 	display_name = "ears of corn"
 	chems = list("nutriment" = list(1,10), "cornoil" = list(1,10))
 	kitchen_tag = "corn"
-	trash_type = /obj/item/weapon/corncob
+	trash_type = /obj/item/corncob
 
 /datum/seed/corn/setup_traits()
 	..()
@@ -1125,27 +1125,6 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#6F7A63")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
 	set_trait(TRAIT_WATER_CONSUMPTION, 0.5)
-
-/datum/seed/diona
-	name = "diona"
-	seed_name = "diona"
-	seed_noun = "node"
-	display_name = "diona pod"
-	can_self_harvest = 1
-	has_mob_product = /mob/living/carbon/alien/diona
-
-/datum/seed/diona/setup_traits()
-	..()
-	set_trait(TRAIT_IMMUTABLE,1)
-	set_trait(TRAIT_ENDURANCE,8)
-	set_trait(TRAIT_MATURATION,5)
-	set_trait(TRAIT_PRODUCTION,10)
-	set_trait(TRAIT_YIELD,1)
-	set_trait(TRAIT_POTENCY,30)
-	set_trait(TRAIT_PRODUCT_ICON,"diona")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#799957")
-	set_trait(TRAIT_PLANT_COLOUR,"#66804B")
-	set_trait(TRAIT_PLANT_ICON,"alien4")
 
 /datum/seed/shand
 	name = "shand"

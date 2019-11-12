@@ -6,47 +6,12 @@
 	var/text = "<br><br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player_full(P)
-		text += get_special_objective_text(P)
 		if(P.ambitions)
 			text += "<br><font color='purple'><b>Their goals for today were:</b></font>"
 			text += "<br>  '[P.ambitions]'"
-		if(!global_objectives.len && P.objectives && P.objectives.len)
-			var/failed
-			var/num = 1
-
-			for(var/datum/objective/O in P.objectives)
-				text += print_objective(O, num)
-				if(O.check_completion())
-					text += "<font color='green'><B>Success!</B></font>"
-					feedback_add_details(feedback_tag,"[O.type]|SUCCESS")
-				else
-					text += "<font color='red'>Fail.</font>"
-					feedback_add_details(feedback_tag,"[O.type]|FAIL")
-					failed = 1
-				num++
-				if(failed)
-					text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
-				else
-					text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
-
-	if(global_objectives && global_objectives.len)
-		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
-		var/num = 1
-		for(var/datum/objective/O in global_objectives)
-			text += print_objective(O, num, 1)
-			num++
 
 	// Display the results.
 	to_world(text)
-
-/datum/antagonist/proc/print_objective(var/datum/objective/O, var/num, var/append_success)
-	var/text = "<br><b>Objective [num]:</b> [O.explanation_text] "
-	if(append_success)
-		if(O.check_completion())
-			text += "<font color='green'><B>Success!</B></font>"
-		else
-			text += "<font color='red'>Fail.</font>"
-	return text
 
 /datum/antagonist/proc/print_player_lite(var/datum/mind/ply)
 	var/role = ply.assigned_role ? "\improper[ply.assigned_role]" : "\improper[ply.special_role]"

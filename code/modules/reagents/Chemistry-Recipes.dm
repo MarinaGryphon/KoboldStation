@@ -1338,7 +1338,6 @@
 		/mob/living/simple_animal/hostile/alien/sentinel,
 		/mob/living/simple_animal/hostile/alien/queen,
 		/mob/living/simple_animal/hostile/alien/queen/large,
-		/mob/living/simple_animal/hostile/true_changeling,
 		/mob/living/simple_animal/hostile/commanded,
 		/mob/living/simple_animal/hostile/commanded/dog,
 		/mob/living/simple_animal/hostile/commanded/dog/amaskan,
@@ -1347,12 +1346,7 @@
 		/mob/living/simple_animal/hostile/commanded/bear,
 		/mob/living/simple_animal/hostile/greatworm,
 		/mob/living/simple_animal/hostile/lesserworm,
-		/mob/living/simple_animal/hostile/greatwormking,
-		/mob/living/simple_animal/hostile/krampus,
-		/mob/living/simple_animal/hostile/gift,
-		/mob/living/simple_animal/hostile/hivebotbeacon,
-		/mob/living/simple_animal/hostile/republicon,
-		/mob/living/simple_animal/hostile/republicon/ranged
+		/mob/living/simple_animal/hostile/greatwormking
 	)
 	//exclusion list for things you don't want the reaction to create.
 	var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs

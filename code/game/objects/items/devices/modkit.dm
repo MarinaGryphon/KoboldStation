@@ -7,7 +7,7 @@
 	desc = "A kit containing all the needed tools and parts to modify a voidsuit for another user."
 	icon_state = "modkit"
 	var/parts = MODKIT_FULL
-	var/target_species = "Human"
+	var/target_species = "Kobold"
 
 	var/list/permitted_types = list(
 		/obj/item/clothing/head/helmet/space/void,

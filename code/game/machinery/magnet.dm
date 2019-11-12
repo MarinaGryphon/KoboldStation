@@ -217,7 +217,7 @@
 	var/moving = 0 // 1 if scheduled to loop
 	var/looping = 0 // 1 if looping
 
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 
 	Initialize()

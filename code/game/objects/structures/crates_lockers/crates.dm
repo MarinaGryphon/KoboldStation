@@ -28,19 +28,6 @@
 	if(!can_open())
 		return 0
 
-	if(rigged && locate(/obj/item/device/radio/electropack) in src)
-		if(isliving(usr))
-			var/mob/living/L = usr
-			var/touchy_hand
-			if(L.hand)
-				touchy_hand = "r_hand"
-			else
-				touchy_hand = "l_hand"
-			if(L.electrocute_act(17, src, ground_zero = touchy_hand))
-				spark(src, 5, alldirs)
-				if(L.stunned)
-					return 2
-
 	playsound(loc, 'sound/machines/click.ogg', 15, 1, -3)
 	for(var/obj/O in src)
 		O.forceMove(get_turf(src))
@@ -101,11 +88,6 @@
 		if (C.use(1))
 			to_chat(user, "<span class='notice'>You rig [src].</span>")
 			rigged = 1
-			return
-	else if(istype(W, /obj/item/device/radio/electropack))
-		if(rigged)
-			to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
-			user.drop_from_inventory(W,src)
 			return
 	else if(W.iswirecutter())
 		if(rigged)
@@ -334,7 +316,7 @@
 		return toggle(user)
 
 /obj/structure/closet/crate/secure/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(is_type_in_list(W, list(/obj/item/stack/packageWrap, /obj/item/stack/cable_coil, /obj/item/device/radio/electropack, /obj/item/weapon/wirecutters)))
+	if(is_type_in_list(W, list(/obj/item/stack/packageWrap, /obj/item/stack/cable_coil, /obj/item/weapon/wirecutters)))
 		return ..()
 	if(istype(W, /obj/item/weapon/melee/energy/blade))
 		emag_act(INFINITY, user)
@@ -641,6 +623,24 @@
 //		new /obj/item/weapon/pestspray(src)
 //		new /obj/item/weapon/pestspray(src)
 
+/obj/structure/closet/crate/hydroponics/narvat/fill()
+	new /obj/item/weapon/reagent_containers/spray/plantbgone(src)
+	new /obj/item/weapon/reagent_containers/spray/plantbgone(src)
+	new /obj/item/weapon/material/minihoe(src)
+	new /obj/item/weapon/wirecutters/clippers(src)
+	new /obj/item/seeds/nettleseed(src)
+	new /obj/item/seeds/potatoseed(src)
+	new /obj/item/seeds/soyaseed(src)
+	new /obj/item/seeds/wheatseed(src)
+	new /obj/item/seeds/whitebeetseed(src)
+	new /obj/item/seeds/tomatoseed(src)
+	new /obj/item/seeds/peanutseed(src)
+	new /obj/item/seeds/cocoapodseed(src)
+	for(var/i=1, i==10, i++)
+		var/seedtype = pick(subtypesof(/obj/item/seeds))
+		new seedtype(src)
+
+
 
 
 //A crate that populates itself with randomly selected loot from randomstock.dm
@@ -706,33 +706,3 @@
 /obj/structure/closet/crate/extinguisher_cartridges/fill()
 	for(var/a = 1 to 12)
 		new /obj/item/weapon/reagent_containers/extinguisher_refill(src)
-
-/obj/structure/closet/crate/autakh
-	name = "aut'akh crate"
-	desc = "Contains a number of limbs and augmentations created by the Aut'akh Commune."
-	icon = 'icons/obj/storage.dmi'
-	icon_state = "autakh_crate"
-	icon_opened = "autakh_crateopen"
-	icon_closed = "autakh_crate"
-
-/obj/structure/closet/crate/autakh/fill()
-	new /obj/item/organ/external/arm/right/autakh(src)
-	new /obj/item/organ/external/arm/right/autakh(src)
-	new /obj/item/organ/external/arm/autakh(src)
-	new /obj/item/organ/external/arm/autakh(src)
-	new /obj/item/organ/external/hand/autakh(src)
-	new /obj/item/organ/external/hand/autakh(src)
-	new /obj/item/organ/external/hand/right/autakh(src)
-	new /obj/item/organ/external/hand/right/autakh(src)
-	new /obj/item/organ/external/leg/autakh(src)
-	new /obj/item/organ/external/leg/autakh(src)
-	new /obj/item/organ/external/leg/right/autakh(src)
-	new /obj/item/organ/external/leg/right/autakh(src)
-	new /obj/item/organ/external/foot/autakh(src)
-	new /obj/item/organ/external/foot/autakh(src)
-	new /obj/item/organ/external/foot/right/autakh(src)
-	new /obj/item/organ/external/foot/right/autakh(src)
-	new /obj/item/organ/external/hand/right/autakh/tool(src)
-	new /obj/item/organ/external/hand/right/autakh/tool/mining(src)
-	new /obj/item/organ/external/hand/right/autakh/medical(src)
-	new /obj/item/organ/external/hand/right/autakh/security(src)

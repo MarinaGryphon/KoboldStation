@@ -35,22 +35,10 @@ var/datum/antagonist/revolutionary/revs
 	..()
 	revs = src
 
-/datum/antagonist/revolutionary/create_global_objectives()
-	if(!..())
-		return
-	global_objectives = list()
-	for(var/mob/living/carbon/human/player in mob_list)
-		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in command_positions))
-			continue
-		var/datum/objective/rev/rev_obj = new
-		rev_obj.target = player.mind
-		rev_obj.explanation_text = "Assassinate, capture or convert [player.real_name], the [player.mind.assigned_role]."
-		global_objectives += rev_obj
-
 /datum/antagonist/revolutionary/can_become_antag(var/datum/mind/player)
 	if(!..())
 		return 0
-	for(var/obj/item/weapon/implant/loyalty/L in player.current)
+	for(var/obj/item/implant/loyalty/L in player.current)
 		if(L && (L.imp_in == player.current))
 			return 0
 	return 1

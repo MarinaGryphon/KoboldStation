@@ -52,11 +52,6 @@
 	new /obj/item/weapon/gun/energy/gun(src)
 	new /obj/item/weapon/gun/energy/gun(src)
 	new /obj/item/weapon/gun/energy/gun(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
-	new /obj/item/weapon/pinpointer/nukeop(src)
 	new /obj/item/device/pda/syndicate(src)
 	var/obj/item/device/radio/uplink/U = new(src)
 	U.hidden_uplink.uses = 40

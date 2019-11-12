@@ -164,7 +164,7 @@ var/list/cleanbot_types // Going to use this to generate a list of types once th
 	if(!found_spot && !target) // No targets in range
 		if(!patrol_path || !patrol_path.len)
 			if(!signal_sent || signal_sent > world.time + 200) // Waited enough or didn't send yet
-				var/datum/radio_frequency/frequency = SSradio.return_frequency(beacon_freq)
+				var/tmp/datum/radio_frequency/frequency = SSradio.return_frequency(beacon_freq)
 				if(!frequency)
 					return
 
@@ -228,7 +228,7 @@ var/list/cleanbot_types // Going to use this to generate a list of types once th
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
+	new /obj/item/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
@@ -364,7 +364,7 @@ var/list/cleanbot_types // Going to use this to generate a list of types once th
 
 /* Assembly */
 
-/obj/item/weapon/bucket_sensor
+/obj/item/bucket_sensor
 	desc = "It's a bucket. With a sensor attached."
 	name = "proxy bucket"
 	icon = 'icons/obj/aibots.dmi'
@@ -376,7 +376,7 @@ var/list/cleanbot_types // Going to use this to generate a list of types once th
 	w_class = 3.0
 	var/created_name = "Cleanbot"
 
-/obj/item/weapon/bucket_sensor/attackby(var/obj/item/O, var/mob/user)
+/obj/item/bucket_sensor/attackby(var/obj/item/O, var/mob/user)
 	..()
 	if(istype(O, /obj/item/robot_parts/l_arm) || istype(O, /obj/item/robot_parts/r_arm))
 		user.drop_from_inventory(O,get_turf(src))

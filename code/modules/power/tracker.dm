@@ -14,7 +14,7 @@
 
 	var/id = 0
 	var/sun_angle = 0		// sun angle as set by sun datum
-	var/obj/machinery/power/solar_control/control = null
+	var/tmp/obj/machinery/power/solar_control/control = null
 
 /obj/machinery/power/tracker/Initialize(mapload, obj/item/solar_assembly/S)
 	. = ..()
@@ -57,7 +57,7 @@
 	if(powernet && (powernet == control.powernet)) //update if we're still in the same powernet
 		control.cdir = angle
 
-/obj/machinery/power/tracker/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/machinery/power/tracker/attackby(var/obj/item/W, var/mob/user)
 
 	if(W.iscrowbar())
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -75,7 +75,7 @@
 
 // Tracker Electronic
 
-/obj/item/weapon/tracker_electronics
+/obj/item/tracker_electronics
 
 	name = "tracker electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'

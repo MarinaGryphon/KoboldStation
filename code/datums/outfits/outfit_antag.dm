@@ -52,7 +52,6 @@
 	l_ear = /obj/item/device/radio/headset/syndicate
 	glasses = /obj/item/clothing/glasses/night
 	shoes = /obj/item/clothing/shoes/magboots
-	l_pocket = /obj/item/weapon/pinpointer/nukeop
 	l_hand = /obj/item/weapon/tank/jetpack/void
 
 	backpack_contents = list(
@@ -74,7 +73,6 @@
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	belt = /obj/item/weapon/gun/projectile/deagle
 	l_ear = /obj/item/device/radio/headset/syndicate
-	l_pocket = /obj/item/weapon/pinpointer/advpinpointer
 	r_pocket = null // stop them getting a radio uplink, they get an implant instead
 
 	backpack_contents = list(
@@ -125,8 +123,7 @@
 	belt_contents = list(
 		/obj/item/device/flashlight/maglight = 1,
 		/obj/item/weapon/crowbar = 1,
-		/obj/item/weapon/screwdriver = 1,
-		/obj/item/device/paicard = 1
+		/obj/item/weapon/screwdriver = 1
 	)
 
 	id_access = "Syndicate Agent"
@@ -239,7 +236,6 @@
 	shoes = /obj/item/clothing/shoes/combat
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	l_hand = /obj/item/weapon/material/sword
-	l_pocket = /obj/item/weapon/pinpointer
 
 	id = /obj/item/weapon/card/id/highlander
 

@@ -20,9 +20,6 @@
 	if(istype(O, /obj/item/weapon/book))
 		if(volume < 5)
 			return
-		if(istype(O, /obj/item/weapon/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
-			return
 		var/obj/item/weapon/book/affectedbook = O
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
@@ -52,10 +49,7 @@
 	fallback_specific_heat = 1.048
 
 /datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.adjustOxyLoss(-removed * 10)
-	else
-		M.adjustToxLoss(removed * 1.5)
+	M.adjustToxLoss(removed * 1.5)
 
 /datum/reagent/carbon
 	name = "Carbon"
@@ -92,10 +86,6 @@
 	color = "#6E3B08"
 	taste_description = "copper"
 	fallback_specific_heat = 1.148
-
-/datum/reagent/copper/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if (alien & IS_SKRELL)
-		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /datum/reagent/alcohol //Parent class for all alcoholic reagents, though this one shouldn't be used anywhere.
 	name = null	// This null name should prevent alcohol from being added to global lists.
@@ -150,18 +140,16 @@
 	return
 
 /datum/reagent/alcohol/affect_ingest(mob/living/carbon/M, alien, removed)
+	M.intoxication += (strength / 100) * removed * 3.5
 
-	if(alien != IS_DIONA)
-		M.intoxication += (strength / 100) * removed * 3.5
+	if (druggy != 0)
+		M.druggy = max(M.druggy, druggy)
 
-		if (druggy != 0)
-			M.druggy = max(M.druggy, druggy)
+	if (halluci)
+		M.hallucination = max(M.hallucination, halluci)
 
-		if (halluci)
-			M.hallucination = max(M.hallucination, halluci)
-
-		if (caffeine && !caffeine_mod)
-			caffeine_mod = M.add_modifier(/datum/modifier/stimulant, MODIFIER_REAGENT, src, _strength = caffeine, override = MODIFIER_OVERRIDE_STRENGTHEN)
+	if (caffeine && !caffeine_mod)
+		caffeine_mod = M.add_modifier(/datum/modifier/stimulant, MODIFIER_REAGENT, src, _strength = caffeine, override = MODIFIER_OVERRIDE_STRENGTHEN)
 
 	if (adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
@@ -187,16 +175,8 @@
 /datum/reagent/alcohol/ethanol/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(!istype(M))
 		return
-	var/obj/item/organ/parasite/P = M.internal_organs_by_name["blackkois"]
-	if((alien == IS_VAURCA) || (istype(P) && P.stage >= 3))//Vaurca are damaged instead of getting nutrients, but they can still get drunk
-		M.adjustToxLoss(1.5 * removed * (strength / 100))
-	else
-		M.adjustNutritionLoss(-nutriment_factor * removed)
-		M.adjustHydrationLoss(-hydration_factor * removed)
-
-	if (alien == IS_UNATHI)//unathi are poisoned by alcohol as well
-		M.adjustToxLoss(1.5 * removed * (strength / 100))
-
+	M.adjustNutritionLoss(-nutriment_factor * removed)
+	M.adjustHydrationLoss(-hydration_factor * removed)
 	..()
 
 /datum/reagent/alcohol/ethanol/touch_obj(var/obj/O)
@@ -208,50 +188,10 @@
 	if(istype(O, /obj/item/weapon/book))
 		if(volume < 5)
 			return
-		if(istype(O, /obj/item/weapon/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
-			return
 		var/obj/item/weapon/book/affectedbook = O
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 	return
-
-
-// Butanol is a common alcohol that is fairly ineffective for humans and most other species, but highly intoxicating to unathi.
-// Most behavior is inherited from alcohol.
-/datum/reagent/alcohol/butanol
-	name = "Butanol"
-	id = "butanol"
-	description = "A fairly harmless alcohol that has intoxicating effects on certain species."
-	reagent_state = LIQUID
-	color = "#404030"
-	ingest_met = REM * 0.5 //Extremely slow metabolic rate means the liver will generally purge it faster than it can intoxicate you
-	flammability_divisor = 7	//Butanol is a bit less flammable than ethanol
-
-	taste_description = "alcohol"
-
-	glass_icon_state = "glass_clear"
-	glass_name = "glass of butanol"
-	glass_desc = "A fairly harmless alcohol that has intoxicating effects on certain species."
-
-	fallback_specific_heat = 0.549
-
-	distillation_point = T0C + 117.7
-
-/datum/reagent/alcohol/butanol/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(!istype(M))
-		return
-	var/obj/item/organ/parasite/P = M.internal_organs_by_name["blackkois"]
-	if((alien == IS_VAURCA) || (istype(P) && P.stage >= 3))
-		M.adjustToxLoss(removed * (strength / 100))
-	else
-		M.adjustNutritionLoss(-nutriment_factor * removed)
-		M.adjustHydrationLoss(-hydration_factor * removed)
-
-	if (alien == IS_UNATHI)
-		ingest_met = initial(ingest_met)*3
-
-	..()
 
 /datum/reagent/hydrazine
 	name = "Hydrazine"
@@ -295,8 +235,7 @@
 	fallback_specific_heat = 1.181
 
 /datum/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if (!(alien & IS_SKRELL))
-		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
+	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /datum/reagent/lithium
 	name = "Lithium"
@@ -367,14 +306,6 @@
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_effect(10 * removed, IRRADIATE, blocked = 0) // Radium may increase your chances to cure a disease
-	if(M.is_diona())
-		M.adjustToxLoss(-20 * removed)
-		M.adjustBruteLoss(-20 * removed)
-		M.adjustFireLoss(-20 * removed)
-		if(!message_shown) // Not to spam message
-			to_chat(M, "<span class='notice'>You feel an extreme energy as your body regenerates faster.</span>")
-			message_shown = TRUE
-		return
 	if(M.virus2.len)
 		for(var/ID in M.virus2)
 			var/datum/disease2/disease/V = M.virus2[ID]
@@ -382,12 +313,7 @@
 				M.antibodies |= V.antigen
 				if(prob(50))
 					M.apply_effect(50, IRRADIATE, blocked = 0) // curing it that way may kill you instead
-					var/absorbed = 0
-					var/obj/item/organ/diona/nutrients/rad_organ = locate() in M.internal_organs
-					if(rad_organ && !rad_organ.is_broken())
-						absorbed = 1
-					if(!absorbed)
-						M.adjustToxLoss(100)
+					M.adjustToxLoss(100)
 
 /datum/reagent/radium/touch_turf(var/turf/T)
 	if(volume >= 3)

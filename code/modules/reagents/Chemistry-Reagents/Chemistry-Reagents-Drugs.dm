@@ -246,7 +246,7 @@
 	strength = 3
 
 /datum/reagent/toxin/stimm/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_TAJARA)
+	if(alien == IS_KOBOLD)
 		removed *= 1.25
 	..()
 	if(prob(15))

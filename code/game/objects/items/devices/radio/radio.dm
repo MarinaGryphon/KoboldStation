@@ -32,7 +32,7 @@ var/global/list/default_medbay_channels = list(
 	var/frequency = PUB_FREQ //common chat
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
-	var/datum/wires/radio/wires = null
+	var/tmp/datum/wires/radio/wires = null
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
@@ -49,8 +49,8 @@ var/global/list/default_medbay_channels = list(
 	var/list/internal_channels
 
 /obj/item/device/radio
-	var/datum/radio_frequency/radio_connection
-	var/list/datum/radio_frequency/secure_radio_connections = new
+	var/tmp/datum/radio_frequency/radio_connection
+	var/tmp/list/datum/radio_frequency/secure_radio_connections = new
 
 	proc/set_frequency(new_frequency)
 		SSradio.remove_object(src, frequency)
@@ -151,7 +151,7 @@ var/global/list/default_medbay_channels = list(
 	return user.has_internal_radio_channel_access(internal_channels[freq])
 
 /mob/proc/has_internal_radio_channel_access(var/list/req_one_accesses)
-	var/obj/item/weapon/card/id/I = GetIdCard()
+	var/obj/item/card/id/I = GetIdCard()
 	return has_access(list(), req_one_accesses, I ? I.GetAccess() : list())
 
 /mob/abstract/observer/has_internal_radio_channel_access(var/list/req_one_accesses)
@@ -227,7 +227,7 @@ var/global/list/default_medbay_channels = list(
 		SSnanoui.update_uis(src)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
-	var/datum/radio_frequency/connection = null
+	var/tmp/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
 		if (channel == "department")
 			channel = channels[1]
@@ -293,7 +293,7 @@ var/global/list/default_medbay_channels = list(
 	*/
 
 	//#### Grab the connection datum ####//
-	var/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
+	var/tmp/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
 	if (!istype(connection))
 		return 0
 	if (!connection)
@@ -516,7 +516,7 @@ var/global/list/default_medbay_channels = list(
 		var/accept = (freq==frequency && listening)
 		if (!accept)
 			for (var/ch_name in channels)
-				var/datum/radio_frequency/RF = secure_radio_connections[ch_name]
+				var/tmp/datum/radio_frequency/RF = secure_radio_connections[ch_name]
 				if (RF.frequency==freq && (channels[ch_name]&FREQ_LISTENING))
 					accept = 1
 					break

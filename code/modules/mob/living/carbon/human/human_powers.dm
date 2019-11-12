@@ -139,10 +139,6 @@ mob/living/carbon/human/proc/change_monitor()
 	visible_message("<span class='danger'>[src] leaps at [T]!</span>", "<span class='danger'>You leap at [T]!</span>")
 	throw_at(get_step(get_turf(T), get_turf(src)), 4, 1, src, do_throw_animation = FALSE)
 
-	// Only Vox get to shriek. Seriously.
-	if (isvox(src))
-		playsound(loc, 'sound/voice/shriek1.ogg', 50, 1)
-
 	sleep(5)
 
 	if(status_flags & LEAPING)
@@ -281,14 +277,6 @@ mob/living/carbon/human/proc/change_monitor()
 		to_chat(src,"<span class='warning'>This can only be used on living organisms.</span>")
 		return
 
-	if (target.is_diona())
-		to_chat(src,"<span class='alium'>The creature's mind is incompatible, formless.</span>")
-		return
-
-	if (isvaurca(target))
-		to_chat (src, "<span class='cult'>You feel your thoughts pass right through a mind empty of psychic energy.</span>")
-		return
-
 	if(!(target in view(client.view, client.eye)))
 		to_chat(src,"<span class='warning'>[target] is too far for your mind to grasp!</span>")
 		return
@@ -344,97 +332,6 @@ mob/living/carbon/human/proc/change_monitor()
 		to_chat(M, "<span class ='alium'>You hear a strange, alien voice in your head... \italic [msg]</span>")
 		to_chat(src, "<span class ='alium'>You said: \"[msg]\" to [M]</span>")
 	return
-
-/mob/living/carbon/human/proc/bugbite()
-	set category = "Abilities"
-	set name = "Bite"
-	set desc = "While grabbing someone aggressively, tear into them with your mandibles."
-
-	if(last_special > world.time)
-		to_chat(src, "<span class='warning'>Your mandibles still ache!</span>")
-		return
-
-	if(stat || paralysis || stunned || weakened || lying)
-		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
-		return
-
-	var/obj/item/weapon/grab/G = locate() in src
-	if(!G || !istype(G))
-		to_chat(src, "<span class='warning'>You are not grabbing anyone.</span>")
-		return
-
-	if(G.state < GRAB_AGGRESSIVE)
-		to_chat(src, "<span class='warning'>You must have an aggressive grab to gut your prey!</span>")
-		return
-
-	if(istype(G.affecting,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = G.affecting
-		var/hit_zone = zone_sel.selecting
-		var/obj/item/organ/external/affected = H.get_organ(hit_zone)
-
-		if(!affected || affected.is_stump())
-			to_chat(H, "<span class='danger'>They are missing that limb!</span>")
-			return
-
-		H.apply_damage(25, BRUTE, hit_zone, sharp = 1, edge = 1)
-		visible_message("<span class='warning'><b>\The [src]</b> rips viciously at \the [G.affecting]'s [affected] with its mandibles!</span>")
-		msg_admin_attack("[key_name_admin(src)] mandible'd [key_name_admin(H)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(H))
-	else
-		var/mob/living/M = G.affecting
-		if(!istype(M))
-			return
-		M.apply_damage(25,BRUTE, sharp=1, edge=1)
-		visible_message("<span class='warning'><b>\The [src]</b> rips viciously at \the [G.affecting]'s flesh with its mandibles!</span>")
-		msg_admin_attack("[key_name_admin(src)] mandible'd [key_name_admin(M)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(M))
-	playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1)
-	last_special = world.time + 25
-
-/mob/living/carbon/human/proc/detonate_flechettes()
-	set category = "Military Frame"
-	set name = "Detonate Flechettes"
-	set desc = "Detonate all explosive flechettes in a range of seven meters."
-
-	if(stat || paralysis || stunned || weakened || lying)
-		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
-		return
-
-	for(var/mob/living/M in range(7, src))
-		to_chat(M, 'sound/effects/EMPulse.ogg')
-		for(var/obj/item/weapon/material/shard/shrapnel/flechette/F in M.contents)
-			playsound(F, 'sound/items/countdown.ogg', 125, 1)
-			spawn(20)
-				explosion(F.loc, -1, -1, 2)
-				M.apply_damage(20,BRUTE)
-				M.apply_damage(15,BURN)
-				qdel(F)
-
-	for(var/obj/item/weapon/material/shard/shrapnel/flechette/F in range(7, src))
-		playsound(F, 'sound/items/countdown.ogg', 125, 1)
-		spawn(20)
-			explosion(F.loc, -1, -1, 2)
-			qdel(F)
-
-
-/mob/living/carbon/human/proc/state_laws()
-	set category = "Military Frame"
-	set name = "State Laws"
-	set desc = "State your laws aloud."
-
-	if(stat)
-		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
-		return
-
-	if(last_special > world.time)
-		return
-	last_special = world.time + 20
-
-	say("Current Active Laws:")
-	sleep(10)
-	say("Law 1: [src.real_name] will accomplish the assigned objective .")
-	sleep(10)
-	say("Law 2: [src.real_name] will engage self-destruct upon the accomplishment of the assigned objective, or upon capture.")
-	sleep(10)
-	say("Law 3: [src.real_name] will allow no tampering of its systems or modifications of its laws.")
 
 /mob/living/carbon/human/proc/get_aggressive_grab()
 
@@ -500,97 +397,6 @@ mob/living/carbon/human/proc/change_monitor()
 			M.gib()
 
 	last_special = world.time + 200
-
-/mob/living/carbon/human/proc/self_destruct()
-	set category = "Military Frame"
-	set name = "Engage Self-Destruct"
-	set desc = "When all else has failed, bite the bullet."
-
-	if(stat || paralysis || stunned || weakened || lying)
-		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
-		return
-
-	src.visible_message(
-	"<span class='danger'>\The [src] begins to beep ominously!</span>",
-	"<span class='danger'>WARNING: SELF-DESTRUCT ENGAGED. Unit termination finalized in three seconds!</span>"
-	)
-	sleep(10)
-	playsound(src, 'sound/items/countdown.ogg', 125, 1)
-	sleep(20)
-	explosion(src, -1, 1, 5)
-	src.gib()
-
-/mob/living/carbon/human/proc/hivenet()
-	set category = "Abilities"
-	set name = "Hivenet Control"
-	set desc = "Issue an order over the hivenet."
-
-	var/list/targets = list()
-	var/target = null
-	var/text = null
-
-	if(!(all_languages[LANGUAGE_VAURCA] in src.languages))
-		to_chat(src, "<span class='danger'>Your mind is dark, the unity of the hive is torn from you!</span>")
-		return
-
-	targets += getmobs()
-	target = input("Select a pawn!", "Issue an order", null, null) as null|anything in targets
-
-	if(!target) return
-
-	text = input("What is your will?", "Issue an order", null, null)
-
-	text = sanitize(text)
-
-	if(!text) return
-
-	var/mob/M = targets[target]
-
-	if(istype(M, /mob/abstract/observer) || M.stat == DEAD)
-		to_chat(src, "<span class='danger'>[M]'s hivenet implant is inactive!</span>")
-		return
-
-	if(!(all_languages[LANGUAGE_VAURCA] in M.languages))
-		to_chat(src, "<span class='danger'>[M]'s hivenet implant is inactive!</span>")
-		return
-
-	log_say("[key_name(src)] issued a hivenet order to [key_name(M)]: [text]",ckey=key_name(src))
-
-	if(istype(M, /mob/living/carbon/human) && isvaurca(M))
-		to_chat(M, "<span class='danger'>You feel a buzzing in the back of your head, and your mind fills with the authority of [src.real_name], your ruler:</span>")
-		to_chat(M, "<span class='notice'> [text]</span>")
-	else
-		to_chat(M, "<span class='danger'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]</span>")
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.name == src.species.name)
-				return
-			to_chat(H, "<span class='danger'>Your nose begins to bleed...</span>")
-			H.drip(1)
-
-/mob/living/carbon/human/proc/quillboar(mob/target as mob in oview())
-	set name = "Launch Quill"
-	set desc = "Launches a quill in self-defense. Painful, but effective."
-	set category = "Abilities"
-
-	if(last_special > world.time)
-		to_chat(src, "<span class='danger'>Your spine still aches!</span>")
-		return
-
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		to_chat(src, "You cannot launch a quill in your current state.")
-		return
-
-	last_special = world.time + 30
-
-	visible_message("<span class='warning'><b>\The [src]</b> launches a spine-quill at [target]!</span>")
-
-	src.apply_damage(10,BRUTE)
-	playsound(src.loc, 'sound/weapons/bladeslice.ogg', 50, 1)
-	var/obj/item/weapon/arrow/quill/A = new /obj/item/weapon/arrow/quill(usr.loc)
-	A.throw_at(target, 10, 30, usr)
-	msg_admin_attack("[key_name_admin(src)] launched a quill at [key_name_admin(target)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(target))
-
 
 /mob/living/carbon/human/proc/shatter_light()
 	set category = "Abilities"
@@ -819,20 +625,20 @@ mob/living/carbon/human/proc/change_monitor()
 	if (victims.len)
 		admin_attacker_log_many_victims(src, victims, "used rebel yell to stun", "was stunned by [key_name(src)] using rebel yell", "used rebel yell to stun")
 
-/mob/living/carbon/human/proc/formic_spray()
+/mob/living/carbon/human/proc/fire_spray()
 	set category = "Abilities"
-	set name = "Napalm"
-	set desc = "Spew a cone of ignited napalm in front of you"
+	set name = "Searing Burst"
+	set desc = "Spew a cone of magical flame in front of you."
 
 	if(last_special > world.time)
-		to_chat(src,"<span class='notice'>You are too tired to spray napalm!</span>")
+		to_chat(src,"<span class='notice'>You are too tired to spray fire!</span>")
 		return
 
 	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		to_chat(src,"<span class='notice'>You cannot spray napalm in your current state.</span>")
+		to_chat(src,"<span class='notice'>You cannot spray fire in your current state.</span>")
 		return
 
-	last_special = world.time + 100
+	last_special = world.time + 20 SECONDS
 	playsound(loc, 'sound/species/shadow/grue_screech.ogg', 100, 1)
 	visible_message("<span class='danger'>\The [src] unleashes a torrent of raging flame!</span>",
 			"<span class='danger'>You unleash a gust of fire!</span>",
@@ -1086,7 +892,7 @@ mob/living/carbon/human/proc/change_monitor()
 	var/list/dirs = list()
 	for(var/mob/living/L in range(20))
 		var/turf/T = get_turf(L)
-		if(!T || L == src || L.stat == DEAD || L.isSynthetic() || L.is_diona() || isvaurca(L) || L.invisibility == INVISIBILITY_LEVEL_TWO)
+		if(!T || L == src || L.stat == DEAD || L.isSynthetic() || L.invisibility == INVISIBILITY_LEVEL_TWO)
 			continue
 		var/image/ping_image = image(icon = 'icons/effects/effects.dmi', icon_state = "sonar_ping", loc = src)
 		ping_image.plane = LIGHTING_LAYER+1

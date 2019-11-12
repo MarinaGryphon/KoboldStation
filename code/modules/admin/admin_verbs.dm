@@ -45,7 +45,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_direct_narrate,	//send text directly to a player with no padding. Useful for narratives and fluff-text,
 	/client/proc/cmd_admin_world_narrate,	//sends text to all players with no padding,
 	/client/proc/cmd_admin_create_centcom_report,
-	/client/proc/check_words,			//displays cult-words,
 	/client/proc/check_ai_laws,			//shows AI and borg laws,
 	/client/proc/rename_silicon,		//properly renames silicons,
 	/client/proc/manage_silicon_laws,	// Allows viewing and editing silicon laws. ,
@@ -88,7 +87,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/change_human_appearance_self,	// Allows the human-based mob itself change its basic appearance ,
 	/client/proc/change_security_level,
 	/client/proc/view_chemical_reaction_logs,
-	/client/proc/makePAI,
 	/datum/admins/proc/paralyze_mob,
 	/datum/admins/proc/create_admin_fax,
 	/client/proc/check_fax_history,
@@ -133,8 +131,6 @@ var/list/admin_verbs_fun = list(
 	/client/proc/show_tip,
 	/client/proc/fab_tip,
 	/client/proc/apply_sunstate,
-	/client/proc/cure_traumas,
-	/client/proc/add_traumas,
 	/datum/admins/proc/ccannoucment
 	)
 
@@ -266,7 +262,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/admin_cancel_shuttle,
 	/client/proc/cmd_admin_direct_narrate,
 	/client/proc/cmd_admin_world_narrate,
-	/client/proc/check_words,
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
 	/client/proc/play_server_sound,
@@ -315,8 +310,6 @@ var/list/admin_verbs_hideable = list(
 	/proc/possess,
 	/proc/release,
 	/client/proc/toggle_recursive_explosions,
-	/client/proc/cure_traumas,
-	/client/proc/add_traumas,
 	/datum/admins/proc/ccannoucment
 	)
 var/list/admin_verbs_mod = list(
@@ -337,7 +330,6 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/paralyze_mob,
 	/client/proc/toggleattacklogs,
 	/client/proc/cmd_admin_check_contents,
-	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
 	/client/proc/aooc,
 	/client/proc/print_logout_report
@@ -625,52 +617,6 @@ var/list/admin_verbs_cciaa = list(
 			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
 	message_admins("<span class='notice'>[ckey] creating an admin explosion at [epicenter.loc].</span>")
 	feedback_add_details("admin_verb","DB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/cure_traumas(mob/T as mob in mob_list)
-	set category = "Fun"
-	set name = "Cure Traumas"
-	set desc = "Cure the retardations of a given mob."
-
-	if(!istype(T,/mob/living/carbon/human))
-		to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
-		return
-
-	var/mob/living/carbon/human/C = T
-
-	C.cure_all_traumas(TRUE, CURE_ADMIN)
-	log_and_message_admins("<span class='notice'>cured [key_name(C)]'s traumas.</span>")
-	feedback_add_details("admin_verb","TB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!\
-
-/client/proc/add_traumas(mob/T as mob in mob_list)
-	set category = "Fun"
-	set name = "Add Traumas"
-	set desc = "Induces retardations on a given mob."
-
-	if(!istype(T,/mob/living/carbon/human))
-		to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
-		return
-
-	var/mob/living/carbon/human/C = T
-
-	var/list/traumas = subtypesof(/datum/brain_trauma)
-	var/result = input(usr, "Choose the brain trauma to apply","Traumatize") as null|anything in traumas
-	if(!result) return
-	var/permanent = alert("Do you want to make the trauma unhealable?", "Permanently Traumatize", "Yes", "No")
-	if(permanent == "Yes")
-		permanent = TRUE
-	else
-		permanent = FALSE
-	if(!usr)
-		return
-	if(!C)
-		to_chat(usr, "Mob doesn't exist anymore")
-		return
-
-	if(result)
-		C.gain_trauma(result, permanent)
-
-	log_and_message_admins("<span class='notice'>gave [key_name(C)] [result].</span>")
-	feedback_add_details("admin_verb","BT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/give_disease(mob/T as mob in mob_list) // -- Giacom
 	set category = "Fun"

@@ -351,13 +351,13 @@
 	species_restricted = list("exclude","Golem","Vaurca Breeder","Vaurca Warform")
 	drop_sound = 'sound/items/drop/metalboots.ogg'
 	gender = NEUTER
-	var/obj/item/weapon/gun/projectile/mounted
-	var/gun_type = /obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet
+	var/obj/item/gun/projectile/mounted
+	var/gun_type = /obj/item/gun/projectile/shotgun/doublebarrel/pellet
 
 /obj/item/clothing/gloves/ballistic/Initialize()
 	. = ..()
 	if(!mounted)
-		var/obj/item/weapon/gun/projectile/new_gun = new gun_type (src)
+		var/obj/item/gun/projectile/new_gun = new gun_type (src)
 		mounted = new_gun
 		mounted.name = "wrist-mounted [initial(new_gun.name)]"
 

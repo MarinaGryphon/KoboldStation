@@ -1,5 +1,5 @@
 /**********************Mineral deposits**************************/
-/turf/unsimulated/mineral
+/turf/simulated/mineral
 	name = "impassable rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
@@ -31,23 +31,24 @@ var/list/mineral_can_smooth_with = list(
 	smooth = SMOOTH_MORE | SMOOTH_BORDER | SMOOTH_NO_CLEAR_ICON
 	smoothing_hints = SMOOTHHINT_CUT_F | SMOOTHHINT_ONLY_MATCH_TURF | SMOOTHHINT_TARGETS_NOT_UNIQUE
 
-	oxygen = 0
-	nitrogen = 0
+	oxygen = MOLES_OXYGEN_NAARVAT
+	nitrogen = MOLES_NITROGEN_NAARVAT
+	carbon_dioxide = MOLES_CARBONDIOXIDE_NAARVAT
+	temperature = TEMPERATURE_NAARVAT
 	opacity = 1
 	density = 1
 	blocks_air = 1
-	temperature = T0C
-	var/mined_turf = /turf/unsimulated/floor/asteroid/ash/rocky
+	var/mined_turf = /turf/simulated/floor/planet/sand/rocky
 	var/ore/mineral
 	var/mined_ore = 0
-	var/last_act = 0
+	var/tmp/last_act = 0
 	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
 
-	var/datum/geosample/geologic_data
+	var/tmp/datum/geosample/geologic_data
 	var/excavation_level = 0
 	var/list/finds
 	var/archaeo_overlay = ""
-	var/obj/item/weapon/last_find
+	var/obj/item/last_find
 	var/datum/artifact_find/artifact_find
 
 	var/obj/effect/mineral/my_mineral
@@ -146,19 +147,19 @@ var/list/mineral_can_smooth_with = list(
 	. = ..()
 	if(istype(AM,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
-		if((istype(H.l_hand,/obj/item/weapon/pickaxe)) && (!H.hand))
-			var/obj/item/weapon/pickaxe/P = H.l_hand
+		if((istype(H.l_hand,/obj/item/pickaxe)) && (!H.hand))
+			var/obj/item/pickaxe/P = H.l_hand
 			if(P.autodrill)
 				attackby(H.l_hand,H)
 
-		else if((istype(H.r_hand,/obj/item/weapon/pickaxe)) && H.hand)
-			var/obj/item/weapon/pickaxe/P = H.r_hand
+		else if((istype(H.r_hand,/obj/item/pickaxe)) && H.hand)
+			var/obj/item/pickaxe/P = H.r_hand
 			if(P.autodrill)
 				attackby(H.r_hand,H)
 
 	else if(istype(AM,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/weapon/pickaxe))
+		if(istype(R.module_active,/obj/item/pickaxe))
 			attackby(R.module_active,R)
 
 	else if(istype(AM,/obj/mecha))
@@ -267,12 +268,12 @@ var/list/mineral_can_smooth_with = list(
 			to_chat(user, "<span class='notice'>\icon[P] [src] has been excavated to a depth of [2*excavation_level]cm.</span>")
 		return
 
-	if (istype(W, /obj/item/weapon/pickaxe) && W.simulated)	// Pickaxe offhand is not simulated.
+	if (istype(W, /obj/item/pickaxe) && W.simulated)	// Pickaxe offhand is not simulated.
 		var/turf/T = user.loc
 		if (!( istype(T, /turf) ))
 			return
 
-		var/obj/item/weapon/pickaxe/P = W
+		var/obj/item/pickaxe/P = W
 		if(last_act + P.digspeed > world.time)//prevents message spam
 			return
 
@@ -310,11 +311,11 @@ var/list/mineral_can_smooth_with = list(
 			P.drilling = 0
 
 			if(prob(50))
-				var/obj/item/weapon/ore/O
+				var/obj/item/ore/O
 				if(prob(25) && (mineral) && (P.excavation_amount >= 30))
 					O = new mineral.ore (src)
 				else
-					O = new /obj/item/weapon/ore(src)
+					O = new /obj/item/ore(src)
 				if(istype(O))
 					geologic_data.UpdateNearbyArtifactInfo(src)
 					O.geologic_data = geologic_data
@@ -368,7 +369,7 @@ var/list/mineral_can_smooth_with = list(
 			to_chat(user, "<span class='notice'> You stop [P.drill_verb] [src].</span>")
 			P.drilling = 0
 
-	if (istype(W, /obj/item/weapon/autochisel))
+	if (istype(W, /obj/item/autochisel))
 
 		if(last_act + 80 > world.time)//prevents message spam
 			return
@@ -395,7 +396,7 @@ var/list/mineral_can_smooth_with = list(
 		return
 
 	clear_ore_effects()
-	var/obj/item/weapon/ore/O = new mineral.ore (src)
+	var/obj/item/ore/O = new mineral.ore (src)
 	if(istype(O))
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		O.geologic_data = geologic_data
@@ -440,15 +441,15 @@ var/list/mineral_can_smooth_with = list(
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
 	//with skill and luck, players can cleanly extract finds
 	//otherwise, they come out inside a chunk of rock
-	var/obj/item/weapon/X
+	var/obj/item/X
 	if(prob_clean)
-		X = new /obj/item/weapon/archaeological_find(src, new_item_type = F.find_type)
+		X = new /obj/item/archaeological_find(src, new_item_type = F.find_type)
 	else
-		X = new /obj/item/weapon/ore/strangerock(src, inside_item_type = F.find_type)
+		X = new /obj/item/ore/strangerock(src, inside_item_type = F.find_type)
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		X:geologic_data = geologic_data
 
-	//some find types delete the /obj/item/weapon/archaeological_find and replace it with something else, this handles when that happens
+	//some find types delete the /obj/item/archaeological_find and replace it with something else, this handles when that happens
 	//yuck
 	var/display_name = "something"
 	if(!X)
@@ -493,12 +494,12 @@ var/list/mineral_can_smooth_with = list(
 			if(5)
 				var/quantity = rand(1,3)
 				for(var/i=0, i<quantity, i++)
-					new /obj/item/weapon/material/shard(src)
+					new /obj/item/material/shard(src)
 
 			if(6)
 				var/quantity = rand(1,3)
 				for(var/i=0, i<quantity, i++)
-					new /obj/item/weapon/material/shard/phoron(src)
+					new /obj/item/material/shard/phoron(src)
 
 			if(7)
 				var/obj/item/stack/material/uranium/R = new(src)
@@ -692,10 +693,10 @@ var/list/asteroid_floor_smooth = list(
 			return
 
 	var/static/list/usable_tools = typecacheof(list(
-		/obj/item/weapon/shovel,
-		/obj/item/weapon/pickaxe/diamonddrill,
-		/obj/item/weapon/pickaxe/drill,
-		/obj/item/weapon/pickaxe/borgdrill
+		/obj/item/shovel,
+		/obj/item/pickaxe/diamonddrill,
+		/obj/item/pickaxe/drill,
+		/obj/item/pickaxe/borgdrill
 	))
 
 	if(is_type_in_typecache(W, usable_tools))
@@ -774,16 +775,16 @@ var/list/asteroid_floor_smooth = list(
 
 		gets_dug(user)
 
-	else if(istype(W,/obj/item/weapon/storage/bag/ore))
-		var/obj/item/weapon/storage/bag/ore/S = W
+	else if(istype(W,/obj/item/storage/bag/ore))
+		var/obj/item/storage/bag/ore/S = W
 		if(S.collection_mode)
-			for(var/obj/item/weapon/ore/O in contents)
+			for(var/obj/item/ore/O in contents)
 				O.attackby(W,user)
 				return
-	else if(istype(W,/obj/item/weapon/storage/bag/fossils))
-		var/obj/item/weapon/storage/bag/fossils/S = W
+	else if(istype(W,/obj/item/storage/bag/fossils))
+		var/obj/item/storage/bag/fossils/S = W
 		if(S.collection_mode)
-			for(var/obj/item/weapon/fossil/F in contents)
+			for(var/obj/item/fossil/F in contents)
 				F.attackby(W,user)
 				return
 
@@ -796,32 +797,32 @@ var/list/asteroid_floor_smooth = list(
 	add_overlay("asteroid_dug", TRUE)
 
 	if(prob(75))
-		new /obj/item/weapon/ore/glass(src)
+		new /obj/item/ore/glass(src)
 
 	if(prob(25) && has_resources)
 		var/list/ore = list()
 		for(var/metal in resources)
 			switch(metal)
 				if("silicates")
-					ore += /obj/item/weapon/ore/glass
+					ore += /obj/item/ore/glass
 				if("carbonaceous rock")
-					ore += /obj/item/weapon/ore/coal
+					ore += /obj/item/ore/coal
 				if("iron")
-					ore += /obj/item/weapon/ore/iron
+					ore += /obj/item/ore/iron
 				if("gold")
-					ore += /obj/item/weapon/ore/gold
+					ore += /obj/item/ore/gold
 				if("silver")
-					ore += /obj/item/weapon/ore/silver
+					ore += /obj/item/ore/silver
 				if("diamond")
-					ore += /obj/item/weapon/ore/diamond
+					ore += /obj/item/ore/diamond
 				if("uranium")
-					ore += /obj/item/weapon/ore/uranium
+					ore += /obj/item/ore/uranium
 				if("phoron")
-					ore += /obj/item/weapon/ore/phoron
+					ore += /obj/item/ore/phoron
 				if("osmium")
-					ore += /obj/item/weapon/ore/osmium
+					ore += /obj/item/ore/osmium
 				if("hydrogen")
-					ore += /obj/item/weapon/ore/hydrogen
+					ore += /obj/item/ore/hydrogen
 				else
 					if(prob(25))
 						switch(rand(1,5))
@@ -834,9 +835,9 @@ var/list/asteroid_floor_smooth = list(
 							if(4)
 								ore += /obj/random/loot
 							if(5)
-								ore += /obj/item/weapon/ore/glass
+								ore += /obj/item/ore/glass
 					else
-						ore += /obj/item/weapon/ore/glass
+						ore += /obj/item/ore/glass
 		if (ore.len)
 			var/ore_path = pick(ore)
 			if(ore)
@@ -861,11 +862,11 @@ var/list/asteroid_floor_smooth = list(
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
 		if(R.module)
-			if(istype(R.module_state_1,/obj/item/weapon/storage/bag/ore))
+			if(istype(R.module_state_1,/obj/item/storage/bag/ore))
 				attackby(R.module_state_1,R)
-			else if(istype(R.module_state_2,/obj/item/weapon/storage/bag/ore))
+			else if(istype(R.module_state_2,/obj/item/storage/bag/ore))
 				attackby(R.module_state_2,R)
-			else if(istype(R.module_state_3,/obj/item/weapon/storage/bag/ore))
+			else if(istype(R.module_state_3,/obj/item/storage/bag/ore))
 				attackby(R.module_state_3,R)
 			else
 				return

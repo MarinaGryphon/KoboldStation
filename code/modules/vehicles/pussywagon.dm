@@ -10,7 +10,7 @@
 
 	var/cart_icon = "janicart"
 
-/obj/item/weapon/key/janicart
+/obj/item/key/janicart
 	name = "key"
 	desc = "A keyring with a small steel key, and a pink fob reading \"Pussy Wagon\"."
 	icon = 'icons/obj/vehicles.dmi'
@@ -19,13 +19,13 @@
 
 /obj/vehicle/train/cargo/engine/pussywagon/Initialize()
 	. = ..()
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new /obj/item/cell/high(src)
 	key = null
 	update_icon()
 	turn_off()	//so engine verbs are correctly set
 
 /obj/vehicle/train/cargo/engine/pussywagon/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/key/janicart))
+	if(istype(W, /obj/item/key/janicart))
 		if(!key)
 			user.drop_from_inventory(W,src)
 			key = W
@@ -126,7 +126,7 @@
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "jantrolley"
 
-	var/obj/item/weapon/reagent_containers/bucket
+	var/obj/item/reagent_containers/bucket
 	var/list/hoovered = list()
 	var/vacuum_capacity = 125
 	var/mopping = 0
@@ -134,7 +134,7 @@
 
 
 /obj/vehicle/train/cargo/trolley/pussywagon/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/reagent_containers) && open)
+	if(istype(W, /obj/item/reagent_containers) && open)
 		if(!bucket)
 			user.drop_from_inventory(W,src)
 			bucket = W

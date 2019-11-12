@@ -9,6 +9,9 @@
 	S["age"]        >> pref.age
 	S["species"]    >> pref.species
 	S["spawnpoint"] >> pref.spawnpoint
+	S["xpos"]       >> pref.xpos
+	S["ypos"]       >> pref.ypos
+	S["zpos"]       >> pref.zpos
 	S["OOC_Notes"]  >> pref.metadata
 
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
@@ -17,6 +20,9 @@
 	S["age"]        << pref.age
 	S["species"]    << pref.species
 	S["spawnpoint"] << pref.spawnpoint
+	S["xpos"]       << pref.xpos
+	S["ypos"]       << pref.ypos
+	S["zpos"]       << pref.zpos
 	S["OOC_Notes"]  << pref.metadata
 
 /datum/category_item/player_setup_item/general/basic/gather_load_query()
@@ -45,6 +51,9 @@
 			"age",
 			"metadata",
 			"spawnpoint",
+			"xpos",
+			"ypos",
+			"zpos",
 			"species",
 			"id" = 1,
 			"ckey" = 1
@@ -58,6 +67,9 @@
 		"age" = pref.age,
 		"metadata" = pref.metadata,
 		"spawnpoint" = pref.spawnpoint,
+		"xpos" = pref.xpos,
+		"ypos" = pref.ypos,
+		"zpos" = pref.zpos,
 		"species" = pref.species,
 		"id" = pref.current_character,
 		"ckey" = PREF_CLIENT_CKEY
@@ -84,7 +96,7 @@
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 	if(!pref.species || !(pref.species in playable_species))
-		pref.species = "Human"
+		pref.species = "Kobold"
 
 	pref.age           = sanitize_integer(text2num(pref.age), pref.getMinAge(), pref.getMaxAge(), initial(pref.age))
 	pref.gender        = sanitize_inlist(pref.gender, valid_player_genders, pick(valid_player_genders))

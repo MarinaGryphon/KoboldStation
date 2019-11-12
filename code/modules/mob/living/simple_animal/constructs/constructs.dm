@@ -43,23 +43,17 @@
 	var/health_prefix = ""
 	appearance_flags = NO_CLIENT_COLOR
 
-
-/mob/living/simple_animal/construct/cultify()
-	return
-
 /mob/living/simple_animal/construct/Initialize()
 	. = ..()
 	name = text("[initial(name)] ([rand(1, 1000)])")
 	real_name = name
-	add_language("Cult")
-	add_language("Occult")
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
 	updateicon()
 	add_glow()
 
 /mob/living/simple_animal/construct/death()
-	new /obj/item/weapon/ectoplasm (src.loc)
+	new /obj/item/ectoplasm (src.loc)
 	..(null,"collapses in a shattered heap.")
 	ghostize()
 	qdel(src)
@@ -95,14 +89,6 @@
 
 	to_chat(user, msg)
 
-/mob/living/simple_animal/construct/UnarmedAttack(var/atom/A, var/proximity)
-	if(istype(A, /obj/effect/rune))
-		var/obj/effect/rune/R = A
-		do_attack_animation(R)
-		R.attack_hand(src)
-	else
-		..()
-
 
 /////////////////Juggernaut///////////////
 
@@ -129,7 +115,7 @@
 	attack_sound = 'sound/weapons/heavysmash.ogg'
 	status_flags = 0
 	resistance = 10
-	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	construct_spells = list(/spell/aoe_turf/conjure/forcewall)
 
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
@@ -204,11 +190,8 @@
 	environment_smash = 1
 	attack_sound = 'sound/weapons/rapidslice.ogg'
 	can_repair = 1
-	construct_spells = list(/spell/aoe_turf/conjure/construct/lesser,
-							/spell/aoe_turf/conjure/wall,
-							/spell/aoe_turf/conjure/floor,
-							/spell/aoe_turf/conjure/soulstone,
-							/spell/aoe_turf/conjure/pylon
+	construct_spells = list(/spell/aoe_turf/conjure/construct,
+							/spell/aoe_turf/conjure/soulstone
 							)
 
 
@@ -237,7 +220,7 @@
 	resistance = 10
 	var/energy = 0
 	var/max_energy = 1000
-	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	construct_spells = list(/spell/aoe_turf/conjure/forcewall)
 
 ////////////////////////Harvester////////////////////////////////
 
@@ -262,15 +245,10 @@
 	attack_sound = 'sound/weapons/pierce.ogg'
 	can_repair = 1
 	construct_spells = list(
-			/spell/targeted/harvest,
-			/spell/aoe_turf/knock/harvester,
-			/spell/rune_write,
-			/spell/aoe_turf/conjure/construct/lesser,
-			/spell/aoe_turf/conjure/wall,
-			/spell/aoe_turf/conjure/floor,
+			/spell/aoe_turf/knock,
+			/spell/aoe_turf/conjure/construct,
 			/spell/aoe_turf/conjure/soulstone,
-			/spell/aoe_turf/conjure/pylon,
-			/spell/aoe_turf/conjure/forcewall/lesser
+			/spell/aoe_turf/conjure/forcewall
 		)
 	//Harvesters are endgame stuff, no harm giving them construct spells
 

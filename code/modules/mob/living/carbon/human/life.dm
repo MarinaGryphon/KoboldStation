@@ -61,8 +61,6 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
-		//Updates the number of stored chemicals for powers
-		handle_changeling()
 
 		//Organs and blood
 		handle_organs()
@@ -79,13 +77,8 @@
 
 		handle_heartbeat()
 
-		handle_brain_damage()
-
 		//Handles regenerating stamina if we have sufficient air and no oxyloss
 		handle_stamina()
-
-		if (is_diona())
-			diona_handle_light(DS)
 
 		handle_shared_dreaming()
 
@@ -184,7 +177,7 @@
 	else
 		//blindness
 		if(!(sdisabilities & BLIND))
-			if(!src.is_diona() && equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
+			if(equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
 				eye_blurry = max(eye_blurry-2, 0)
 			else
 				eye_blurry = max(eye_blurry-1, 0)
@@ -296,48 +289,43 @@
 	total_radiation = Clamp(total_radiation,0,100)
 
 	if (total_radiation)
-		//var/obj/item/organ/diona/nutrients/rad_organ = locate() in internal_organs
-		if(src.is_diona())
-			diona_handle_regeneration(get_dionastats())
-			return
-		else
-			var/damage = 0
+		var/damage = 0
+		total_radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+		if(prob(25))
+			damage = 1
+
+		if (total_radiation > 50)
+			damage = 1
 			total_radiation -= 1 * RADIATION_SPEED_COEFFICIENT
-			if(prob(25))
-				damage = 1
+			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
+				src.apply_radiation(-5 * RADIATION_SPEED_COEFFICIENT)
+				to_chat(src, "<span class='warning'>You feel weak.</span>")
+				Weaken(3)
+				if(!lying)
+					emote("collapse")
+			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.name == "Human") //apes go bald
+				if((h_style != "Bald" || f_style != "Shaved" ))
+					to_chat(src, "<span class='warning'>Your hair falls out.</span>")
+					h_style = "Bald"
+					f_style = "Shaved"
+					update_hair()
 
-			if (total_radiation > 50)
-				damage = 1
-				total_radiation -= 1 * RADIATION_SPEED_COEFFICIENT
-				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
-					src.apply_radiation(-5 * RADIATION_SPEED_COEFFICIENT)
-					to_chat(src, "<span class='warning'>You feel weak.</span>")
-					Weaken(3)
-					if(!lying)
-						emote("collapse")
-				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.name == "Human") //apes go bald
-					if((h_style != "Bald" || f_style != "Shaved" ))
-						to_chat(src, "<span class='warning'>Your hair falls out.</span>")
-						h_style = "Bald"
-						f_style = "Shaved"
-						update_hair()
+		if (total_radiation > 75)
+			src.apply_radiation(-1 * RADIATION_SPEED_COEFFICIENT)
+			damage = 3
+			if(prob(5))
+				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
+			if(prob(1))
+				to_chat(src, "<span class='warning'>You feel strange!</span>")
+				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
+				emote("gasp")
 
-			if (total_radiation > 75)
-				src.apply_radiation(-1 * RADIATION_SPEED_COEFFICIENT)
-				damage = 3
-				if(prob(5))
-					take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
-				if(prob(1))
-					to_chat(src, "<span class='warning'>You feel strange!</span>")
-					adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
-					emote("gasp")
-
-			if(damage)
-				adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
-				updatehealth()
-				if(organs.len)
-					var/obj/item/organ/external/O = pick(organs)
-					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
+		if(damage)
+			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+			updatehealth()
+			if(organs.len)
+				var/obj/item/organ/external/O = pick(organs)
+				if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
 	/** breathing **/
 
@@ -382,7 +370,7 @@
 	if(breath)
 		//exposure to extreme pressures can rupture lungs
 		var/check_pressure = breath.return_pressure()
-		if(check_pressure < ONE_ATMOSPHERE / 5 || check_pressure > ONE_ATMOSPHERE * 5)
+		if(check_pressure < (species?.hazard_low_pressure || HAZARD_LOW_PRESSURE) || check_pressure > (species?.hazard_high_pressure || HAZARD_HIGH_PRESSURE))
 			if(!is_lung_ruptured() && prob(5))
 				rupture_lung()
 
@@ -627,9 +615,6 @@
 	var/pressure = environment.return_pressure()
 	var/adjusted_pressure = calculate_affecting_pressure(pressure)
 
-	if (consume_nutrition_from_air)
-		environment.remove(diona_handle_air(get_dionastats(), pressure))
-
 	//Check for contaminants before anything else because we don't want to skip it.
 	for(var/g in environment.gas)
 		if(gas_data.flags[g] & XGM_GAS_CONTAMINANT && environment.gas[g] > gas_data.overlay_limit[g] + 1)
@@ -692,11 +677,6 @@
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
-		if (is_diona() == DIONA_WORKER)
-			diona_contained_cold_damage()
-
-		if(status_flags & GODMODE)	return 1	//godmode
-
 		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 			if(bodytemperature > species.cold_level_2)
 				take_overall_damage(burn=COLD_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
@@ -730,9 +710,6 @@
 			pressure_alert = -2
 		else
 			pressure_alert = -1
-
-	if (is_diona())
-		diona_handle_temperature(DS)
 
 	return
 
@@ -915,7 +892,7 @@
 
 		var/total_phoronloss = 0
 		for(var/obj/item/I in src)
-			if(I.contaminated && !(isvaurca(src) && src.species.has_organ["filtration bit"]))
+			if(I.contaminated)
 				total_phoronloss += vsc.plc.CONTAMINATION_LOSS
 		if(!(status_flags & GODMODE)) adjustToxLoss(total_phoronloss)
 
@@ -1323,10 +1300,6 @@
 		var/turf/T = loc
 		if (T.get_lumcount() < 0.01)	// give a little bit of tolerance for near-dark areas.
 			playsound_simple(null, pick(scarySounds), 50, TRUE)
-
-/mob/living/carbon/human/proc/handle_changeling()
-	if(mind && mind.changeling)
-		mind.changeling.regenerate()
 
 /mob/living/carbon/human/handle_shock()
 	..()
@@ -1748,16 +1721,6 @@
 	else if (last_oxy_overlay)
 		damageoverlay.cut_overlay(last_oxy_overlay)
 		last_oxy_overlay = null
-
-////////////////
-//BRAIN DAMAGE//
-////////////////
-
-/mob/living/carbon/human/proc/handle_brain_damage()
-	for(var/T in get_traumas())
-		var/datum/brain_trauma/BT = T
-		if(!BT.suppressed)
-			BT.on_life()
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

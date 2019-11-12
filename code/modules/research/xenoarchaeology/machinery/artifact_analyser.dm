@@ -73,12 +73,12 @@
 			results = get_scan_info(scanned_object)
 
 		src.visible_message("<b>[name]</b> states, \"Scanning complete.\"")
-		var/obj/item/weapon/paper/P = new(src.loc)
+		var/obj/item/paper/P = new(src.loc)
 		var/pname = "[src] report #[++report_num]"
 		var/info = "<b>[src] analysis report #[report_num]</b><br>"
 		info += "<br>"
 		info += "\icon[scanned_object] [results]"
-		P.stamped = list(/obj/item/weapon/stamp)
+		P.stamped = list(/obj/item/stamp)
 		P.overlays = list("paper_stamped")
 		P.set_content_unsafe(pname, info)
 		print(P)
@@ -145,8 +145,6 @@
 			rock/plastcrete composite."
 		if(/obj/machinery/giga_drill)
 			return "Automated mining drill - structure composed of titanium-carbide alloy, with tip and drill lines edged in an alloy of diamond and phoron."
-		if(/obj/structure/cult/pylon)
-			return "Tribal pylon - Item resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
 		if(/obj/machinery/replicator)
 			return "Automated construction unit - Item appears to be able to synthesize synthetic items, some with simple internal circuitry. Method unknown, \
 			phasing suggested?"

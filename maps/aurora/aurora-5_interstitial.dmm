@@ -4258,7 +4258,6 @@
 /area/security/training)
 "hJ" = (
 /obj/structure/table/steel,
-/obj/structure/metronome,
 /obj/machinery/light/small/red{
 	tag = "icon-bulb1 (NORTH)";
 	icon_state = "bulb1";
@@ -4790,7 +4789,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/selfdestruct)
 "iQ" = (
-/obj/machinery/nuclearbomb/station,
 /obj/effect/decal/warning_stripes,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
@@ -5479,21 +5477,8 @@
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/white,
 /area/medical/psych)
-"kb" = (
-/obj/machinery/chakraconsole{
-	tag = "icon-body_scannerconsole (EAST)";
-	icon_state = "body_scannerconsole";
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/green/diagonal,
-/turf/simulated/floor/tiled/white,
-/area/medical/psych)
 "kc" = (
 /obj/effect/floor_decal/industrial/warning/full,
-/obj/machinery/chakrapod{
-	dir = 8
-	},
 /turf/simulated/floor/plating,
 /area/medical/psych)
 "kd" = (
@@ -6115,7 +6100,6 @@
 /area/medical/psych)
 "ld" = (
 /obj/structure/table/wood,
-/obj/item/weapon/mesmetron,
 /obj/machinery/camera/network/medbay{
 	c_tag = "Medical - Psychiatry Closet"
 	},
@@ -54300,7 +54284,7 @@ aa
 aa
 hZ
 jV
-kb
+kn
 kn
 kz
 hZ

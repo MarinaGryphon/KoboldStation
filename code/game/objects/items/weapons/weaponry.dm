@@ -88,50 +88,12 @@
 		return
 
 	if (M.stat !=2 && ishuman(M) && user.a_intent != I_HURT)
-		var/mob/living/K = M
-		if(cult && (K.mind in cult.current_antagonists) && prob(33))
-			if(do_after(user, 15))
-				K.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [K]'s head, [K] looks captivated by it.</span>", "<span class='warning'>[user] wave's the [src] over your head. <b>You see a foreign light, asking you to follow it. Its presence burns and blinds.</b></span>")
-				var/choice = alert(K,"Do you want to give up your goal?","Become cleansed","Resist","Give in")
-				switch(choice)
-					if("Resist")
-						K.visible_message("<span class='warning'>The gaze in [K]'s eyes remains determined.</span>", "<span class='notice'>You turn away from the light, remaining true to the Geometer!</span>")
-						K.say("*scream")
-						K.take_overall_damage(5, 15)
-					if("Give in")
-						K.visible_message("<span class='notice'>[K]'s eyes become clearer, the evil gone, but not without leaving scars.</span>")
-						K.take_overall_damage(15, 30)
-						cult.remove_antagonist(K.mind)
-			else
-				user.visible_message("<span class='warning'>[user]'s concentration is broken!</span>", "<span class='warning'>Your concentration is broken! You and your target need to stay uninterrupted for longer!</span>")
-				return
-		else if(prob(10))
-			to_chat(user, "<span class='danger'>The rod slips in your hand.</span>")
-			..()
-		else
-			to_chat(user, "<span class='danger'>The rod appears to do nothing.</span>")
-			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(prob(15))
-					H.cure_all_traumas(cure_type = CURE_SOLITUDE)
-				else if(prob(10))
-					H.cure_all_traumas(cure_type = CURE_CRYSTAL)
-			return
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Is being deconverted with the [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attempt to deconvert [M.name] ([M.ckey])</font>")
-
-		msg_admin_attack("[key_name_admin(user)] attempted to deconvert [key_name_admin(M)] with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)",ckey=key_name(user),ckey_target=key_name(M))
+		to_chat(user, "<span class='danger'>The rod appears to do nothing.</span>")
+		M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
+		return
 
 	else
 		return ..()
-
-/obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity)
-		return
-	if (istype(A, /turf/simulated/floor))
-		to_chat(user, "<span class='notice'>You hit the floor with the [src].</span>")
-		call(/obj/effect/rune/proc/revealrunes)(src)
 
 /obj/item/weapon/reagent_containers/spray/aspergillum/AltClick()
 	return

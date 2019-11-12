@@ -8,10 +8,6 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
-/datum/gear/uniform/offworlder/dress
-	display_name = "CR dress"
-	path = /obj/item/clothing/under/dress/offworlder
-
 /datum/gear/uniform/offworlder/skirt
 	display_name = "CR skirt"
 	path = /obj/item/clothing/under/skirt/offworlder

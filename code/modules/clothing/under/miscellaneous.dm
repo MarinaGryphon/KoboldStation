@@ -449,12 +449,6 @@
 /obj/item/clothing/under/dress/blacktango/alt
 	icon_state = "black_tango_alt"
 
-/obj/item/clothing/under/dress/offworlder
-	name = "\improper CR dress"
-	desc = "A very tight form-fitting padded suit that looks extremely comfortable to wear, made of strong woven spider-silk. This variant seems to be tailored to resemble a dress, revealing much more skin."
-	icon_state = "crdress"
-	worn_state = "crdress"
-
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
 	desc = "A captain's formal-wear, for special occasions."
@@ -705,10 +699,13 @@
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/under/offworlder
-	name = "\improper CR suit"
-	desc = "A very tight form-fitting padded suit that looks extremely comfortable to wear."
+	name = "\improper environmental suit"
+	desc = "A tight, thickly padded suit meant to assist with maintaining body temperature and ensure hydration in hostile environments. Tough, and allows for relatively normal mobility, albeit it tends to chafe during prolonged use."
 	icon_state = "crsuit"
 	worn_state = "crsuit"
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"

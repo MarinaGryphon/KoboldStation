@@ -317,7 +317,6 @@ var/global/list/additional_antag_types = list()
 		sleep(10)
 		for (var/datum/antagonist/antag in antag_templates)
 			sleep(10)
-			antag.check_victory()
 			antag.print_player_summary()
 			// Avoid the longest loop if we aren't actively using the bot.
 			if (discord_bot.active)
@@ -709,20 +708,6 @@ proc/get_nt_opposed()
 /proc/show_generic_antag_text(var/datum/mind/player)
 	if(player.current)
 		to_chat(player.current, "You are an antagonist! <font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</b>")
-
-/proc/show_objectives(var/datum/mind/player)
-
-	if(!player || !player.current) return
-
-	if(config.objectives_disabled)
-		show_generic_antag_text(player)
-		return
-
-	var/obj_count = 1
-	to_chat(player.current, "<span class='notice'>Your current objectives:</span>")
-	for(var/datum/objective/objective in player.objectives)
-		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
-		obj_count++
 
 /mob/verb/check_round_info()
 	set name = "Check Round Info"

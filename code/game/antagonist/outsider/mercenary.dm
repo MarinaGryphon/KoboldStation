@@ -23,30 +23,3 @@ var/datum/antagonist/mercenary/mercs
 /datum/antagonist/mercenary/New()
 	..()
 	mercs = src
-
-/datum/antagonist/mercenary/create_global_objectives()
-	if(!..())
-		return FALSE
-	global_objectives = list()
-	global_objectives |= new /datum/objective/nuclear
-	return TRUE
-
-/datum/antagonist/mercenary/equip(var/mob/living/carbon/human/player)
-	if(!..())
-		return FALSE
-
-	for (var/obj/item/I in player)
-		if (istype(I, /obj/item/weapon/implant))
-			continue
-		player.drop_from_inventory(I)
-		if(I.loc != player)
-			qdel(I)
-
-	player.preEquipOutfit(/datum/outfit/admin/syndicate/mercenary, FALSE)
-	player.equipOutfit(/datum/outfit/admin/syndicate/mercenary, FALSE)
-	player.force_update_limbs()
-	player.update_eyes()
-	player.regenerate_icons()
-
-	give_codewords(player)
-	return TRUE

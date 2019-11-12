@@ -37,7 +37,7 @@ var/global/list/all_species = list()
 var/global/list/all_languages = list()
 var/global/list/language_keys = list()					// Table of say codes for all languages
 var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
-var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
+var/global/list/playable_species = list("Kobold")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
 // Posters
 var/global/list/poster_designs = list()
@@ -92,7 +92,6 @@ var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg, /datum/job/
 // Visual nets
 var/list/datum/visualnet/visual_nets = list()
 var/datum/visualnet/camera/cameranet = new()
-var/datum/visualnet/cult/cultnet = new()
 
 // Runes
 var/global/list/rune_list = new()

@@ -28,7 +28,7 @@
 
 
 	var/frequency = 0
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 /obj/machinery/atmospherics/trinary/filter/proc/set_frequency(new_frequency)
 	SSradio.remove_object(src, frequency)
@@ -128,7 +128,7 @@
 	set_frequency(frequency)
 	..()
 
-/obj/machinery/atmospherics/trinary/filter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/trinary/filter/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.iswrench())
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()

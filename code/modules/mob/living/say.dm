@@ -204,8 +204,6 @@ proc/get_radio_key_from_channel(var/channel)
 	message = trim_left(message)
 	var/message_range
 	if(!(speaking && (speaking.flags & NO_STUTTER)))
-		message = handle_autohiss(message, speaking)
-
 		var/list/handle_s = handle_speech_problems(message, verb, message_mode)
 		message = handle_s[1]
 		verb = handle_s[2]
@@ -268,7 +266,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 
 	var/list/hear_clients = list()
-	for(var/m in listening)		
+	for(var/m in listening)
 		var/mob/M = m
 		M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 		if (M.client)

@@ -54,12 +54,8 @@ var/global/universe_has_ended = 0
 	APCSet()
 	OverlayAndAmbientSet()
 
-	// Disable Nar-Sie.
-	cult.allow_narsie = 0
-
 	PlayerSet()
 
-	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
 	var/time = rand(30, 60)
 	log_debug("universal_state/cascade: Announcing to world in [time] seconds.")
 	log_debug("universal_state/cascade: Ending universe in [(time SECONDS + 5 MINUTES)/10] seconds.")

@@ -227,11 +227,6 @@ var/list/asset_datums = list()
 
 /datum/asset/simple/faction_icons
 	assets = list(
-		"faction_EPMC.png" = 'icons/misc/factions/ECFlogo.png',
-		"faction_Zeng.png" = 'icons/misc/factions/ZhenHulogo.png',
-		"faction_Necro.png" = 'icons/misc/factions/NecroInclogo.png',
-		"faction_NT.png" = 'icons/misc/factions/NanoTrasenlogo.png',
-		"faction_Idris.png" = 'icons/misc/factions/Idrislogo.png',
-		"faction_Hepht.png" = 'icons/misc/factions/Hephaestuslogo.png',
+		"faction_UKS.png" = 'icons/misc/factions/UKSlogo.png',
 		"faction_unaffiliated.png" = 'icons/misc/factions/Unaffiliatedlogo.png'
 	)

@@ -11,19 +11,19 @@
 	var/max_power = 500000
 	var/thermal_efficiency = 0.65
 
-	var/obj/machinery/atmospherics/binary/circulator/circ1
-	var/obj/machinery/atmospherics/binary/circulator/circ2
+	var/tmp/obj/machinery/atmospherics/binary/circulator/circ1
+	var/tmp/obj/machinery/atmospherics/binary/circulator/circ2
 
-	var/last_circ1_gen = 0
-	var/last_circ2_gen = 0
-	var/last_thermal_gen = 0
+	var/tmp/last_circ1_gen = 0
+	var/tmp/last_circ2_gen = 0
+	var/tmp/last_thermal_gen = 0
 	var/stored_energy = 0
-	var/lastgen1 = 0
-	var/lastgen2 = 0
+	var/tmp/lastgen1 = 0
+	var/tmp/lastgen2 = 0
 	var/effective_gen = 0
-	var/lastgenlev = 0
+	var/tmp/lastgenlev = 0
 
-	var/datum/effect_system/sparks/spark_system
+	var/tmp/datum/effect_system/sparks/spark_system
 
 /obj/machinery/power/generator/Initialize()
 	. = ..()

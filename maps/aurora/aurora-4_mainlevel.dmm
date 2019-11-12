@@ -11462,7 +11462,6 @@
 	name = "Station Intercom (General)";
 	pixel_x = 27
 	},
-/obj/item/device/paicard,
 /obj/item/weapon/aicard,
 /obj/machinery/light{
 	dir = 4;
@@ -18603,8 +18602,6 @@
 /area/crew_quarters/captain)
 "aHg" = (
 /obj/structure/table/wood,
-/obj/item/weapon/pinpointer,
-/obj/item/weapon/disk/nuclear,
 /obj/machinery/newscaster/security_unit{
 	pixel_x = 0;
 	pixel_y = -32
@@ -47260,9 +47257,6 @@
 /obj/item/device/taperecorder{
 	pixel_x = -3
 	},
-/obj/item/device/paicard{
-	pixel_x = 4
-	},
 /obj/item/device/radio/intercom{
 	frequency = 1459;
 	name = "Station Intercom (General)";
@@ -51778,7 +51772,6 @@
 /area/library)
 "bLm" = (
 /obj/item/device/radio/headset/headset_service,
-/obj/structure/cult/tome,
 /obj/item/clothing/under/librarian,
 /turf/simulated/floor/tiled/dark,
 /area/library)
@@ -54196,7 +54189,6 @@
 /obj/machinery/newscaster{
 	pixel_y = -30
 	},
-/obj/machinery/vending/battlemonsters,
 /turf/simulated/floor/wood,
 /area/library)
 "bQR" = (
@@ -55431,7 +55423,6 @@
 	icon_state = "intact-supply";
 	dir = 6
 	},
-/mob/living/carbon/human/monkey/punpun,
 /turf/simulated/floor/wood,
 /area/crew_quarters/bar)
 "bTX" = (
@@ -65050,10 +65041,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/maintenance/medbay)
-"hPs" = (
-/obj/structure/closet/crate/autakh,
-/turf/simulated/floor/tiled/dark,
-/area/assembly/chargebay)
 "hRF" = (
 /obj/structure/closet,
 /obj/random/loot,
@@ -94881,7 +94868,7 @@ fDF
 bfX
 fBg
 biD
-hPs
+vvP
 biD
 bmr
 bnP

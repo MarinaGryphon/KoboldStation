@@ -48,7 +48,6 @@ var/list/ai_verbs_default = list(
 	anchored = 1 // -- TLE
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
-	//shouldnt_see - set in New()
 	var/list/network = list("Station")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
@@ -65,25 +64,6 @@ var/list/ai_verbs_default = list(
 	var/datum/announcement/priority/announcement
 	var/obj/machinery/ai_powersupply/psupply = null // Backwards reference to AI's powersupply object.
 	var/hologram_follow = 1 //This is used for the AI eye, to determine if a holopad's hologram should follow it or not
-
-	//NEWMALF VARIABLES
-	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
-	var/datum/malf_hardware/hardware = null		// Installed piece of hardware.
-	var/datum/malf_research/research = null		// Malfunction research datum.
-	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
-	var/list/hacked_apcs = null					// List of all hacked APCs
-	var/APU_power = 0							// If set to 1 AI runs on APU power
-	var/hacking = 0								// Set to 1 if AI is hacking APC, cyborg, other AI, or running system override.
-	var/system_override = 0						// Set to 1 if system override is initiated, 2 if succeeded.
-	var/synthetic_takeover = 0					// 1 is started, 2 is complete.
-	var/hack_can_fail = 1						// If 0, all abilities have zero chance of failing.
-	var/hack_fails = 0							// This increments with each failed hack, and determines the warning message text.
-	var/errored = 0								// Set to 1 if runtime error occurs. Only way of this happening i can think of is admin fucking up with varedit.
-	var/bombing_core = 0						// Set to 1 if core auto-destruct is activated
-	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
-	var/bombing_time = 1200							// How much time is remaining for the nuke
-	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
-	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
 	var/list/cameraRecords = list()				//For storing what is shown to the cameras
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
@@ -101,7 +81,6 @@ var/list/ai_verbs_default = list(
 	src.verbs -= silicon_subsystems
 
 /mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, obj/item/device/mmi/B, safety = 0)
-	shouldnt_see = typecacheof(/obj/effect/rune)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
 	announcement.announcement_type = "A.I. Announcement"
@@ -147,18 +126,11 @@ var/list/ai_verbs_default = list(
 
 	//Languages
 	add_language(LANGUAGE_ROBOT, 1)
-	add_language(LANGUAGE_TCB, 1)
-	add_language(LANGUAGE_SOL_COMMON, 0)
-	add_language(LANGUAGE_UNATHI, 0)
-	add_language(LANGUAGE_SIIK_MAAS, 0)
-	add_language(LANGUAGE_SKRELLIAN, 0)
-	add_language(LANGUAGE_TRADEBAND, 1)
-	add_language(LANGUAGE_GUTTER, 0)
-	add_language(LANGUAGE_VAURCA, 0)
-	add_language(LANGUAGE_ROOTSONG, 0)
+	add_language(LANGUAGE_KOBOLD, 1)
+	add_language(LANGUAGE_DRAGON, 0)
+	add_language(LANGUAGE_LIZARD, 0)
+	//add_language(LANGUAGE_HUMAN, 0)
 	add_language(LANGUAGE_EAL, 1)
-	add_language(LANGUAGE_YA_SSA, 0)
-	add_language(LANGUAGE_DELVAHII, 0)
 
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
@@ -173,8 +145,6 @@ var/list/ai_verbs_default = list(
 					B.brainobj.lobotomized = 1
 
 			on_mob_init()
-
-	addtimer(CALLBACK(src, .proc/create_powersupply), 5)
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
@@ -210,9 +180,8 @@ var/list/ai_verbs_default = list(
 
 	to_chat(src, radio_text)
 
-	if (malf && !(mind in malf.current_antagonists))
-		show_laws()
-		to_chat(src, "<b>These laws may be changed by other players, or by you being the traitor.</b>")
+	show_laws()
+	to_chat(src, "<b>These laws may be changed by other players, or by you being the traitor.</b>")
 
 	job = "AI"
 	setup_icon()
@@ -309,9 +278,6 @@ var/list/ai_verbs_default = list(
 		return
 	if(powered_ai.psupply != src) // For some reason, the AI has different powersupply object. Delete this one, it's no longer needed.
 		qdel(src)
-		return
-	if(powered_ai.APU_power)
-		use_power = 0
 		return
 	if(!powered_ai.anchored)
 		loc = powered_ai.loc
@@ -818,6 +784,28 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/has_power()
 	return (aiRestorePowerRoutine == 0)
+
+// Cleaner proc for creating powersupply for an AI.
+/mob/living/silicon/ai/proc/create_powersupply()
+	if(psupply)
+		qdel(psupply)
+	psupply = new/obj/machinery/ai_powersupply(src)
+
+// Returns percentage of AI's remaining backup capacitor charge (maxhealth - oxyloss).
+/mob/living/silicon/ai/proc/backup_capacitor()
+	return ((200 - getOxyLoss()) / 2)
+
+// Returns percentage of AI's remaining hardware integrity (maxhealth - (bruteloss + fireloss))
+/mob/living/silicon/ai/proc/hardware_integrity()
+	return (health-config.health_threshold_dead)/2
+
+// Shows capacitor charge and hardware integrity information to the AI in Status tab.
+/mob/living/silicon/ai/show_system_integrity()
+	if(!src.stat)
+		stat("Hardware integrity", "[hardware_integrity()]%")
+		stat("Internal capacitor", "[backup_capacitor()]%")
+	else
+		stat("Systems nonfunctional")
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

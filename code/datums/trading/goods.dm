@@ -148,7 +148,6 @@
 		/obj/item/clothing/under/tactical                        = TRADER_BLACKLIST,
 		/obj/item/clothing/under/vox                             = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/wedding                         = TRADER_BLACKLIST,
-		/obj/item/clothing/under/punpun                          = TRADER_BLACKLIST,
 		/obj/item/clothing/under/fluff                           = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/dress/fluff                     = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/rank/centcom_officer/bst        = TRADER_BLACKLIST,
@@ -207,7 +206,6 @@
 		/obj/item/clothing/head/centhat                 = TRADER_BLACKLIST,
 		/obj/item/clothing/head/chameleon               = TRADER_BLACKLIST,
 		/obj/item/clothing/head/collectable             = TRADER_BLACKLIST,
-		/obj/item/clothing/head/culthood                = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/head/helmet                  = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/head/lightrig                = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/head/radiation               = TRADER_BLACKLIST,
@@ -238,7 +236,6 @@ Sells devices, odds and ends, and medical stuff
 		/obj/item/device/multitool                 = TRADER_THIS_TYPE,
 		/obj/item/device/lightreplacer             = TRADER_THIS_TYPE,
 		/obj/item/device/megaphone                 = TRADER_THIS_TYPE,
-		/obj/item/device/paicard                   = TRADER_THIS_TYPE,
 		/obj/item/device/pipe_painter              = TRADER_THIS_TYPE,
 		/obj/item/device/healthanalyzer            = TRADER_THIS_TYPE,
 		/obj/item/device/breath_analyzer           = TRADER_THIS_TYPE,
@@ -300,7 +297,6 @@ Sells devices, odds and ends, and medical stuff
 	)
 
 	possible_trading_items = list(
-		/obj/item/device/paicard                        = TRADER_THIS_TYPE,
 		/obj/item/weapon/aicard                         = TRADER_THIS_TYPE,
 		/mob/living/bot                                 = TRADER_SUBTYPES_ONLY
 	)

@@ -41,9 +41,6 @@
 		T.cultify()
 
 	var/destination = null
-	for(var/obj/singularity/narsie/large/N in narsie_list)
-		destination = N.loc
-		break
 	if(destination)
 		var/prey = 0
 		for(var/mob/living/M in targets)

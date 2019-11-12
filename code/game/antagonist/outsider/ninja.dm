@@ -16,7 +16,7 @@ var/datum/antagonist/ninja/ninjas
 	hard_cap = 2
 	hard_cap_round = 3
 
-	id_type = /obj/item/weapon/card/id/syndicate
+	id_type = /obj/item/card/id/syndicate
 
 /datum/antagonist/ninja/New()
 	..()
@@ -24,61 +24,6 @@ var/datum/antagonist/ninja/ninjas
 
 /datum/antagonist/ninja/attempt_random_spawn()
 	if(config.ninjas_allowed) ..()
-
-/datum/antagonist/ninja/create_objectives(var/datum/mind/ninja)
-
-	if(!..())
-		return
-
-	var/objective_list = list(1,2,3,4,5)
-	for(var/i=rand(2,4),i>0,i--)
-		switch(pick(objective_list))
-			if(1)//Kill
-				var/datum/objective/assassinate/ninja_objective = new
-				ninja_objective.owner = ninja
-				ninja_objective.target = ninja_objective.find_target()
-				if(ninja_objective.target != "Free Objective")
-					ninja.objectives += ninja_objective
-				else
-					i++
-				objective_list -= 1 // No more than one kill objective
-			if(2)//Steal
-				var/datum/objective/steal/ninja_objective = new
-				ninja_objective.owner = ninja
-				ninja_objective.target = ninja_objective.find_target()
-				ninja.objectives += ninja_objective
-			if(3)//Protect
-				var/datum/objective/protect/ninja_objective = new
-				ninja_objective.owner = ninja
-				ninja_objective.target = ninja_objective.find_target()
-				if(ninja_objective.target != "Free Objective")
-					ninja.objectives += ninja_objective
-				else
-					i++
-					objective_list -= 3
-			if(4)//Download
-				var/datum/objective/download/ninja_objective = new
-				ninja_objective.owner = ninja
-				ninja_objective.gen_amount_goal()
-				ninja.objectives += ninja_objective
-				objective_list -= 4
-			if(5)//Harm
-				var/datum/objective/harm/ninja_objective = new
-				ninja_objective.owner = ninja
-				ninja_objective.target = ninja_objective.find_target()
-				if(ninja_objective.target != "Free Objective")
-					ninja.objectives += ninja_objective
-				else
-					i++
-					objective_list -= 5
-
-	var/datum/objective/ninja_highlander/ninja_obj = new
-	ninja_obj.owner = ninja
-	ninja.objectives += ninja_obj
-
-	var/datum/objective/survive/ninja_objective = new
-	ninja_objective.owner = ninja
-	ninja.objectives += ninja_objective
 
 /datum/antagonist/ninja/greet(var/datum/mind/player)
 
@@ -103,7 +48,7 @@ var/datum/antagonist/ninja/ninjas
 		return FALSE
 
 	for (var/obj/item/I in player)
-		if (istype(I, /obj/item/weapon/implant))
+		if (istype(I, /obj/item/implant))
 			continue
 		player.drop_from_inventory(I)
 		if(I.loc != player)

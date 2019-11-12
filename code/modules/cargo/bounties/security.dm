@@ -23,12 +23,6 @@
 	required_count = 2
 	wanted_types = list(/obj/item/weapon/gun/projectile/shotgun/pump)
 
-/datum/bounty/item/security/pinpointer
-	name = "Pinpointer"
-	description = "Someone might or might not have misplaced a high-value item. Can the station spare a pinpointer to help out?"
-	reward = 1500
-	wanted_types = list(/obj/item/weapon/pinpointer)
-
 /datum/bounty/item/security/captains_spare
 	name = "Captain's Spare"
 	description = "Captain Bart of Station 12 has forgotten his ID! Ship him your station's spare, would you?"

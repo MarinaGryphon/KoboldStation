@@ -14,27 +14,8 @@
 	origin_tech = list(TECH_BIO = 3)
 	attack_verb = list("attacked", "slapped", "whacked")
 	var/mob/living/carbon/brain/brainmob = null
-	var/list/datum/brain_trauma/traumas = list()
 	var/lobotomized = 0
 	var/can_lobotomize = 1
-
-/obj/item/organ/pariah_brain
-	name = "brain remnants"
-	desc = "Did someone tread on this? It looks useless for cloning or cyborgification."
-	organ_tag = "brain"
-	parent_organ = "head"
-	icon = 'icons/mob/npc/alien.dmi'
-	icon_state = "chitin"
-	vital = 1
-
-/obj/item/organ/brain/xeno
-	name = "thinkpan"
-	desc = "It looks kind of like an enormous wad of purple bubblegum."
-	icon = 'icons/mob/npc/alien.dmi'
-	icon_state = "chitin"
-
-/obj/item/organ/brain/xeno/gain_trauma()
-	return
 
 /obj/item/organ/brain/Initialize(mapload)
 	. = ..()
@@ -72,17 +53,6 @@
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
 /obj/item/organ/brain/removed(var/mob/living/user)
-
-	for(var/X in traumas)
-		var/datum/brain_trauma/BT = X
-		BT.on_lose(TRUE)
-		BT.owner = null
-
-	var/mob/living/simple_animal/borer/borer = owner.has_brain_worms()
-
-	if(borer)
-		borer.detatch() //Should remove borer if the brain is removed - RR
-
 	var/obj/item/organ/brain/B = src
 	if(istype(B) && istype(owner))
 		B.transfer_identity(owner)
@@ -100,11 +70,6 @@
 		else
 			target.key = brainmob.key
 
-	for(var/X in traumas)
-		var/datum/brain_trauma/BT = X
-		BT.owner = owner
-		BT.on_gain()
-
 	..()
 
 /obj/item/organ/brain/proc/lobotomize(mob/user as mob)
@@ -121,7 +86,7 @@
 	return
 
 /obj/item/organ/brain/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/surgicaldrill))
+	if(istype(W,/obj/item/surgicaldrill))
 		if(!can_lobotomize)
 			return
 		if(!lobotomized)
@@ -155,49 +120,3 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"
 	can_lobotomize = 0
-
-
-////////////////////////////////////TRAUMAS////////////////////////////////////////
-
-/obj/item/organ/brain/proc/has_trauma_type(brain_trauma_type, consider_permanent = FALSE)
-	for(var/X in traumas)
-		var/datum/brain_trauma/BT = X
-		if(istype(BT, brain_trauma_type) && (consider_permanent || !BT.permanent))
-			return BT
-
-
-//Add a specific trauma
-/obj/item/organ/brain/proc/gain_trauma(datum/brain_trauma/trauma, permanent = FALSE, list/arguments)
-	var/trauma_type
-	if(ispath(trauma))
-		trauma_type = trauma
-		traumas += new trauma_type(arglist(list(src, permanent) + arguments))
-	else
-		traumas += trauma
-		trauma.permanent = permanent
-
-//Add a random trauma of a certain subtype
-/obj/item/organ/brain/proc/gain_trauma_type(brain_trauma_type = /datum/brain_trauma, permanent = FALSE)
-	var/list/datum/brain_trauma/possible_traumas = list()
-	for(var/T in subtypesof(brain_trauma_type))
-		var/datum/brain_trauma/BT = T
-		if(initial(BT.can_gain))
-			possible_traumas += BT
-
-	var/trauma_type = pick(possible_traumas)
-	traumas += new trauma_type(src, permanent)
-
-//Cure a random trauma of a certain subtype
-/obj/item/organ/brain/proc/cure_trauma_type(brain_trauma_type, cure_permanent = FALSE)
-	var/datum/brain_trauma/trauma = has_trauma_type(brain_trauma_type)
-	if(trauma && (cure_permanent || !trauma.permanent))
-		qdel(trauma)
-
-/obj/item/organ/brain/proc/cure_all_traumas(cure_permanent = FALSE, cure_type = "")
-	for(var/X in traumas)
-		var/datum/brain_trauma/trauma = X
-		if(trauma.cure_type == cure_type || cure_type == CURE_ADMIN)
-			if(cure_permanent || !trauma.permanent)
-				qdel(trauma)
-				if(cure_type != CURE_ADMIN)
-					break

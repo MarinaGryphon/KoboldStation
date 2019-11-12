@@ -54,18 +54,6 @@
 			LANGUAGE_AZAZIBA
 		)
 
-/datum/species/tajaran
-	autohiss_basic_map = list(
-			"r" = list("rr", "rrr", "rrrr")
-		)
-	autohiss_exempt = list(
-			LANGUAGE_SIIK_MAAS,
-			LANGUAGE_SIIK_TAJR,
-			LANGUAGE_SIGN_TAJARA,
-			LANGUAGE_YA_SSA,
-			LANGUAGE_DELVAHII
-		)
-
 /datum/species/bug
 	autohiss_basic_map = list(
 			"s" = list("z","zz")

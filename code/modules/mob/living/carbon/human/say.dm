@@ -48,9 +48,6 @@
 
 	//These only pertain to common. Languages are handled by mob/say_understands()
 	if (!speaking)
-		if (istype(other, /mob/living/carbon/alien/diona))
-			if(other.languages.len >= 2) //They've sucked down some blood and can speak common now.
-				return 1
 		if (istype(other, /mob/living/silicon))
 			return 1
 		if (istype(other, /mob/living/carbon/brain))
@@ -69,8 +66,8 @@
 /mob/living/carbon/human/GetVoice()
 
 	var/voice_sub
-	if(istype(back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = back
+	if(istype(back,/obj/item/rig))
+		var/obj/item/rig/rig = back
 		// todo: fix this shit
 		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
 			voice_sub = rig.speech.voice_holder.voice
@@ -83,8 +80,6 @@
 				voice_sub = changer.voice
 	if(voice_sub)
 		return voice_sub
-	if(mind && mind.changeling && mind.changeling.mimicing)
-		return mind.changeling.mimicing
 	if(GetSpecialVoice())
 		return GetSpecialVoice()
 	return real_name
@@ -127,13 +122,10 @@
 
 /mob/living/carbon/human/handle_speech_problems(var/message, var/verb, var/message_mode)
 	message = handle_speech_muts(message,verb)
-	for(var/datum/brain_trauma/trauma in get_traumas())
-		if(!trauma.suppressed)
-			message = trauma.on_say(message)
 	if(silent || (sdisabilities & MUTE))
 		message = ""
 		speech_problem_flag = 1
-	else if(!src.is_diona() && istype(wear_mask, /obj/item/clothing/mask))
+	else if(istype(wear_mask, /obj/item/clothing/mask))
 		var/obj/item/clothing/mask/M = wear_mask
 		if(M.voicechange)
 			message = pick(M.say_messages)
@@ -223,13 +215,6 @@
 	var/list/returns = ..()
 	returns = species.handle_speech_sound(src, returns)
 	return returns
-
-/mob/living/carbon/human/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
-	for(var/T in get_traumas())
-		var/datum/brain_trauma/trauma = T
-		if(!trauma.suppressed)
-			message = trauma.on_hear(message, verb, language, alt_name, italics, speaker)
-	..()
 
 /mob/living/carbon/human/proc/handle_speech_muts(var/message, var/verb)
 	if(message)

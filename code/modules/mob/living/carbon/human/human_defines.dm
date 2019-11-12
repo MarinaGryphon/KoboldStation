@@ -23,7 +23,8 @@
 	var/g_skin = 0
 	var/b_skin = 0
 
-	var/size_multiplier = 1 //multiplier for the mob's icon size
+	var/size_multiplier_x = 1 //multiplier for the mob's icon x size
+	var/size_multiplier_y = 1 //multiplier for the mob's icon y size
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place
 
@@ -38,7 +39,7 @@
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 	var/backbag_style = 1
 
-	var/last_chew = 0 // Used for hand chewing
+	var/tmp/last_chew = 0 // Used for hand chewing
 
 	// General information
 	var/citizenship = ""
@@ -64,51 +65,49 @@
 	var/skill_specialization = null
 	var/list/skills = list()
 
-	var/icon/stand_icon = null
-	var/icon/lying_icon = null
+	var/tmp/icon/stand_icon = null
+	var/tmp/icon/lying_icon = null
 
-	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
+	var/tmp/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
-	var/speech_problem_flag = 0
+	var/tmp/speech_problem_flag = 0
 
-	var/miming = null //Toggle for the mime's abilities.
-	var/special_voice = "" // For changing our voice. Used by a symptom.
+	var/tmp/miming = null //Toggle for the mime's abilities.
+	var/tmp/special_voice = "" // For changing our voice. Used by a symptom.
 
-	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
-	var/list/bad_external_organs = list()// organs we check until they are good.
+	var/tmp/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
+	var/tmp/list/bad_external_organs = list()// organs we check until they are good.
 
-	var/list/bad_internal_organs = list()//A list of internal organs which are damaged.
+	var/tmp/list/bad_internal_organs = list()//A list of internal organs which are damaged.
 	//This isnt used for regular processing, since all internal organs are regularly processed anyway, but it can be used as a shortlist for calls that only care about damaged organs
 
-	var/xylophone = 0 //For the spoooooooky xylophone cooldown
+	var/tmp/xylophone = 0 //For the spoooooooky xylophone cooldown
 
-	var/mob/remoteview_target = null
-	var/hand_blood_color
+	var/tmp/mob/remoteview_target = null
+	var/tmp/hand_blood_color
 
 	var/list/flavor_texts = list()
-	var/gunshot_residue
-	var/pulling_punches // Are you trying not to hurt your opponent?
+	var/tmp/gunshot_residue
+	var/tmp/pulling_punches // Are you trying not to hurt your opponent?
 
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
 
-	var/flash_protection = 0				// Total level of flash protection
-	var/equipment_tint_total = 0			// Total level of visualy impairing items
-	var/equipment_darkness_modifier			// Darkvision modifier from equipped items
-	var/equipment_vision_flags				// Extra vision flags from equipped items
-	var/equipment_see_invis					// Max see invibility level granted by equipped items
-	var/equipment_prescription				// Eye prescription granted by equipped items
-	var/list/equipment_overlays = list()	// Extra overlays from equipped items
+	var/tmp/flash_protection = 0				// Total level of flash protection
+	var/tmp/equipment_tint_total = 0			// Total level of visualy impairing items
+	var/tmp/equipment_darkness_modifier			// Darkvision modifier from equipped items
+	var/tmp/equipment_vision_flags				// Extra vision flags from equipped items
+	var/tmp/equipment_see_invis					// Max see invibility level granted by equipped items
+	var/tmp/equipment_prescription				// Eye prescription granted by equipped items
+	var/tmp/list/equipment_overlays = list()	// Extra overlays from equipped items
 
-	var/is_noisy = FALSE		// if TRUE, movement should make sound.
-	var/last_x = 0
-	var/last_y = 0
+	var/tmp/is_noisy = FALSE		// if TRUE, movement should make sound.
+	var/tmp/last_x = 0
+	var/tmp/last_y = 0
 
-	var/cached_bodytype
+	var/tmp/cached_bodytype
 
-	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
+	var/tmp/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
 	var/datum/unarmed_attack/default_attack	//default unarmed attack
-
-	var/datum/martial_art/martial_art = null

@@ -464,7 +464,6 @@
 		/obj/machinery/vending/hydroseeds = 1,
 		/obj/machinery/vending/magivend = 0.5,	//The things it dispenses are just costumes to non-wizards
 		/obj/machinery/vending/dinnerware = 1,
-		/obj/machinery/vending/sovietsoda = 2,
 		/obj/machinery/vending/tool = 1,
 		/obj/machinery/vending/engivend = 0.6,
 		/obj/machinery/vending/engineering = 1,
@@ -673,7 +672,6 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "gift3"
 	problist = list(
-		/obj/item/assembly/shock_kit = 0.1,
 		/obj/item/bluespace_crystal/artificial = 0.1,
 		/obj/item/bodybag = 0.7,
 		/obj/item/clothing/accessory/storage/knifeharness = 0.3,
@@ -783,7 +781,6 @@
 		/obj/item/weapon/lipstick = 0.6,
 		/obj/item/weapon/material/hook = 0.3,
 		/obj/item/weapon/material/knife/tacknife = 0.4,
-		/obj/item/weapon/mesmetron = 0.1,
 		/obj/item/weapon/pickaxe = 0.4,
 		/obj/item/weapon/razor = 0.5,
 		/obj/item/weapon/reagent_containers/extinguisher_refill = 0.1,

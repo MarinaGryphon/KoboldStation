@@ -17,8 +17,8 @@
 	var/can_plate = 1
 
 	var/manipulating = 0
-	var/material/material = null
-	var/material/reinforced = null
+	var/tmp/material/material = null
+	var/tmp/material/reinforced = null
 
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.
 	// Convert if/when you can easily get stacks of these.
@@ -37,6 +37,13 @@
 			maxhealth += reinforced.integrity / 2
 
 	health += maxhealth - old_maxhealth
+
+/obj/structure/table/Write(var/savefile/F)
+	table_mat = material?.name
+	table_reinf = reinforced?.name
+	material = null
+	reinforced = null
+	. = ..()
 
 /obj/structure/table/proc/take_damage(amount)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
@@ -146,7 +153,7 @@
 		return 1
 
 	if(health < maxhealth && W.iswelder())
-		var/obj/item/weapon/weldingtool/F = W
+		var/obj/item/weldingtool/F = W
 		if(F.welding)
 			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
@@ -166,7 +173,7 @@
 			update_material()
 		return 1
 
-	if(!material && can_plate && istype(W, /obj/item/weapon/reagent_containers/glass/beaker/bowl))
+	if(!material && can_plate && istype(W, /obj/item/reagent_containers/glass/beaker/bowl))
 		new /obj/structure/chemkit(loc)
 		qdel(W)
 		qdel(src)
@@ -274,7 +281,7 @@
 	qdel(src)
 	return
 
-// Returns a list of /obj/item/weapon/material/shard objects that were created as a result of this table's breakage.
+// Returns a list of /obj/item/material/shard objects that were created as a result of this table's breakage.
 // Used for !fun! things such as embedding shards in the faces of tableslammed people.
 
 // The repeated
@@ -284,7 +291,7 @@
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
 	var/list/shards = list()
-	var/obj/item/weapon/material/shard/S = null
+	var/obj/item/material/shard/S = null
 	if(reinforced)
 		if(reinforced.stack_type && (full_return || prob(20)))
 			reinforced.place_sheet(loc)

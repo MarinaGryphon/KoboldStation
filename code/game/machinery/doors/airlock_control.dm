@@ -174,7 +174,7 @@
 	var/frequency = 1379
 	var/command = "cycle"
 
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 	var/on = 1
 	var/alert = 0
@@ -252,7 +252,7 @@
 	var/frequency = 1449
 	var/command = "cycle"
 
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 	var/on = 1
 
@@ -265,7 +265,7 @@
 
 /obj/machinery/access_button/attackby(obj/item/I as obj, mob/user as mob)
 	//Swiping ID on the access button
-	if (istype(I, /obj/item/weapon/card/id) || istype(I, /obj/item/device/pda))
+	if (istype(I, /obj/item/card/id) || istype(I, /obj/item/device/pda))
 		attack_hand(user)
 		return
 	..()

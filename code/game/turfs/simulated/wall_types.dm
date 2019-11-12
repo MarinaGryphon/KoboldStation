@@ -1,80 +1,63 @@
 /turf/simulated/wall/r_wall
 	icon_state = "rgeneric"
-
-/turf/simulated/wall/r_wall/Initialize(mapload)
-	. = ..(mapload, "plasteel","plasteel") //3strong
-
-/turf/simulated/wall/cult
-	icon_state = "cult"
-	desc = "Hideous images dance beneath the surface."
-	appearance_flags = NO_CLIENT_COLOR
-
-/turf/simulated/wall/cult/Initialize(mapload)
-	. = ..(mapload,"cult")
-	desc = "Hideous images dance beneath the surface."
-
-/turf/simulated/wall/cult_reinforced/Initialize(mapload)
-	. = ..(mapload,"cult","cult2")
-	desc = "Hideous images dance beneath the surface."
-
-/turf/unsimulated/wall/cult
-	name = "cult wall"
-	desc = "Hideous images dance beneath the surface."
-	icon = 'icons/turf/smooth/cult_wall.dmi'
-	canSmoothWith = null
-	smooth = SMOOTH_TRUE
-	smoothing_hints = SMOOTHHINT_TARGETS_NOT_UNIQUE | SMOOTHHINT_ONLY_MATCH_TURF
-	icon_state = "cult"
-	appearance_flags = NO_CLIENT_COLOR
+	materialtype = "plasteel"
+	rmaterialtype = "plasteel"
 
 /turf/simulated/wall/rusty
 	icon_state = "arust"
+	materialtype = "rust"
 
 /turf/simulated/wall/rusty/Initialize(mapload)
-	. = ..(mapload,"rust")
+	. = ..(mapload)
+	icon_state = "arust"
 	desc = "Rust stains this ancient wall."
 
-/turf/simulated/wall/vaurca/Initialize(mapload)
-	. = ..(mapload,"alien biomass")
+/turf/simulated/wall/vaurca/
+	materialtype = "alien biomass"
 
-/turf/simulated/wall/iron/Initialize(mapload)
-	. = ..(mapload,"iron")
+/turf/simulated/wall/iron/
+	materialtype = "iron"
 
-/turf/simulated/wall/uranium/Initialize(mapload)
-	. = ..(mapload,"uranium")
+/turf/simulated/wall/uranium/
+	materialtype = "uranium"
 
-/turf/simulated/wall/diamond/Initialize(mapload)
-	. = ..(mapload,"diamond")
+/turf/simulated/wall/diamond/
+	materialtype = "diamond"
 
-/turf/simulated/wall/gold/Initialize(mapload)
-	. = ..(mapload,"gold")
+/turf/simulated/wall/gold/
+	materialtype = "gold"
 
-/turf/simulated/wall/silver/Initialize(mapload)
-	. = ..(mapload,"silver")
+/turf/simulated/wall/silver/
+	materialtype = "silver"
 
-/turf/simulated/wall/phoron/Initialize(mapload)
-	. = ..(mapload,"phoron")
+/turf/simulated/wall/phoron/
+	materialtype = "phoron"
 
-/turf/simulated/wall/sandstone/Initialize(mapload)
-	. = ..(mapload,"sandstone")
+/turf/simulated/wall/sandstone/
+	materialtype = "sandstone"
 
-/turf/simulated/wall/ironphoron/Initialize(mapload)
-	. = ..(mapload,"iron","phoron")
+/turf/simulated/wall/ironphoron/
+	materialtype = "iron"
+	rmaterialtype = "phoron"
 
-/turf/simulated/wall/golddiamond/Initialize(mapload)
-	. = ..(mapload,"gold","diamond")
+/turf/simulated/wall/golddiamond/
+	materialtype = "gold"
+	rmaterialtype = "diamond"
 
-/turf/simulated/wall/silvergold/Initialize(mapload)
-	. = ..(mapload,"silver","gold")
+/turf/simulated/wall/silvergold/
+	materialtype = "silver"
+	rmaterialtype = "gold"
 
-/turf/simulated/wall/sandstonediamond/Initialize(mapload)
-	. = ..(mapload,"sandstone","diamond")
+/turf/simulated/wall/sandstonediamond/
+	materialtype = "sandstone"
+	rmaterialtype = "diamond"
 
-/turf/simulated/wall/titanium/Initialize(mapload)
-	. = ..(mapload,"titanium")
+/turf/simulated/wall/titanium/
+	materialtype = "titanium"
 
-/turf/simulated/wall/titanium_reinforced/Initialize(mapload)
-	. = ..(mapload,"titanium", "titanium")
+/turf/simulated/wall/titanium_reinforced/
+	materialtype = "titanium"
+	rmaterialtype = "titanium"
 
-/turf/simulated/wall/wood/Initialize(mapload)
-	. = ..(mapload,"wood")
+/turf/simulated/wall/wood/
+	materialtype = "wood"

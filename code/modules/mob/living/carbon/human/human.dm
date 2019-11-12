@@ -89,7 +89,6 @@
 
 	QDEL_NULL(vessel)
 
-	QDEL_NULL(DS)
 	// qdel and null out our equipment.
 	QDEL_NULL(shoes)
 	QDEL_NULL(belt)
@@ -117,11 +116,6 @@
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
 				stat(null, eta_status)
-		if(is_diona() && DS)
-			stat("Biomass:", "[round(nutrition)] / [max_nutrition]")
-			stat("Energy:", "[round(DS.stored_energy)] / [round(DS.max_energy)]")
-			if(DS.regen_limb)
-				stat("Regeneration Progress:", " [round(DS.regen_limb_progress)] / [LIMB_REGROW_REQUIREMENT]")
 		if (internal)
 			if (!internal.air_contents)
 				qdel(internal)
@@ -140,9 +134,6 @@
 			if(mind.vampire)
 				stat("Usable Blood", mind.vampire.blood_usable)
 				stat("Total Blood", mind.vampire.blood_total)
-			if(mind.changeling)
-				stat("Chemical Storage", mind.changeling.chem_charges)
-				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
@@ -150,9 +141,6 @@
 
 	var/b_loss = null
 	var/f_loss = null
-
-	if (is_diona() == DIONA_WORKER)//Thi
-		diona_contained_explosion_damage(severity)
 
 	switch (severity)
 		if (1.0)
@@ -1179,7 +1167,7 @@
 	cached_bodytype = null
 	if(!dna)
 		if(!new_species)
-			new_species = "Human"
+			new_species = "Kobold"
 	else
 		if(!new_species)
 			new_species = dna.species
@@ -1188,7 +1176,7 @@
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!all_species[new_species])
-		new_species = "Human"
+		new_species = "Kobold"
 
 	if(species)
 
@@ -1243,9 +1231,6 @@
 		if(hud_used)
 			qdel(hud_used)
 		hud_used = new /datum/hud(src)
-
-	if (src.is_diona())
-		setup_gestalt(1)
 
 	burn_mod = species.burn_mod
 	brute_mod = species.brute_mod
@@ -1529,37 +1514,6 @@
 	pulling_punches = !pulling_punches
 	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
 	return
-
-/mob/living/carbon/human/proc/get_traumas()
-	. = list()
-	var/obj/item/organ/brain/B = internal_organs_by_name["brain"]
-	if(B && species && species.has_organ["brain"] && !isipc(src))
-		. = B.traumas
-
-/mob/living/carbon/human/proc/has_trauma_type(brain_trauma_type, consider_permanent = FALSE)
-	var/obj/item/organ/brain/B = internal_organs_by_name["brain"]
-	if(B && species && species.has_organ["brain"] && !isipc(src))
-		. = B.has_trauma_type(brain_trauma_type, consider_permanent)
-
-/mob/living/carbon/human/proc/gain_trauma(datum/brain_trauma/trauma, permanent = FALSE, list/arguments)
-	var/obj/item/organ/brain/B = internal_organs_by_name["brain"]
-	if(B && species && species.has_organ["brain"] && !isipc(src))
-		. = B.gain_trauma(trauma, permanent, arguments)
-
-/mob/living/carbon/human/proc/gain_trauma_type(brain_trauma_type = /datum/brain_trauma, permanent = FALSE)
-	var/obj/item/organ/brain/B = internal_organs_by_name["brain"]
-	if(B && species && species.has_organ["brain"] && !isipc(src))
-		. = B.gain_trauma_type(brain_trauma_type, permanent)
-
-/mob/living/carbon/human/proc/cure_trauma_type(brain_trauma_type, cure_permanent = FALSE)
-	var/obj/item/organ/brain/B = internal_organs_by_name["brain"]
-	if(B && species && species.has_organ["brain"] && !isipc(src))
-		. = B.cure_trauma_type(brain_trauma_type, cure_permanent)
-
-/mob/living/carbon/human/proc/cure_all_traumas(cure_permanent = FALSE, cure_type = "")
-	var/obj/item/organ/brain/B = internal_organs_by_name["brain"]
-	if(B && species && species.has_organ["brain"] && !isipc(src))
-		. = B.cure_all_traumas(cure_permanent, cure_type)
 
 /mob/living/carbon/human/get_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)

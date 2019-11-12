@@ -8,7 +8,7 @@
 /obj/machinery/iv_drip/var/mob/living/carbon/human/attached = null
 /obj/machinery/iv_drip/var/mode = 1 // 1 is injecting, 0 is taking blood.
 /obj/machinery/iv_drip/var/transfer_amount = REM
-/obj/machinery/iv_drip/var/obj/item/weapon/reagent_containers/beaker = null
+/obj/machinery/iv_drip/var/obj/item/reagent_containers/beaker = null
 
 /obj/machinery/iv_drip/update_icon()
 	if(src.attached)
@@ -53,10 +53,10 @@
 
 /obj/machinery/iv_drip/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-	if (istype(W, /obj/item/weapon/reagent_containers/blood/ripped))
+	if (istype(W, /obj/item/reagent_containers/blood/ripped))
 		to_chat(user, "You can't use a ripped bloodpack.")
 		return
-	if (istype(W, /obj/item/weapon/reagent_containers))
+	if (istype(W, /obj/item/reagent_containers))
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return

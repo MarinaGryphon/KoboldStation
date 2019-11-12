@@ -126,11 +126,6 @@
 	if (!get_death_time(CREW))
 		set_death_time(CREW, world.time)
 
-/mob/abstract/observer/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/book/tome))
-		var/mob/abstract/observer/M = src
-		M.manifest(user)
-
 /mob/abstract/observer/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1
 /*
@@ -167,11 +162,11 @@ Works together with spawning an observer, noted above.
 	//Check if they are a staff member
 	if(check_rights(R_MOD|R_ADMIN|R_DEV, show_msg=FALSE, user=src))
 		return FALSE
-	
+
 	//Check if the z level is in the restricted list
 	if (!(check in current_map.restricted_levels))
 		return FALSE
-	
+
 	return TRUE
 
 /mob/abstract/observer/proc/teleport_to_spawn(var/message)
@@ -277,21 +272,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Re-enter Corpse"
 	if(!client)	return
-	if(!(mind && mind.current && can_reenter_corpse))
+	if(!mind?.current || !can_reenter_corpse)
 		to_chat(src, "<span class='warning'>You have no body.</span>")
 		return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
-	if(mind.current.ajourn && mind.current.stat != DEAD) //check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
-		var/found_rune
-		for(var/obj/effect/rune/R in mind.current.loc)   //whilst corpse is alive, we can only reenter the body if it's on the rune
-			if(R && R.word1 == cultwords["hell"] && R.word2 == cultwords["travel"] && R.word3 == cultwords["self"]) // Found an astral journey rune.
-				found_rune = 1
-				break
-		if(!found_rune)
-			to_chat(usr, "<span class='warning'>The astral cord that ties your body and your spirit has been severed. You are likely to wander the realm beyond until your body is finally dead and thus reunited with you.</span>")
-			return
 	stop_following()
 	mind.current.ajourn=0
 	mind.current.key = key
@@ -356,7 +342,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/list/L = list()
 	var/holyblock = 0
 
-	if(usr.invisibility <= SEE_INVISIBLE_LIVING || (usr.mind in cult.current_antagonists))
+	if(usr.invisibility <= SEE_INVISIBLE_LIVING)
 		for(var/turf/T in get_area_turfs(thearea.type))
 			if(!T.holy)
 				L+=T
@@ -411,7 +397,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		moved_event.unregister(following, src)
 		destroyed_event.unregister(following, src)
 		following = null
-	
+
 
 /mob/abstract/observer/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
@@ -429,7 +415,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(check_rights(R_ADMIN|R_FUN, 0, src))
 		return 0
 
-	return (T && T.holy) && (invisibility <= SEE_INVISIBLE_LIVING || (mind in cult.current_antagonists))
+	return (T && T.holy) && (invisibility <= SEE_INVISIBLE_LIVING)
 
 /mob/abstract/observer/verb/jumptomob(input in getmobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
@@ -446,7 +432,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			forceMove(T)
 		else
 			to_chat(src, "This mob is not located in the game world.")
-		
+
 		teleport_if_needed()
 
 /mob/abstract/observer/memory()
@@ -623,10 +609,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Write in blood"
 	set desc = "If the round is sufficiently spooky, write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
 
-	if(!(config.cult_ghostwriter))
-		to_chat(src, "<span class='warning'>That verb is not currently permitted.</span>")
-		return
-
 	if (!src.stat)
 		return
 
@@ -745,8 +727,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='info'>You are now visible!</span>")
 
 	invisibility = invisibility == INVISIBILITY_OBSERVER ? 0 : INVISIBILITY_OBSERVER
-	// Give the ghost a cult icon which should be visible only to itself
-	toggle_icon("cult")
 
 /mob/abstract/observer/proc/ghost_whisper()
 	set category = "Ghost"
@@ -925,7 +905,7 @@ mob/abstract/observer/MayRespawn(var/feedback = 0, var/respawn_type = null)
 /mob/abstract/observer/verb/ghost_spawner()
 	set category = "Ghost"
 	set name = "Ghost Spawner"
-	
+
 	if(!ROUND_IS_STARTED)
 		to_chat(usr, "<span class='danger'>The round hasn't started yet!</span>")
 		return

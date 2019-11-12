@@ -274,10 +274,8 @@
 		env.merge(removed)
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
-		if(!istype(l.glasses, /obj/item/clothing/glasses/meson) && !l.is_diona() && !l.isSynthetic())
+		if(!istype(l.glasses, /obj/item/clothing/glasses/meson) && !l.isSynthetic())
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
-			if(prob(15))
-				l.cure_all_traumas(cure_type = CURE_HYPNOSIS)
 
 	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
 	//note that the rads given at the maximum range is a constant 0.2 - as power increases the maximum range merely increases.
@@ -289,10 +287,6 @@
 		if (!(l in oview(rad_range, src)) && !(l in range(src, round(rad_range * 2/3))))
 			continue
 		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
-		if(l.is_diona())
-			l.adjustToxLoss(-rads)
-			if(last_message_time + 800 < world.time) // Not to spam message
-				to_chat(l, "<span class='notice'>You can feel an extreme level of energy which flows throught your body and makes you regenerate very fast.</span>")
 	last_message_time = world.time
 
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
@@ -400,8 +394,8 @@
 		user.dust()
 		power += 200
 	else
-		if (istype(user, /obj/item/weapon/holder))
-			var/obj/item/weapon/holder/H = user
+		if (istype(user, /obj/item/holder))
+			var/obj/item/holder/H = user
 			Consume(H.contained)//If its a holder, eat the thing inside
 			qdel(H)
 			return

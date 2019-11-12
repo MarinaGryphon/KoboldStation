@@ -21,49 +21,6 @@ var/datum/antagonist/wizard/wizards
 	..()
 	wizards = src
 
-/datum/antagonist/wizard/create_objectives(var/datum/mind/wizard)
-
-	if(!..())
-		return
-
-	var/kill
-	var/escape
-	var/steal
-	var/hijack
-
-	switch(rand(1,100))
-		if(1 to 30)
-			escape = 1
-			kill = 1
-		if(31 to 60)
-			escape = 1
-			steal = 1
-		if(61 to 99)
-			kill = 1
-			steal = 1
-		else
-			hijack = 1
-
-	if(kill)
-		var/datum/objective/assassinate/kill_objective = new
-		kill_objective.owner = wizard
-		kill_objective.find_target()
-		wizard.objectives |= kill_objective
-	if(steal)
-		var/datum/objective/steal/steal_objective = new
-		steal_objective.owner = wizard
-		steal_objective.find_target()
-		wizard.objectives |= steal_objective
-	if(escape)
-		var/datum/objective/survive/survive_objective = new
-		survive_objective.owner = wizard
-		wizard.objectives |= survive_objective
-	if(hijack)
-		var/datum/objective/hijack/hijack_objective = new
-		hijack_objective.owner = wizard
-		wizard.objectives |= hijack_objective
-	return
-
 /datum/antagonist/wizard/update_antag_mob(var/datum/mind/wizard)
 	..()
 	wizard.store_memory("<B>Remember:</B> do not forget to prepare your spells.")
@@ -76,7 +33,7 @@ var/datum/antagonist/wizard/wizards
 		return FALSE
 
 	for (var/obj/item/I in player)
-		if (istype(I, /obj/item/weapon/implant))
+		if (istype(I, /obj/item/implant))
 			continue
 		player.drop_from_inventory(I)
 		if(I.loc != player)
@@ -87,17 +44,6 @@ var/datum/antagonist/wizard/wizards
 	player.force_update_limbs()
 	player.update_eyes()
 	player.regenerate_icons()
-
-/datum/antagonist/wizard/check_victory()
-	var/survivor
-	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || player.current.stat)
-			continue
-		survivor = 1
-		break
-	if(!survivor)
-		feedback_set_details("round_end_result","loss - wizard killed")
-		to_world("<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew! The Space Wizards Federation has been taught a lesson they will not soon forget!</font></span>")
 
 /datum/antagonist/wizard/print_player_summary()
 	..()

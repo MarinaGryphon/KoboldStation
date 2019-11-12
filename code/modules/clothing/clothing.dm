@@ -20,7 +20,7 @@
 	var/list/sprite_sheets_refit = null
 
 	//material things
-	var/material/material = null
+	var/tmp/material/material = null
 	var/applies_material_color = TRUE
 	var/unbreakable = FALSE
 	var/default_material = null // Set this to something else if you want material attributes on init.
@@ -34,6 +34,11 @@
 		material_key = default_material
 	if(material_key) // May still be null if a material was not specified as a default.
 		set_material(material_key)
+
+/obj/item/clothing/Write(var/savefile/S)
+	if(material)
+		default_material = material.name
+	. = ..()
 
 /obj/item/clothing/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
@@ -179,7 +184,7 @@
 	if(istype(loc, /mob/living))
 		var/mob/living/M = loc
 		if(material.shard_type == SHARD_SHARD) // Wearing glass armor is a bad idea.
-			var/obj/item/weapon/material/shard/S = material.place_shard(T)
+			var/obj/item/material/shard/S = material.place_shard(T)
 			M.embed(S)
 
 	playsound(src.loc, "shatter", 70, 1)
@@ -236,11 +241,11 @@
 		for(var/number in list(melee_armor, bullet_armor, laser_armor, energy_armor, bomb_armor))
 			number = between(0, number, 100)
 
-		armor["melee"] = melee_armor
-		armor["bullet"] = bullet_armor
-		armor["laser"] = laser_armor
-		armor["energy"] = energy_armor
-		armor["bomb"] = bomb_armor
+		LAZYSET(armor, "melee", melee_armor)
+		LAZYSET(armor, "bullet", bullet_armor)
+		LAZYSET(armor, "laser", laser_armor)
+		LAZYSET(armor, "energy", energy_armor)
+		LAZYSET(armor, "bomb", bomb_armor)
 
 		if(!isnull(material.conductivity))
 			siemens_coefficient = between(0, material.conductivity / 10, 10)
@@ -316,7 +321,7 @@
 	icon = 'icons/obj/clothing/gloves.dmi'
 	siemens_coefficient = 0.75
 	var/wired = 0
-	var/obj/item/weapon/cell/cell = 0
+	var/obj/item/cell/cell = 0
 	var/clipped = 0
 	var/fingerprint_chance = 0
 	var/obj/item/clothing/ring/ring = null		//Covered ring
@@ -353,7 +358,7 @@
 
 /obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
 	..()
-	if(W.iswirecutter() || istype(W, /obj/item/weapon/scalpel))
+	if(W.iswirecutter() || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, "<span class='notice'>\The [src] have already been clipped!</span>")
 			update_icon()
@@ -475,13 +480,6 @@
 	var/success
 	if(istype(user, /mob/living/silicon/robot/drone))
 		var/mob/living/silicon/robot/drone/D = user
-		if(D.hat)
-			success = 2
-		else
-			D.wear_hat(src)
-			success = 1
-	else if(istype(user, /mob/living/carbon/alien/diona))
-		var/mob/living/carbon/alien/diona/D = user
 		if(D.hat)
 			success = 2
 		else
@@ -650,7 +648,7 @@
 
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/knife)))
+	if(can_hold_knife && is_type_in_list(I, list(/obj/item/material/shard, /obj/item/material/kitchen/utensil, /obj/item/material/knife)))
 		if(holding)
 			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
 			return
@@ -703,7 +701,7 @@
 	name = "suit"
 	var/fire_resist = T0C+100
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-	allowed = list(/obj/item/weapon/tank/emergency_oxygen)
+	allowed = list(/obj/item/tank/emergency_oxygen)
 	armor = null
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"

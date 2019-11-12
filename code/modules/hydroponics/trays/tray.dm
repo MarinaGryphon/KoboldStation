@@ -132,17 +132,6 @@
 		)
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
-	if (istype(usr, /mob/living/carbon/alien/diona))//A diona alt+clicking feeds the plant
-
-		if (closed_system)
-			to_chat(usr, "The lid is closed, you don't have hands to open it and reach the plants inside!")
-			return
-		var/mob/living/carbon/alien/diona/nymph = usr
-		if(nymph.nutrition > 100 && nutrilevel < 10)
-			nymph.adjustNutritionLoss((10-nutrilevel)*5)
-			nutrilevel = 10
-			nymph.visible_message("<font color='blue'><b>[nymph]</b> secretes a trickle of green liquid, refilling [src].</font>","<font color='blue'>You secrete a trickle of green liquid, refilling [src].</font>")
-		return//Nymphs cant open and close lids
 	if(mechanical && !usr.incapacitated() && Adjacent(usr))
 		close_lid(usr)
 		return 1
@@ -160,34 +149,6 @@
 	if(response == "Yes")
 		harvest()
 	return
-
-/obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
-
-	// Why did I ever think this was a good idea. TODO: move this onto the nymph mob.
-	if(istype(user,/mob/living/carbon/alien/diona))
-		var/mob/living/carbon/alien/diona/nymph = user
-
-		if (closed_system)
-			to_chat(user, "The lid is closed, you don't have hands to open it and reach the plants inside!")
-			return
-		if(nymph.stat == DEAD || nymph.paralysis || nymph.weakened || nymph.stunned || nymph.restrained())
-			return
-		if(weedlevel > 0)
-			nymph.ingested.add_reagent("nutriment", weedlevel/6)
-			weedlevel = 0
-			nymph.visible_message("<font color='blue'><b>[nymph]</b> roots through [src], ripping out weeds and eating them noisily.</font>","<font color='blue'>You root through [src], ripping out weeds and eating them noisily.</font>")
-			return
-		if (dead)//Let nymphs eat dead plants
-			nymph.ingested.add_reagent("nutriment", 1)
-			nymph.visible_message("<font color='blue'><b>[nymph]</b> rips out the dead plants from [src], and loudly munches them.</font>","<font color='blue'>You root out the dead plants in [src], eating them with loud chewing sounds.</font>")
-			remove_dead(user)
-			return
-		if (harvest)
-			harvest(user)
-			return
-		else
-			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
-		return
 
 /obj/machinery/portable_atmospherics/hydroponics/New()
 	..()
@@ -446,8 +407,8 @@
 /obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 	//A special case for if the container has only water, for manual watering with buckets
-	if (istype(O,/obj/item/weapon/reagent_containers))
-		var/obj/item/weapon/reagent_containers/RC = O
+	if (istype(O,/obj/item/reagent_containers))
+		var/obj/item/reagent_containers/RC = O
 		if (RC.reagents.reagent_list.len == 1)
 			if (RC.reagents.has_reagent("water", 1))
 				if (waterlevel < maxWaterLevel)
@@ -462,7 +423,7 @@
 	if (O.is_open_container())
 		return 0
 
-	if(O.iswirecutter() || istype(O, /obj/item/weapon/scalpel))
+	if(O.iswirecutter() || istype(O, /obj/item/scalpel))
 
 		if(!seed)
 			to_chat(user, "There is nothing to take a sample from in \the [src].")
@@ -490,9 +451,9 @@
 
 		return
 
-	else if(istype(O, /obj/item/weapon/reagent_containers/syringe))
+	else if(istype(O, /obj/item/reagent_containers/syringe))
 
-		var/obj/item/weapon/reagent_containers/syringe/S = O
+		var/obj/item/reagent_containers/syringe/S = O
 
 		if (S.mode == 1)
 			if(seed)
@@ -536,7 +497,7 @@
 		else
 			to_chat(user, "<span class='danger'>\The [src] already has seeds in it!</span>")
 
-	else if (istype(O, /obj/item/weapon/material/minihoe))  // The minihoe
+	else if (istype(O, /obj/item/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
 			user.visible_message("<span class='danger'>[user] starts uprooting the weeds.</span>", "<span class='danger'>You remove the weeds from the [src].</span>")
@@ -545,19 +506,19 @@
 		else
 			to_chat(user, "<span class='danger'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
-	else if (istype(O, /obj/item/weapon/storage/bag/plants))
+	else if (istype(O, /obj/item/storage/bag/plants))
 
 		attack_hand(user)
 
-		var/obj/item/weapon/storage/bag/plants/S = O
-		for (var/obj/item/weapon/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
+		var/obj/item/storage/bag/plants/S = O
+		for (var/obj/item/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
 			if(!S.can_be_inserted(G))
 				return
 			S.handle_item_insertion(G, 1)
 
-	else if ( istype(O, /obj/item/weapon/plantspray) )
+	else if ( istype(O, /obj/item/plantspray) )
 
-		var/obj/item/weapon/plantspray/spray = O
+		var/obj/item/plantspray/spray = O
 		user.remove_from_mob(O)
 		toxins += spray.toxicity
 		pestlevel -= spray.pest_kill_str

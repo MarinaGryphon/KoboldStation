@@ -5,9 +5,9 @@
 	icon_state = "compressor"
 	anchored = 1
 	density = 1
-	var/obj/machinery/power/turbine/turbine
-	var/datum/gas_mixture/gas_contained
-	var/turf/simulated/inturf
+	var/tmp/obj/machinery/power/turbine/turbine
+	var/tmp/datum/gas_mixture/gas_contained
+	var/tmp/turf/simulated/inturf
 	var/starter = 0
 	var/rpm = 0
 	var/rpmtarget = 0
@@ -21,9 +21,9 @@
 	icon_state = "turbine"
 	anchored = 1
 	density = 1
-	var/obj/machinery/compressor/compressor
-	var/turf/simulated/outturf
-	var/lastgen
+	var/tmp/obj/machinery/compressor/compressor
+	var/tmp/turf/simulated/outturf
+	var/tmp/lastgen
 
 /obj/machinery/computer/turbine_computer
 	name = "Gas turbine control computer"
@@ -31,11 +31,11 @@
 	icon = 'icons/obj/computer.dmi'
 
 	icon_screen = "turbinecomp"
-	circuit = /obj/item/weapon/circuitboard/turbine_control
+	circuit = /obj/item/circuitboard/turbine_control
 	anchored = 1
 	density = 1
-	var/obj/machinery/compressor/compressor
-	var/list/obj/machinery/door/blast/doors
+	var/tmp/obj/machinery/compressor/compressor
+	var/tmp/list/obj/machinery/door/blast/doors
 	var/id = 0
 	var/door_status = 0
 

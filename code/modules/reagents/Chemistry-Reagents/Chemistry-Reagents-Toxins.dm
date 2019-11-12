@@ -44,7 +44,7 @@
 	taste_description = "fish"
 
 /datum/reagent/toxin/carpotoxin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien && alien == IS_UNATHI)
+	if(alien && alien != IS_HUMAN)
 		return
 	..()
 
@@ -72,50 +72,12 @@
 	breathe_mul = 2
 	fallback_specific_heat = 12 //Phoron is very dense and can hold a lot of energy.
 
-/datum/reagent/toxin/phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-
-		var/obj/item/organ/parasite/PA = H.internal_organs_by_name["blackkois"]
-		if((istype(PA) && PA.stage >= 3))
-			H.heal_organ_damage(2 * removed, 2 * removed)
-			H.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
-			H.adjustToxLoss(-2 * removed)
-			return
-
-		if(alien == IS_VAURCA && H.species.has_organ["filtration bit"])
-			metabolism = REM * 20 //vaurcae metabolise phoron faster than other species - good for them if their filter isn't broken.
-			var/obj/item/organ/vaurca/filtrationbit/F = H.internal_organs_by_name["filtration bit"]
-			if(isnull(F))
-				..()
-			else if(F.is_broken())
-				..()
-			else if(H.species.has_organ["phoron reserve tank"])
-				var/obj/item/organ/vaurca/preserve/P = H.internal_organs_by_name["phoron reserve tank"]
-				if(isnull(P))
-					return
-				else if(P.is_broken())
-					return
-				else
-					P.air_contents.adjust_gas("phoron", (0.5*removed))
-
-		else
-			..()
-	else
-		..()
-
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	. = ..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/parasite/P = H.internal_organs_by_name["blackkois"]
-		if((alien == IS_VAURCA) || (istype(P) && P.stage >= 3))
-			return
-
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
 	if(prob(50))
 		M.pl_effects()
@@ -134,40 +96,6 @@
 	color = "#7C4876"
 	strength = 30
 	default_temperature = 130 //Kelvin
-
-/datum/reagent/toxin/cardox
-	name = "Cardox"
-	id = "cardox"
-	description = "Cardox is an mildly toxic, expensive, NanoTrasen designed cleaner intended to eliminate liquid phoron stains from suits."
-	reagent_state = LIQUID
-	color = "#EEEEEE"
-	metabolism = 0.3 // 100 seconds for 30 units to metabolise.
-	taste_description = "cherry"
-	conflicting_reagent = /datum/reagent/toxin/phoron
-	strength = 1
-
-/datum/reagent/toxin/cardox/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(!istype(M))
-		return
-
-	var/obj/item/organ/parasite/P = M.internal_organs_by_name["blackkois"]
-	if((alien == IS_VAURCA) || (istype(P) && P.stage >= 3))
-		M.adjustToxLoss(removed * strength*2)
-	else
-		M.adjustToxLoss(removed * strength)
-
-/datum/reagent/toxin/cardox/affect_conflicting(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagent/conflicting)
-	var/amount = min(removed, conflicting.volume)
-	holder.remove_reagent(conflicting.id, amount)
-
-/datum/reagent/toxin/cardox/touch_turf(var/turf/T, var/amount)
-
-	if(amount >= 1)
-		for(var/mob/living/carbon/slime/M in T)
-			M.adjustToxLoss(amount*10)
-
-	var/datum/gas_mixture/environment = T.return_air()
-	environment.adjust_gas("phoron",-amount*10)
 
 /datum/reagent/toxin/cyanide //Fast and Lethal
 	name = "Cyanide"
@@ -267,13 +195,6 @@
 	taste_mult = 0.5
 	unaffected_species = IS_MACHINE
 
-/datum/reagent/toxin/fertilizer/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		M.adjustNutritionLoss(-removed*3)
-		//Fertilizer is good for plants
-	else
-		..()
-
 /datum/reagent/toxin/fertilizer/eznutrient
 	name = "EZ Nutrient"
 	id = "eznutrient"
@@ -357,11 +278,6 @@
 		alien_weeds.healthcheck()
 	else if(istype(O, /obj/effect/plant))
 		qdel(O)
-
-/datum/reagent/toxin/plantbgone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(alien == IS_DIONA)
-		M.adjustToxLoss(30 * removed)
 
 //Affect touch automatically transfers to affect_blood, so we'll apply the damage there, after accounting for permeability
 /datum/reagent/toxin/plantbgone/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
@@ -558,22 +474,6 @@
 		new_mob.key = M.key
 	qdel(M)
 
-/datum/reagent/nanites
-	name = "Nanomachines"
-	id = "nanites"
-	description = "Microscopic construction robots."
-	reagent_state = LIQUID
-	color = "#535E66"
-	taste_description = "slimey metal"
-	fallback_specific_heat = 3
-
-/datum/reagent/nanites/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(prob(10))
-		M.contract_disease(new /datum/disease/robotic_transformation(0), 1) //What
-
-/datum/reagent/nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.contract_disease(new /datum/disease/robotic_transformation(0), 1)
-
 /datum/reagent/toxin/undead
 	name = "Undead Ichor"
 	id = "undead_ichor"
@@ -629,7 +529,7 @@
 	strength = 5
 	taste_description = "bitterness"
 	metabolism = REM * 2
-	unaffected_species = IS_DIONA | IS_MACHINE
+	unaffected_species = IS_MACHINE
 	var/datum/modifier/modifier
 
 /datum/reagent/toxin/berserk/affect_blood(var/mob/living/carbon/M, var/removed)
@@ -656,55 +556,10 @@
 	strength = 5
 	taste_description = "acid"
 	metabolism = REM
-	unaffected_species = IS_DIONA | IS_MACHINE
+	unaffected_species = IS_MACHINE
 
 /datum/reagent/toxin/spectrocybin/affect_blood(var/mob/living/carbon/M, var/removed)
 	..()
 	M.hallucination = max(M.hallucination, 50)
 	if(prob(10))
 		M.see_invisible = SEE_INVISIBLE_CULT
-
-/datum/reagent/toxin/trioxin
-	name = "Trioxin"
-	id = "trioxin"
-	description = "A synthetic compound of unknown origins, designated originally as a performance enhancing substance."
-	reagent_state = LIQUID
-	color = "#E7E146"
-	strength = 1
-	taste_description = "old eggs"
-	metabolism = REM
-	unaffected_species = IS_DIONA | IS_MACHINE | IS_UNDEAD
-	affects_dead = TRUE
-
-/datum/reagent/toxin/trioxin/affect_blood(var/mob/living/carbon/M, var/removed)
-	..()
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-
-		if(H.reagents.has_reagent("deltamivir", 15))
-			return
-
-		if(!H.internal_organs_by_name["zombie"] && prob(15))
-			var/obj/item/organ/external/affected = H.get_organ("chest")
-			var/obj/item/organ/parasite/zombie/infest = new()
-			infest.replaced(H, affected)
-
-		if(H.species.zombie_type)
-			if(!H.internal_organs_by_name["brain"])	//destroying the brain stops trioxin from bringing the dead back to life
-				return
-
-			if(H && H.stat != DEAD)
-				return
-
-			for(var/datum/language/L in H.languages)
-				H.remove_language(L.name)
-
-			var/r = H.r_skin
-			var/g = H.g_skin
-			var/b = H.b_skin
-
-			H.set_species(H.species.zombie_type, 0, 0, 0)
-			H.revive()
-			H.change_skin_color(r, g, b)
-			playsound(H.loc, 'sound/hallucinations/far_noise.ogg', 50, 1)
-			to_chat(H,"<font size='3'><span class='cult'>You return back to life as the undead, all that is left is the hunger to consume the living and the will to spread the infection.</font></span>")

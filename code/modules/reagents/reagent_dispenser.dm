@@ -39,7 +39,7 @@
 
 /obj/structure/reagent_dispensers/attackby(obj/item/O as obj, mob/user as mob)
 
-	var/obj/item/weapon/reagent_containers/RG = O
+	var/obj/item/reagent_containers/RG = O
 	if (istype(RG) && RG.is_open_container())
 
 		var/atype

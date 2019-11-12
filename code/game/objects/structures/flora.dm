@@ -5,7 +5,27 @@
 	density = 1
 	pixel_x = -16
 	layer = 9
+	var/tmp/being_cut = FALSE
 
+/obj/structure/flora/tree/attackby(obj/item/W, mob/user)
+	if(W.edge || W.sharp && W.force > 12)
+		if(being_cut)
+			return
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * (12/W.force))
+		being_cut = TRUE
+		user.visible_message("<span class='notice'>\The [user] begins to chop down \the [src].</span>")
+		user.do_attack_animation(src)
+		animate_shake()
+		if(do_after(user, 20 * (12/W.force), act_target = src))
+			user.visible_message("<span class='notice'>\The [user] chops down \the [src].</span>")
+			playsound(loc, 'sound/effects/woodcutting.ogg', 50, 1)
+			var/obj/item/stack/material/wood/T = new(src.loc)
+			T.amount = 8
+			qdel(src)
+			return
+		being_cut = FALSE
+		return ..()
+	. = ..()
 /obj/structure/flora/tree/pine
 	name = "pine tree"
 	icon = 'icons/obj/flora/pinetrees.dmi'
@@ -31,47 +51,6 @@
 /obj/structure/flora/tree/dead/New()
 	..()
 	icon_state = "tree_[rand(1, 6)]"
-
-
-//grass
-/obj/structure/flora/grass
-	name = "grass"
-	icon = 'icons/obj/flora/snowflora.dmi'
-	anchored = 1
-
-/obj/structure/flora/grass/brown
-	icon_state = "snowgrass1bb"
-
-/obj/structure/flora/grass/brown/New()
-	..()
-	icon_state = "snowgrass[rand(1, 3)]bb"
-
-
-/obj/structure/flora/grass/green
-	icon_state = "snowgrass1gb"
-
-/obj/structure/flora/grass/green/New()
-	..()
-	icon_state = "snowgrass[rand(1, 3)]gb"
-
-/obj/structure/flora/grass/both
-	icon_state = "snowgrassall1"
-
-/obj/structure/flora/grass/both/New()
-	..()
-	icon_state = "snowgrassall[rand(1, 3)]"
-
-
-//bushes
-/obj/structure/flora/bush
-	name = "bush"
-	icon = 'icons/obj/flora/snowflora.dmi'
-	icon_state = "snowbush1"
-	anchored = 1
-
-/obj/structure/flora/bush/New()
-	..()
-	icon_state = "snowbush[rand(1, 6)]"
 
 /obj/structure/flora/pottedplant
 	name = "potted plant"
@@ -126,12 +105,8 @@
 		if(!stored_item)
 			to_chat(user,"<span class='notice'>There is nothing hidden in [src].</span>")
 		else
-			if(istype(stored_item, /obj/item/device/paicard))
-				stored_item.forceMove(src.loc)
-				to_chat(user,"<span class='notice'>You reveal \the [stored_item] from [src].</span>")
-			else
-				user.put_in_hands(stored_item)
-				to_chat(user,"<span class='notice'>You take \the [stored_item] from [src].</span>")
+			user.put_in_hands(stored_item)
+			to_chat(user,"<span class='notice'>You take \the [stored_item] from [src].</span>")
 			stored_item = null
 
 /obj/structure/flora/pottedplant/bullet_act(var/obj/item/projectile/Proj)
@@ -209,8 +184,8 @@
 	..()
 	icon_state = "firstbush_[rand(1, 4)]"
 
-/obj/structure/flora/ausbushes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W,/obj/item/weapon/material/scythe/sickle))
+/obj/structure/flora/ausbushes/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(istype(W,/obj/item/material/scythe/sickle))
 		if(prob(50))
 			new /obj/item/stack/material/wood(get_turf(src), 2)
 		if(prob(40))

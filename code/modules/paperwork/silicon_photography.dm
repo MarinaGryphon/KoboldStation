@@ -4,7 +4,7 @@
 /obj/item/device/camera/siliconcam
 	var/in_camera_mode = 0
 	var/photos_taken = 0
-	var/list/obj/item/weapon/photo/aipictures = list()
+	var/list/obj/item/photo/aipictures = list()
 
 /obj/item/device/camera/siliconcam/ai_camera //camera AI can take pictures with
 	name = "AI photo camera"
@@ -41,18 +41,18 @@
 	if(cam.aipictures.len == 0)
 		to_chat(usr, "<span class='notice'>No images saved</span>")
 		return
-	for(var/obj/item/weapon/photo/t in cam.aipictures)
+	for(var/obj/item/photo/t in cam.aipictures)
 		nametemp += t.name
 	find = input("Select image (numbered in order taken)") as null|anything in nametemp
 	if(!find)
 		return
 
-	for(var/obj/item/weapon/photo/q in cam.aipictures)
+	for(var/obj/item/photo/q in cam.aipictures)
 		if(q.name == find)
 			return q
 
 /obj/item/device/camera/siliconcam/proc/viewpictures()
-	var/obj/item/weapon/photo/selection = selectpicture()
+	var/obj/item/photo/selection = selectpicture()
 
 	if(!selection)
 		return

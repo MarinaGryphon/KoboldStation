@@ -69,7 +69,7 @@ Follow by example and make good judgement based on length which list to include 
 		name = "Bald"   // try to capitalize the names please~
 		icon_state = "bald" // you do not need to define _s or _l sub-states, game automatically does this for you
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Kobold")
 		length = 0
 		chatname = "bald head" //aim to keep these lowercase so they fit into the hair tugging message
 
@@ -1763,7 +1763,7 @@ Follow by example and make good judgement based on length which list to include 
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox")
+		species_allowed = list("Human","Unathi", "Kobold","Tajara","Skrell","Vox")
 
 	threeOclock
 		name = "3 O'clock Shadow"
@@ -1957,7 +1957,7 @@ Follow by example and make good judgement based on length which list to include 
 		icon = 'icons/mob/human_face/unathi_hair.dmi'
 		name = "Unathi Aquatic Frills"
 		icon_state = "unathi_aquaticfrills"
-		species_allowed = list("Unathi")
+		species_allowed = list("Unathi", "Kobold")
 		length = 0
 		chatname = "frills"
 
@@ -2392,7 +2392,7 @@ Follow by example and make good judgement based on length which list to include 
 		icon = 'icons/mob/human_face/unathi_hair.dmi'
 		name = "Unathi Aquatic Frills"
 		icon_state = "facial_aquaticfrills"
-		species_allowed = list("Unathi")
+		species_allowed = list("Unathi", "Kobold")
 		gender = NEUTER
 
 		una_bighorns
@@ -2705,7 +2705,7 @@ Follow by example and make good judgement based on length which list to include 
 		name = "Socks Coloration (Unathi)"
 		icon_state = "una_pawsocks"
 		body_parts = list("l_foot","r_foot","l_leg","r_leg","l_arm","r_arm","l_hand","r_hand")
-		species_allowed = list("Unathi")
+		species_allowed = list("Unathi", "Kobold")
 
 	belly_hands_feet
 		name = "Hands,Feet,Belly Color (Minor)"
@@ -2729,13 +2729,13 @@ Follow by example and make good judgement based on length which list to include 
 		name = "Color Bands"
 		icon_state = "bands"
 		body_parts = list("l_foot","r_foot","l_leg","r_leg","l_arm","r_arm","l_hand","r_hand","chest","groin")
-		species_allowed = list("Tajara", "Zhan-Khazan Tajara", "M'sai Tajara", "Unathi")
+		species_allowed = list("Tajara", "Zhan-Khazan Tajara", "M'sai Tajara", "Unathi", "Kobold")
 
 	bandsface
 		name = "Color Bands (Face)"
 		icon_state = "bandsface"
 		body_parts = list("head")
-		species_allowed = list("Tajara", "Zhan-Khazan Tajara", "M'sai Tajara", "Unathi")
+		species_allowed = list("Tajara", "Zhan-Khazan Tajara", "M'sai Tajara", "Unathi", "Kobold")
 
 	tigerhead
 		name = "Tiger Stripes (Head, Minor)"
@@ -2753,7 +2753,7 @@ Follow by example and make good judgement based on length which list to include 
 		name = "Back Stripe"
 		icon_state = "backstripe"
 		body_parts = list("chest")
-		species_allowed = list("Tajara", "Zhan-Khazan Tajara", "M'sai Tajara", "Unathi")
+		species_allowed = list("Tajara", "Zhan-Khazan Tajara", "M'sai Tajara", "Unathi", "Kobold")
 
 	taj_nose
 		name = "Nose Color"
@@ -2783,19 +2783,19 @@ Follow by example and make good judgement based on length which list to include 
 		name = "Face Color"
 		icon_state = "una_face"
 		body_parts = list("head")
-		species_allowed = list("Unathi")
+		species_allowed = list("Unathi", "Kobold")
 
 	una_facelow
 		name = "Face Color Low"
 		icon_state = "una_facelow"
 		body_parts = list("head")
-		species_allowed = list("Unathi")
+		species_allowed = list("Unathi", "Kobold")
 
 	una_scutes
 		name = "Scutes"
 		icon_state = "una_scutes"
 		body_parts = list("chest")
-		species_allowed = list("Unathi")
+		species_allowed = list("Unathi", "Kobold")
 
 	spelunker
 		name = "Spelunker"

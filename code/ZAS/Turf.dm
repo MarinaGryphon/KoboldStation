@@ -1,14 +1,31 @@
-/turf/simulated/var/zone/zone
-/turf/simulated/var/open_directions
+/turf/simulated/var/tmp/zone/zone
+/turf/simulated/var/tmp/open_directions
 
-/turf/var/needs_air_update = 0
-/turf/var/datum/gas_mixture/air
+/turf/var/tmp/needs_air_update = 0
+/turf/var/tmp/datum/gas_mixture/air
 
 /turf/simulated/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	if (LAZYLEN(graphic_add))
 		add_overlay(graphic_add.Copy(), TRUE)	// We need to copy because SSoverlay will mutate this list & add appearance objects.
 	if(LAZYLEN(graphic_remove))
 		cut_overlay(graphic_remove.Copy(), TRUE)
+
+/turf/simulated/Write(var/savefile/F)
+	var/loverlay = lighting_overlay
+	lighting_overlay = null
+	contents -= loverlay
+	. = ..() // can't save lighting overlays!
+	lighting_overlay = loverlay
+	contents += loverlay
+	if(!istype(air))
+		return
+	for(var/g in air.gas)
+		if(!(g in vars))
+			continue
+		if(round(air.gas[g]) == round(initial(vars[g])))
+			continue
+		F[g] << air.gas[g]
+	temperature = air.temperature
 
 /turf/proc/update_air_properties()
 	var/block

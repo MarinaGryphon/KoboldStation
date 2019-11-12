@@ -33,7 +33,7 @@
 	return ..()
 
 /obj/machinery/case_button/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/weapon/card))
+	if(istype(W, /obj/item/card))
 		if(src.allowed(user))
 			covered = !covered //Enable / Disable the forcefield
 		update_use_power(covered + 1) //Update the power usage

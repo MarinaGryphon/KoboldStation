@@ -151,17 +151,17 @@ There are several things that need to be remembered:
 
 		add_overlay(ovr)
 
-	if (lying_prev != lying || size_multiplier != 1)
+	if (lying_prev != lying || size_multiplier_x != 1 || size_multiplier_y != 1)
 		if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 			var/matrix/M = matrix()
 			M.Turn(90)
-			M.Scale(size_multiplier)
+			M.Scale(size_multiplier_x, size_multiplier_y)
 			M.Translate(1,-6)
 			animate(src, transform = M, time = ANIM_LYING_TIME)
 		else
 			var/matrix/M = matrix()
-			M.Scale(size_multiplier)
-			M.Translate(0, 16*(size_multiplier-1))
+			M.Scale(size_multiplier_x, size_multiplier_y)
+			M.Translate(0, 16*(size_multiplier_y-1))
 			animate(src, transform = M, time = ANIM_LYING_TIME)
 
 	compile_overlays()
@@ -1213,6 +1213,14 @@ There are several things that need to be remembered:
 		//generate a new one
 		tail_icon = new/icon(icon = (species.tail_animation? species.tail_animation : 'icons/effects/species.dmi'))
 		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+		if(species.tail_transform["EAST"] > 0)			
+			tail_icon.Shift(EAST, species.tail_transform["EAST"])
+		else if(species.tail_transform["EAST"] < 0)
+			tail_icon.Shift(WEST, -species.tail_transform["EAST"])
+		if(species.tail_transform["NORTH"] > 0)
+			tail_icon.Shift(EAST, species.tail_transform["NORTH"])
+		else if(species.tail_transform["NORTH"] < 0)
+			tail_icon.Shift(SOUTH, -species.tail_transform["NORTH"])
 		// The following will not work with animated tails.
 		if(species.tail_hair)
 			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.tail]_[species.tail_hair]")

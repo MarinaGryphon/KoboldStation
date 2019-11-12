@@ -29,7 +29,7 @@ var/list/floor_light_cache = list()
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 	else if(W.iswelder() && (damaged || (stat & BROKEN)))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
 			return
@@ -173,10 +173,6 @@ var/list/floor_light_cache = list()
 	if(A)
 		on = 0
 	return ..()
-
-/obj/machinery/floor_light/cultify()
-	default_light_colour = "#FF0000"
-	update_brightness()
 
 /obj/machinery/floor_light/dance
 	name = "dance floor"

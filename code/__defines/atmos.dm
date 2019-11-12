@@ -97,3 +97,10 @@
 #define ATMOSTANK_NITROUSOXIDE  10000 // N2O doesn't have a real useful use, i guess it's on station just to allow refilling of sec's riot control canisters?
 
 #define ADIABATIC_EXPONENT 0.667 //Actually adiabatic exponent - 1.
+
+
+// Defines how much of certain gases the planet starts with.
+#define MOLES_OXYGEN_NAARVAT		MOLES_CELLSTANDARD * 0.32
+#define MOLES_NITROGEN_NAARVAT		MOLES_CELLSTANDARD * 0.62
+#define MOLES_CARBONDIOXIDE_NAARVAT	MOLES_CELLSTANDARD * 0.08
+#define TEMPERATURE_NAARVAT			T0C + 55

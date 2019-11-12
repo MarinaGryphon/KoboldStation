@@ -49,6 +49,9 @@
 	anchored = TRUE
 	mouse_opacity = FALSE
 
+/atom/movable/openspace/Write(var/savefile/S)
+	return // no
+
 /atom/movable/openspace/can_fall()
 	return FALSE
 

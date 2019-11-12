@@ -1,5 +1,5 @@
 /atom
-	var/initialized = FALSE
+	var/tmp/initialized = FALSE
 	var/update_icon_on_init	// Default to 'no'.
 
 /atom/New(loc, ...)
@@ -27,6 +27,14 @@
 
 	if (light_power && light_range)
 		update_light()
+	
+	if(LAZYLEN(reagents_to_add))
+		create_reagents(0)
+		for(var/v in reagents_to_add)
+			reagents.maximum_volume += reagents_to_add[v]
+			reagents.add_reagent(v, reagents_to_add[v], LAZYACCESS(reagent_data, v))
+		LAZYCLEARLIST(reagents_to_add)
+		LAZYCLEARLIST(reagent_data)
 
 	if (opacity && isturf(loc))
 		var/turf/T = loc

@@ -2,21 +2,16 @@
 /obj/item/clothing/ring/material
 	icon = 'icons/obj/clothing/rings.dmi'
 	icon_state = "material"
+	default_material = DEFAULT_WALL_MATERIAL
 
 /obj/item/clothing/ring/material/Initialize(var/mapload, var/new_material)
-	. = ..(mapload)
-	if(!new_material)
-		new_material = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(new_material)
+	. = ..(mapload, new_material)
 	if(!istype(material))
 		qdel(src)
 		return
 	name = "[material.display_name] ring"
 	desc = "A ring made from [material.display_name]."
 	color = material.icon_colour
-
-/obj/item/clothing/ring/material/get_material()
-	return material
 
 /obj/item/clothing/ring/material/wood/Initialize(var/mapload)
 	. = ..(mapload, "wood")

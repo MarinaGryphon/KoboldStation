@@ -26,8 +26,8 @@
 	economic_modifier = 7
 
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_UNATHI, LANGUAGE_AZAZIBA)
-	name_language = LANGUAGE_UNATHI
+	secondary_langs = list(LANGUAGE_LIZARD)
+	name_language = LANGUAGE_LIZARD
 	stamina	=	120			  // Unathi have the shortest but fastest sprint of all
 	sprint_speed_factor = 3.2
 	stamina_recovery = 5
@@ -60,12 +60,12 @@
 	)
 
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
 
-	reagent_tag = IS_UNATHI
+	reagent_tag = IS_LIZARD
 	base_color = "#066000"
 
 	heat_discomfort_level = 295

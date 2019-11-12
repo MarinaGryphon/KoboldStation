@@ -38,21 +38,21 @@
 	is_critical = 1
 
 /obj/machinery/power/apc/high
-	cell_type = /obj/item/weapon/cell/high
+	cell_type = /obj/item/cell/high
 
 /obj/machinery/power/apc/isolation
-	cell_type = /obj/item/weapon/cell
+	cell_type = /obj/item/cell
 	req_access = null
 	req_one_access = list(access_engine_equip,access_research,access_xenobiology)
 
 
 /obj/machinery/power/apc/vault
-	cell_type = /obj/item/weapon/cell
+	cell_type = /obj/item/cell
 	req_access = list(access_captain)
 
 // Construction site APC, starts turned off
 /obj/machinery/power/apc/high/inactive
-	cell_type = /obj/item/weapon/cell/high
+	cell_type = /obj/item/cell/high
 	lighting = 0
 	equipment = 0
 	environ = 0
@@ -61,13 +61,13 @@
 	start_charge = 100
 
 /obj/machinery/power/apc/super
-	cell_type = /obj/item/weapon/cell/super
+	cell_type = /obj/item/cell/super
 
 /obj/machinery/power/apc/super/critical
 	is_critical = 1
 
 /obj/machinery/power/apc/hyper
-	cell_type = /obj/item/weapon/cell/hyper
+	cell_type = /obj/item/cell/hyper
 
 /obj/machinery/power/apc
 	name = "area power controller"
@@ -78,14 +78,14 @@
 	use_power = 0
 	req_access = list(access_engine_equip)
 	gfi_layer_rotation = GFI_ROTATION_DEFDIR
-	var/area/area
+	var/tmp/area/area
 	var/areastring = null
-	var/obj/item/weapon/cell/cell
+	var/tmp/obj/item/cell/cell
 	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 	var/cellused = 0
 	var/initalchargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 	var/start_charge = 90				// initial cell charge %
-	var/cell_type = /obj/item/weapon/cell/apc
+	var/cell_type = /obj/item/cell/apc
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
 	var/shorted = 0
 	var/night_mode = 0 // Determines if the light level is set to dimmed or not
@@ -96,19 +96,19 @@
 	var/operating = 1
 	var/charging = 0
 	var/chargemode = 1
-	var/chargecount = 0
+	var/tmp/chargecount = 0
 	var/locked = 1
 	var/coverlocked = 1
 	var/aidisabled = 0
-	var/obj/machinery/power/terminal/terminal = null
-	var/lastused_light = 0
-	var/lastused_equip = 0
-	var/static/list/hacked_ipcs
-	var/lastused_environ = 0
-	var/lastused_charging = 0
-	var/lastused_total = 0
+	var/tmp/obj/machinery/power/terminal/terminal = null
+	var/tmp/lastused_light = 0
+	var/tmp/lastused_equip = 0
+	var/tmp/static/list/hacked_ipcs
+	var/tmp/lastused_environ = 0
+	var/tmp/lastused_charging = 0
+	var/tmp/lastused_total = 0
 	var/main_status = 0
-	var/mob/living/silicon/ai/hacker = null // Malfunction var. If set AI hacked the APC and has full control.
+	var/tmp/mob/living/silicon/ai/hacker = null // Malfunction var. If set AI hacked the APC and has full control.
 	var/wiresexposed = 0
 	powernet = 0		// set so that APCs aren't found as powernet nodes //Hackish, Horrible, was like this before I changed it :(
 	var/debug= 0
@@ -116,25 +116,25 @@
 	var/has_electronics = 0 // 0 - none, 1 - plugged in, 2 - secured by screwdriver
 	var/beenhit = 0 // used for counting how many times it has been hit, used for Aliens at the moment
 	var/longtermpower = 10
-	var/datum/wires/apc/wires = null
+	var/tmp/datum/wires/apc/wires = null
 	var/update_state = -1
 	var/update_overlay = -1
 	var/is_critical = 0
-	var/global/status_overlays = 0
-	var/updating_icon = 0
-	var/failure_timer = 0
-	var/force_update = 0
-	var/global/list/status_overlays_lock
-	var/global/list/status_overlays_charging
-	var/global/list/status_overlays_equipment
-	var/global/list/status_overlays_lighting
-	var/global/list/status_overlays_environ
+	var/tmp/global/status_overlays = 0
+	var/tmp/updating_icon = 0
+	var/tmp/failure_timer = 0
+	var/tmp/force_update = 0
+	var/tmp/global/list/status_overlays_lock
+	var/tmp/global/list/status_overlays_charging
+	var/tmp/global/list/status_overlays_equipment
+	var/tmp/global/list/status_overlays_lighting
+	var/tmp/global/list/status_overlays_environ
 
 	var/emergency_lights = FALSE
 
-	var/time = 0
-	var/charge_mode = 0
-	var/last_time = 1
+	var/tmp/time = 0
+	var/tmp/charge_mode = 0
+	var/tmp/last_time = 1
 
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
@@ -194,20 +194,17 @@
 
 /obj/machinery/power/apc/Destroy()
 	src.update()
-	area.apc = null
-	area.power_light = 0
-	area.power_equip = 0
-	area.power_environ = 0
-	area.power_change()
+	if(area)
+		area.apc = null
+		area.power_light = 0
+		area.power_equip = 0
+		area.power_environ = 0
+		area.power_change()
 	QDEL_NULL(wires)
 	QDEL_NULL(terminal)
 	if(cell)
 		cell.forceMove(loc)
 		cell = null
-
-	// Malf AI, removes the APC from AI's hacked APCs list.
-	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
-		hacker.hacked_apcs -= src
 
 	return ..()
 
@@ -221,10 +218,18 @@
 	terminal.set_dir(dir)
 	terminal.master = src
 
+/obj/machinery/power/apc/Write(var/savefile/S)
+	if(cell)
+		cell_type = cell.type
+		start_charge = (cell.charge / cell.maxcharge) * 100
+	if(area)
+		src.areastring = area.name
+	. = ..()
+
 /obj/machinery/power/apc/proc/init(mapload)
 	has_electronics = 2 //installed and secured
 	// is starting with a power cell installed, create it and set its charge level
-	if(cell_type)
+	if(!cell && cell_type)
 		src.cell = new cell_type(src)
 		cell.charge = start_charge * cell.maxcharge / 100.0 		// (convert percentage to actual value)
 
@@ -382,7 +387,7 @@
 			update_state |= UPDATE_OPENED1
 		if(opened==2)
 			update_state |= UPDATE_OPENED2
-	else if (emagged || failure_timer || (hacker && (hacker.system_override || prob(20))))
+	else if (emagged || failure_timer || prob(20))
 		update_state |= UPDATE_BLUESCREEN
 	else if(wiresexposed)
 		update_state |= UPDATE_WIREEXP
@@ -461,7 +466,7 @@
 						user.visible_message(\
 							"<span class='warning'>[user.name] has removed the power control board from [src.name]!</span>",\
 							"<span class='notice'>You remove the power control board.</span>")
-						new /obj/item/weapon/module/power_control(loc)
+						new /obj/item/module/power_control(loc)
 		else if (opened!=2) //cover isn't removed
 			panel_open = 0
 			opened = 0
@@ -474,8 +479,8 @@
 			opened = 1
 			panel_open = 1
 			update_icon()
-	else if (istype(W, /obj/item/weapon/gripper))//Code for allowing cyborgs to use rechargers
-		var/obj/item/weapon/gripper/Gri = W
+	else if (istype(W, /obj/item/gripper))//Code for allowing cyborgs to use rechargers
+		var/obj/item/gripper/Gri = W
 		if(opened && cell)
 			if (Gri.grip_item(cell, user))
 				cell.add_fingerprint(user)
@@ -487,7 +492,7 @@
 				charging = 0
 				src.update_icon()
 				return
-	else if	(istype(W, /obj/item/weapon/cell) && opened)	// trying to put a cell inside
+	else if	(istype(W, /obj/item/cell) && opened)	// trying to put a cell inside
 		if(cell)
 			to_chat(user, "There is a power cell already installed.")
 			return
@@ -530,7 +535,7 @@
 			to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
 			update_icon()
 
-	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))			// trying to unlock the interface with an ID card
+	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/device/pda))			// trying to unlock the interface with an ID card
 		if(emagged)
 			to_chat(user, "The interface is broken.")
 		else if(opened)
@@ -590,7 +595,7 @@
 				new /obj/item/stack/cable_coil(loc,10)
 				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 				qdel(terminal)
-	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && !((stat & BROKEN)))
+	else if (istype(W, /obj/item/module/power_control) && opened && has_electronics==0 && !((stat & BROKEN)))
 		user.visible_message("<span class='warning'>[user.name] inserts the power control board into [src].</span>", \
 							"You start to insert the power control board into the frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -599,11 +604,11 @@
 				has_electronics = 1
 				to_chat(user, "<span class='notice'>You place the power control board inside the frame.</span>")
 				qdel(W)
-	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && ((stat & BROKEN)))
+	else if (istype(W, /obj/item/module/power_control) && opened && has_electronics==0 && ((stat & BROKEN)))
 		to_chat(user, "<span class='warning'>You cannot put the board inside, the frame is damaged.</span>")
 		return
 	else if (W.iswelder() && opened && has_electronics==0 && !terminal)
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if (!WT.isOn()) return
 		if (WT.get_fuel() < 3)
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
@@ -649,10 +654,6 @@
 				"You replace the damaged APC frame with new one.")
 			qdel(W)
 			stat &= ~BROKEN
-			// Malf AI, removes the APC from AI's hacked APCs list.
-			if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
-				hacker.hacked_apcs -= src
-				hacker = null
 			if (opened==2)
 				opened = 1
 			update_icon()
@@ -670,14 +671,8 @@
 					to_chat(user, "<span class='notice'>Applied default software. Restarting APC...</span>")
 					if(do_after(user, 10/W.toolspeed SECONDS, act_target = src))
 						to_chat(user, "<span class='notice'>APC Reset. Fixes applied.</span>")
-						if(hacker)
-							hacker.hacked_apcs -= src
-							hacker = null
-							update_icon()
 						if(emagged)
 							emagged = 0
-						if(infected)
-							infected = 0
 			else
 				to_chat(user, "<span class='notice'>There has been a connection issue.</span>")
 				return
@@ -689,7 +684,7 @@
 		if ((stat & BROKEN) \
 				&& !opened \
 				&& W.iswelder() )
-			var/obj/item/weapon/weldingtool/WT = W
+			var/obj/item/weldingtool/WT = W
 			if (!WT.isOn()) return
 			if (WT.get_fuel() <1)
 				to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
@@ -1378,16 +1373,6 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 		return 1
 	else
 		return 0
-
-// Malfunction: Transfers APC under AI's control
-/obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)
-	if(!A || !A.hacked_apcs || hacker || aidisabled || A.stat == DEAD)
-		return 0
-	src.hacker = A
-	A.hacked_apcs += src
-	locked = 1
-	update_icon()
-	return 1
 
 /obj/machinery/power/apc/proc/update_time()
 

@@ -39,7 +39,7 @@
 	spell_flags = IGNOREDENSE | IGNORESPACE | NEEDSCLOTHES | Z2NOCAST | IGNOREPREV
 	cooldown_min = 600
 	cast_sound = 'sound/species/diona/gestalt_grow.ogg'
-	
+
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 3, Sp_POWER = 1)
 
 	seed_type = /datum/seed/merlin_tear
@@ -73,20 +73,3 @@
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_HARVEST_REPEAT,1)
 	set_trait(TRAIT_IMMUTABLE,1)
-
-/spell/aoe_turf/conjure/grove/gestalt
-	name = "Convert Gestalt"
-	desc = "Converts the surrounding area into a Dionaea gestalt."
-
-	school = "conjuration"
-	spell_flags = 0
-	invocation_type = SpI_EMOTE
-	invocation = "rumbles as green alien plants grow quickly along the floor."
-
-	charge_type = Sp_HOLDVAR
-
-	spell_flags = Z2NOCAST | IGNOREPREV | IGNOREDENSE
-	summon_type = list(/turf/simulated/floor/diona)
-	seed_type = /datum/seed/diona
-
-	hud_state = "wiz_diona"

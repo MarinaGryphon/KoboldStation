@@ -73,7 +73,7 @@
 		break_handcuffs()
 		return
 
-	var/obj/item/weapon/handcuffs/HC = handcuffed
+	var/obj/item/handcuffs/HC = handcuffed
 
 	//A default in case you are somehow handcuffed with something that isn't an obj/item/weapon/handcuffs type
 	var/breakouttime = 1200
@@ -146,7 +146,7 @@
 		break_legcuffs()
 		return
 
-	var/obj/item/weapon/legcuffs/HC = legcuffed
+	var/obj/item/legcuffs/HC = legcuffed
 
 	//A default in case you are somehow legcuffed with something that isn't an obj/item/weapon/legcuffs type
 	var/breakouttime = 1200

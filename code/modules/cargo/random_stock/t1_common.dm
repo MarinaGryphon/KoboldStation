@@ -460,8 +460,7 @@ STOCK_ITEM_COMMON(snacks, 4)
 		/obj/item/weapon/storage/box/sinpockets = 5,
 		/obj/item/weapon/storage/box/snack = 10,
 		/obj/item/weapon/storage/box/produce = 8,
-		/obj/item/weapon/storage/field_ration = 3,
-		/obj/item/weapon/storage/field_ration/nka = 1
+		/obj/item/weapon/storage/field_ration = 3
 	)
 
 	var/type = pickweight(snacks)
@@ -574,9 +573,6 @@ STOCK_ITEM_COMMON(mining, 2)
 		new /obj/item/weapon/mining_scanner(L)
 	if (prob(25))
 		new /obj/item/weapon/storage/box/excavation(L)
-
-STOCK_ITEM_COMMON(paicard, 2)
-	new /obj/item/device/paicard(L)
 
 STOCK_ITEM_COMMON(phoronsheets, 2)
 	new /obj/item/stack/material/phoron(L, rand(5,50))

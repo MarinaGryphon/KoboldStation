@@ -176,11 +176,7 @@ All custom items with worn sprites must follow the contained sprite system: http
 	item_state = "usiki_cane"
 	contained_sprite = TRUE
 
-<<<<<<< HEAD
 /obj/item/cane/fluff/usiki_cane/attack_self(mob/user as mob)
-=======
-/obj/item/weapon/cane/fluff/usiki_cane/attack_self(mob/user as mob)
->>>>>>> 88c99bbab58122534220d56ad89d570bebd251d2
 	if(all_languages[LANGUAGE_LIZARD] in user.languages)
 		to_chat(user, "<span class='notice'>This cane has the words \"A new and better life\" carved into one side in basic, and on the other side in Sinta'Unathi.</span>")
 	else

@@ -106,8 +106,8 @@
 "o" = (
 /obj/effect/landmark/start,
 /obj/machinery/atmospherics/trinary/filter/m_filter{
-	icon_state = "mmap";
-	dir = 1
+	dir = 1;
+	icon_state = "mmap"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/kobold/surface)
@@ -144,6 +144,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/kobold/surface)
+"u" = (
+/obj/machinery/power/solar,
+/obj/structure/cable,
+/obj/structure/cable,
+/turf/simulated/floor/planet/sand,
+/area/mine/explored)
 "w" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -27724,7 +27730,7 @@ z
 A
 H
 z
-A
+u
 H
 z
 A

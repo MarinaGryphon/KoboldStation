@@ -151,3 +151,8 @@
 	toothpaste["toothpaste and green toothbrush"] = /obj/item/storage/box/toothpaste/green
 	toothpaste["toothpaste and red toothbrush"] = /obj/item/storage/box/toothpaste/red
 	gear_tweaks += new/datum/gear_tweak/path(toothpaste)
+
+/datum/gear/lantern
+	display_name = "handheld lantern"
+	path = /obj/item/device/flashlight/lantern
+	cost = 0 

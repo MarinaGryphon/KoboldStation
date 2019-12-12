@@ -82,7 +82,7 @@
 
 /obj/machinery/optable/MouseDrop_T(obj/O as obj, mob/user as mob)
 
-	if (!istype(O, /obj/item/weapon))
+	if (!istype(O, /obj/item))
 		return
 	user.drop_from_inventory(O,get_turf(src))
 	return

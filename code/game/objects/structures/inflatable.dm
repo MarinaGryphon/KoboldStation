@@ -83,7 +83,7 @@
 	add_fingerprint(user)
 	return
 
-/obj/structure/inflatable/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/inflatable/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
 
 	if (can_puncture(W))

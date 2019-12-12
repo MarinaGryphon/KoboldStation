@@ -58,7 +58,7 @@
 	active_power_usage = 500
 	var/stage = 0
 
-/obj/machinery/telepad_cargo/attackby(obj/item/weapon/W, mob/user, params)
+/obj/machinery/telepad_cargo/attackby(obj/item/W, mob/user, params)
 	if(W.iswrench())
 		anchored = 0
 		playsound(src, W.usesound, 50, 1)

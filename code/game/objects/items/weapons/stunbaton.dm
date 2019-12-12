@@ -63,7 +63,7 @@
 	else
 		to_chat(user, "<span class='warning'>The baton does not have a power source installed.</span>")
 
-/obj/item/melee/baton/attackby(obj/item/weapon/W, mob/user)
+/obj/item/melee/baton/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cell))
 		if(!bcell)
 			user.drop_from_inventory(W,src)
@@ -211,7 +211,7 @@
 		bcell = R.cell
 	return ..()
 
-/obj/item/melee/baton/robot/attackby(obj/item/weapon/W, mob/user)
+/obj/item/melee/baton/robot/attackby(obj/item/W, mob/user)
 	return
 
 /obj/item/melee/baton/robot/arm

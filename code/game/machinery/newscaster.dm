@@ -716,7 +716,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		for (var/mob/O in hearers(5, src.loc))
 			O.show_message("<EM>[user.name]</EM> further abuses the shattered [src.name].")
 	else
-		if(istype(I, /obj/item/weapon) )
+		if(istype(I, /obj/item) )
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			var/obj/item/W = I
 			if(W.force <15)
@@ -802,7 +802,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/scribble_page = null
 	drop_sound = 'sound/items/drop/wrapper.ogg'
 
-obj/item/weapon/newspaper/attack_self(mob/user as mob)
+obj/item/newspaper/attack_self(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
 		var/dat
@@ -883,7 +883,7 @@ obj/item/weapon/newspaper/attack_self(mob/user as mob)
 		to_chat(user, "The paper is full of intelligible symbols!")
 
 
-obj/item/weapon/newspaper/Topic(href, href_list)
+obj/item/newspaper/Topic(href, href_list)
 	var/mob/living/U = usr
 	..()
 	if ((src in U.contents) || ( istype(loc, /turf) && in_range(src, U) ))
@@ -915,7 +915,7 @@ obj/item/weapon/newspaper/Topic(href, href_list)
 			src.attack_self(src.loc)
 
 
-obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
+obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.ispen())
 		if(src.scribble_page == src.curr_page)
 			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")

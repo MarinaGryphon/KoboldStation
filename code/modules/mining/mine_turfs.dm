@@ -241,7 +241,7 @@ var/list/mineral_can_smooth_with = list(
 	new /obj/effect/mineral(src, mineral)
 
 //Not even going to touch this pile of spaghetti
-/turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/mineral/attackby(obj/item/W as obj, mob/user as mob)
 
 	if (!usr.IsAdvancedToolUser())
 		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
@@ -661,7 +661,7 @@ var/list/asteroid_floor_smooth = list(
 /turf/unsimulated/floor/asteroid/is_plating()
 	return 0
 
-/turf/unsimulated/floor/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/unsimulated/floor/asteroid/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(!W || !user)
 		return 0

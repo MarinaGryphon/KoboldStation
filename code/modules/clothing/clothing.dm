@@ -356,7 +356,7 @@
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, mob/user, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
 
-/obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
+/obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
 	..()
 	if(W.iswirecutter() || istype(W, /obj/item/scalpel))
 		if (clipped)

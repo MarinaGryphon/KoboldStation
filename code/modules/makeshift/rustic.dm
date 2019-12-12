@@ -41,7 +41,7 @@
 /obj/item/device/flashlight/flare/torch/attack_self(mob/user)
 	return
 
-/obj/item/device/flashlight/flare/torch/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/flashlight/flare/torch/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(on)
 		return

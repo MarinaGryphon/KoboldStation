@@ -47,7 +47,7 @@
 		to_chat(user,"<span class='notice'>\The reagents inside [src] are already secured!</span>")
 	return
 
-/obj/item/reagent_containers/extinguisher_refill/attackby(obj/item/weapon/W, mob/user)
+/obj/item/reagent_containers/extinguisher_refill/attackby(obj/item/W, mob/user)
 	if(W.isscrewdriver() && !is_open_container())
 		to_chat(user,"<span class='notice'>Using \the [W], you unsecure the extinguisher refill cartridge's lid.</span>") // it locks shut after being secured
 		flags |= OPENCONTAINER

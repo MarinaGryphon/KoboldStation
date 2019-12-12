@@ -90,7 +90,7 @@
 
 	return ..()
 
-/obj/machinery/turretid/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/turretid/attackby(obj/item/W, mob/user)
 	if(stat & BROKEN)
 		return
 

@@ -239,7 +239,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/storage/fancy/tray/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/storage/fancy/tray/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	update_icon()
 

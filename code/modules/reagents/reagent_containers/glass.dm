@@ -50,7 +50,7 @@
 /obj/item/reagent_containers/glass/AltClick(var/mob/user)
 	set_APTFT()
 
-/obj/item/reagent_containers/glass/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/glass/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/storage/part_replacer))
 		if(!reagents || !reagents.total_volume)
 			return ..()
@@ -247,7 +247,7 @@
 	to_chat(user, "<span class='notice'>You drink heavily from \the [src].</span>")
 
 
-obj/item/weapon/reagent_containers/glass/bucket/wood
+obj/item/reagent_containers/glass/bucket/wood
 	desc = "An old wooden bucket."
 	name = "wooden bucket"
 	icon = 'icons/obj/janitor.dmi'

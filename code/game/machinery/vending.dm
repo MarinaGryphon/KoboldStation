@@ -188,7 +188,7 @@
 		to_chat(user, "You short out the product lock on \the [src]")
 		return 1
 
-/obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/vending/attackby(obj/item/W as obj, mob/user as mob)
 
 	var/obj/item/card/id/I = W.GetID()
 	var/datum/money_account/vendor_account = SSeconomy.get_department_account("Vendor")

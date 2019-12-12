@@ -15,7 +15,7 @@
 	var amount = 0 // How many sheet
 	drop_sound = 'sound/items/drop/paper.ogg'
 
-/obj/item/paper_bundle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/paper_bundle/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 
 	if (istype(W, /obj/item/paper/carbon))
@@ -56,7 +56,7 @@
 	add_fingerprint(usr)
 	return
 
-/obj/item/paper_bundle/proc/insert_sheet_at(mob/user, var/index, obj/item/weapon/sheet)
+/obj/item/paper_bundle/proc/insert_sheet_at(mob/user, var/index, obj/item/sheet)
 	if(istype(sheet, /obj/item/paper))
 		to_chat(user, "<span class='notice'>You add [(sheet.name == "paper") ? "the paper" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
 	else if(istype(sheet, /obj/item/photo))
@@ -69,7 +69,7 @@
 	if(index <= page)
 		page++
 
-/obj/item/paper_bundle/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
+/obj/item/paper_bundle/proc/burnpaper(obj/item/flame/P, mob/user)
 	var/class = "warning"
 
 	if(P.lit && !user.restrained())

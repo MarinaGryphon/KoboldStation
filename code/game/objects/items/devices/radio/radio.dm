@@ -540,7 +540,7 @@ var/global/list/default_medbay_channels = list(
 			user.show_message("<span class='notice'>\The [src] can not be modified or attached!</span>")
 	return
 
-/obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/radio/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	user.set_machine(src)
 	if (!( W.isscrewdriver() ))
@@ -594,7 +594,7 @@ var/global/list/default_medbay_channels = list(
 		var/datum/robot_component/C = R.components["radio"]
 		R.cell_use_power(C.active_usage)
 
-/obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/radio/borg/attackby(obj/item/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
 	if (!( W.isscrewdriver() || (istype(W, /obj/item/device/encryptionkey/ ))))

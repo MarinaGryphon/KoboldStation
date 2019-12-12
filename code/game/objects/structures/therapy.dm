@@ -27,7 +27,7 @@
 
 	. = ..()
 
-/obj/structure/bed/chair/e_chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/e_chair/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.iswrench())
 		var/obj/structure/bed/chair/C = new /obj/structure/bed/chair(loc)
 		playsound(loc, W.usesound, 50, 1)
@@ -185,7 +185,7 @@
 	. = ..()
 	START_PROCESSING(SSfast_process, src)
 
-/obj/structure/metronome/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/metronome/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.iswrench())
 		playsound(src.loc, W.usesound, 50, 1)
 		if(anchored)
@@ -330,7 +330,7 @@
 	update_icon()
 	return
 
-/obj/machinery/chakrapod/attackby(obj/item/weapon/grab/G, mob/user)
+/obj/machinery/chakrapod/attackby(obj/item/grab/G, mob/user)
 	if (!istype(G) || !ishuman(G.affecting))
 		return
 	if (occupant)

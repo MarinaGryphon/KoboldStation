@@ -41,7 +41,7 @@ var/global/photo_count = 0
 /obj/item/photo/attack_self(mob/user as mob)
 	user.examinate(src)
 
-/obj/item/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
+/obj/item/photo/attackby(obj/item/P as obj, mob/user as mob)
 	if(P.ispen())
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
 		if(loc == user && user.stat == 0)
@@ -245,7 +245,7 @@ var/global/photo_count = 0
 
 	return p
 
-/obj/item/device/camera/proc/printpicture(mob/user, obj/item/weapon/photo/p)
+/obj/item/device/camera/proc/printpicture(mob/user, obj/item/photo/p)
 	p.forceMove(user.loc)
 	if(!user.get_inactive_hand())
 		user.put_in_inactive_hand(p)

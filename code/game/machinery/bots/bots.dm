@@ -54,7 +54,7 @@
 			to_chat(user, "<span class='danger'>[src]'s parts look very loose!</span>")
 	return
 
-/obj/machinery/bot/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/bot/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.isscrewdriver())
 		if(!locked)
 			open = !open
@@ -166,7 +166,7 @@
 
 // Returns true if a link between A and B is blocked
 // Movement through doors allowed if ID has access
-/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/weapon/card/id/ID)
+/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/card/id/ID)
 
 	if(A == null || B == null) return 1
 	var/adir = get_dir(A,B)

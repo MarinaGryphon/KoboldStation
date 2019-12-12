@@ -139,7 +139,7 @@
 	if(attached_device)
 		add_overlay("device")
 
-/obj/item/device/transfer_valve/proc/remove_tank(obj/item/weapon/tank/T)
+/obj/item/device/transfer_valve/proc/remove_tank(obj/item/tank/T)
 	if(tank_one == T)
 		split_gases()
 		tank_one = null

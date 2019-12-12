@@ -342,7 +342,7 @@
 	loc = A //Place the water tank into the assembly, it will be needed for the finished bot
 	qdel(S)
 
-/obj/item/farmbot_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/farmbot_arm_assembly/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if((istype(W, /obj/item/device/analyzer/plant_analyzer)) && (build_step == 0))
 		build_step++

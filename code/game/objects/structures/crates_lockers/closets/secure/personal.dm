@@ -47,7 +47,7 @@
 	new /obj/item/device/radio/headset( src )
 
 
-/obj/structure/closet/secure_closet/personal/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/secure_closet/personal/attackby(obj/item/W as obj, mob/user as mob)
 	if (opened)
 		if (istype(W, /obj/item/grab))
 			MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet

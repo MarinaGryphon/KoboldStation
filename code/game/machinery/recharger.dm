@@ -42,7 +42,7 @@
 		LAZYREMOVE(chargebars, bar)
 		qdel(bar)
 
-/obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
+/obj/machinery/recharger/attackby(obj/item/G as obj, mob/user as mob)
 	if(portable && G.iswrench())
 		if(charging)
 			to_chat(user, "<span class='alert'>Remove [charging] first!</span>")

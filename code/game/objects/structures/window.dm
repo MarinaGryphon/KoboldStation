@@ -266,7 +266,7 @@
 		..()
 	return
 
-/obj/structure/window/proc/grab_smash_attack(obj/item/weapon/grab/G, var/damtype = BRUTE)
+/obj/structure/window/proc/grab_smash_attack(obj/item/grab/G, var/damtype = BRUTE)
 	var/mob/living/M = G.affecting
 	var/mob/living/user = G.assailant
 

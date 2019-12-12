@@ -32,7 +32,7 @@
 		if(..(user, 1))
 			to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
+	attackby(obj/item/W as obj, mob/user as mob)
 		if(locked)
 			if (istype(W, /obj/item/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
 				W:spark_system.queue()
@@ -186,7 +186,7 @@
 	attack_hand(mob/user as mob)
 		return attack_self(user)
 
-/*obj/item/weapon/storage/secure/safe/HoS/New()
+/*obj/item/storage/secure/safe/HoS/New()
 	..()
 	//new /obj/item/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldnt exist to begin with (even though it's cool)
 */

@@ -679,7 +679,7 @@ var/datum/controller/subsystem/cargo/SScargo
 							log_debug("SScargo: Bad variable name [var_name] for item name: [coi.ci.name] id: [coi.ci.id] - [e]")
 
 		//Spawn the Paper Inside
-		var/obj/item/weapon/paper/P = new(A)
+		var/obj/item/paper/P = new(A)
 		P.set_content_unsafe("[co.order_id] - [co.ordered_by]", co.get_report_delivery_order())
 
 	//Shuttle is loaded now - Charge cargo for it

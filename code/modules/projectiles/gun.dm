@@ -9,7 +9,7 @@
 	var/name = "default"
 	var/list/settings = list()
 
-/datum/firemode/New(obj/item/weapon/gun/gun, list/properties = null)
+/datum/firemode/New(obj/item/gun/gun, list/properties = null)
 	..()
 	if(!properties) return
 
@@ -23,7 +23,7 @@
 		else
 			settings[propname] = propvalue
 
-/datum/firemode/proc/apply_to(obj/item/weapon/gun/gun)
+/datum/firemode/proc/apply_to(obj/item/gun/gun)
 	for(var/propname in settings)
 		gun.vars[propname] = settings[propname]
 

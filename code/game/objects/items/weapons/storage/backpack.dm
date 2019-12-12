@@ -84,7 +84,7 @@
 		)
 	empty_delay = 0.8 SECOND
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
+	attackby(obj/item/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/storage/backpack/holding))
 			to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
 			qdel(W)

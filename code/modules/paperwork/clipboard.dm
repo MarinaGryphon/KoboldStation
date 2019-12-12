@@ -48,7 +48,7 @@
 	to_add += "clipboard_over"
 	add_overlay(to_add)
 
-/obj/item/clipboard/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/clipboard/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		user.drop_from_inventory(W,src)

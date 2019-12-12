@@ -434,7 +434,7 @@
 
 	console.updateUsrDialog()
 
-/obj/machinery/mineral/processing_unit/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/mineral/processing_unit/attackby(obj/item/W as obj, mob/user as mob)
 	if(default_deconstruction_screwdriver(user, W))
 		return
 	else if(default_part_replacement(user, W))

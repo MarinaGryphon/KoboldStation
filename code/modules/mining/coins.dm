@@ -64,7 +64,7 @@
 	icon_state = "coin_battlemonsters_heads"
 	cmineral = "battlemonsters"
 
-/obj/item/coin/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/coin/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.iscoil())
 		var/obj/item/stack/cable_coil/CC = W
 		if(string_attached)

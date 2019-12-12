@@ -101,7 +101,7 @@
 	update_icon()
 
 
-/obj/machinery/floodlight/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/floodlight/attackby(obj/item/W as obj, mob/user as mob)
 	if (W.isscrewdriver())
 		if (!open)
 			if(unlocked)

@@ -121,7 +121,7 @@ var/list/holder_mob_icon_cache = list()
 
 	qdel(src)
 
-/obj/item/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/holder/attackby(obj/item/W as obj, mob/user as mob)
 	for(var/mob/M in src.contents)
 		M.attackby(W,user)
 

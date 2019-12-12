@@ -161,7 +161,7 @@ obj/item/organ/vaurca/neuralsocket/process()
 				descriptive = "cold"
 		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
 
-/obj/item/organ/vaurca/preserve/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/organ/vaurca/preserve/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	var/obj/icon = src
 

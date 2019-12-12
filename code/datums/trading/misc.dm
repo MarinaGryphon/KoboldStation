@@ -22,7 +22,7 @@
 
 	possible_trading_items = list(
 		/obj/item/clothing/head/wizard/magus            = TRADER_THIS_TYPE,
-		/obj/item/weapon/shield/buckler                 = TRADER_THIS_TYPE,
+		/obj/item/shield/buckler                 = TRADER_THIS_TYPE,
 		/obj/item/clothing/head/redcoat                 = TRADER_THIS_TYPE,
 		/obj/item/clothing/head/powdered_wig            = TRADER_THIS_TYPE,
 		/obj/item/clothing/head/hasturhood              = TRADER_THIS_TYPE,
@@ -45,14 +45,14 @@
 		/obj/item/clothing/under/kilt                   = TRADER_THIS_TYPE,
 		/obj/item/clothing/under/redcoat                = TRADER_THIS_TYPE,
 		/obj/item/clothing/under/soviet                 = TRADER_THIS_TYPE,
-		/obj/item/weapon/material/harpoon               = TRADER_THIS_TYPE,
-		/obj/item/weapon/material/sword                 = TRADER_ALL,
-		/obj/item/weapon/material/scythe                = TRADER_THIS_TYPE,
-		/obj/item/weapon/material/star                  = TRADER_THIS_TYPE,
-		/obj/item/weapon/material/twohanded/baseballbat = TRADER_THIS_TYPE,
-		/obj/item/weapon/material/twohanded/pike        = TRADER_ALL,
-		/obj/item/weapon/material/twohanded/zweihander  = TRADER_THIS_TYPE,
-		/obj/item/weapon/melee/whip                     = TRADER_THIS_TYPE
+		/obj/item/material/harpoon               = TRADER_THIS_TYPE,
+		/obj/item/material/sword                 = TRADER_ALL,
+		/obj/item/material/scythe                = TRADER_THIS_TYPE,
+		/obj/item/material/star                  = TRADER_THIS_TYPE,
+		/obj/item/material/twohanded/baseballbat = TRADER_THIS_TYPE,
+		/obj/item/material/twohanded/pike        = TRADER_ALL,
+		/obj/item/material/twohanded/zweihander  = TRADER_THIS_TYPE,
+		/obj/item/melee/whip                     = TRADER_THIS_TYPE
 	)
 
 
@@ -61,15 +61,15 @@
 	name_language = LANGUAGE_LIZARD
 	origin = "Azazi Bulk Supply Guild"
 	possible_trading_items = list(
-		/obj/item/weapon/rig/unathi                    = TRADER_ALL,
-		/obj/item/weapon/rig/internalaffairs           = TRADER_THIS_TYPE,
-		/obj/item/weapon/rig/industrial                = TRADER_THIS_TYPE,
-		/obj/item/weapon/rig/eva                       = TRADER_THIS_TYPE,
-		/obj/item/weapon/rig/ce                        = TRADER_THIS_TYPE,
-		/obj/item/weapon/rig/hazmat                    = TRADER_THIS_TYPE,
-		/obj/item/weapon/rig/medical                   = TRADER_THIS_TYPE,
-		/obj/item/weapon/rig/hazard                    = TRADER_THIS_TYPE,
-		/obj/item/weapon/rig/combat                    = TRADER_THIS_TYPE,
+		/obj/item/rig/unathi                    = TRADER_ALL,
+		/obj/item/rig/internalaffairs           = TRADER_THIS_TYPE,
+		/obj/item/rig/industrial                = TRADER_THIS_TYPE,
+		/obj/item/rig/eva                       = TRADER_THIS_TYPE,
+		/obj/item/rig/ce                        = TRADER_THIS_TYPE,
+		/obj/item/rig/hazmat                    = TRADER_THIS_TYPE,
+		/obj/item/rig/medical                   = TRADER_THIS_TYPE,
+		/obj/item/rig/hazard                    = TRADER_THIS_TYPE,
+		/obj/item/rig/combat                    = TRADER_THIS_TYPE,
 		/obj/item/rig_module/device/healthscanner      = TRADER_THIS_TYPE,
 		/obj/item/rig_module/device/drill              = TRADER_THIS_TYPE,
 		/obj/item/rig_module/device/rfd_c              = TRADER_THIS_TYPE,

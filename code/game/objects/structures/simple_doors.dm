@@ -148,7 +148,7 @@
 	else
 		icon_state = material.door_icon_base
 
-/obj/structure/simple_door/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/simple_door/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/key) && lock)
 		var/obj/item/key/K = W
 		if(!lock.toggle(W))
@@ -166,7 +166,7 @@
 			lock = L.create_lock(src,user)
 		return
 
-	else if(istype(W,/obj/item/weapon))
+	else if(istype(W,/obj/item))
 		var/obj/item/I = W
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(I.damtype == BRUTE || I.damtype == BURN)

@@ -661,7 +661,7 @@ default behaviour is:
 		var/obj/structure/closet/C = loc
 		spawn() C.mob_breakout(src)
 
-/mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
+/mob/living/proc/escape_inventory(obj/item/holder/H)
 	if(H != src.loc) return
 
 	var/mob/M = H.loc //Get our mob holder (if any).

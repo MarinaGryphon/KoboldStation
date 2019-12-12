@@ -298,7 +298,7 @@
 	do_after_cooldown()
 	return 1
 
-/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/proc/action_callback(obj/item/weapon/reagent_containers/syringe/S, turf/trg)
+/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/proc/action_callback(obj/item/reagent_containers/syringe/S, turf/trg)
 	for(var/i=0, i<6, i++)
 		if(!S || !trg)
 			return
@@ -423,7 +423,7 @@
 		output += "Total: [round(reagents.total_volume,0.001)]/[reagents.maximum_volume] - <a href=\"?src=\ref[src];purge_all=1\">Purge All</a>"
 	return output || "None"
 
-/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/proc/load_syringe(obj/item/weapon/reagent_containers/syringe/S)
+/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/proc/load_syringe(obj/item/reagent_containers/syringe/S)
 	if(syringes.len<max_syringes)
 		if(get_dist(src,S) >= 2)
 			occupant_message("The syringe is too far away.")

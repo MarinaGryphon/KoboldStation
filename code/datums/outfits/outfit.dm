@@ -241,7 +241,7 @@
 		H.r_store.add_fingerprint(H, 1)
 	return 1
 
-/datum/outfit/proc/imprint_idcard(mob/living/carbon/human/H, obj/item/weapon/card/id/C)
+/datum/outfit/proc/imprint_idcard(mob/living/carbon/human/H, obj/item/card/id/C)
 	if(istype(C))
 		C.access = get_id_access(H)
 		C.rank = get_id_rank(H)

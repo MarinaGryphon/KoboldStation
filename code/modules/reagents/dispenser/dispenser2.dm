@@ -29,7 +29,7 @@
 	..()
 	to_chat(user, "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more.")
 
-/obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/weapon/reagent_containers/chem_disp_cartridge/C, mob/user)
+/obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/reagent_containers/chem_disp_cartridge/C, mob/user)
 	if(!istype(C))
 		if(user)
 			to_chat(user, "<span class='warning'>\The [C] will not fit in \the [src]!</span>")
@@ -65,7 +65,7 @@
 	cartridges -= label
 	SSnanoui.update_uis(src)
 
-/obj/machinery/chemical_dispenser/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/chemical_dispenser/attackby(obj/item/W, mob/user)
 	if(W.iswrench())
 		playsound(src.loc, W.usesound, 50, 1)
 		to_chat(user, "<span class='notice'>You begin to [anchored ? "un" : ""]fasten \the [src].</span>")

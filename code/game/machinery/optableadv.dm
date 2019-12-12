@@ -45,7 +45,7 @@
 /obj/machinery/optable/lifesupport/Initialize()
 	..()
 
-/obj/machinery/optable/lifesupport/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
+/obj/machinery/optable/lifesupport/attackby(obj/item/W as obj, mob/living/carbon/user as mob)
 	. = ..()
 	if (.)
 		return

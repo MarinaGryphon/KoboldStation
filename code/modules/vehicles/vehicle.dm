@@ -74,7 +74,7 @@
 	else
 		return 0
 
-/obj/vehicle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/vehicle/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/hand_labeler))
 		return
 	if(W.isscrewdriver())

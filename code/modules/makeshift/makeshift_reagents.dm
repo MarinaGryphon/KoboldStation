@@ -61,7 +61,7 @@
 	transfer_out = !transfer_out
 	to_chat(user, span("notice", "You are now [transfer_out ? "removing from" : "adding to"] \the [src]."))
 
-/obj/structure/chemkit/proc/heat_item(obj/item/weapon/W, mob/user)
+/obj/structure/chemkit/proc/heat_item(obj/item/W, mob/user)
 	var/joules = 0
 	if(istype(W, /obj/item/flame))
 		joules = 1000 // 1 kJ per match, and we're assuming lighters give as much per use
@@ -131,7 +131,7 @@
 		analyzer = null
 	qdel(src)
 
-/obj/structure/chemkit/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/chemkit/attackby(obj/item/W, mob/user)
 	if(W.iscrowbar())
 		dismantle()
 		return
@@ -194,7 +194,7 @@
 		welder = null
 	qdel(src)
 
-/obj/structure/distillery/proc/trans_item(obj/item/weapon/W, mob/user)
+/obj/structure/distillery/proc/trans_item(obj/item/W, mob/user)
 	if(transfer_out)
 		if(!reagents.total_volume)
 			to_chat(user, span("notice", "\The [src] is empty."))
@@ -226,7 +226,7 @@
 		reagents.remove_reagent(AR.id, AR.volume)
 	src.icon_state = "distillery-off"
 
-/obj/structure/distillery/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/distillery/attackby(obj/item/W, mob/user)
 	if(W.iscrowbar())
 		dismantle()
 		return

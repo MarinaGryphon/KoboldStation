@@ -44,7 +44,7 @@
 		to_chat(user,"<span class='notice'>The reagents inside \the [src] are already secured.</span>")
 	return
 
-/obj/item/reagent_containers/personal_inhaler_cartridge/attackby(obj/item/weapon/W, mob/user)
+/obj/item/reagent_containers/personal_inhaler_cartridge/attackby(obj/item/W, mob/user)
 	if(W.isscrewdriver() && !is_open_container())
 		to_chat(user,"<span class='notice'>Using \the [W], you unsecure the inhaler cartridge's lid.</span>") // it locks shut after being secured
 		flags |= OPENCONTAINER

@@ -158,7 +158,7 @@
 	emagged = 1
 	return 1
 
-/obj/item/gun/energy/lawgiver/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/gun/energy/lawgiver/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/card/emag) && !emagged)
 		Emag(user)
 	else

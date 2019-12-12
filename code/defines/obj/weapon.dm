@@ -551,7 +551,7 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "neuralbroke"
 
-/obj/item/neuralbroke/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/neuralbroke/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.isscrewdriver())
 		new /obj/item/device/encryptionkey/hivenet(user.loc)
 		playsound(src.loc, W.usesound, 50, 1)

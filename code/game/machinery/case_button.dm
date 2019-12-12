@@ -32,7 +32,7 @@
 	QDEL_NULL(listener)
 	return ..()
 
-/obj/machinery/case_button/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/case_button/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/card))
 		if(src.allowed(user))
 			covered = !covered //Enable / Disable the forcefield

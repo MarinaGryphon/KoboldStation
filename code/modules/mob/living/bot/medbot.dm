@@ -345,7 +345,7 @@
 	if(skin)
 		add_overlay("kit_skin_[skin]")
 
-/obj/item/firstaid_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/firstaid_arm_assembly/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(W.ispen())
 		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)

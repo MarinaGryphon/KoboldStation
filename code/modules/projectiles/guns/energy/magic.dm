@@ -22,7 +22,7 @@
 /obj/item/gun/energy/staff/emp_act(severity) // to prevent it from breaking.
 	return
 
-obj/item/weapon/gun/energy/staff/special_check(var/mob/living/user)
+obj/item/gun/energy/staff/special_check(var/mob/living/user)
 	if(HULK in user.mutations)
 		to_chat(user, "<span class='danger'>In your rage you momentarily forget the operation of this stave!</span>")
 		return 0
@@ -72,7 +72,7 @@ obj/item/weapon/gun/energy/staff/special_check(var/mob/living/user)
 	fire_sound = 'sound/magic/wand.ogg'
 	max_shots = 10
 
-obj/item/weapon/gun/energy/staff/animate/special_check(var/mob/living/user)
+obj/item/gun/energy/staff/animate/special_check(var/mob/living/user)
 	if(HULK in user.mutations)
 		to_chat(user, "<span class='danger'>In your rage you momentarily forget the operation of this stave!</span>")
 		return 0
@@ -98,7 +98,7 @@ obj/item/weapon/gun/energy/staff/animate/special_check(var/mob/living/user)
 		return 0
 	return 1
 
-obj/item/weapon/gun/energy/staff/focus
+obj/item/gun/energy/staff/focus
 	name = "mental focus"
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."
 	icon = 'icons/obj/wizard.dmi'
@@ -108,7 +108,7 @@ obj/item/weapon/gun/energy/staff/focus
 	slot_flags = SLOT_BACK
 	projectile_type = /obj/item/projectile/forcebolt
 
-obj/item/weapon/gun/energy/staff/focus/special_check(var/mob/living/user)
+obj/item/gun/energy/staff/focus/special_check(var/mob/living/user)
 	if(HULK in user.mutations)
 		to_chat(user, "<span class='danger'>In your rage you momentarily forget the operation of this stave!</span>")
 		return 0
@@ -131,7 +131,7 @@ obj/item/weapon/gun/energy/staff/focus/special_check(var/mob/living/user)
 	return 1
 
 
-obj/item/weapon/gun/energy/staff/focus/attack_self(mob/living/user as mob)
+obj/item/gun/energy/staff/focus/attack_self(mob/living/user as mob)
 	if(projectile_type == /obj/item/projectile/forcebolt)
 		charge_cost = 400
 		to_chat(user, "<span class='warning'>The [src.name] will now strike a small area.</span>")

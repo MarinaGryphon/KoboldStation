@@ -165,7 +165,7 @@ mob/living/carbon/human/proc/change_monitor()
 
 	visible_message("<span class='warning'><b>[src]</b> seizes [T] aggressively!</span>", "<span class='warning'>You aggressively seize [T]!</span>")
 
-	var/obj/item/weapon/grab/G = new(src,T)
+	var/obj/item/grab/G = new(src,T)
 	if(use_hand == "left")
 		l_hand = G
 	else
@@ -189,7 +189,7 @@ mob/living/carbon/human/proc/change_monitor()
 		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
 		return
 
-	var/obj/item/weapon/grab/G = locate() in src
+	var/obj/item/grab/G = locate() in src
 	if(!G || !istype(G))
 		to_chat(src, "<span class='warning'>You are not grabbing anyone.</span>")
 		return
@@ -335,7 +335,7 @@ mob/living/carbon/human/proc/change_monitor()
 
 /mob/living/carbon/human/proc/get_aggressive_grab()
 
-	var/obj/item/weapon/grab/G = locate() in src
+	var/obj/item/grab/G = locate() in src
 	if(!G || !istype(G))
 		to_chat(src, "<span class='warning'>You are not grabbing anyone.</span>")
 		return
@@ -360,7 +360,7 @@ mob/living/carbon/human/proc/change_monitor()
 		return
 
 
-	var/obj/item/weapon/grab/G = src.get_active_hand()
+	var/obj/item/grab/G = src.get_active_hand()
 	if(!istype(G))
 		to_chat(src, "<span class='warning'>We must be grabbing a creature in our active hand to devour their head.</span>")
 		return
@@ -479,7 +479,7 @@ mob/living/carbon/human/proc/change_monitor()
 
 	forceMove(T)
 
-	for (var/obj/item/weapon/grab/G in contents)
+	for (var/obj/item/grab/G in contents)
 		if (G.affecting)
 			G.affecting.forceMove(locate(T.x + rand(-1,1), T.y + rand(-1,1), T.z))
 		else

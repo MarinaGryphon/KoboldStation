@@ -187,7 +187,7 @@
 
 	action_button_name = null
 
-/obj/item/pickaxe/proc/copy_stats(obj/item/weapon/pickaxe/parent)
+/obj/item/pickaxe/proc/copy_stats(obj/item/pickaxe/parent)
 	digspeed_wielded = parent.digspeed_wielded
 	excavation_amount = parent.excavation_amount
 	force = parent.force_wielded
@@ -528,7 +528,7 @@
 	add_overlay(I)
 	turn_off()	//so engine verbs are correctly set
 
-/obj/vehicle/train/cargo/engine/mining/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/vehicle/train/cargo/engine/mining/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/key/minecarts))
 		if(!key)
 			user.drop_from_inventory(W,src)

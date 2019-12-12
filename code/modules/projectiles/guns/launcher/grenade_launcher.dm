@@ -48,7 +48,7 @@
 		if(chambered)
 			to_chat(user, "\A [chambered] is chambered.")
 
-/obj/item/gun/launcher/grenade/proc/load(obj/item/weapon/grenade/G, mob/user)
+/obj/item/gun/launcher/grenade/proc/load(obj/item/grenade/G, mob/user)
 	if(!can_load_grenade_type(G, user))
 		return
 	if(grenades.len >= max_grenades)
@@ -68,7 +68,7 @@
 	else
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
 
-/obj/item/gun/launcher/grenade/proc/can_load_grenade_type(obj/item/weapon/grenade/G, mob/user)
+/obj/item/gun/launcher/grenade/proc/can_load_grenade_type(obj/item/grenade/G, mob/user)
 	if(is_type_in_list(G, blacklisted_grenades))
 		to_chat(user, "<span class='warning'>\The [G] doesn't seem to fit in \the [src]!</span>")
 		return FALSE
@@ -112,7 +112,7 @@
 	return
 
 //load and unload directly into chambered
-/obj/item/gun/launcher/grenade/underslung/load(obj/item/weapon/grenade/G, mob/user)
+/obj/item/gun/launcher/grenade/underslung/load(obj/item/grenade/G, mob/user)
 	if(chambered)
 		to_chat(user, "<span class='warning'>[src] is already loaded.</span>")
 		return

@@ -51,7 +51,7 @@
 		else
 			..()
 
-/obj/structure/bonfire/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bonfire/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(W.iswelder())
 		var/obj/item/weldingtool/WT = W

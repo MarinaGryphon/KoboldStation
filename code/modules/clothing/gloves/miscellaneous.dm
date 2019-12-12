@@ -160,7 +160,7 @@
 	if (get_dist(src, user) <= 1)
 		checktime()
 
-/obj/item/clothing/gloves/watch/attackby(obj/item/weapon/W, mob/user)
+/obj/item/clothing/gloves/watch/attackby(obj/item/W, mob/user)
 	if(W.isscrewdriver())
 		if (clipped) //Using clipped because adding a new var for something is dumb
 			user.visible_message("<span class='notice'>[user] screws the cover of the [src] closed.</span>","<span class='notice'>You screw the cover of the [src] closed..</span>")

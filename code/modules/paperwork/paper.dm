@@ -263,7 +263,7 @@
 
 	return signfont
 
-/obj/item/paper/proc/parsepencode(t, obj/item/weapon/pen/P, mob/user, iscrayon)
+/obj/item/paper/proc/parsepencode(t, obj/item/pen/P, mob/user, iscrayon)
 
 	t = replacetext(t, "\[sign\]", "<font face=\"[get_signfont(P, user)]\">[get_signature(P, user)]</font>")
 
@@ -306,7 +306,7 @@
 	return t
 
 
-/obj/item/paper/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
+/obj/item/paper/proc/burnpaper(obj/item/flame/P, mob/user)
 	var/class = "warning"
 
 	if (!user.restrained())
@@ -414,7 +414,7 @@
 			c.update_icon()
 
 
-/obj/item/paper/attackby(obj/item/weapon/P as obj, mob/user as mob)
+/obj/item/paper/attackby(obj/item/P as obj, mob/user as mob)
 	..()
 	var/clown = 0
 	if(user.mind && (user.mind.assigned_role == "Clown"))

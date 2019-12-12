@@ -5,7 +5,7 @@
 	icon_state = "wrap_paper"
 	amount = 20.0
 
-/obj/item/stack/wrapping_paper/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/stack/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
 		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")

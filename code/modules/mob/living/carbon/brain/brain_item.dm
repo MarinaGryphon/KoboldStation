@@ -85,7 +85,7 @@
 
 	return
 
-/obj/item/organ/brain/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/organ/brain/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/surgicaldrill))
 		if(!can_lobotomize)
 			return

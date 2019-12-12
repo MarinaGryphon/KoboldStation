@@ -122,7 +122,7 @@
 		modifier = null
 
 
-/obj/item/cloaking_device/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/cloaking_device/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/cell))
 		if(!cell)
 			user.drop_from_inventory(W,src)

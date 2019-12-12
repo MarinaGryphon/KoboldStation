@@ -67,7 +67,7 @@
 				descriptive = "cold"
 		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
 
-/obj/item/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/tank/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (istype(src.loc, /obj/item/device/assembly))
 		icon = src.loc

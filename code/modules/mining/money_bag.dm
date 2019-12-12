@@ -46,7 +46,7 @@
 		dat += text("Uranium coins: [amt_uranium] <A href='?src=\ref[src];remove=uranium'>Remove one</A><br>")
 	user << browse("[dat]", "window=moneybag")
 
-/obj/item/moneybag/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/moneybag/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	//TODO: Check this code
 	if (istype(W, /obj/item/coin))

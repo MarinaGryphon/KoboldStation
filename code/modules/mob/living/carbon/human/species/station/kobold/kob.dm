@@ -9,7 +9,7 @@
     preview_icon = 'icons/mob/human_races/kobold/kobold_preview.dmi'
     tail = "kobtail"
     tail_animation = 'icons/mob/species/kobold/tail.dmi'
-    tail_transform = list("NORTH" = 0, "EAST" = -2) // move left 2
+    tail_transform = list("NORTH" = 0, "EAST" = 2) // move right 2
     unarmed_types = list(
         /datum/unarmed_attack/stomp,
         /datum/unarmed_attack/kick,

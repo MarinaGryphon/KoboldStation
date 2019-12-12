@@ -59,7 +59,7 @@
 		on = 1
 
 
-/obj/machinery/gumballmachine/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/gumballmachine/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/spacecash))
 		var/obj/item/spacecash/C = W
 		if(!on)
@@ -80,7 +80,7 @@
 
 			if(changeleftover)
 				spawn_money(changeleftover, src.loc, user)
-	if(istype(W, /obj/item/weapon) && user.a_intent == I_HURT && !istype(W, /obj/item/spacecash))
+	if(istype(W, /obj/item) && user.a_intent == I_HURT && !istype(W, /obj/item/spacecash))
 		if(broken)
 			return
 		if(prob(25))

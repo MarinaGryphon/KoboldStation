@@ -1,4 +1,4 @@
-/obj/item/weapon/melee/cultblade
+/obj/item/melee/cultblade
 	name = "eldritch blade"
 	desc = "A sword humming with unholy energy. It glows with a dim red light."
 	icon_state = "cultblade"
@@ -13,11 +13,11 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	can_embed = 0 //can't get stuck anymore, because blood magic
 
-/obj/item/weapon/melee/cultblade/attackby(var/obj/item/I, var/mob/user)
+/obj/item/melee/cultblade/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(istype(I, /obj/item/weapon/nullrod))
+	if(istype(I, /obj/item/nullrod))
 		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, restoring the blade to its original state.</span>")
-		var/obj/item/weapon/material/sword/blade = new(get_turf(src))
+		var/obj/item/material/sword/blade = new(get_turf(src))
 		blade.force = 15
 		qdel(src)
 
@@ -48,7 +48,7 @@
 	icon_state = "cultrobes"
 	item_state = "cultrobes"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	allowed = list(/obj/item/weapon/melee/cultblade)
+	allowed = list(/obj/item/melee/cultblade)
 	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 10, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0
@@ -78,7 +78,7 @@
 	item_state = "cult_armour"
 	desc = "A bulky suit of armour, bristling with spikes. It looks space proof."
 	w_class = 3
-	allowed = list(/obj/item/weapon/melee/cultblade,/obj/item/weapon/tank/emergency_oxygen,/obj/item/device/suit_cooling_unit)
+	allowed = list(/obj/item/melee/cultblade,/obj/item/tank/emergency_oxygen,/obj/item/device/suit_cooling_unit)
 	slowdown = 1
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0

@@ -198,7 +198,7 @@
 		if(guesschar != code[i])
 			. = 0
 
-/obj/structure/closet/crate/secure/loot/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/crate/secure/loot/attackby(obj/item/W as obj, mob/user as mob)
 	if(locked)
 		if (W.ismultitool()) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
 			to_chat(user, "<span class='notice'>DECA-CODE LOCK ANALYSIS:</span>")

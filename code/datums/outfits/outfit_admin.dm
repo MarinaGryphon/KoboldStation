@@ -8,7 +8,7 @@
 			H.mind.assigned_role = name
 		H.job = name
 
-/datum/outfit/admin/imprint_idcard(mob/living/carbon/human/H, obj/item/weapon/card/id/C)
+/datum/outfit/admin/imprint_idcard(mob/living/carbon/human/H, obj/item/card/id/C)
 	..()
 	if(id_icon)
 		C.icon_state = id_icon

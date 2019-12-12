@@ -382,7 +382,7 @@
 		new /obj/item/clothing/accessory/holster/hip(src)
 		new /obj/item/clothing/accessory/holster/thigh(src)
 
-/obj/structure/closet/secure_closet/detective/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/secure_closet/detective/attackby(obj/item/W as obj, mob/user as mob)
 	if(opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W

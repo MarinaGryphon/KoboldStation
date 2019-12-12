@@ -5,7 +5,7 @@
 	icon_closed = "coffin"
 	icon_opened = "coffin_open"
 
-/obj/structure/closet/coffin/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/coffin/attackby(obj/item/W as obj, mob/user as mob)
 	if(opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W

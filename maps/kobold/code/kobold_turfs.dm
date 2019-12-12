@@ -35,7 +35,7 @@
 	return
 
 
-/turf/simulated/floor/planet/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/floor/planet/attackby(obj/item/W as obj, mob/user as mob)
 	if(!W || !user)
 		return 0
 
@@ -66,15 +66,15 @@
 			return
 
 	var/static/list/usable_tools = typecacheof(list(
-		/obj/item/weapon/shovel,
-		/obj/item/weapon/pickaxe/diamonddrill,
-		/obj/item/weapon/pickaxe/drill,
-		/obj/item/weapon/pickaxe/borgdrill
+		/obj/item/shovel,
+		/obj/item/pickaxe/diamonddrill,
+		/obj/item/pickaxe/drill,
+		/obj/item/pickaxe/borgdrill
 	))
 	var/static/list/pen_tools = typecacheof(list(
-		/obj/item/weapon/pickaxe/diamonddrill,
-		/obj/item/weapon/pickaxe/drill,
-		/obj/item/weapon/pickaxe/borgdrill
+		/obj/item/pickaxe/diamonddrill,
+		/obj/item/pickaxe/drill,
+		/obj/item/pickaxe/borgdrill
 	))
 
 	if(is_type_in_typecache(W, usable_tools))
@@ -156,16 +156,16 @@
 
 		gets_dug(user, is_type_in_typecache(W, pen_tools))
 
-	else if(istype(W,/obj/item/weapon/storage/bag/ore))
-		var/obj/item/weapon/storage/bag/ore/S = W
+	else if(istype(W,/obj/item/storage/bag/ore))
+		var/obj/item/storage/bag/ore/S = W
 		if(S.collection_mode)
-			for(var/obj/item/weapon/ore/O in contents)
+			for(var/obj/item/ore/O in contents)
 				O.attackby(W,user)
 				return
-	else if(istype(W,/obj/item/weapon/storage/bag/fossils))
-		var/obj/item/weapon/storage/bag/fossils/S = W
+	else if(istype(W,/obj/item/storage/bag/fossils))
+		var/obj/item/storage/bag/fossils/S = W
 		if(S.collection_mode)
-			for(var/obj/item/weapon/fossil/F in contents)
+			for(var/obj/item/fossil/F in contents)
 				F.attackby(W,user)
 				return
 
@@ -178,32 +178,32 @@
 	add_overlay("asteroid_dug", TRUE)
 
 	if(prob(75))
-		new /obj/item/weapon/ore/glass(src)
+		new /obj/item/ore/glass(src)
 
 	if(prob(25) && has_resources)
 		var/list/ore = list()
 		for(var/metal in resources)
 			switch(metal)
 				if("silicates")
-					ore += /obj/item/weapon/ore/glass
+					ore += /obj/item/ore/glass
 				if("carbonaceous rock")
-					ore += /obj/item/weapon/ore/coal
+					ore += /obj/item/ore/coal
 				if("iron")
-					ore += /obj/item/weapon/ore/iron
+					ore += /obj/item/ore/iron
 				if("gold")
-					ore += /obj/item/weapon/ore/gold
+					ore += /obj/item/ore/gold
 				if("silver")
-					ore += /obj/item/weapon/ore/silver
+					ore += /obj/item/ore/silver
 				if("diamond")
-					ore += /obj/item/weapon/ore/diamond
+					ore += /obj/item/ore/diamond
 				if("uranium")
-					ore += /obj/item/weapon/ore/uranium
+					ore += /obj/item/ore/uranium
 				if("phoron")
-					ore += /obj/item/weapon/ore/phoron
+					ore += /obj/item/ore/phoron
 				if("osmium")
-					ore += /obj/item/weapon/ore/osmium
+					ore += /obj/item/ore/osmium
 				if("hydrogen")
-					ore += /obj/item/weapon/ore/hydrogen
+					ore += /obj/item/ore/hydrogen
 				else
 					if(prob(25))
 						switch(rand(1,5))
@@ -216,9 +216,9 @@
 							if(4)
 								ore += /obj/random/loot
 							if(5)
-								ore += /obj/item/weapon/ore/glass
+								ore += /obj/item/ore/glass
 					else
-						ore += /obj/item/weapon/ore/glass
+						ore += /obj/item/ore/glass
 		if (ore.len)
 			var/ore_path = pick(ore)
 			if(ore)

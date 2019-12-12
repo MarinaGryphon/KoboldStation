@@ -143,7 +143,7 @@
 		return
 
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
+	attackby(obj/item/W as obj, mob/user as mob)
 		if(W.isscrewdriver())
 			if(!a_left || !a_right)
 				to_chat(user, "<span class='danger'>BUG:Assembly part missing, please report this!</span>")

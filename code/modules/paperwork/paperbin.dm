@@ -75,7 +75,7 @@
 	return
 
 
-/obj/item/paper_bin/attackby(obj/item/weapon/O as obj, mob/user as mob)
+/obj/item/paper_bin/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/paper))
 		var/obj/item/paper/i = O
 		user.drop_from_inventory(i,src)

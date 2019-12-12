@@ -52,7 +52,7 @@
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if(prob(20)) src.spark_system.queue()
 
-/obj/item/rfd/attackby(obj/item/weapon/W, mob/user)
+/obj/item/rfd/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/rfd_ammo))
 		if((stored_matter + 10) > 30)

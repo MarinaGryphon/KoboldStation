@@ -164,7 +164,7 @@
 	else
 		to_chat(user, "<span class='notice'>\The [src] was bitten multiple times!</span>")
 
-/obj/item/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W,/obj/item/pen))
 
@@ -678,7 +678,7 @@
 	src.visible_message("<span class='warning'>\The [src] has been squashed!</span>","<span class='warning'>You hear a smack.</span>")
 	qdel(src)
 
-/obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype( W, /obj/item/pen/crayon ))
 		var/obj/item/pen/crayon/C = W
 		var/clr = C.colourName
@@ -3206,7 +3206,7 @@
 	reagents_to_add = list(NUTRIMENT_GOOD = 3)
 
 // Dough + rolling pin = flat dough
-/obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/material/kitchen/rollingpin))
 		new /obj/item/reagent_containers/food/snacks/sliceable/flatdough(src)
 		to_chat(user, "You flatten the dough.")
@@ -3246,7 +3246,7 @@
 	reagent_data = list(NUTRIMENT_GOOD = list("bun" = 3))
 	reagents_to_add = list(NUTRIMENT_GOOD = 4)
 
-/obj/item/reagent_containers/food/snacks/bun/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/bun/attackby(obj/item/W as obj, mob/user as mob)
 	var/obj/item/reagent_containers/food/snacks/result = null
 	// Bun + meatball = burger
 	if(istype(W,/obj/item/reagent_containers/food/snacks/meatball))
@@ -3293,7 +3293,7 @@
 		qdel(src)
 
 // Burger + cheese wedge = cheeseburger
-/obj/item/reagent_containers/food/snacks/burger/monkey/attackby(obj/item/weapon/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/burger/monkey/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
 	if(istype(W))// && !istype(src,/obj/item/reagent_containers/food/snacks/cheesewedge))
 		new /obj/item/reagent_containers/food/snacks/burger/cheese(src)
 		to_chat(user, "You make a cheeseburger.")
@@ -3304,7 +3304,7 @@
 		..()
 
 // Human Burger + cheese wedge = cheeseburger
-/obj/item/reagent_containers/food/snacks/human/burger/attackby(obj/item/weapon/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/human/burger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
 	if(istype(W))
 		new /obj/item/reagent_containers/food/snacks/burger/cheese(src)
 		to_chat(user, "You make a cheeseburger.")
@@ -3332,7 +3332,7 @@
 	center_of_mass = list("x"=17, "y"=20)
 	reagents_to_add = list("protein" = 1)
 
-/obj/item/reagent_containers/food/snacks/rawcutlet/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/rawcutlet/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/material/knife))
 		new /obj/item/reagent_containers/food/snacks/rawbacon(src)
 		new /obj/item/reagent_containers/food/snacks/rawbacon(src)
@@ -3378,7 +3378,7 @@
 	reagents_to_add = list(NUTRIMENT_GOOD = 3)
 
 // potato + knife = raw sticks
-/obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/material/kitchen/utensil/knife))
 		new /obj/item/reagent_containers/food/snacks/rawsticks(src)
 		to_chat(user, "You cut the potato.")
@@ -3655,7 +3655,7 @@
 	center_of_mass = list("x"=16, "y"=16)
 	reagents_to_add = list(NUTRIMENT_GOOD = 20)
 
-/obj/item/reagent_containers/food/snacks/dip/attackby(obj/item/weapon/reagent_containers/food/snacks/item as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/dip/attackby(obj/item/reagent_containers/food/snacks/item as obj, mob/user as mob)
 	. = ..()
 	var/obj/item/reagent_containers/food/snacks/returningitem
 	if(istype(item,/obj/item/reagent_containers/food/snacks/chip/nacho) && item.icon_state == "chip_nacho")

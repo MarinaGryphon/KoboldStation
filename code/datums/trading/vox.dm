@@ -40,7 +40,7 @@
 	)
 
 	possible_wanted_items = list(
-		/obj/item/weapon                = TRADER_SUBTYPES_ONLY,
+		/obj/item                = TRADER_SUBTYPES_ONLY,
 		/obj/item/stack/material        = TRADER_SUBTYPES_ONLY,
 		/obj/item/stack/material/cyborg = TRADER_BLACKLIST_ALL,
 		/obj/item/organ                 = TRADER_SUBTYPES_ONLY

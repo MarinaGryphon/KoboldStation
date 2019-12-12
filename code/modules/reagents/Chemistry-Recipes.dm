@@ -500,18 +500,12 @@
 	name = "Glycerol"
 	id = "glycerol"
 	result = "glycerol"
-	required_reagents = list("triglyceride" = 1, "ethanol" = 2) // transesterification of triglycerides into butanol and glycerol
+	required_reagents = list("triglyceride" = 1, "ethanol" = 2) // transesterification of triglycerides into acetone and glycerol
 	catalysts = list("sacid" = 5) // using acid as a catalyst
 	result_amount = 3 //each triglyceride has 3 glycerin chains.
 
-/datum/chemical_reaction/glycerol/butanol
-	name = "Glycerol"
-	id = "glycerol-butane"
-	result = "glycerol"
-	required_reagents = list("triglyceride" = 1, "butanol" = 2)
-
 /datum/chemical_reaction/glycerol/on_reaction(var/datum/reagents/holder, var/created_volume)
-	holder.add_reagent("acetone", 2 * created_volume / 3) // closest we can get to biofuel, sorry
+	holder.add_reagent("fuel", 2 * created_volume / 3) // closest we can get to biofuel, sorry
 
 /datum/chemical_reaction/glucose
 	name = "Glucose"
@@ -600,11 +594,11 @@
 	required_reagents = list("calomel" = 1, "lexorin" = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/potassium_hydrophoro
-	name = "Potassium Hydrophoride"
-	id = "potassium_hydrophoro"
-	result = "potassium_hydrophoro"
-	required_reagents = list("phoron" = 0.1, "water" = 1, "potassium_chloride" = 0.2)
+/datum/chemical_reaction/saline
+	name = "Saline"
+	id = "saline"
+	result = "saline"
+	required_reagents = list("sodiumchloride" = 0.1, "water" = 1, "potassium_chloride" = 0.2)
 	result_amount = 1
 
 /datum/chemical_reaction/mannitol
@@ -899,21 +893,6 @@
 		spawn (0) target_tile.hotspot_expose(700, 400)
 	holder.del_reagent("napalm")
 	return
-
-/datum/chemical_reaction/zoragel
-	name = "Inert Gel"
-	id = "zoragel"
-	result = "zoragel"
-	required_reagents = list("sacid" = 1, "aluminum" = 1, "sugar" = 1, "surfactant" = 3)
-	result_amount = 1
-
-/datum/chemical_reaction/zorafire
-	name = "Zo'rane Fire"
-	id = "greekfire"
-	result = "greekfire"
-	required_reagents = list("nitroglycerin" = 2, "pyrosilicate" = 2, "phoron" = 3, "zoragel" = 3)
-	result_amount = 1
-	log_is_important = 1
 
 /datum/chemical_reaction/chemsmoke
 	name = "Chemsmoke"
@@ -1922,14 +1901,6 @@
 	required_reagents = list("nutriment" = 10)
 	catalysts = list("enzyme" = 5)
 	result_amount = 10
-
-/datum/chemical_reaction/butanol
-	name = "Butanol"
-	id = "butanol"
-	result = "butanol"
-	required_reagents = list("cornoil" = 10, "sugar" = 10)
-	catalysts = list("enzyme" = 5)
-	result_amount = 5
 
 /datum/chemical_reaction/grenadine
 	name = "Grenadine Syrup"

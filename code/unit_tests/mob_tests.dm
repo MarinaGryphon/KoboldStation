@@ -30,7 +30,7 @@ datum/unit_test/mob_hear
 
 
 datum/unit_test/mob_hear/start_test()
-	var/mobloc = pick(tdome1)
+	var/mobloc = pick(newplayer_start)
 	if(!mobloc)
 		fail("Unable to find a location to create test mob")
 		return 0
@@ -129,7 +129,7 @@ proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
 
 	if(isnull(mobloc))
-		mobloc = pick(tdome1)
+		mobloc = pick(newplayer_start)
 	if(!mobloc)
 		test_result["msg"] = "Unable to find a location to create test mob"
 		return test_result

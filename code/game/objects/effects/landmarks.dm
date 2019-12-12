@@ -15,6 +15,7 @@
 	switch(name)			//some of these are probably obsolete
 		if("start")
 			newplayer_start = get_turf(loc)
+			latejoin += get_turf(loc)
 			return
 		if("JoinLate")
 			latejoin += loc

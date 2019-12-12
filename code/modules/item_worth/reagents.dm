@@ -75,9 +75,6 @@
 /datum/reagent/sulfur
 	value = 2
 
-/datum/reagent/kois
-	value = 0.5
-
 /datum/reagent/nutriment
 	value = 0.1
 
@@ -740,9 +737,6 @@
 
 /datum/reagent/aslimetoxin
 	value = 3
-
-/datum/reagent/nanites
-	value = 9
 
 /datum/reagent/estus
 	value = 50

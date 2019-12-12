@@ -104,7 +104,7 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 
 
 // ==================================================================================================
-
+/*
 datum/unit_test/zas_area_test/supply_centcomm
 	name = "ZAS: Supply Shuttle (CentComm)"
 	area_path = /area/supply/dock
@@ -130,24 +130,23 @@ datum/unit_test/zas_area_test/xenobio
 	name = "ZAS: Xenobiology"
 	area_path = /area/rnd/xenobiology
 
-/*
 datum/unit_test/zas_area_test/mining_area
 	name = "ZAS: Mining Area (Vacuum)"
 	area_path = /area/mine/explored
 	expectation = UT_VACUUM
 	disabled = 1
 	why_disabled = "Asteroid Generation disabled"
- */
+ 
 datum/unit_test/zas_area_test/
 	name = "ZAS: Cargo Bay"
 	area_path = /area/quartermaster/storage
-
+*/
 
 // ==================================================================================================
 
 
 // Here we move a shuttle then test it's area once the shuttle has arrived.
-
+/*
 datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
 	async = TRUE				// We're moving the shuttle using built in procs.
@@ -197,7 +196,7 @@ datum/unit_test/zas_supply_shuttle_moved/check_result()
 	else
 		fail(test["msg"])
 	return 1
-
+*/
 #undef UT_NORMAL
 #undef UT_VACUUM
 #undef UT_NORMAL_COLD

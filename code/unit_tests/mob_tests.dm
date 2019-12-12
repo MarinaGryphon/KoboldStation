@@ -283,31 +283,32 @@ datum/unit_test/mob_damage/start_test()
 	return 1
 
 // =================================================================
-// Human damage check.
+// Kobold damage check.
 // =================================================================
 
 datum/unit_test/mob_damage/brute
-	name = "MOB: Human Brute damage check"
+	name = "MOB: Kobold Brute damage check"
 	damagetype = BRUTE
+	expected_vulnerability = ARMORED
 
 datum/unit_test/mob_damage/fire
-	name = "MOB: Human Fire damage check"
+	name = "MOB: Kobold Fire damage check"
 	damagetype = BURN
 
 datum/unit_test/mob_damage/tox
-	name = "MOB: Human Toxin damage check"
+	name = "MOB: Kobold Toxin damage check"
 	damagetype = TOX
 
 datum/unit_test/mob_damage/oxy
-	name = "MOB: Human Oxygen damage check"
+	name = "MOB: Kobold Oxygen damage check"
 	damagetype = OXY
 
 datum/unit_test/mob_damage/clone
-	name = "MOB: Human Clone damage check"
+	name = "MOB: Kobold Clone damage check"
 	damagetype = CLONE
 
 datum/unit_test/mob_damage/halloss
-	name = "MOB: Human Halloss damage check"
+	name = "MOB: Kobold Halloss damage check"
 	damagetype = HALLOSS
 
 // =================================================================

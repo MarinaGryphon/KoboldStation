@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /obj/item/material/axe
+=======
+/obj/item/weapon/material/axe
+>>>>>>> 88c99bbab58122534220d56ad89d570bebd251d2
 	name = "felling axe"
 	desc = "An axe used to chop down trees."
 	icon = 'icons/kobold/weapons.dmi'
@@ -48,13 +52,22 @@
 	if(!fuel)
 		return
 	if(W.iswelder())
+<<<<<<< HEAD
 		var/obj/item/weldingtool/WT = W
+=======
+		var/obj/item/weapon/weldingtool/WT = W
+>>>>>>> 88c99bbab58122534220d56ad89d570bebd251d2
 		if(WT.isOn())
 			light(user)
 	else if(isflamesource(W))
 		light(user)
+<<<<<<< HEAD
 	else if(istype(W, /obj/item/flame/candle))
 		var/obj/item/flame/candle/C = W
+=======
+	else if(istype(W, /obj/item/weapon/flame/candle))
+		var/obj/item/weapon/flame/candle/C = W
+>>>>>>> 88c99bbab58122534220d56ad89d570bebd251d2
 		if(C.lit)
 			light(user)
 	else if(istype(W, /obj/item/device/flashlight/flare/torch))
@@ -73,7 +86,11 @@
 	user.update_inv_r_hand()
 	START_PROCESSING(SSprocessing, src)
 
+<<<<<<< HEAD
 /obj/item/material/blacksmith_hammer
+=======
+/obj/item/weapon/material/blacksmith_hammer
+>>>>>>> 88c99bbab58122534220d56ad89d570bebd251d2
 	name = "blacksmith hammer"
 	desc = "A hammer used to repair or craft tools."
 	icon = 'icons/obj/blacksmith.dmi'

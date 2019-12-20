@@ -25,6 +25,8 @@
 
 #define INFINITY	1.#INF
 
+#define SIGN(X) (X == 0 ? 0 : (X > 0 ? 1 : -1))
+
 // A neat little helper to convert the value X, that's between imin and imax, into a value
 // that's proportionally scaled and in range of omin and omax.
 #define MAP(x, imin, imax, omin, omax) ((x - imin) * (omax - omin) / (imax - imin) + omin)

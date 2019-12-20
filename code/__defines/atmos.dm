@@ -21,7 +21,7 @@
 #define HUMAN_NEEDED_OXYGEN (MOLES_CELLSTANDARD * BREATH_PERCENTAGE * 0.16)
 #define HUMAN_HEAT_CAPACITY 280000 //J/K For 80kg person
 
-#define SOUND_MINIMUM_PRESSURE 10
+#define SOUND_MINIMUM_PRESSURE 4.79 // based off of a shitton of density, mean interparticle distance, wavelength, etc. calculations, estimating speech at 170hz
 
 #define PRESSURE_DAMAGE_COEFFICIENT 4 // The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE.
 #define    MAX_HIGH_PRESSURE_DAMAGE 4 // This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
@@ -40,12 +40,12 @@
 #define MINIMUM_TEMPERATURE_START_SUPERCONDUCTION (T20C + 200)
 
 // Must be between 0 and 1. Values closer to 1 equalize temperature faster. Should not exceed 0.4, else strange heat flow occurs.
-#define  FLOOR_HEAT_TRANSFER_COEFFICIENT 0.4
-#define   WALL_HEAT_TRANSFER_COEFFICIENT 0.0
-#define   DOOR_HEAT_TRANSFER_COEFFICIENT 0.0
-#define  SPACE_HEAT_TRANSFER_COEFFICIENT 0.2 // A hack to partly simulate radiative heat.
-#define   OPEN_HEAT_TRANSFER_COEFFICIENT 0.4
-#define WINDOW_HEAT_TRANSFER_COEFFICIENT 0.1 // A hack for now.
+#define  FLOOR_HEAT_TRANSFER_COEFFICIENT 0.40
+#define   WALL_HEAT_TRANSFER_COEFFICIENT 0.05
+#define   DOOR_HEAT_TRANSFER_COEFFICIENT 0.20
+#define  SPACE_HEAT_TRANSFER_COEFFICIENT 0.20 // A hack to partly simulate radiative heat.
+#define   OPEN_HEAT_TRANSFER_COEFFICIENT 0.40
+#define WINDOW_HEAT_TRANSFER_COEFFICIENT 0.10 // A hack for now.
 
 // Fire damage.
 #define CARBON_LIFEFORM_FIRE_RESISTANCE (T0C + 200)
@@ -103,4 +103,4 @@
 #define MOLES_OXYGEN_NAARVAT		MOLES_CELLSTANDARD * 0.32
 #define MOLES_NITROGEN_NAARVAT		MOLES_CELLSTANDARD * 0.62
 #define MOLES_CARBONDIOXIDE_NAARVAT	MOLES_CELLSTANDARD * 0.08
-#define TEMPERATURE_NAARVAT			T0C + 55
+#define TEMPERATURE_NAARVAT			T0C + 91

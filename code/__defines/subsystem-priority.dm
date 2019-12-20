@@ -22,6 +22,7 @@
 #define SS_INIT_MISC        3	// Subsystems without an explicitly set initialization order start here.
 #define SS_INIT_SUNLIGHT    2	// Sunlight setup. Creates lots of lighting & SSzcopy updates.
 #define SS_INIT_LIGHTING    1	// Generation of lighting overlays and pre-bake. May cause openturf updates, should initialize before SSzcopy.
+#define SS_INIT_SUN         1/2	// The sun. Needs to be after lighting and sunlight.
 #define SS_INIT_ZCOPY       0	// Z-mimic flush. Should run after SSoverlay & SSicon_smooth so it copies the smoothed sprites.
 #define SS_INIT_LOBBY      -1	// Lobby timer starts here. The lobby timer won't actually start going down until the MC starts ticking, so you probably want this last.
 

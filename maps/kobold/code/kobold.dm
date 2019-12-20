@@ -13,9 +13,9 @@
 	restricted_levels = list()
 	accessible_z_levels = list()
 	base_turf_by_z = list(
-		"1" = /turf/simulated/floor/planet/sand/rocky,
-		"2" = /turf/simulated/floor/planet/sand/rocky,
-		"3" = /turf/simulated/floor/planet/sand
+		"1" = /turf/simulated/floor/rocky,
+		"2" = /turf/simulated/floor/rocky,
+		"3" = /turf/unsimulated/floor/planet/sand
 	)
 
 	has_space_ruins = FALSE
@@ -26,7 +26,7 @@
 
 	command_spawn_enabled = FALSE
 	persist = TRUE
-	
+
 	ut_environ_exempt_areas = list(/area/mine)
 	ut_apc_exempt_areas = list(/area/mine)
 	ut_atmos_exempt_areas = list(/area)

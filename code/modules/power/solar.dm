@@ -1,5 +1,4 @@
-#define SOLAR_MAX_DIST 40
-#define SOLARGENRATE 1500
+#define SOLARGENRATE 250
 
 /obj/machinery/power/solar
 	name = "solar panel"
@@ -15,9 +14,7 @@
 	var/health = 10
 	var/obscured = 0
 	var/sunfrac = 0
-	var/adir = SOUTH // actual dir
-	var/ndir = SOUTH // target dir
-	var/turn_angle = 0
+	var/aang = 90 // actual dir
 	var/tmp/obj/machinery/power/solar_control/control = null
 
 /obj/machinery/power/solar/drain_power()
@@ -32,9 +29,9 @@
 	unset_control() //remove from control computer
 	return ..()
 
-//set the control of the panel to a given computer if closer than SOLAR_MAX_DIST
+//set the control of the panel to a given computer
 /obj/machinery/power/solar/proc/set_control(var/obj/machinery/power/solar_control/SC)
-	if(SC && (get_dist(src, SC) > SOLAR_MAX_DIST))
+	if(!SC)
 		return 0
 	control = SC
 	return 1
@@ -97,7 +94,7 @@
 		add_overlay("solar_panel-b")
 	else
 		add_overlay("solar_panel")
-		src.set_dir(angle2dir(adir))
+		src.set_dir(angle2dir(aang))
 	return
 
 //calculates the fraction of the sunlight that the panel receives
@@ -105,17 +102,19 @@
 	if(!sun)
 		return
 	if(obscured)
+		return
+	if(sun.angle <= 0 || sun.angle >= 180) // sun is below the ground!
 		sunfrac = 0
 		return
-
+	var/zenith = (90 - sun.angle) % 180
 	//find the smaller angle between the direction the panel is facing and the direction of the sun (the sign is not important here)
-	var/p_angle = min(abs(adir - sun.angle), 360 - abs(adir - sun.angle))
+	var/p_angle = min(abs(aang - zenith), 360 - abs(aang - zenith))
 
 	if(p_angle > 90)			// if facing more than 90deg from sun, zero output
 		sunfrac = 0
 		return
 
-	sunfrac = cos(p_angle) ** 2
+	sunfrac = cos(p_angle)
 	//isn't the power received from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
 /obj/machinery/power/solar/machinery_process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
@@ -174,16 +173,20 @@
 /obj/machinery/power/solar/proc/occlusion()
 
 	var/ax = x		// start at the solar panel
-	var/ay = y
+	var/az = z
 	var/turf/T = null
+	
+	if(!sun.dz) // no way the sun could ever reach us :(
+		obscured = 1
+		return
 
-	for(var/i = 1 to 20)		// 20 steps is enough
+	for(var/i = 1 to min(round(world.maxz/sun.dz, 1), 20)) // upper bound
 		ax += sun.dx	// do step
-		ay += sun.dy
+		az += sun.dz
 
-		T = locate( round(ax,0.5),round(ay,0.5),z)
+		T = locate( round(ax,0.5), y, round(az) )
 
-		if(!T || T.x == 1 || T.x==world.maxx || T.y==1 || T.y==world.maxy)		// not obscured if we reach the edge
+		if(!T || T.x == 1 || T.x==world.maxx || T.z == world.maxz || !HasAbove(T.z))		// not obscured if we reach the edge
 			break
 
 		if(T.opacity)			// if we hit a solid turf, panel is obscured
@@ -232,7 +235,7 @@
 	else
 		if(W.iswrench())
 			anchored = 0
-			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from it's place.</span>")
+			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from its place.</span>")
 			playsound(src.loc, W.usesound, 75, 1)
 			return 1
 
@@ -370,8 +373,8 @@
 /obj/machinery/power/solar_control/interact(mob/user)
 
 	var/t = "<B><span class='highlight'>Generated power</span></B> : [round(lastgen)] W<BR>"
-	t += "<B><span class='highlight'>Star Orientation</span></B>: [sun.angle]&deg ([angle2text(sun.angle)])<BR>"
-	t += "<B><span class='highlight'>Array Orientation</span></B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
+	t += "<B><span class='highlight'>Sun Orientation</span></B>: [sun.angle]&deg<BR>"
+	t += "<B><span class='highlight'>Array Orientation</span></B>: [rate_control(src,"cdir","[cdir]&deg",1,15)]<BR>"
 	t += "<B><span class='highlight'>Tracking:</span></B><div class='statusDisplay'>"
 	switch(track)
 		if(0)
@@ -441,8 +444,11 @@
 
 	if(track==1 && trackrate) //manual tracking and set a rotation speed
 		if(nexttime <= world.time) //every time we need to increase/decrease the angle by 1°...
-			targetdir = (targetdir + trackrate/abs(trackrate) + 360) % 360 	//... do it
-			nexttime += 36000/abs(trackrate) //reset the counter for the next 1°
+			targetdir = (targetdir + trackrate/abs(trackrate)) 	//... do it
+			if(targetdir > 180 || targetdir < 0) // at the end of the day...
+				trackrate *= -1 // we flip direction
+				targetdir %= 180
+			nexttime += (1 HOUR)/abs(trackrate) //reset the counter for the next 1°
 
 	updateDialog()
 
@@ -492,7 +498,7 @@
 /obj/machinery/power/solar_control/proc/set_panels(var/cdir)
 
 	for(var/obj/machinery/power/solar/S in connected_panels)
-		S.adir = cdir //instantly rotates the panel
+		S.aang = cdir //instantly rotates the panel
 		S.occlusion()//and
 		S.update_icon() //update it
 

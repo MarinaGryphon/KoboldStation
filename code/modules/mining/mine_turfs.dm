@@ -38,7 +38,7 @@ var/list/mineral_can_smooth_with = list(
 	opacity = 1
 	density = 1
 	blocks_air = 1
-	var/mined_turf = /turf/simulated/floor/planet/sand/rocky
+	var/mined_turf = /turf/simulated/floor/rocky
 	var/ore/mineral
 	var/mined_ore = 0
 	var/tmp/last_act = 0

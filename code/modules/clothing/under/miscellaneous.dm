@@ -76,7 +76,7 @@
 
 //This set of uniforms looks fairly fancy and is generally used for high-ranking NT personnel from what I've seen, so lets give them appropriate ranks.
 /obj/item/clothing/under/rank/centcom
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\""
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of 'Captain.'"
 	name = "officer's dress uniform"
 	icon_state = "officer"
 	item_state = "lawyer_black"
@@ -85,7 +85,7 @@
 
 /obj/item/clothing/under/rank/centcom_officer
 	name = "officer's dress uniform"
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\""
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of 'Admiral.'"
 	icon_state = "officer"
 	item_state = "lawyer_black"
 	worn_state = "officer"
@@ -93,7 +93,7 @@
 
 /obj/item/clothing/under/rank/centcom_captain
 	name = "officer's dress uniform"
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\""
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of 'Admiral-Executive.'"
 	icon_state = "centcom"
 	item_state = "lawyer_black"
 	worn_state = "centcom"
@@ -114,7 +114,7 @@
 	worn_state = "civilprotection"
 
 /obj/item/clothing/under/rank/centcom_commander
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Commander.\ It has a patch denoting a Pheonix on the sleeves."
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of 'Commander.' It has a patch denoting a Pheonix on the sleeves."
 	name = "\improper ERT commander's dress uniform"
 	icon_state = "centcom"
 	item_state = "lawyer_black"
@@ -704,7 +704,7 @@
 	icon_state = "crsuit"
 	worn_state = "crsuit"
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_heat_protection_temperature = T0C + 100
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 
 /obj/item/clothing/under/tactical

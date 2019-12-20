@@ -233,7 +233,7 @@ var/const/enterloopsanity = 100
 	return 0
 
 /turf/proc/can_have_cabling()
-	return FALSE
+	return TRUE
 
 /turf/proc/can_lay_cable()
 	return can_have_cabling()

@@ -2,13 +2,14 @@
 	descriptor = "desert"
 	smoothing_iterations = 3
 	target_area_type = /area/mine
+	must_be_clear = TRUE
 
 /datum/random_map/noise/desert/replace_space
 	descriptor = "desert (replacement)"
 	target_turf_type = /turf/space
 
 /datum/random_map/noise/desert/get_appropriate_path(var/value)
-	return /turf/simulated/floor/planet/sand
+	return /turf/unsimulated/floor/planet/sand
 
 /datum/random_map/noise/desert/get_additional_spawns(var/value, var/turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))

@@ -49,9 +49,17 @@
 		.++
 		CHECK_TICK
 
+/datum/controller/subsystem/sunlight/proc/set_dir(var/direction)
+	. = 0
+	for (var/thing in light_points)
+		var/atom/movable/AM = thing
+		AM.dir = direction
+		.++
+		CHECK_TICK
+
 /datum/controller/subsystem/sunlight/proc/apply_sun_state(datum/sun_state/S)
 	log_debug("sunlight: Applying preset [S].")
-	set_overall_light(config.sun_accuracy * 1.2, 1, S.color)
+	set_overall_light(Ceiling(config.sun_accuracy * 1.2), 1, S.color)
 
 /atom/movable/sunobj
 	name = "sunlight emitter"

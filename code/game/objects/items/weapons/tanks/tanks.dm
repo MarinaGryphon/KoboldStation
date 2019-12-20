@@ -9,6 +9,7 @@
 
 	var/gauge_icon = "indicator_tank"
 	var/last_gauge_pressure
+	var/processes = TRUE
 	var/gauge_cap = 6
 
 	flags = CONDUCT
@@ -32,14 +33,15 @@
 	air_contents = new /datum/gas_mixture()
 	air_contents.volume = volume //liters
 	air_contents.temperature = T20C
-
-	START_PROCESSING(SSprocessing, src)
+	if(processes)
+		START_PROCESSING(SSprocessing, src)
 	update_gauge()
 
 /obj/item/tank/Destroy()
 	QDEL_NULL(air_contents)
 
-	STOP_PROCESSING(SSprocessing, src)
+	if(processes)
+		STOP_PROCESSING(SSprocessing, src)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
@@ -49,8 +51,9 @@
 
 /obj/item/tank/examine(mob/user)
 	. = ..(user, 0)
+	var/datum/gas_mixture/returned_contents = return_air()
 	if(.)
-		var/celsius_temperature = air_contents.temperature - T0C
+		var/celsius_temperature = returned_contents.temperature - T0C
 		var/descriptive
 		switch(celsius_temperature)
 			if(300 to INFINITY)
@@ -90,6 +93,7 @@
 	ui_interact(user)
 
 /obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/datum/gas_mixture/returned_contents = return_air()
 	var/mob/living/carbon/location = null
 
 	if(istype(loc, /obj/item/rig))		// check for tanks in rigs
@@ -105,7 +109,7 @@
 
 	// this is the data which will be sent to the ui
 	var/data[0]
-	data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
+	data["tankPressure"] = round(returned_contents.return_pressure() ? returned_contents.return_pressure() : 0)
 	data["releasePressure"] = round(distribute_pressure ? distribute_pressure : 0)
 	data["defaultReleasePressure"] = round(TANK_DEFAULT_RELEASE_PRESSURE)
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
@@ -194,40 +198,45 @@
 
 
 /obj/item/tank/remove_air(amount)
-	return air_contents.remove(amount)
+	var/datum/gas_mixture/returned_contents = return_air()
+	return returned_contents.remove(amount)
 
 /obj/item/tank/return_air()
 	return air_contents
 
 /obj/item/tank/assume_air(datum/gas_mixture/giver)
-	air_contents.merge(giver)
+	var/datum/gas_mixture/returned_contents = return_air()
+	returned_contents.merge(giver)
 
 	check_status()
 	return 1
 
 /obj/item/tank/proc/remove_air_volume(volume_to_return)
-	if(!air_contents)
+	var/datum/gas_mixture/returned_contents = return_air()
+	if(!returned_contents)
 		return null
 
-	var/tank_pressure = air_contents.return_pressure()
+	var/tank_pressure = returned_contents.return_pressure()
 	if(tank_pressure < distribute_pressure)
 		distribute_pressure = tank_pressure
 
-	var/moles_needed = distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	var/moles_needed = distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*returned_contents.temperature)
 
 	return remove_air(moles_needed)
 
 /obj/item/tank/process()
+	var/datum/gas_mixture/returned_contents = return_air()
 	//Allow for reactions
-	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
+	returned_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 	if(gauge_icon)
 		update_gauge()
 	check_status()
 
 /obj/item/tank/proc/update_gauge()
+	var/datum/gas_mixture/returned_contents = return_air()
 	var/gauge_pressure = 0
-	if(air_contents)
-		gauge_pressure = air_contents.return_pressure()
+	if(returned_contents)
+		gauge_pressure = returned_contents.return_pressure()
 		if(gauge_pressure > TANK_IDEAL_PRESSURE)
 			gauge_pressure = -1
 		else
@@ -243,22 +252,21 @@
 
 /obj/item/tank/proc/check_status()
 	//Handle exploding, leaking, and rupturing of the tank
-
-	if(!air_contents)
+	var/datum/gas_mixture/returned_contents = return_air()
+	
+	if(!returned_contents)
 		return 0
 
-	var/pressure = air_contents.return_pressure()
+	var/pressure = returned_contents.return_pressure()
 	if(pressure > TANK_FRAGMENT_PRESSURE)
 		if(!istype(src.loc,/obj/item/device/transfer_valve))
 			message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 			log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 
 		//Give the gas a chance to build up more pressure through reacting
-		air_contents.react()
-		air_contents.react()
-		air_contents.react()
+		returned_contents.react()
 
-		pressure = air_contents.return_pressure()
+		pressure = returned_contents.return_pressure()
 		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
 
 		explosion(
@@ -279,7 +287,7 @@
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
 				return
-			T.assume_air(air_contents)
+			T.assume_air(returned_contents)
 			playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
 			qdel(src)
 		else
@@ -294,7 +302,7 @@
 			var/turf/simulated/T = get_turf(src)
 			if(!T)
 				return
-			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(0.25)
+			var/datum/gas_mixture/leaked_gas = returned_contents.remove_ratio(0.25)
 			T.assume_air(leaked_gas)
 		else
 			integrity--

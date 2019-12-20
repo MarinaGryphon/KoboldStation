@@ -22,6 +22,7 @@ var/global/list/map_count = list()
 	// Turf paths.
 	var/wall_type =  /turf/simulated/wall
 	var/floor_type = /turf/simulated/floor
+	var/must_be_clear = FALSE
 	var/target_turf_type
 	var/target_area_type
 	var/spawn_roof = FALSE //Set to TRUE if a roof should be spawned based.
@@ -179,6 +180,8 @@ var/global/list/map_count = list()
 	if(!T || (target_turf_type && !istype(T,target_turf_type)))
 		return 0
 	if(target_area_type && !istype(T.loc, target_area_type))
+		return 0
+	if(must_be_clear && (locate(/obj/structure) in T))
 		return 0
 	var/newpath = get_appropriate_path(map[tmp_cell])
 	if(newpath)

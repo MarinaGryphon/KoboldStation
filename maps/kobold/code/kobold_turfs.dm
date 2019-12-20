@@ -1,4 +1,4 @@
-/turf/simulated/floor/planet/sand
+/turf/unsimulated/floor/planet/sand
 	name = "desert"
 	icon = 'icons/misc/beach.dmi'
 	footstep_sound = "sandstep"
@@ -7,14 +7,37 @@
 	nitrogen = MOLES_NITROGEN_NAARVAT
 	carbon_dioxide = MOLES_CARBONDIOXIDE_NAARVAT
 	temperature = TEMPERATURE_NAARVAT
+	roof_type = null
 
-/turf/simulated/floor/planet
+/turf/unsimulated/floor/planet/attackby(obj/item/W as obj, mob/user as mob)
+	if(!W || !user)
+		return 0
+
+	if (istype(W, /obj/item/stack/tile/floor))
+		var/obj/item/stack/tile/floor/S = W
+		if (S.get_amount() < 1)
+			return
+		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+		S.use(1)
+		ChangeTurf(/turf/simulated/floor)
+		return
+
+/turf/simulated/floor/rocky
+	name = "rocky sand"
+	icon = 'icons/turf/smooth/rocky_ash.dmi'
+	icon_state = "rockyash"
+	desc = "A fine grey sand. Seems to contain medium-sized rocks."
+	oxygen = MOLES_OXYGEN_NAARVAT
+	nitrogen = MOLES_NITROGEN_NAARVAT
+	carbon_dioxide = MOLES_CARBONDIOXIDE_NAARVAT
+	temperature = TEMPERATURE_NAARVAT
+	footstep_sound = "gravelstep"
 	var/dug = 0 //Increments by 1 every time it's dug. 11 is the last integer that should ever be here.
 	var/digging
 	has_resources = 1
 	roof_type = null
 
-/turf/simulated/floor/planet/ex_act(severity)
+/turf/simulated/floor/rocky/ex_act(severity)
 	switch(severity)
 		if(3.0)
 			return
@@ -34,36 +57,23 @@
 				gets_dug(through = TRUE)
 	return
 
+/turf/simulated/floor/rocky/Initialize()
+	. = ..()
+	if (prob(20))
+		add_overlay("asteroid[rand(0, 9)]", TRUE)
 
-/turf/simulated/floor/planet/attackby(obj/item/W as obj, mob/user as mob)
+/turf/simulated/floor/rocky/attackby(obj/item/W as obj, mob/user as mob)
 	if(!W || !user)
 		return 0
 
-	if (istype(W, /obj/item/stack/rods))
-		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			return
-		var/obj/item/stack/rods/R = W
-		if (R.use(1))
-			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ReplaceWithLattice()
-		return
-
 	if (istype(W, /obj/item/stack/tile/floor))
-		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			var/obj/item/stack/tile/floor/S = W
-			if (S.get_amount() < 1)
-				return
-			qdel(L)
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			S.use(1)
-			ChangeTurf(/turf/simulated/floor)
+		var/obj/item/stack/tile/floor/S = W
+		if (S.get_amount() < 1)
 			return
-		else
-			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
-			return
+		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+		S.use(1)
+		ChangeTurf(/turf/simulated/floor)
+		return
 
 	var/static/list/usable_tools = typecacheof(list(
 		/obj/item/shovel,
@@ -90,13 +100,13 @@
 			playsound(user.loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
 			digging = 1
 			if(!do_after(user, 60/W.toolspeed))
-				if (istype(src, /turf/simulated/floor/planet))
+				if (istype(src, /turf/simulated/floor/rocky))
 					digging = 0
 				return
 
 			// Turfs are special. They don't delete. So we need to check if it's
 			// still the same turf as before the sleep.
-			if (!istype(src, /turf/simulated/floor/planet))
+			if (!istype(src, /turf/simulated/floor/rocky))
 				return
 
 			playsound(user.loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
@@ -142,13 +152,13 @@
 
 		digging = 1
 		if(!do_after(user,40))
-			if (istype(src, /turf/simulated/floor/planet))
+			if (istype(src, /turf/simulated/floor/rocky))
 				digging = 0
 			return
 
 		// Turfs are special. They don't delete. So we need to check if it's
 		// still the same turf as before the sleep.
-		if (!istype(src, /turf/simulated/floor/planet))
+		if (!istype(src, /turf/simulated/floor/rocky))
 			return
 
 		to_chat(user, "<span class='notice'> You dug a hole.</span>")
@@ -173,7 +183,7 @@
 		..(W,user)
 	return
 
-/turf/simulated/floor/planet/proc/gets_dug(mob/user, var/through = FALSE)
+/turf/simulated/floor/rocky/proc/gets_dug(mob/user, var/through = FALSE)
 
 	add_overlay("asteroid_dug", TRUE)
 
@@ -237,15 +247,3 @@
 				below.spawn_roof(ROOF_FORCE_SPAWN)
 			else
 				ChangeTurf(/turf/simulated/open)
-
-/turf/simulated/floor/planet/sand/rocky
-	name = "rocky sand"
-	icon = 'icons/turf/smooth/rocky_ash.dmi'
-	icon_state = "rockyash"
-	desc = "A fine grey ash. Seems to contain medium-sized rocks."
-	footstep_sound = "gravelstep"
-
-/turf/simulated/floor/planet/sand/rocky/Initialize()
-	. = ..()
-	if (prob(20))
-		add_overlay("asteroid[rand(0, 9)]", TRUE)

@@ -23,7 +23,7 @@
 
 
 /obj/item/tank/oxygen/examine(mob/user)
-	if(..(user, 0) && air_contents.gas["oxygen"] < 10)
+	if(..(user, 0) && return_air().gas["oxygen"] < 10)
 		to_chat(user, text("<span class='warning'>The meter on \the [src] indicates you are almost out of oxygen!</span>"))
 		//playsound(usr, 'sound/effects/alert.ogg', 50, 1)
 

@@ -5,7 +5,8 @@
 	density = 1
 	pixel_x = -16
 	layer = 9
-	var/tmp/being_cut = FALSE
+
+/obj/structure/flora/var/tmp/being_cut = FALSE
 
 /obj/structure/flora/tree/attackby(obj/item/W, mob/user)
 	if(W.edge || W.sharp && W.force > 12)
@@ -303,3 +304,20 @@
 /obj/structure/flora/ausbushes/fullgrass/New()
 	..()
 	icon_state = "fullgrass_[rand(1, 3)]"
+
+/obj/structure/flora/ausbushes/attackby(obj/item/W, mob/user)
+	if(W.edge || W.sharp && W.force > 2)
+		if(being_cut)
+			return
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * (2/W.force))
+		being_cut = TRUE
+		user.visible_message("<span class='notice'>\The [user] begins to cut away \the [src].</span>")
+		user.do_attack_animation(src)
+		animate_shake()
+		if(do_after(user, 20 * (2/W.force), act_target = src))
+			user.visible_message("<span class='notice'>\The [user] cuts away \the [src].</span>")
+			qdel(src)
+			return
+		being_cut = FALSE
+		return ..()
+	. = ..()

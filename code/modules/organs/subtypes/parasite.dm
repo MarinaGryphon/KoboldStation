@@ -1,4 +1,4 @@
-/obj/item/organ/parasite
+/obj/item/organ/internal/parasite
 	name = "parasite"
 	icon = 'icons/mob/npc/alien.dmi'
 	icon_state = "burst_lie"
@@ -11,7 +11,7 @@
 	var/stage_interval = 600 //time between stages, in seconds
 	var/subtle = 0 //will the body reject the parasite naturally?
 
-/obj/item/organ/parasite/process()
+/obj/item/organ/internal/parasite/process()
 	..()
 
 	if(!owner)
@@ -24,7 +24,7 @@
 		stage = min(stage+1,max_stage)
 		stage_effect()
 
-/obj/item/organ/parasite/handle_rejection()
+/obj/item/organ/internal/parasite/handle_rejection()
 	if(subtle)
 		return ..()
 	else
@@ -32,14 +32,14 @@
 			rejecting = 0
 		return
 
-/obj/item/organ/parasite/proc/stage_effect()
+/obj/item/organ/internal/parasite/proc/stage_effect()
 	return
 
 //////////////////////
 ///Zombie Infection///
 //////////////////////
 
-/obj/item/organ/parasite/zombie
+/obj/item/organ/internal/parasite/zombie
 	name = "black tumor"
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "blacktumor"
@@ -47,10 +47,10 @@
 
 	organ_tag = "zombie"
 
-	parent_organ = "chest"
+	parent_organ = BP_CHEST
 	stage_interval = 150
 
-/obj/item/organ/parasite/zombie/process()
+/obj/item/organ/internal/parasite/zombie/process()
 	..()
 
 	if (!owner)

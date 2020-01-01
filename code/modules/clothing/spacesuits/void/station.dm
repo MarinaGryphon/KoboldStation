@@ -22,7 +22,7 @@
 		slot_r_hand_str = "eng_hardsuit"
 	)
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/pickaxe, /obj/item/rfd/construction)
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/pickaxe,/obj/item/material/twohanded/fireaxe,/obj/item/rfd/construction)
 
 //Mining rig
 /obj/item/clothing/head/helmet/space/void/mining
@@ -69,7 +69,7 @@
 		slot_l_hand_str = "medical_hardsuit",
 		slot_r_hand_str = "medical_hardsuit"
 	)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical, /obj/item/device/breath_analyzer )
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical,/obj/item/device/breath_analyzer,/obj/item/material/twohanded/fireaxe)
 	armor = list(melee = 30, bullet = 5, laser = 20,energy = 5, bomb = 25, bio = 100, rad = 50)
 
 	//Security
@@ -119,6 +119,7 @@
 		slot_r_hand_str = "atmos_hardsuit"
 	)
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 50)
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/pickaxe,/obj/item/material/twohanded/fireaxe,/obj/item/rfd/construction)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE + 10000 // It is a suit designed for fire, enclosed
 
 //Head of Security
@@ -144,3 +145,19 @@
 	)
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/gun,/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/melee/baton)
+
+	//Science
+/obj/item/clothing/head/helmet/space/void/sci
+	name = "research voidsuit helmet"
+	desc = "A special helmet designed for usage by NanoTrasen research personnel in hazardous, low pressure environments."
+	icon_state = "rig0-sci"
+	item_state = "research_voidsuit_helmet"
+	armor = list(melee = 20, bullet = 5, laser = 30, energy = 45, bomb = 25, bio = 100, rad = 75)
+
+/obj/item/clothing/suit/space/void/sci
+	icon_state = "rig-sci"
+	name = "research voidsuit"
+	desc = "A special suit that designed for usage by NanoTrasen research personnel in hazardous, low pressure environments."
+	item_state = "research_voidsuit"
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit)
+	armor = list(melee = 20, bullet = 5, laser = 30, energy = 45, bomb = 25, bio = 100, rad = 75)

@@ -211,6 +211,8 @@
 
 /obj/structure/AIcore/deactivated/attackby(var/obj/item/W, var/mob/user)
 
+/obj/structure/AIcore/deactivated/attackby(var/obj/item/W, var/mob/user)
+
 	if(istype(W, /obj/item/aicard))
 		var/obj/item/aicard/card = W
 		var/mob/living/silicon/ai/transfer = locate() in card

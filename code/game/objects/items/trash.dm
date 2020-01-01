@@ -11,20 +11,12 @@
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return
 
-/obj/item/trash/koisbar
-	name = "\improper K'ois Bar Wrapper"
-	icon_state = "koisbar"
-
-/obj/item/trash/kokobar
-	name = "\improper Koko Bar Wrapper"
-	icon_state = "kokobar"
-
 /obj/item/trash/raisins
 	name = "\improper 4no raisins"
 	icon_state= "4no_raisins"
 
 /obj/item/trash/candy
-	name = "candy"
+	name = "candy wrapper"
 	icon_state= "candy"
 
 /obj/item/trash/cheesie
@@ -50,14 +42,20 @@
 /obj/item/trash/waffles
 	name = "square tray"
 	icon_state = "waffles"
+	drop_sound = 'sound/items/trayhit1.ogg'
 
 /obj/item/trash/plate
 	name = "plate"
 	icon_state = "plate"
+	drop_sound = 'sound/items/drop/gloves.ogg'
+
+/obj/item/trash/plate/steak
+	icon_state = "steak"
 
 /obj/item/trash/snack_bowl
 	name = "snack bowl"
 	icon_state	= "snack_bowl"
+	drop_sound = 'sound/items/drop/gloves.ogg'
 
 /obj/item/trash/pistachios
 	name = "pistachios pack"
@@ -76,6 +74,7 @@
 	name = "candle"
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle4"
+	drop_sound = 'sound/items/drop/gloves.ogg'
 
 /obj/item/trash/liquidfood
 	name = "\improper \"LiquidFood\" ration"
@@ -92,11 +91,12 @@
 /obj/item/trash/maps
 	name = "maps salty ham"
 	icon_state = "maps-used"
+	drop_sound = 'sound/items/drop/shovel.ogg'
 
 /obj/item/trash/nathisnack
 	name = "razi-snack corned beef"
 	icon_state = "cbeef-used"
-	drop_sound = 'sound/items/drop/soda.ogg'
+	drop_sound = 'sound/items/drop/shovel.ogg'
 
 /obj/item/trash/brownies
 	name = "square tray"
@@ -133,10 +133,14 @@
 	icon_state = "skrellsnacks"
 
 /obj/item/trash/space_twinkie
-	name = "space twinkie"
+	name = "\improper space twinkie"
 	icon_state = "space_twinkie"
 
 /obj/item/trash/grease //used for generic plattered food. example is lasagna.
 	name = "square tray"
 	icon_state = "grease"
 	drop_sound = 'sound/items/trayhit1.ogg'
+
+/obj/item/trash/cookiesnack
+	name = "\improper Carps Ahoy! miniature cookies"
+	icon_state = "cookiesnack"

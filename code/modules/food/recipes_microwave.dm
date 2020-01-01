@@ -26,7 +26,7 @@
 		/obj/item/reagent_containers/food/snacks/bun,
 		/obj/item/reagent_containers/food/snacks/meat/rat
 	)
-	result = /obj/item/reagent_containers/food/snacks/burger/mouse
+z	result = /obj/item/reagent_containers/food/snacks/burger/mouse
 
 /datum/recipe/hotdog
 	items = list(
@@ -41,7 +41,6 @@
 		/obj/item/reagent_containers/food/snacks/meat/corgi
 	)
 	result = /obj/item/reagent_containers/food/snacks/classichotdog
-
 
 /datum/recipe/donkpocket
 	items = list(
@@ -63,7 +62,6 @@
 		/obj/item/reagent_containers/food/snacks/dough
 	)
 	result = /obj/item/reagent_containers/food/snacks/muffin
-
 
 /datum/recipe/humankabob
 	items = list(
@@ -97,8 +95,6 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/tofukabob
 
-
-
 /datum/recipe/microchips
 	appliance = MICROWAVE
 	items = list(
@@ -113,9 +109,6 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/cheesyfries
 
-
-
-
 /datum/recipe/meatsteak
 	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
 	items = list(/obj/item/reagent_containers/food/snacks/meat)
@@ -125,10 +118,6 @@
 	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
 	items = list(/obj/item/reagent_containers/food/snacks/meat/syntiflesh)
 	result = /obj/item/reagent_containers/food/snacks/meatsteak
-
-
-
-
 
 /datum/recipe/bigbiteburger
 	items = list(
@@ -190,7 +179,6 @@
 		/obj/item/reagent_containers/food/snacks/doughslice
 	)
 	result= /obj/item/reagent_containers/food/snacks/spagetti*/
-
 
 /datum/recipe/superbiteburger
 	fruit = list("tomato" = 1)
@@ -262,8 +250,6 @@
 	result = /obj/item/reagent_containers/food/snacks/sausage
 	result_quantity = 2
 
-
-
 /datum/recipe/tossedsalad
 	fruit = list("cabbage" = 2, "tomato" = 1, "carrot" = 1, "apple" = 1)
 	result = /obj/item/reagent_containers/food/snacks/salad/tossedsalad
@@ -281,8 +267,6 @@
 		. = ..(container)
 		for (var/obj/item/reagent_containers/food/snacks/salad/validsalad/being_cooked in .)
 			being_cooked.reagents.del_reagent("toxin")
-
-
 
 // Fuck Science!
 /datum/recipe/ruinedvirusdish
@@ -303,7 +287,6 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/taco
 
-
 /datum/recipe/meatball
 	items = list(
 		/obj/item/reagent_containers/food/snacks/rawmeatball
@@ -317,8 +300,6 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/cutlet
 	appliance = MICROWAVE | SKEWER
-
-
 
 /datum/recipe/mint
 	reagents = list("sugar" = 5, "frostoil" = 5)
@@ -355,7 +336,6 @@
 	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
 	result = /obj/item/reagent_containers/food/snacks/honeytoast
 
-
 /datum/recipe/donerkebab
 	fruit = list("tomato" = 1, "cabbage" = 1)
 	reagents = list("sodiumchloride" = 1)
@@ -364,8 +344,6 @@
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough
 	)
 	result = /obj/item/reagent_containers/food/snacks/donerkebab
-
-
 
 /datum/recipe/nugget
 	reagents = list("flour" = 5)

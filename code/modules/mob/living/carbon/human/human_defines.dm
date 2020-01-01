@@ -65,6 +65,7 @@
 	var/skill_specialization = null
 	var/list/skills = list()
 
+<<<<<<< HEAD
 	var/tmp/icon/stand_icon = null
 	var/tmp/icon/lying_icon = null
 
@@ -72,7 +73,6 @@
 
 	var/tmp/speech_problem_flag = 0
 
-	var/tmp/miming = null //Toggle for the mime's abilities.
 	var/tmp/special_voice = "" // For changing our voice. Used by a symptom.
 
 	var/tmp/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.

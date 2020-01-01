@@ -212,7 +212,7 @@
 		Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/gun/attack(atom/A, mob/living/user, def_zone)
-	if (A == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
+	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
 		handle_suicide(user)
 	else if(user.a_intent != I_HURT && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
 		if (user.aiming.aiming_at != A)
@@ -329,7 +329,7 @@
 			if(silenced)
 				playsound(src, fire_sound, 10, 1)
 			else
-				playsound(src, fire_sound, 75, 1, 5, 0.9, 1)
+				playsound(src, fire_sound, 75, 1, 3, 0.5, 1)
 
 			if (muzzle_flash)
 				set_light(muzzle_flash)
@@ -372,7 +372,7 @@
 	if(silenced)
 		playsound(user, fire_sound, 10, 1)
 	else
-		playsound(user, fire_sound, 75, 1, 5, 0.9, 1)
+		playsound(user, fire_sound, 75, 1, 3, 0.5, 1)
 
 		if (playemote)
 			if(reflex)
@@ -484,7 +484,7 @@
 		if(silenced)
 			playsound(user, fire_sound, 10, 1)
 		else
-			playsound(user, fire_sound, 75, 1, 5, 0.9, 1)
+			playsound(user, fire_sound, 75, 1, 3, 0.5, 1)
 
 		in_chamber.on_hit(M)
 
@@ -492,12 +492,12 @@
 			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0
 			return
-		else if (in_chamber.damage_type == HALLOSS)
+		else if (in_chamber.damage_type == PAIN)
 			to_chat(user, "<span class = 'notice'>Ow...</span>")
-			user.apply_effect(110,AGONY,0)
+			user.apply_effect(110,PAIN,0)
 		else
 			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
-			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
+			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, BP_HEAD, used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
 			user.death()
 		qdel(in_chamber)
 		mouthshoot = 0

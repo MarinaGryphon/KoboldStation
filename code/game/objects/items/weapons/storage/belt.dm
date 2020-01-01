@@ -58,7 +58,7 @@
 		)
 
 
-/obj/item/storage/belt/utility/full/
+/obj/item/storage/belt/utility/full
 	starts_with = list(
 		/obj/item/screwdriver = 1,
 		/obj/item/wrench = 1,
@@ -70,7 +70,7 @@
 	)
 
 
-/obj/item/storage/belt/utility/atmostech/
+/obj/item/storage/belt/utility/atmostech
 	starts_with = list(
 		/obj/item/screwdriver = 1,
 		/obj/item/wrench = 1,
@@ -250,7 +250,8 @@
 		/obj/item/device/lightreplacer,
 		/obj/item/soap,
 		/obj/item/storage/bag/trash,
-		/obj/item/reagent_containers/glass/rag
+		/obj/item/reagent_containers/glass/rag,
+		/obj/item/gun/energy/mousegun
 		)
 
 /obj/item/storage/belt/wands

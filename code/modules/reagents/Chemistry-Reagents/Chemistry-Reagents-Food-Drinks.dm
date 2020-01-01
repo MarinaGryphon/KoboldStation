@@ -501,9 +501,9 @@
 		if(prob(5) || dose == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
 			to_chat(M, discomfort_message)
 	else
-		M.apply_effect(agony_amount, AGONY, 0)
+		M.apply_effect(agony_amount, PAIN, 0)
 		if(prob(5))
-			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
+			M.visible_message("<b>[M]</b> [pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(0, 15) + slime_temp_adj
@@ -543,7 +543,7 @@
 			no_pain = 1
 
 		// Robo-eyes are immune to pepperspray now. Wee.
-		var/obj/item/organ/eyes/E = H.get_eyes()
+		var/obj/item/organ/internal/eyes/E = H.get_eyes()
 		if (istype(E) && (E.status & (ORGAN_ROBOT|ORGAN_ADV_ROBOT)))
 			eyes_covered |= EYES_MECH
 	else
@@ -579,8 +579,8 @@
 	else if(!no_pain)
 		message = "<span class='danger'>Your face and throat burn!</span>"
 		if(prob(25))
-			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
-		M.apply_effect(40, AGONY, 0)
+			M.visible_message("<b>[M]</b> [pick("coughs!","coughs hysterically!","splutters!")]")
+		M.apply_effect(40, PAIN, 0)
 
 /datum/reagent/capsaicin/condensed/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
@@ -590,7 +590,7 @@
 	if(dose == metabolism)
 		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	else
-		M.apply_effect(4, AGONY, 0)
+		M.apply_effect(4, PAIN, 0)
 		if(prob(5))
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
 	if(istype(M, /mob/living/carbon/slime))
@@ -651,8 +651,10 @@
 	digest(M,alien,removed)
 
 /datum/reagent/drink/proc/digest(var/mob/living/carbon/M, var/alien, var/removed, var/add_nutrition = TRUE)
-	if (caffeine && !modifier)
-		modifier = M.add_modifier(/datum/modifier/stimulant, MODIFIER_REAGENT, src, _strength = caffeine, override = MODIFIER_OVERRIDE_STRENGTHEN)
+	if (caffeine)
+		if(!modifier)
+			modifier = M.add_modifier(/datum/modifier/stimulant, MODIFIER_REAGENT, src, _strength = caffeine, override = MODIFIER_OVERRIDE_STRENGTHEN)
+		M.add_chemical_effect(CE_PULSE, 1)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
@@ -2893,6 +2895,7 @@
 /datum/reagent/alcohol/ethanol/neurotoxin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.Weaken(3)
+	M.add_chemical_effect(CE_PULSE, -2)
 
 /datum/reagent/alcohol/ethanol/omimosa
 	name = "Orange Mimosa"
@@ -2994,7 +2997,7 @@
 
 	if(dose > 60 && prob(5))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
+		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (L && istype(L))
 			if(dose < 120)
 				L.take_damage(10 * removed, 0)
@@ -3626,10 +3629,12 @@
 		if(prob(5) || dose == metabolism)
 			to_chat(M, discomfort_message)
 	else
-		M.apply_effect(agony_amount, AGONY, 0)
+		M.apply_effect(agony_amount, PAIN, 0)
 		if(prob(5))
-			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
+			M.visible_message("<b>[M]</b> [pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+	if(istype(M, /mob/living/carbon/slime))
+		M.bodytemperature += rand(0, 15) + slime_temp_adj
 	holder.remove_reagent("frostoil", 2)
 
 /datum/reagent/alcohol/ethanol/cherrytreefireball
@@ -4077,7 +4082,6 @@
 /datum/reagent/alcohol/ethanol/trizkizki_tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed) //contains tea. Gotta get those tea effects.
 	..()
 	M.adjustToxLoss(-0.1 * removed)
-
 
 /datum/reagent/alcohol/ethanol/trizkizki_tea/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(-0.1 * removed)

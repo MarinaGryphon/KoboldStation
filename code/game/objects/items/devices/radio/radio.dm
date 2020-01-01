@@ -51,6 +51,7 @@ var/global/list/default_medbay_channels = list(
 /obj/item/device/radio
 	var/tmp/datum/radio_frequency/radio_connection
 	var/tmp/list/datum/radio_frequency/secure_radio_connections = new
+	var/obj/item/cell/cell = /obj/item/cell/device
 
 	proc/set_frequency(new_frequency)
 		SSradio.remove_object(src, frequency)
@@ -266,12 +267,21 @@ var/global/list/default_medbay_channels = list(
 	// If we were to send to a channel we don't have, drop it.
 	return null
 
-/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, var/verb = "says", var/datum/language/speaking = null)
-	if(!on) return 0 // the device has to be on
+/obj/item/device/radio/talk_into(mob/living/M, message, channel, var/verb = "says", var/datum/language/speaking = null)
+	if(!on) 
+		return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!M || !message) return 0
+	if(!M || !message) 
+		return 0
 
-	if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
+	if (iscarbon(M))
+		var/mob/living/carbon/C = M
+		if (CE_UNDEXTROUS in C.chem_effects)
+			to_chat(M, span("warning", "Your can't move your arms enough to activate the radio..."))
+			return
+
+	if(istype(M)) 
+		M.trigger_aiming(TARGET_CAN_RADIO)
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
@@ -293,7 +303,7 @@ var/global/list/default_medbay_channels = list(
 	*/
 
 	//#### Grab the connection datum ####//
-	var/tmp/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
+	var/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
 	if (!istype(connection))
 		return 0
 	if (!connection)
@@ -475,20 +485,6 @@ var/global/list/default_medbay_channels = list(
 		if(get_dist(src, M) <= canhear_range)
 			talk_into(M, msg,null,verb,speaking)
 
-
-/*
-/obj/item/device/radio/proc/accept_rad(obj/item/device/radio/R as obj, message)
-
-	if ((R.frequency == frequency && message))
-		return 1
-	else if
-
-	else
-		return null
-	return
-*/
-
-
 /obj/item/device/radio/proc/receive_range(freq, level)
 	// check if this radio can receive on the given frequency, and if so,
 	// what the range is in which mobs will hear the radio
@@ -516,7 +512,7 @@ var/global/list/default_medbay_channels = list(
 		var/accept = (freq==frequency && listening)
 		if (!accept)
 			for (var/ch_name in channels)
-				var/tmp/datum/radio_frequency/RF = secure_radio_connections[ch_name]
+				var/datum/radio_frequency/RF = secure_radio_connections[ch_name]
 				if (RF.frequency==freq && (channels[ch_name]&FREQ_LISTENING))
 					accept = 1
 					break

@@ -10,12 +10,14 @@ var/datum/antagonist/ninja/ninjas
 	restricted_species = list("Diona")
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudninja"
+	required_age = 10
 
 	initial_spawn_req = 2
 	initial_spawn_target = 2
 	hard_cap = 2
 	hard_cap_round = 3
 
+	faction = "syndicate"
 	id_type = /obj/item/card/id/syndicate
 
 /datum/antagonist/ninja/New()

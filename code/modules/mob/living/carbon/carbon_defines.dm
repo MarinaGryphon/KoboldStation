@@ -1,5 +1,5 @@
 /mob/living/carbon/
-	gender = MALE
+	gender = FEMALE
 	var/tmp/datum/species/species //Contains icon generation and language information, set during New().
 	//stomach contents redefined at mob/living level, removed from here
 	var/tmp/list/datum/disease2/disease/virus2 = list()
@@ -21,8 +21,6 @@
 	var/tmp/datum/reagents/metabolism/touching = null
 	var/tmp/datum/reagents/metabolism/breathing = null
 
-	var/tmp/pulse = PULSE_NORM	//current pulse level
-
 	//these two help govern taste. The first is the last time a taste message was shown to the plaer.
 	//the second is the message in question.
 	var/tmp/last_taste_time = 0
@@ -34,4 +32,3 @@
 	var/tmp/coughedtime = null // should only be useful for carbons as the only thing using it has a carbon arg.
 
 	var/tmp/willfully_sleeping = 0
-	var/consume_nutrition_from_air = FALSE // used by Diona

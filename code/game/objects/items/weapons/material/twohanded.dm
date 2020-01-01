@@ -28,6 +28,9 @@
 	var/unwielded_force_divisor = 0.25
 	var/parry_chance = 15
 	action_button_name = "Wield two-handed weapon"
+	icon = 'icons/obj/weapons.dmi'
+	hitsound = "swing_hit"
+	drop_sound = 'sound/items/drop/sword.ogg'
 
 /obj/item/material/twohanded/proc/unwield()
 	wielded = 0
@@ -205,7 +208,7 @@
 			P.die_off()
 
 /obj/item/material/twohanded/fireaxe/pre_attack(var/mob/living/target, var/mob/living/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * 2.5)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * 1.5)
 	if(istype(target) && wielded)
 		cleave(user, target)
 	..()
@@ -342,6 +345,7 @@
 
 	var/cutting = 0 //Ignore
 	var/powered = 0 //Ignore
+	drop_sound = 'sound/items/drop/metalshield.ogg'
 
 /obj/item/material/twohanded/chainsaw/Initialize()
 	. = ..()
@@ -463,7 +467,7 @@
 	if (!istype(H) || H.status_flags & GODMODE)
 		return
 
-	var/obj/item/organ/eyes/E = H.get_eyes()
+	var/obj/item/organ/internal/eyes/E = H.get_eyes()
 	if(!istype(E))
 		return
 
@@ -533,6 +537,7 @@
 	reach = 2
 	applies_material_colour = 0
 	can_embed = 0
+	drop_sound = 'sound/items/drop/woodweapon.ogg'
 
 /obj/item/material/twohanded/pike/halberd
 	icon_state = "halberd0"

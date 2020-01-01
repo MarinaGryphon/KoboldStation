@@ -3,6 +3,7 @@ CONTAINS:
 
 Deployable items
 Barricades
+Deployable Kits
 
 for reference:
 
@@ -141,6 +142,9 @@ for reference:
 	else
 		return 0
 
+/obj/structure/barricade/steel/Initialize(var/newloc)
+	.=..(newloc,"steel")
+
 //Actual Deployable machinery stuff
 /obj/machinery/deployable
 	name = "deployable"
@@ -154,7 +158,7 @@ for reference:
 	icon = 'icons/obj/objects.dmi'
 	anchored = 0.0
 	density = 1.0
-	icon_state = "barrier0"
+	icon_state = "barrier"
 	var/health = 100.0
 	var/maxhealth = 100.0
 	var/locked = 0.0
@@ -163,7 +167,7 @@ for reference:
 	New()
 		..()
 
-		src.icon_state = "barrier[src.locked]"
+		src.icon_state = "[initial(icon_state)][src.locked]"
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		if (istype(W, /obj/item/card/id/))
@@ -171,7 +175,7 @@ for reference:
 				if	(src.emagged < 2.0)
 					src.locked = !src.locked
 					src.anchored = !src.anchored
-					src.icon_state = "barrier[src.locked]"
+					src.icon_state = "[initial(icon_state)][src.locked]"
 					if ((src.locked == 1.0) && (src.emagged < 2.0))
 						to_chat(user, "Barrier lock toggled on.")
 						return
@@ -226,7 +230,7 @@ for reference:
 		if(prob(50/severity))
 			locked = !locked
 			anchored = !anchored
-			icon_state = "barrier[src.locked]"
+			icon_state = "[initial(icon_state)][src.locked]"
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 		if(air_group || (height==0))

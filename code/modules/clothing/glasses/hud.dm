@@ -30,7 +30,8 @@
 	item_state = "healthhudpresc"
 
 /obj/item/clothing/glasses/hud/health/prescription/attack_self(mob/user)
-	to_chat(user, "<span class='notice'>You detach a set of medical HUDs form your glasses.</span>")
+	to_chat(user, "<span class='notice'>You detach a set of medical HUDs from your glasses.</span>")
+	playsound(src.loc, 'sound/weapons/blade_close.ogg', 50, 1)
 	var/turf/T = get_turf(src)
 	new /obj/item/clothing/glasses/hud/health(T)
 	new /obj/item/clothing/glasses/regular(T)
@@ -52,7 +53,8 @@
 	item_state = "sechudpresc"
 
 /obj/item/clothing/glasses/hud/security/prescription/attack_self(mob/user)
-	to_chat(user, "<span class='notice'>You detach a set of security HUDs form your glasses.</span>")
+	to_chat(user, "<span class='notice'>You detach a set of security HUDs from your glasses.</span>")
+	playsound(src.loc, 'sound/weapons/blade_close.ogg', 50, 1)
 	var/turf/T = get_turf(src)
 	new /obj/item/clothing/glasses/hud/health(T)
 	new /obj/item/clothing/glasses/regular(T)

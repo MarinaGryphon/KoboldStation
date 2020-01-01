@@ -208,8 +208,10 @@
 
 /obj/item/pickaxe/hammer
 	name = "sledgehammer"
-	//icon_state = "sledgehammer" Waiting on sprite
 	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
+	icon_state = "sledgehammer"
+	icon = 'icons/obj/weapons.dmi'
+	hitsound = "swing_hit"
 
 /obj/item/pickaxe/silver
 	name = "silver pickaxe"
@@ -374,6 +376,18 @@
 	singular_name = "red beacon"
 	icon_state = "redflag"
 	light_color = LIGHT_COLOR_RED
+
+/obj/item/stack/flag/red/planted
+	name = "red beacon"
+	icon_state = "redflag_open"
+	amount = 1
+	upright = 1
+	anchored = 1
+
+/obj/item/stack/flag/red/planted/Initialize()
+	..()
+	base_state = "redflag"
+	set_light(2)
 
 /obj/item/stack/flag/yellow
 	name = "yellow beacons"
@@ -721,7 +735,7 @@
 				L.Weaken(3)
 				if(ishuman(L))
 					shake_camera(L, 20, 1)
-					addtimer(CALLBACK(L, /mob/living/carbon/.proc/vomit), 20)
+					addtimer(CALLBACK(L, /mob/living/carbon/human.proc/vomit), 20)
 
 /**********************Lazarus Injector**********************/
 
@@ -1284,8 +1298,8 @@ var/list/total_extraction_beacons = list()
 					var/mob/living/carbon/L = A
 					L.Weaken(3)
 					shake_camera(L, 20, 1)
-					if(!isipc(L))
-						addtimer(CALLBACK(L, /mob/living/carbon/.proc/vomit), 20)
+					if(!isipc(L) && ishuman(L))
+						addtimer(CALLBACK(L, /mob/living/carbon/human.proc/vomit), 20)
 
 		addtimer(CALLBACK(src, .proc/drill, location), 2)
 

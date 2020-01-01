@@ -158,16 +158,6 @@ All custom items with worn sprites must follow the contained sprite system: http
 	slot_flags = SLOT_BELT
 	w_class = 1
 
-
-/obj/item/device/kit/paint/ripley/fluff/zairjah_kit //Hephaestus Industrial Exosuit MK III Customization Kit - Zairjah - alberyk
-	name = "\"Hephaestus Industrial Exosuit MK III\" APLU customisation kit"
-	desc = "A ripley APLU model manufactured by Hephaestus industries, a common sight in New Gibson nowadays. It shines with chrome painting and a fancy reinforced glass cockpit."
-	new_name = "Hephaestus Industrial Exosuit MK III"
-	new_desc = "A ripley APLU model manufactured by Hephaestus industries, a common sight in New Gibson nowadays. It shines with chrome painting and a fancy reinforced glass cockpit."
-	new_icon = "ripley_zairjah" //a lot of thanks to cakeisossim for the sprites
-	allowed_types = list("ripley","firefighter")
-
-
 /obj/item/cane/fluff/usiki_cane //Inscribed Silver-handled Cane - Usiki Guwan - fireandglory
 	name = "inscribed silver-handled cane"
 	desc = "This silver-handled cane has letters carved into the sides."
@@ -177,7 +167,7 @@ All custom items with worn sprites must follow the contained sprite system: http
 	contained_sprite = TRUE
 
 /obj/item/cane/fluff/usiki_cane/attack_self(mob/user as mob)
-	if(all_languages[LANGUAGE_LIZARD] in user.languages)
+	if(all_languages[LANGUAGE_UNATHI] in user.languages)
 		to_chat(user, "<span class='notice'>This cane has the words \"A new and better life\" carved into one side in basic, and on the other side in Sinta'Unathi.</span>")
 	else
 		to_chat(user, "<span class='notice'>This cane has the words \"A new and better life\" carved into the side, the other side has some unreadable carvings.</span>")
@@ -493,7 +483,7 @@ All custom items with worn sprites must follow the contained sprite system: http
 	contained_sprite = TRUE
 
 
-/obj/item/clothing/shoes/jackboots/unathi/fluff/yinzr_sandals //Marching Sandals - Sslazhir Yinzr - alberyk
+/obj/item/clothing/shoes/jackboots/toeless/fluff/yinzr_sandals //Marching Sandals - Sslazhir Yinzr - alberyk
 	name = "marching sandals"
 	desc = "A pair of sturdy marching sandals made of layers of leather and with a reinforced sole, they are also rather big."
 	icon = 'icons/obj/custom_items/yinzr_sandals.dmi'
@@ -548,7 +538,7 @@ All custom items with worn sprites must follow the contained sprite system: http
 
 	last_special = world.time + 500
 
-	var/obj/item/organ/F = src.internal_organs_by_name["heart"]
+	var/obj/item/organ/F = src.internal_organs_by_name[BP_HEART]
 
 	if(isnull(F))
 		return

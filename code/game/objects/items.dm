@@ -97,7 +97,7 @@
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 
-/obj/item/proc/get_cell()
+/atom/proc/get_cell()
 	return DEVICE_NO_CELL
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
@@ -162,9 +162,9 @@
 	if (!user) return
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
-			temp = H.organs_by_name["l_hand"]
+			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
 			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 			return
@@ -241,6 +241,13 @@
 			else if(S.can_be_inserted(src))
 				S.handle_item_insertion(src)
 
+//Called when the user alt-clicks on something with this item in their active hand
+//this function is designed to be overridden by individual weapons
+/obj/item/proc/alt_attack(var/atom/target, var/mob/user)
+	return 1
+	//A return value of 1 continues on to do the normal alt-click action.
+	//A return value of 0 does not continue, and will not do the alt-click
+
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
 
@@ -289,7 +296,7 @@
 // slot uses the slot_X defines found in setup.dm
 // for items that can be placed in multiple slots
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = 20
+	layer = SCREEN_LAYER+0.01
 	equip_slot = slot
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
@@ -424,7 +431,6 @@ var/list/global/slot_flags_enumeration = list(
 	set src in oview(1)
 	set category = "Object"
 	set name = "Pick up"
-
 	if(!(usr)) //BS12 EDIT
 		return
 	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr))
@@ -537,7 +543,7 @@ var/list/global/slot_flags_enumeration = list(
 		*/
 
 	if(istype(H))
-		var/obj/item/organ/eyes/eyes = H.get_eyes()
+		var/obj/item/organ/internal/eyes/eyes = H.get_eyes()
 
 		if(H != user)
 			M.visible_message(
@@ -565,7 +571,7 @@ var/list/global/slot_flags_enumeration = list(
 			if (eyes.damage >= eyes.min_broken_damage)
 				if(M.stat != 2)
 					to_chat(M, "<span class='warning'>You go blind!</span>")
-		var/obj/item/organ/external/affecting = H.get_organ("head")
+		var/obj/item/organ/external/affecting = H.get_organ(BP_HEAD)
 		if(affecting.take_damage(7))
 			M:UpdateDamageIcon()
 	else

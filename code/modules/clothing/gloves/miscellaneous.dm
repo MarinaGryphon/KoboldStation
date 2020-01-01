@@ -24,10 +24,14 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
+/obj/item/clothing/gloves/swat/ert
+	species_restricted = null
+
 /obj/item/clothing/gloves/swat/tactical
 	name = "\improper tactical gloves"
 	icon_state = "black_leather"
 	item_state = "black_leather_gloves"
+	species_restricted = null
 
 /obj/item/clothing/gloves/combat //Combined effect of SWAT gloves and insulated gloves
 	desc = "These tactical gloves are somewhat fire and impact resistant."
@@ -72,15 +76,17 @@
 	icon_state = "nitrile"
 	item_state = "ngloves"
 
+/obj/item/clothing/gloves/latex/nitrile/unathi
+	name = "unathi nitrile gloves"
+	desc = "Sterile nitrile gloves. Designed for Unathi use."
+	icon_state = "nitrile"
+	item_state = "ngloves"
+	species_restricted = list("Unathi")
+
 /obj/item/clothing/gloves/latex/unathi
 	name = "unathi latex gloves"
 	desc = "Sterile latex gloves. Designed for Unathi use."
 	species_restricted = list("Unathi")
-
-/obj/item/clothing/gloves/latex/tajara
-	name = "tajaran latex gloves"
-	desc = "Sterile latex gloves. Designed for Tajara use."
-	species_restricted = list("Tajara")
 
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
@@ -94,10 +100,6 @@
 /obj/item/clothing/gloves/botanic_leather/unathi
 	name = "unathi leather gloves"
 	species_restricted = list("Unathi")
-
-/obj/item/clothing/gloves/botanic_leather/tajara
-	name = "tajaran leather gloves"
-	species_restricted = list("Tajara")
 
 /obj/item/clothing/gloves/watch
 	desc = "A small wristwatch, capable of telling time."

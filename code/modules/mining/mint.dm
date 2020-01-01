@@ -7,8 +7,6 @@
 	icon_state = "coinpress0"
 	density = 1
 	anchored = 1.0
-	var/obj/machinery/mineral/input = null
-	var/obj/machinery/mineral/output = null
 	var/amt_silver = 0 //amount of silver
 	var/amt_gold = 0   //amount of gold
 	var/amt_diamond = 0
@@ -22,12 +20,7 @@
 
 /obj/machinery/mineral/mint/Initialize()
 	. = ..()
-	for (var/dir in cardinal)
-		src.input = locate(/obj/machinery/mineral/input, get_step(src, dir))
-		if(src.input) break
-	for (var/dir in cardinal)
-		src.output = locate(/obj/machinery/mineral/output, get_step(src, dir))
-		if(src.output) break
+	FindInOut()
 	START_PROCESSING(SSprocessing, src)
 
 /obj/machinery/mineral/mint/machinery_process()
@@ -126,14 +119,14 @@
 		if (src.output)
 			processing = 1;
 			icon_state = "coinpress1"
-			var/obj/item/moneybag/M
+			var/obj/item/storage/bag/money/M
 			switch(chosen)
 				if(DEFAULT_WALL_MATERIAL)
 					while(amt_iron > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/moneybag,output.loc))
-							M = locate(/obj/item/moneybag,output.loc)
+						if (locate(/obj/item/storage/bag/money,output.loc))
+							M = locate(/obj/item/storage/bag/money,output.loc)
 						else
-							M = new/obj/item/moneybag(output.loc)
+							M = new/obj/item/storage/bag/money(output.loc)
 						new/obj/item/coin/iron(M)
 						amt_iron -= 20
 						coinsToProduce--
@@ -142,10 +135,10 @@
 						sleep(5);
 				if("gold")
 					while(amt_gold > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/moneybag,output.loc))
-							M = locate(/obj/item/moneybag,output.loc)
+						if (locate(/obj/item/storage/bag/money,output.loc))
+							M = locate(/obj/item/storage/bag/money,output.loc)
 						else
-							M = new/obj/item/moneybag(output.loc)
+							M = new/obj/item/storage/bag/money(output.loc)
 						new /obj/item/coin/gold(M)
 						amt_gold -= 20
 						coinsToProduce--
@@ -154,10 +147,10 @@
 						sleep(5);
 				if("silver")
 					while(amt_silver > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/moneybag,output.loc))
-							M = locate(/obj/item/moneybag,output.loc)
+						if (locate(/obj/item/storage/bag/money,output.loc))
+							M = locate(/obj/item/storage/bag/money,output.loc)
 						else
-							M = new/obj/item/moneybag(output.loc)
+							M = new/obj/item/storage/bag/money(output.loc)
 						new /obj/item/coin/silver(M)
 						amt_silver -= 20
 						coinsToProduce--
@@ -166,10 +159,10 @@
 						sleep(5);
 				if("diamond")
 					while(amt_diamond > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/moneybag,output.loc))
-							M = locate(/obj/item/moneybag,output.loc)
+						if (locate(/obj/item/storage/bag/money,output.loc))
+							M = locate(/obj/item/storage/bag/money,output.loc)
 						else
-							M = new/obj/item/moneybag(output.loc)
+							M = new/obj/item/storage/bag/money(output.loc)
 						new /obj/item/coin/diamond(M)
 						amt_diamond -= 20
 						coinsToProduce--
@@ -178,10 +171,10 @@
 						sleep(5);
 				if("phoron")
 					while(amt_phoron > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/moneybag,output.loc))
-							M = locate(/obj/item/moneybag,output.loc)
+						if (locate(/obj/item/storage/bag/money,output.loc))
+							M = locate(/obj/item/storage/bag/money,output.loc)
 						else
-							M = new/obj/item/moneybag(output.loc)
+							M = new/obj/item/storage/bag/money(output.loc)
 						new /obj/item/coin/phoron(M)
 						amt_phoron -= 20
 						coinsToProduce--
@@ -190,10 +183,10 @@
 						sleep(5);
 				if("uranium")
 					while(amt_uranium > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/moneybag,output.loc))
-							M = locate(/obj/item/moneybag,output.loc)
+						if (locate(/obj/item/storage/bag/money,output.loc))
+							M = locate(/obj/item/storage/bag/money,output.loc)
 						else
-							M = new/obj/item/moneybag(output.loc)
+							M = new/obj/item/storage/bag/money (output.loc)
 						new /obj/item/coin/uranium(M)
 						amt_uranium -= 20
 						coinsToProduce--

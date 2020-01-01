@@ -11,6 +11,7 @@
 	possible_transfer_amounts = list(5,10,15,25,30,60)
 	flags = 0
 	volume = 60
+	fragile = 4
 
 /obj/item/reagent_containers/glass/bottle/on_reagent_change()
 	update_icon()
@@ -56,12 +57,17 @@
 	if (!is_open_container())
 		add_overlay("lid_bottle")
 
+/obj/item/reagent_containers/glass/bottle/norepinephrine
+	name = "norepinephrine bottle"
+	desc = "A small bottle. Contains norepinephrine - used to stabilize patients."
+	icon_state = "bottle-4"
+	reagents_to_add = list("norepinephrine" = 60)
+
 /obj/item/reagent_containers/glass/bottle/inaprovaline
 	name = "inaprovaline bottle"
 	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
 	icon_state = "bottle-4"
 	reagents_to_add = list("inaprovaline" = 60)
-
 
 /obj/item/reagent_containers/glass/bottle/toxin
 	name = "toxin bottle"
@@ -91,7 +97,7 @@
 	name = "dylovene bottle"
 	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
 	icon_state = "bottle-4"
-	reagents_to_add = list("anti_toxin" = 60)
+	reagents_to_add = list("dylovene" = 60)
 
 /obj/item/reagent_containers/glass/bottle/mutagen
 	name = "unstable mutagen bottle"
@@ -156,9 +162,9 @@
 
 /obj/item/reagent_containers/glass/bottle/epinephrine
 	name = "epinephrine bottle"
-	desc = "A small bottle. Contains epinephrine, also known as adrenaline, is a super strength stimulant and painkiller intended to keep a patient alive while in critical condition. Overdose causes heart damage and an energy boost equivelent to hyperzine."
+	desc = "A small bottle. Contains epinephrine. Epinephrine, also known as adrenaline, is a super strength stimulant and painkiller intended to keep a patient alive while in critical condition. Overdose causes heart damage and an energy boost equivelent to hyperzine."
 	icon_state = "bottle-4"
-	reagents_to_add = list("epinephrine" = 60)
+	reagents_to_add = list("adrenaline" = 60)
 
 /obj/item/reagent_containers/glass/bottle/dexalin_plus
 	name = "dexalin plus bottle"
@@ -166,11 +172,11 @@
 	icon_state = "bottle-4"
 	reagents_to_add = list("dexalinp" = 60)
 
-/obj/item/reagent_containers/glass/bottle/spaceacillin
-	name = "spaceacillin bottle"
-	desc = "A small bottle. Contains spaceacillin. An all-purpose antiviral agent."
+/obj/item/reagent_containers/glass/bottle/deltamivir
+	name = "deltamivir bottle"
+	desc = "A small bottle. Contains deltamivir. An all-purpose antiviral agent."
 	icon_state = "bottle-4"
-	reagents_to_add = list("spaceacillin" = 60)
+	reagents_to_add = list("deltamivir" = 60)
 
 /obj/item/reagent_containers/glass/bottle/coughsyrup
 	name = "cough syrup bottle"

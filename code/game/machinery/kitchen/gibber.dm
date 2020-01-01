@@ -18,37 +18,6 @@
 	idle_power_usage = 2
 	active_power_usage = 500
 
-//auto-gibs anything that bumps into it
-/obj/machinery/gibber/autogibber
-	var/turf/input_plate
-
-/obj/machinery/gibber/autogibber/Initialize()
-	. = ..()
-	for(var/i in cardinal)
-		var/obj/machinery/mineral/input/input_obj = locate( /obj/machinery/mineral/input, get_step(src.loc, i) )
-		if(input_obj)
-			if(isturf(input_obj.loc))
-				input_plate = input_obj.loc
-				gib_throw_dir = i
-				qdel(input_obj)
-				break
-
-	if(!input_plate)
-		log_misc("a [src] didn't find an input plate.")
-		return
-
-/obj/machinery/gibber/autogibber/CollidedWith(var/atom/A)
-	if(!input_plate) return
-
-	if(ismob(A))
-		var/mob/M = A
-
-		if(M.loc == input_plate
-		)
-			M.forceMove(src)
-			M.gib()
-
-
 /obj/machinery/gibber/Initialize()
 	. = ..()
 	add_overlay("grjam")
@@ -107,8 +76,8 @@
 		var/mob/living/carbon/human/M = user
 		if(M.h_style == "Floorlength Braid" || M.h_style == "Very Long Hair")
 			if(prob(10))
-				M.apply_damage(30, BRUTE, "head")
-				M.apply_damage(45, HALLOSS)
+				M.apply_damage(30, BRUTE, BP_HEAD)
+				M.apply_damage(45, PAIN)
 				M.visible_message("<span class='danger'>[user]'s hair catches in the [src]!</span>", "<span class='danger'>Your hair gets caught in the [src]!</span>")
 				M.say("*scream")
 

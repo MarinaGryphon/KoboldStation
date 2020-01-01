@@ -24,6 +24,8 @@
 		/obj/item/smes_coil,
 		/obj/item/device/assembly,//Primarily for making improved cameras, but opens many possibilities
 		/obj/item/computer_hardware,
+		/obj/item/conveyor_construct,//for when people need to rebuild Cargo
+		/obj/item/conveyor_switch_construct,//ditto
 		/obj/item/pipe
 		)
 
@@ -223,7 +225,7 @@
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
 		/obj/item/device/flash, //to build borgs,
-		/obj/item/organ/brain, //to insert into MMIs,
+		/obj/item/organ/internal/brain, //to insert into MMIs,
 		/obj/item/stack/cable_coil, //again, for borg building,
 		/obj/item/circuitboard,
 		/obj/item/slime_extract,
@@ -240,9 +242,9 @@
 		)
 
 /obj/item/gripper/chemistry //A gripper designed for chemistry, to allow borgs to work efficiently in the lab
-	name = "chemistry gripper"
+	name = "medical gripper"
 	icon_state = "gripper-sci"
-	desc = "A specialised grasping tool designed for working in chemistry and pharmaceutical labs"
+	desc = "A specialised grasping tool designed for working in medical treatment facilities and pharmaceutical labs."
 
 	can_hold = list(
 		/obj/item/reagent_containers/glass,
@@ -253,7 +255,10 @@
 		/obj/item/storage/pill_bottle,
 		/obj/item/hand_labeler,
 		/obj/item/paper,
-		/obj/item/stack/material/phoron
+		/obj/item/stack/material/phoron,
+		/obj/item/reagent_containers/blood,
+		/obj/item/reagent_containers/food/drinks/sillycup,
+		/obj/item/reagent_containers/food/drinks/medcup
 		)
 
 
@@ -270,7 +275,8 @@
 		/obj/item/seeds,
 		/obj/item/grown,
 		/obj/item/trash,
-		/obj/item/reagent_containers/cooking_container
+		/obj/item/reagent_containers/cooking_container,
+		/obj/item/material/kitchen
 		)
 
 /obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item

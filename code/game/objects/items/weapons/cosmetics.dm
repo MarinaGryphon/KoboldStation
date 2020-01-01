@@ -95,7 +95,7 @@
 	w_class = 2
 
 /obj/item/razor/proc/shave(mob/living/carbon/human/H, location)
-	if(location == "head")
+	if(location == BP_HEAD)
 		H.h_style = H.species.default_h_style
 	else
 		H.f_style = H.species.default_f_style
@@ -117,7 +117,6 @@
 
 	if(!ishuman_species(H))	//you can only shave humans for obvious reasons
 		return FALSE
-
 
 	if(target_zone == "head")
 		if(H.head && (H.head.body_parts_covered & HEAD))
@@ -148,7 +147,7 @@
 
 				return TRUE
 
-	else if(target_zone == "mouth")
+	else if(target_zone == BP_MOUTH)
 
 		if(H.head && (H.head.body_parts_covered & FACE))
 			to_chat(user, "<span class='warning'>\The [H.head] is in the way!</span>")

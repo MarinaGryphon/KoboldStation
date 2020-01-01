@@ -130,17 +130,20 @@
 	item_state = "gift1"
 	w_class = 1
 
-/obj/item/xmasgift/New()
+/obj/item/xmasgift/Initialize()
 	..()
+	pixel_x = rand(-10,10)
+	pixel_y = rand(-10,10)
 	var/gift_benefactor = pick("the NanoTrasen Department of Christmas Affairs", "Miranda Trasen", "Joseph Dorne", "Isaac Asimov", "Baal D. Griffon", "the Sol Alliance (Sorry about the blockade!)",
 		"Hephaestus Industries", "Idris Incorporated", "Glorsh Omega II", "the Jargon Federation", "the People's Republic of Adhomai", "the Adhomai Liberation Army", "the Izweski Hegemony",
 		"the Zo'ra Hive","the Frontier Alliance", "Digital Dingo", "Optimum Jeffrey", "Lemmy and the Clockworks", "President Hadii", "King Azunja","Supreme Commander Nated'Hakhan",
 		"Lord-Regent Not'zar","Jesus Christ","Santa Claus","Mrs. Claus","Sandy Claws","Buddha","Gary","Jesus Christ!","the True Queen of Biesel, God-Lady Seon-rin von Illdenberg, First of Her Name",
-		"Admiral Frost","Pirate King Frost", "The Secret NanoTrasen Cabal of Duty Officers", "The Society for the Preservation of Rats", "Officer Beepsky","Lieutenant Columbo","B.O.B","Runtime",
+		"Admiral Frost","Pirate King Frost", "The Secret NanoTrasen Cabal of Duty Officers", "The Society for the Preservation of Rats", "Officer Beepsky","Lieutenant Columbo","Crew of the NSS Upsilon","Runtime",
 		"Bones","Chauncey","Ian","Pun Pun","Nup Nup","Waldo","Odlaw","Crew of the NSS Exodus", "Custodial Staff of the NTCC Odin","ERT Phoenix","grey slime (357)","Bob the Blob","People for the Ethical Treatment of Bluespace Bears",
-		"Mr. Clown and Mrs. Mime from New Puerto Rico","the Grinch","the Krampus","Satan","Mega-Satan","<span class='danger'>\[BENEFACTOR REDACTED]\</span>","Bluespace Cat","Union of Bluespace Technicians Tau Ceti","Robo Mickey Mouse")
+		"Mr. Clown and Mrs. Mime from New Puerto Rico","the Grinch","the Krampus","Satan","Mega-Satan","<span class='danger'>\[BENEFACTOR REDACTED]\</span>","Bluespace Cat","Union of Bluespace Technicians Tau Ceti","the New Kingdom of Adhomai",
+		"Ginny", "Boleslaw Keesler", "The Queen in Blue", "Cuban Pete", "Ceres' Lance", "the real Odin Killer (Still out here, guys!)", "the K'lax Hive", "the C'thur Hive")
 	var/pick_emotion = pick("love","platonic admiration","approval","love (not in a sexual way or anything, though)","apathy", "schadenfreude","love","God's blessing","Santa's blessing","Non-demoninational deity's blessing","love","compassion","appreciation",
-		"respect","begrudging respect","love")
+		"respect","begrudging respect","love", "seasonal obligation")
 	desc = "To: <i>The [station_name()]</i><BR>From: <i>[gift_benefactor], with [pick_emotion]</i>"
 
 	return
@@ -149,12 +152,13 @@
 	qdel(src)
 	return
 
-/obj/item/xmasgift/small/attack_self(mob/M as mob)
+/obj/item/xmasgift/small/attack_self(mob/user)
 	var/gift_type = pick(
 		/obj/random/action_figure,
 		/obj/random/coin,
 		/obj/random/spacecash,
 		/obj/random/glowstick,
+		/obj/random/gloves,
 		/obj/item/storage/wallet,
 		/obj/item/storage/photo_album,
 		/obj/item/storage/box/snappops,
@@ -163,7 +167,7 @@
 		/obj/item/pen/invisible,
 		/obj/item/clothing/gloves/watch,
 		/obj/item/lipstick/random,
-		/obj/item/corncob,
+		/obj/item/clothing/shoes/carp,
 		/obj/item/bikehorn,
 		/obj/item/toy/balloon,
 		/obj/item/toy/blink,
@@ -196,9 +200,6 @@
 		/obj/item/stack/material/animalhide/human,
 		/obj/item/stack/material/animalhide/monkey,
 		/obj/item/stack/material/animalhide/xeno,
-		/obj/item/trash/cheesie,
-		/obj/item/trash/raisins,
-		/obj/item/trash/koisbar,
 		/obj/item/xmasgift/medium,
 		/obj/item/toy/syndicateballoon,
 		/obj/item/toy/xmastree,
@@ -207,7 +208,6 @@
 		/obj/item/clothing/accessory/medal/bronze_heart,
 		/obj/item/clothing/accessory/medal/silver/valor,
 		/obj/item/bluespace_crystal,
-		/obj/random/junk,
 		/obj/item/gun/energy/mousegun,
 		/obj/item/gun/energy/wand/toy,
 		/obj/item/mirror,
@@ -215,12 +215,13 @@
 		/obj/item/ore/coal,
 		/obj/item/ore/coal,
 		/obj/item/stamp/clown,
+		/obj/item/organ/internal/heart/skrell,
 		/obj/item/latexballon)
 
-	var/atom/movable/I = new gift_type(get_turf(M))
-	M.remove_from_mob(src)
-	M.put_in_hands(I)
-	to_chat(M, "<span class='notice'>You open the gift, revealing your new [I.name]! Just what you always wanted!</span>")
+	var/atom/movable/I = new gift_type(get_turf(user))
+	user.remove_from_mob(src)
+	user.put_in_hands(I)
+	to_chat(user, span("notice", "You open the gift, revealing your new [I.name]! Just what you always wanted!"))
 	qdel(src)
 	return
 
@@ -229,10 +230,11 @@
 	item_state = "gift2"
 	w_class = 2
 
-/obj/item/xmasgift/medium/attack_self(mob/M as mob)
+/obj/item/xmasgift/medium/attack_self(mob/user)
 	var/gift_type = pick(
 		/obj/item/sord,
 		/obj/random/booze,
+		/obj/random/random_flag,
 		/obj/item/storage/belt/champion,
 		/obj/item/pickaxe/silver,
 		/obj/item/grenade/smokebomb,
@@ -240,6 +242,7 @@
 		/obj/item/book/manual/barman_recipes,
 		/obj/item/book/manual/chef_recipes,
 		/obj/item/banhammer,
+		/obj/item/clothing/shoes/cowboy,
 		/obj/item/toy/crossbow,
 		/obj/item/toy/katana,
 		/obj/item/toy/spinningtoy,
@@ -247,6 +250,7 @@
 		/obj/item/reagent_containers/food/snacks/grown/ambrosiadeus,
 		/obj/item/reagent_containers/food/snacks/grown/ambrosiavulgaris,
 		/obj/item/clothing/accessory/horrible,
+		/obj/item/clothing/shoes/heels,
 		/obj/item/storage/box/donkpockets,
 		/obj/item/reagent_containers/food/drinks/teapot,
 		/obj/item/device/flashlight/lantern,
@@ -282,11 +286,11 @@
 		/obj/item/device/megaphone,
 		/obj/item/device/violin)
 
-	var/atom/movable/I = new gift_type(get_turf(M))
-	M.remove_from_mob(src)
-	if (!M.put_in_hands(I))
-		M.forceMove(get_turf(src))
-	to_chat(M, "<span class='notice'>You open the gift, revealing your new [I.name]! Just what you always wanted!</span>")
+	var/atom/movable/I = new gift_type(get_turf(user))
+	user.remove_from_mob(src)
+	if (!user.put_in_hands(I))
+		user.forceMove(get_turf(src))
+	to_chat(user, span("notice", "You open the gift, revealing your new [I.name]! Just what you always wanted!"))
 	qdel(src)
 	return
 
@@ -295,8 +299,10 @@
 	item_state = "gift3"
 	w_class = 3
 
-/obj/item/xmasgift/large/attack_self(mob/M as mob)
+/obj/item/xmasgift/large/attack_self(mob/user)
 	var/gift_type = pick(
+		/obj/random/plushie,
+		/obj/random/backpack,
 		/obj/item/inflatable_duck,
 		/obj/item/beach_ball,
 		/obj/item/clothing/under/redcoat,
@@ -305,10 +311,13 @@
 		/obj/item/clothing/under/mime,
 		/obj/item/clothing/under/rank/fatigues/marine,
 		/obj/item/clothing/under/rank/dress/marine,
+		/obj/random/hoodie,
 		/mob/living/simple_animal/cat/kitten,
 		/mob/living/simple_animal/chick,
 		/mob/living/simple_animal/corgi/puppy,
 		/mob/living/simple_animal/mushroom,
+		/mob/living/simple_animal/ice_tunneler,
+		/mob/living/simple_animal/carp/baby,
 		/obj/item/xmasgift/medium,
 		/obj/item/tank/jetpack,
 		/obj/item/toy/plushie/drone,
@@ -322,9 +331,9 @@
 		/mob/living/simple_animal/hostile/commanded/dog/pug,
 		/obj/item/target/alien)
 
-	var/atom/movable/I = new gift_type(get_turf(M))
-	M.remove_from_mob(src)
-	M.put_in_hands(I)
-	to_chat(M, "<span class='notice'>You open the gift, revealing your new [I.name]! Just what you always wanted!</span>")
+	var/atom/movable/I = new gift_type(get_turf(user))
+	user.remove_from_mob(src)
+	user.put_in_hands(I)
+	to_chat(user, span("notice", "You open the gift, revealing your new [I.name]! Just what you always wanted!"))
 	qdel(src)
 	return

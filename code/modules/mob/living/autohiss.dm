@@ -54,47 +54,6 @@
 			LANGUAGE_AZAZIBA
 		)
 
-/datum/species/bug
-	autohiss_basic_map = list(
-			"s" = list("z","zz")
-		)
-	autohiss_extra_map = list(
-			"f" = list("v", "vh"),
-			"ph" = list("v", "vh")
-		)
-	autohiss_exempt = list(LANGUAGE_VAURCA)
-
-/datum/species/bug/type_b
-	autohiss_basic_map = list(
-			"s" = list("z","zz", "zzz")
-		)
-	autohiss_extra_map = list(
-			"f" = list("v", "vh"),
-			"ph" = list("v", "vh")
-		)
-	autohiss_exempt = list(LANGUAGE_VAURCA)
-
-/datum/species/diona
-
-	autohiss_basic_extend = list("who","what","when","where","why","how")
-	autohiss_extra_extend = list("i'm","i","am","this","they","are","they're","their","his","her","their","the","he","she")
-	autohiss_extender = "..."
-
-	autohiss_basic_map = list(
-			"s" = list("s","ss","sss"),
-			"z" = list("z","zz","zzz"),
-			"ee" = list("ee","eee")
-		)
-	autohiss_extra_map = list(
-			"a" = list("a","aa", "aaa"),
-			"i" = list("i","ii", "iii"),
-			"o" = list("o","oo", "ooo"),
-			"u" = list("u","uu", "uuu")
-		)
-	autohiss_exempt = list(
-			LANGUAGE_ROOTSONG
-		)
-
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
 	if (!autohiss_basic_map || !autohiss_basic_map.len)
 		return message

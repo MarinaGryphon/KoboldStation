@@ -10,6 +10,7 @@ var/datum/antagonist/raider/raiders
 	welcome_text = "Use :H to talk on your encrypted channel."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	antaghud_indicator = "hudmutineer"
+	required_age = 10
 
 	hard_cap = 6
 	hard_cap_round = 10
@@ -195,6 +196,8 @@ var/datum/antagonist/raider/raiders
 	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
 	player.equip_to_slot_or_del(new /obj/item/tank/nitrogen(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
+	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/raider(player), slot_l_ear)
+	player.equip_to_slot_or_del(new /obj/item/card/id/syndicate/raider(player), slot_wear_id)
 
 	player.internal = locate(/obj/item/tank) in player.contents
 	if(istype(player.internal,/obj/item/tank) && player.internals)

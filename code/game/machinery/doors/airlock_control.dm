@@ -1,9 +1,9 @@
 #define AIRLOCK_CONTROL_RANGE 22
 
-// This code allows for airlocks to be controlled externally by setting an id_tag and comm frequency (disables ID access)
+// This code allows for airlocks to be controlled externally by setting an id_tag and comm frequency (disables ID access) // doesn't actually disable ID access
 /obj/machinery/door/airlock
 	var/id_tag
-	var/frequency
+	var/frequency = 1411
 	var/tmp/shockedby
 	var/tmp/datum/radio_frequency/radio_connection
 	var/tmp/cur_command = null	//the command the door is currently attempting to complete
@@ -119,22 +119,14 @@
 		radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 
 
-/obj/machinery/door/airlock/open(surpress_send)
+/obj/machinery/door/airlock/open(suppress_send)
 	. = ..()
-	if(!surpress_send) send_status()
+	if(!suppress_send) send_status()
 
 
-/obj/machinery/door/airlock/close(surpress_send)
+/obj/machinery/door/airlock/close(suppress_send)
 	. = ..()
-	if(!surpress_send) send_status()
-
-
-/obj/machinery/door/airlock/CollidedWith(atom/AM)
-	. = ..()
-	if(istype(AM, /obj/mecha))
-		var/obj/mecha/mecha = AM
-		if(density && radio_connection && mecha.occupant && (src.allowed(mecha.occupant) || src.check_access_list(mecha.operation_req_access)))
-			send_status(1)
+	if(!suppress_send) send_status()
 
 /obj/machinery/door/airlock/proc/set_frequency(new_frequency)
 	SSradio.remove_object(src, frequency)
@@ -147,7 +139,12 @@
 	if(frequency)
 		set_frequency(frequency)
 
+	if(!id_tag)
+		id_tag = (electronics && electronics.id_tag) ? electronics.id_tag : "\ref[src]"
+
 	//wireless connection
+	if(!_wifi_id && electronics && electronics.wifi_id)
+		_wifi_id = electronics.wifi_id
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
@@ -234,6 +231,12 @@
 		SSradio.remove_object(src,frequency)
 	return ..()
 
+/obj/machinery/airlock_sensor/attackby(obj/item/W, mob/user)
+	if(istype(W,/obj/item/device/debugger))
+		var/newtag = sanitize(input(user, "Enter a new sensor ID tag.", "Sensor Tag Control") as null|text)
+		id_tag = newtag
+		return
+
 /obj/machinery/airlock_sensor/airlock_interior
 	command = "cycle_interior"
 
@@ -267,6 +270,10 @@
 	//Swiping ID on the access button
 	if (istype(I, /obj/item/card/id) || istype(I, /obj/item/device/pda))
 		attack_hand(user)
+		return
+	else if(istype(I,/obj/item/device/debugger))
+		var/newtag = sanitize(input(user, "Enter the button's master ID tag.", "Access Button Tag Control") as null|text)
+		master_tag = newtag
 		return
 	..()
 

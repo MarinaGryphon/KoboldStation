@@ -51,7 +51,7 @@
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
 	var/global/list/toxic_reagents = list(
-		"anti_toxin" =		-2,
+		"dylovene" =		-2,
 		"toxin" =			2,
 		"hydrazine" =		2.5,
 		"acetone" =			1,
@@ -333,7 +333,7 @@
 		return
 
 	// Check if we should even bother working on the current seed datum.
-	if(seed.mutants. && seed.mutants.len && severity > 1)
+	if(seed.mutants?.len && severity > 1)
 		mutate_species()
 		return
 

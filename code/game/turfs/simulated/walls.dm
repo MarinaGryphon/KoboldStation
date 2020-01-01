@@ -28,7 +28,6 @@
 
 	var/materialtype
 	var/rmaterialtype
-
 	smooth = SMOOTH_TRUE | SMOOTH_NO_CLEAR_ICON
 
 // Walls always hide the stuff below them.

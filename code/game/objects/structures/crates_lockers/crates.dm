@@ -641,8 +641,6 @@
 		new seedtype(src)
 
 
-
-
 //A crate that populates itself with randomly selected loot from randomstock.dm
 //Can be passed in a rarity value, which is used as a multiplier on the rare/uncommon chance
 //Quantity of spawns is number of discrete selections from the loot lists, default 10
@@ -667,14 +665,13 @@
 		"trashcart" = "trashcartopen",
 		"critter" = "critteropen",
 		"largemetal" = "largemetalopen",
-		"medicalcrate" = "medicalcrateopen"
+		"medicalcrate" = "medicalcrateopen",
+		"tcflcrate" = "tcflcrateopen"
 	)
 
 
-/obj/structure/closet/crate/loot/Initialize(mapload, var/_rarity = 1, var/_quantity = 10)
+/obj/structure/closet/crate/loot/Initialize(mapload)
 	. = ..()
-	rarity = _rarity
-	quantity = _quantity
 
 	spawntypes = list(
 		"1" = STOCK_RARE_PROB * rarity,

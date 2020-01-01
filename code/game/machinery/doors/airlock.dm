@@ -463,7 +463,7 @@ About the new airlock wires panel:
 				return
 		else if(user.hallucination > 50 && prob(10) && src.operating == 0 && !user.isSynthetic())
 			to_chat(user, "<span class='danger'>You feel a powerful shock course through your body!</span>")
-			user.halloss += 10
+			user.adjustHalLoss(10)
 			user.stunned += 10
 			return
 	..(user)
@@ -788,7 +788,7 @@ About the new airlock wires panel:
 				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 				if(!istype(H.head, /obj/item/clothing/head/helmet))
 					user.visible_message("<span class='warning'>[user] headbutts the airlock.</span>")
-					var/obj/item/organ/external/affecting = H.get_organ("head")
+					var/obj/item/organ/external/affecting = H.get_organ(BP_HEAD)
 					H.Stun(8)
 					H.Weaken(5)
 					if(affecting.take_damage(10, 0))
@@ -1067,6 +1067,11 @@ About the new airlock wires panel:
 		var/obj/item/pai_cable/cable = C
 		cable.plugin(src, user)
 	else if(!repairing && C.iscrowbar())
+		if(istype(C, /obj/item/melee/arm_blade))
+			if(!arePowerSystemsOn()) //if this check isn't done and empty, the armblade will never be used to hit the airlock
+			else if(!(stat & BROKEN))
+				..()
+				return
 		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && !src.locked)))
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
@@ -1135,8 +1140,7 @@ About the new airlock wires panel:
 					"<span class='notice'>You hear a metal clank and some sparks.</span>"\
 				)
 				set_broken()
-				sleep(1 SECONDS)
-				CreateAssembly()
+				addtimer(CALLBACK(src, .proc/CreateAssembly, 1 SECONDS))
 			ChainSawVar.cutting = 0
 			take_damage(50)
 		else if(locked)

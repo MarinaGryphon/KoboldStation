@@ -1,6 +1,6 @@
-/obj/machinery/mineral/rigpress
-	name = "hardsuit module press"
-	desc = "This machine converts certain items permanently into hardsuit modules."
+/obj/machinery/rigpress
+	name = "RIG module press"
+	desc = "This machine converts certain items permanently into RIG modules."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "coinpress0"
 	density = 1
@@ -10,13 +10,13 @@
 	active_power_usage = 50
 	var/pressing
 
-/obj/machinery/mineral/rigpress/update_icon()
+/obj/machinery/rigpress/update_icon()
 	if(pressing)
 		icon_state = "coinpress1"
 	else
 		icon_state = "coinpress0"
 
-/obj/machinery/mineral/rigpress/attackby(obj/item/W, mob/user)
+/obj/machinery/rigpress/attackby(obj/item/W, mob/user)
 	if(!pressing)
 		var/outcome_path
 

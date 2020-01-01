@@ -286,11 +286,8 @@ swapmap
 						A.contents+=T
 					else defarea.contents+=T
 					// clear the turf
-					for(var/obj/O in T)
-						sleep()
-						qdel(O)
+					for(var/obj/O in T) qdel(O)
 					for(var/mob/M in T)
-						sleep()
 						if(!M.key) qdel(M)
 						else M.loc=null
 					// finish the read

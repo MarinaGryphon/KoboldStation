@@ -174,6 +174,14 @@
 	icon_state = "bridge"
 	anchored = 1
 
+/obj/structure/bed/chair/office/bridge/generic
+	icon_state = "bridge_generic"
+
+/obj/structure/bed/chair/office/bridge/pilot
+	name = "pilot seat"
+	desc = "A comfortable seat for a pilot."
+	icon_state = "pilot"
+
 /obj/structure/bed/chair/office/Initialize()
 	. = ..()
 	var/image/I = image(icon, "[icon_state]_over")

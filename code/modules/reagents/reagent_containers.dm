@@ -70,10 +70,16 @@
 	if(standard_splash_mob(user, target))
 		return
 	if(standard_pour_into(user, target))
+		SSvueui.check_uis_for_change(target)
 		return
 	if(standard_splash_obj(user, target))
 		return
-
+	
+	if(istype(target, /obj/))
+		var/obj/O = target
+		if(!(O.flags & NOBLUDGEON) && reagents)
+			reagents.apply_force(O.force)
+		return ..()
 
 /obj/item/reagent_containers/proc/get_temperature()
 	if(reagents)

@@ -1,0 +1,13 @@
+author: MoondancerPony
+delete-after: True
+
+changes: 
+  - experiment: "Replaced the invisible input/output objects for mining machinery with constructible industrial hoppers."
+  - rscadd: "Added circuitboards for mining machinery."
+  - rscadd: "Added recipes to make docking/airlock controllers from plasteel sheets."
+  - rscadd: "Added recipes to make buttons, mining hoppers, and airlock sensors from steel sheets."
+  - rscadd: "Added recipes to make conveyor belts and conveyor switches from plastic sheets."
+  - rscadd: "Most of these, as well as airlock boards and vent pumps can have various variables configured with a debugger from Engineering."
+  - rscadd: "Buttons can be constructed, opened, deconstructed, and have assembly pieces placed in them, activated when the button is."
+  - rscadd: "Conveyor belts and switches can be deconstructed."
+  - rscadd: "Added two new integrated circuit components, an advanced signaller as well as a reference encoder (converts a reference to a text format that can be stored, transmitted, and compared)."

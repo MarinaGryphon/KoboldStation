@@ -101,10 +101,7 @@
 				var/mob/living/carbon/C = M
 				if(!C.handcuffed)
 					SwitchState(user)
-			else
-				SwitchState(user)
-	else if(istype(user, /obj/mecha))
-		SwitchState()
+			SwitchState(user)
 
 /obj/structure/simple_door/proc/SwitchState(mob/user)
 	if(state)

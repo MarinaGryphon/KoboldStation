@@ -16,6 +16,7 @@ var/list/holder_mob_icon_cache = list()
 	var/desc_dead
 	var/name_dead
 	var/isalive
+	contained_sprite = TRUE
 
 	var/static/list/unsafe_containers
 
@@ -59,10 +60,6 @@ var/list/holder_mob_icon_cache = list()
 		M.show_inv(usr)
 
 //Mob specific holders.
-/obj/item/holder/diona
-	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 5)
-	slot_flags = SLOT_HEAD | SLOT_OCLOTHING | SLOT_HOLSTER
-
 /obj/item/holder/drone
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 
@@ -275,6 +272,7 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/human
 	icon = null
+	contained_sprite = FALSE
 	var/holder_icon = 'icons/mob/holder_complex.dmi'
 	var/list/generate_for_slots = list(slot_l_hand_str, slot_r_hand_str, slot_back_str)
 	slot_flags = SLOT_BACK
@@ -336,7 +334,7 @@ var/list/holder_mob_icon_cache = list()
 		icon_state = species_name
 		item_state = species_name
 
-		contained_sprite = 1
+		contained_sprite = TRUE
 
 		color = M.color
 		name = M.name
@@ -370,7 +368,6 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
 	w_class = 2
 
-
 /obj/item/holder/drone
 	name = "maintenance drone"
 	desc = "It's a small maintenance robot."
@@ -379,7 +376,6 @@ var/list/holder_mob_icon_cache = list()
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 	slot_flags = SLOT_HEAD
 	w_class = 4
-	contained_sprite = 1
 
 /obj/item/holder/drone/heavy
 	name = "construction drone"
@@ -398,9 +394,10 @@ var/list/holder_mob_icon_cache = list()
 	name = "cat"
 	desc = "It's a cat. Meow."
 	desc_dead = "It's a dead cat."
-	icon_state = "cat_tabby"
-	icon_state_dead = "cat_tabby_dead"
-	item_state = "cat"
+	icon = 'icons/mob/npc/pets.dmi'
+	icon_state = "cat2"
+	icon_state_dead = "cat2_dead"
+	item_state = "cat2"
 //Setting item state to cat saves on some duplication for the in-hand versions, but we cant use it for head.
 //Instead, the head versions are done by duplicating the cat
 	slot_flags = SLOT_HEAD
@@ -412,13 +409,18 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD
 	item_state = "cat"
 
+/obj/item/holder/cat/black/familiar
+	icon_state = "cat3"
+	icon_state_dead = "cat3_dead"
+	item_state = "cat3"
+
 /obj/item/holder/cat/kitten
 	name = "kitten"
-	icon_state = "cat_kitten"
+	icon_state = "kitten"
 	icon_state_dead = "cat_kitten_dead"
 	slot_flags = SLOT_HEAD
 	w_class = 1
-	item_state = "cat"
+	item_state = "kitten"
 
 /obj/item/holder/cat/penny
 	name = "Penny"
@@ -428,8 +430,23 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD
 	w_class = 1
 	item_state = "penny"
-	contained_sprite = 1
 
+/obj/item/holder/carp/baby
+	name = "baby space carp"
+	desc = "Awfully cute! Looks friendly!"
+	icon = 'icons/mob/npc/pets.dmi'
+	icon_state = "babycarp"
+	item_state = "babycarp"
+	slot_flags = SLOT_HEAD
+	flags_inv = HIDEEARS|BLOCKHEADHAIR // carp wings blocks stuff - geeves
+	w_class = 1
+
+/obj/item/holder/carp/baby/verb/toggle_block_hair(mob/user)
+	set name = "Toggle Hair Coverage"
+	set category = "Object"
+
+	flags_inv ^= BLOCKHEADHAIR
+	to_chat(user, span("notice", "[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair."))
 
 /obj/item/holder/borer
 	name = "cortical borer"
@@ -444,7 +461,6 @@ var/list/holder_mob_icon_cache = list()
 	icon_state = "monkey"
 	item_state = "monkey"
 	slot_flags = SLOT_HEAD
-	contained_sprite = 1
 	w_class = 3
 
 /obj/item/holder/monkey/farwa
@@ -481,7 +497,6 @@ var/list/holder_mob_icon_cache = list()
 	item_state = "rat_brown"
 	icon_state_dead = "rat_brown_dead"
 	slot_flags = SLOT_EARS
-	contained_sprite = 1
 	origin_tech = list(TECH_BIO = 2)
 	w_class = 1
 
@@ -525,6 +540,7 @@ var/list/holder_mob_icon_cache = list()
 //Chicks and chickens
 /obj/item/holder/chick
 	name = "chick"
+	icon = 'icons/mob/npc/livestock.dmi'
 	desc = "It's a fluffy little chick, until it grows up."
 	desc_dead = "How could you do this? You monster!"
 	icon_state_dead = "chick_dead"
@@ -535,6 +551,7 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/chicken
 	name = "chicken"
+	icon = 'icons/mob/npc/livestock.dmi'
 	desc = "It's a feathery, tasty-looking chicken."
 	desc_dead = "Now it's ready for plucking and cooking!"
 	icon_state = "chicken_brown"
@@ -573,7 +590,6 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/pai
 	icon = 'icons/mob/npc/pai.dmi'
 	dir = EAST
-	contained_sprite = 1
 	slot_flags = SLOT_HEAD
 
 /obj/item/holder/pai/drone
@@ -613,14 +629,14 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/corgi
 	name = "corgi"
+	icon = 'icons/mob/npc/pets.dmi'
 	icon_state = "corgi"
 	item_state = "corgi"
-	contained_sprite = 1
 	w_class = 3
 
 /obj/item/holder/fox
 	name = "fox"
+	icon = 'icons/mob/npc/pets.dmi'
 	icon_state = "fox"
 	item_state = "fox"
-	contained_sprite = 1
 	w_class = 3

@@ -984,7 +984,6 @@
 	icon_state = "koisbar"
 	spawn_nothing_percentage = 5
 	problist = list(
-		/obj/item/trash/koisbar = 0.5,
 		/obj/item/trash/raisins = 1,
 		/obj/item/trash/candy = 1,
 		/obj/item/trash/cheesie = 2,

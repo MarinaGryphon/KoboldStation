@@ -19,11 +19,6 @@
 /obj/item/material/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/parry_bonus = 1
 
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.martial_art && H.martial_art.weapon_affinity && istype(src, H.martial_art.weapon_affinity))
-			parry_bonus = H.martial_art.parry_multiplier
-
 	if(default_parry_check(user, attacker, damage_source) && prob(parry_chance * parry_bonus))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 		playsound(user.loc, 'sound/weapons/bladeparry.ogg', 50, 1)

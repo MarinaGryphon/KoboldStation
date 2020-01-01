@@ -65,7 +65,6 @@
 	var/skill_specialization = null
 	var/list/skills = list()
 
-<<<<<<< HEAD
 	var/tmp/icon/stand_icon = null
 	var/tmp/icon/lying_icon = null
 

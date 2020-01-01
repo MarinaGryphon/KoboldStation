@@ -30,14 +30,6 @@
 			amount = list(1,2,3,4,5),
 			emag = 0
 		),
-		"soywafers" = list(
-			name = "Soy Wafers",
-			class = "Food",
-			object = /obj/item/reagent_containers/food/snacks/soywafers,
-			cost = 150,
-			amount = list(1,2,3,4,5),
-			emag = 0
-		),
 		"bio_vitamin" = list(
 			name = "Flavored Vitamin",
 			class = "Food",

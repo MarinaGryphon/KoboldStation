@@ -361,8 +361,6 @@
 	//Harmlessly passes through cultists and constructs
 	if (target_mob == ignore)
 		return 0
-	if (iscult(target_mob))
-		return 0
 
 	return ..()
 

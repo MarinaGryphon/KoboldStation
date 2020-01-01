@@ -86,39 +86,9 @@
 		user.Paralyse(20)
 		return
 
-	if(M.stat != DEAD && ishuman(M) && user.a_intent != I_HURT)
-		var/mob/living/K = M
-		if(cult && (K.mind in cult.current_antagonists) && prob(75))
-			if(do_after(user, 15))
-				K.visible_message(span("danger", "[user] waves \the [src] over \the [K]'s head, [K] looks captivated by it."), span("warning", "[user] waves the [src] over your head. <b>You see a foreign light, asking you to follow it. Its presence burns and blinds.</b>"))
-				var/choice = alert(K,"Do you want to give up your goal?","Become cleansed","Resist","Give in")
-				switch(choice)
-					if("Resist")
-						K.visible_message(span("warning", "The gaze in [K]'s eyes remains determined."), span("notice", "You turn away from the light, remaining true to the Geometer!"))
-						K.say("*scream")
-						K.take_overall_damage(5, 15)
-						admin_attack_log(user, M, "attempted to deconvert", "was unsuccessfully deconverted by", "attempted to deconvert")
-					if("Give in")
-						K.visible_message(span("notice", "[K]'s eyes become clearer, the evil gone, but not without leaving scars."))
-						K.take_overall_damage(10, 20)
-						cult.remove_antagonist(K.mind)
-						admin_attack_log(user, M, "successfully deconverted", "was successfully deconverted by", "successfully deconverted")
-			else
-				user.visible_message(span("warning", "[user]'s concentration is broken!"), span("warning", "Your concentration is broken! You and your target need to stay uninterrupted for longer!"))
-				return
-		else
-			to_chat(user, span("danger", "The [src] appears to do nothing."))
-			M.visible_message(span("danger", "\The [user] waves \the [src] over \the [M]'s head."))
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(prob(25))
-					H.cure_all_traumas(cure_type = CURE_SOLITUDE)
-				else if(prob(20))
-					H.cure_all_traumas(cure_type = CURE_CRYSTAL)
-			return
-	else if(user.a_intent != I_HURT) // to prevent the chaplain from hurting peoples accidentally
-		to_chat(user, span("notice", "The [src] appears to do nothing."))
-		return
+	if(user.a_intent != I_HURT)
+		to_chat(user, span("danger", "The [src] appears to do nothing."))
+		M.visible_message(span("danger", "\The [user] waves \the [src] over \the [M]'s head."))
 	else
 		return ..()
 
@@ -129,7 +99,6 @@
 		cooldown = world.time
 		user.visible_message(span("notice", "[user] loudly taps their [src.name] against the floor."))
 		playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
-		call(/obj/effect/rune/proc/revealrunes)(src)
 		return
 
 /obj/item/reagent_containers/spray/aspergillum

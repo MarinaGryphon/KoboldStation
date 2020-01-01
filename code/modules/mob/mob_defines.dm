@@ -71,6 +71,7 @@
 	var/tmp/med_record = ""
 	var/tmp/sec_record = ""
 	var/tmp/list/incidents = list()
+	var/tmp/list/additional_vision_handlers = list()
 	var/tmp/gen_record = ""
 	var/tmp/ccia_record = ""
 	var/tmp/list/ccia_actions = list()
@@ -95,7 +96,7 @@
 	var/tmp/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/tmp/list/languages = list()         // For speaking/listening.
 	var/tmp/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
-	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
+	var/tmp/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/tmp/facing_dir = null   // Used for the ancient art of moonwalking.
 
 	var/tmp/obj/machinery/hologram/holopad/holo = null

@@ -61,8 +61,7 @@
 		new/datum/computer_file/program/filemanager(),
 		new/datum/computer_file/program/chatclient(),
 		new/datum/computer_file/program/civilian/cargoorder(),
-		new/datum/computer_file/program/ntnetmonitor(),
-		new/datum/computer_file/program/aidiag()
+		new/datum/computer_file/program/ntnetmonitor()
 	)
 	return _prg_list
 
@@ -200,8 +199,7 @@
 		new/datum/computer_file/program/comm(1),
 		new/datum/computer_file/program/suit_sensors(),
 		new/datum/computer_file/program/alarm_monitor(),
-		new/datum/computer_file/program/lighting_control(),
-		new/datum/computer_file/program/aidiag()
+		new/datum/computer_file/program/lighting_control()
 	)
 	return _prg_list
 

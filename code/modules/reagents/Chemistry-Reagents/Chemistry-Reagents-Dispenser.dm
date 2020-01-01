@@ -493,10 +493,6 @@
 
 	fallback_specific_heat = 0.503
 
-/datum/reagent/sulfur/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if (alien & IS_VAURCA)
-		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
-
 /datum/reagent/tungsten
 	name = "Tungsten"
 	id = "tungsten"

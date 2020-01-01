@@ -150,9 +150,6 @@
 	)
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
 	if(remove_generic)
 		M.drowsyness = max(0, M.drowsyness - 6 * removed)
 		M.hallucination += (-9 * removed)
@@ -619,8 +616,6 @@
 	fallback_specific_heat = 1
 
 /datum/reagent/ondansetron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	M.add_chemical_effect(CE_ANTIEMETIC, dose/4) // 1u should suppress 2u thetamycin
 
 /datum/reagent/coughsyrup
@@ -1278,8 +1273,6 @@
 	value = 2
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	if(dose < 1)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(15*volume, 35))
 		M.add_chemical_effect(CE_PULSE, 1)

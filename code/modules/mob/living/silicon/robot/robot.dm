@@ -20,7 +20,6 @@
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
-<<<<<<< HEAD
 	var/crisis = 0 //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/malfAImodule = 0

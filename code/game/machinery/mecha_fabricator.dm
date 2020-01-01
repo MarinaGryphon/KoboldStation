@@ -1,13 +1,8 @@
 /obj/machinery/mecha_part_fabricator
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
-<<<<<<< HEAD:code/game/mecha/mech_fabricator.dm
-	name = "Exosuit Fabricator"
-	desc = "A machine used for construction of robotcs and mechas."
-=======
 	name = "Mechatronic Fabricator"
 	desc = "A general purpose fabricator that can be used to fabricate robotic equipment."
->>>>>>> 21d725c52bdab8afa70ab5407d52182fe3e44b78:code/game/machinery/mecha_fabricator.dm
 	density = 1
 	anchored = 1
 	use_power = 1
@@ -96,11 +91,7 @@
 		if(M.h_style == "Floorlength Braid" || M.h_style == "Very Long Hair")
 			if(prob(10))
 				M.apply_damage(30, BRUTE, "head")
-<<<<<<< HEAD:code/game/mecha/mech_fabricator.dm
-				M.apply_damage(45, HALLOSS)
-=======
 				M.apply_damage(45, PAIN)
->>>>>>> 21d725c52bdab8afa70ab5407d52182fe3e44b78:code/game/machinery/mecha_fabricator.dm
 				M.visible_message("<span class='danger'>[user]'s hair catches in the [src]!</span>", "<span class='danger'>Your hair gets caught in the [src]!</span>")
 				M.say("*scream")
 	ui_interact(user)
@@ -247,11 +238,7 @@
 		if(target != user && !user.restrained() && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
 			user.visible_message(span("alert", "[user] starts tugging on [target]'s head as the [src] keeps running!"), span("alert", "You start tugging on [target]'s head!"))
 			target.apply_damage(25, BRUTE, "head")
-<<<<<<< HEAD:code/game/mecha/mech_fabricator.dm
-			target.apply_damage(10, HALLOSS)
-=======
 			target.apply_damage(10, PAIN)
->>>>>>> 21d725c52bdab8afa70ab5407d52182fe3e44b78:code/game/machinery/mecha_fabricator.dm
 			target.say("*scream")
 			spawn(10)
 			user.visible_message(span("alert", "[user] stops the [src] and leaves [target] resting as they are."), span("alert", "You turn the [src] off and let go of [target]."))

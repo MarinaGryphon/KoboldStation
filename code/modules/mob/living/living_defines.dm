@@ -8,15 +8,6 @@
 
 	var/tmp/hud_updateflag = 0
 
-	//Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
-	var/bruteloss = 0.0	//Traumatic damage caused by brute force (punching, being clubbed by a toolbox ect... this also accounts for pressure damage)
-	var/oxyloss = 0.0	//Oxygen deprivation damage (no air in lungs)
-	var/toxloss = 0.0	//Toxic damage caused by being poisoned or radiated
-	var/fireloss = 0.0	//Burn damage caused by being way too hot, too cold or burnt.
-	var/cloneloss = 0	//Damage caused by being cloned or ejected from the cloner early. slimes also deal cloneloss damage to victims
-	var/halloss = 0		//Hallucination damage. 'Fake' damage obtained through hallucinating or the holodeck. Sleeping should cause it to wear off.
-	var/brainloss = 0	//Brain damage.
-
 
 	var/tmp/hallucination = 0 //Directly affects how long a mob will hallucinate for
 	var/tmp/list/atom/hallucinations = list() //A list of hallucinated people that try to attack the mob. See /obj/effect/fake_attacker in hallucinations.dm
@@ -52,8 +43,7 @@
 	var/composition_reagent_quantity
 	var/mouth_size = 2//how large of a creature it can swallow at once, and how big of a bite it can take out of larger things
 	var/tmp/eat_types = 0//This is a bitfield which must be initialised in New(). The valid values for it are in devour.dm
-	var/tmp/datum/reagents/metabolism/ingested = null
-	var/tmp/underdoor //Used for mobs that can walk through maintenance hatches - drones, pais, and spiderbots
+	var/tmp/underdoor //Used for mobs that can walk through maintenance hatches - drones and spiderbots
 	var/tmp/life_tick = 0      // The amount of life ticks that have processed on this mob.
 
 

@@ -446,9 +446,7 @@
 	explode()
 
 /datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
-	if(!istype(H) || alien == IS_DIONA)
-		return
-	H.add_chemical_effect(CE_PULSE, 2)
+	H.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/coolant
 	name = "Coolant"

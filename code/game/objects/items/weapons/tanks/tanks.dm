@@ -72,7 +72,7 @@
 
 /obj/item/tank/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if (istype(src.loc, /obj/item/assembly))
+	if (istype(src.loc, /obj/item/device/assembly))
 		icon = src.loc
 
 	if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
@@ -253,7 +253,7 @@
 /obj/item/tank/proc/check_status()
 	//Handle exploding, leaking, and rupturing of the tank
 	var/datum/gas_mixture/returned_contents = return_air()
-	
+
 	if(!returned_contents)
 		return 0
 

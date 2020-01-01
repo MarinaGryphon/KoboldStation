@@ -95,7 +95,6 @@
 	new /obj/item/deck/tarot(src)
 	new /obj/item/device/radio/headset/headset_service(src)
 	new /obj/item/spirit_board(src)
-	new /obj/item/mesmetron(src)
 	new /obj/item/toy/plushie/therapy(src)
 	new /obj/item/book/manual/psych(src)
 	return

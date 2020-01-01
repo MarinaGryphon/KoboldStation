@@ -26,7 +26,7 @@
 		/obj/item/reagent_containers/food/snacks/bun,
 		/obj/item/reagent_containers/food/snacks/meat/rat
 	)
-z	result = /obj/item/reagent_containers/food/snacks/burger/mouse
+	result = /obj/item/reagent_containers/food/snacks/burger/mouse
 
 /datum/recipe/hotdog
 	items = list(

@@ -1,136 +1,3 @@
-/datum/outfit/admin/ert/nanotrasen
-	name = "Nanotrasen ERT Responder"
-
-	uniform = /obj/item/clothing/under/ert
-	suit = null
-	suit_store = null
-	belt = /obj/item/storage/belt/military
-	shoes = /obj/item/clothing/shoes/swat
-	accessory = /obj/item/clothing/accessory/storage/black_vest
-	gloves = null
-	id = /obj/item/card/id/ert
-	back = /obj/item/rig/ert/security
-
-	l_ear = /obj/item/device/radio/headset/ert
-
-	belt_contents = list(
-		/obj/item/handcuffs = 2,
-		/obj/item/shield/riot/tact = 1,
-		/obj/item/ammo_magazine/a556 = 2,
-		/obj/item/ammo_magazine/a556/ap = 1
-	)
-
-/datum/outfit/admin/ert/nanotrasen/get_id_access()
-	return get_all_accesses() | get_centcom_access("Emergency Response Team")
-
-/datum/outfit/admin/ert/nanotrasen/specialist
-	name = "Nanotrasen ERT Engineer Specialist"
-
-	belt = /obj/item/storage/belt/utility/full
-	back = /obj/item/rig/ert/engineer
-
-	belt_contents = null
-
-/datum/outfit/admin/ert/nanotrasen/specialist/medical
-	name = "Nanotrasen ERT Medical Specialist"
-
-	belt = /obj/item/storage/belt/medical
-	back = /obj/item/rig/ert/medical
-	r_hand = /obj/item/storage/firstaid/combat
-
-	belt_contents = list(
-		/obj/item/reagent_containers/hypospray = 1,
-		/obj/item/stack/medical/advanced/bruise_pack = 1,
-		/obj/item/stack/medical/advanced/ointment = 1,
-		/obj/item/reagent_containers/glass/bottle/thetamycin = 1
-	)
-
-/datum/outfit/admin/ert/nanotrasen/leader
-	name = "Nanotrasen ERT Leader"
-
-	back = /obj/item/rig/ert
-
-	belt_contents = list(
-		/obj/item/handcuffs = 1,
-		/obj/item/shield/riot/tact = 1,
-		/obj/item/ammo_magazine/a556 = 2,
-		/obj/item/ammo_magazine/a556/ap = 2
-	)
-
-//TCFL
-/datum/outfit/admin/ert/legion
-	name = "TCFL Volunteer"
-
-	head = /obj/item/clothing/head/legion
-	uniform = /obj/item/clothing/under/legion
-	l_ear = /obj/item/device/radio/headset/legion
-	shoes = /obj/item/clothing/shoes/swat/ert
-	gloves = /obj/item/clothing/gloves/swat/ert
-	glasses =  /obj/item/clothing/glasses/sunglasses/aviator
-	back = /obj/item/storage/backpack/legion
-	id = /obj/item/card/id/distress/legion
-
-	backpack_contents = null
-
-/datum/outfit/admin/ert/legion/get_id_access()
-	return get_distress_access()
-
-/datum/outfit/admin/ert/legion/specialist
-	name = "TCFL Legionnaire"
-	accessory = /obj/item/clothing/accessory/legion/specialist
-
-/datum/outfit/admin/ert/legion/leader
-	name = "TCFL Prefect"
-	accessory = /obj/item/clothing/accessory/legion
-
-/datum/outfit/admin/ert/legion/leader/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	.=..()
-	var/obj/item/card/id/distress/legion/I = H.wear_id
-	I.access += (access_cent_specops)
-
-/datum/outfit/admin/ert/legion/pilot
-	name = "TCFL Dropship Pilot"
-	uniform = /obj/item/clothing/under/legion/pilot
-	head = /obj/item/clothing/head/helmet/legion_pilot
-	suit = /obj/item/clothing/suit/storage/toggle/leather_jacket/flight/legion
-	gloves = null
-	back = null
-	belt = /obj/item/storage/belt/security/tactical
-	accessory = /obj/item/clothing/accessory/holster/hip
-	accessory_contents = list(/obj/item/gun/energy/blaster/revolver/pilot  = 1)
-
-/datum/outfit/admin/ert/legion/sentinel
-	name = "TCFL Sentinel"
-	head = /obj/item/clothing/head/legion/sentinel
-	uniform = /obj/item/clothing/under/legion/sentinel
-	suit = /obj/item/clothing/suit/storage/vest/legion
-	gloves = null
-	belt = /obj/item/storage/belt/security/tactical
-	suit_store = /obj/item/gun/energy/blaster/rifle
-	accessory = /obj/item/clothing/accessory/holster/hip
-	accessory_contents = list(/obj/item/gun/energy/blaster/revolver = 1)
-
-	backpack_contents = list(
-		/obj/item/gun/energy/blaster/carbine = 1,
-		/obj/item/handcuffs/ziptie = 3,
-		/obj/item/clothing/mask/gas/tactical = 1,
-		/obj/item/storage/firstaid/regular = 1,
-		/obj/item/clothing/gloves/swat/ert = 1
-	)
-
-	belt_contents = list(
-		/obj/item/melee/energy/sword/knife = 1,
-		/obj/item/shield/energy/legion = 1,
-		/obj/item/reagent_containers/spray/pepper = 1,
-		/obj/item/grenade/flashbang = 2,
-		/obj/item/melee/telebaton = 1
-	)
-
-/datum/outfit/admin/ert/legion/sentinel/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	.=..()
-	var/obj/item/card/id/distress/legion/I = H.wear_id
-	I.access += (access_cent_specops)
-
 //Mercenary
 /datum/outfit/admin/ert/mercenary
 	name = "Mercenary Freelancer"
@@ -233,8 +100,6 @@
 /datum/outfit/admin/deathsquad/leader
 	name = "Asset Protection Lead"
 
-	l_pocket = /obj/item/pinpointer
-
 /datum/outfit/admin/deathsquad/syndicate
 	name = "Syndicate Commando"
 
@@ -249,7 +114,6 @@
 
 	belt_contents = list(
 		/obj/item/ammo_magazine/c762 = 3,
-		/obj/item/pinpointer = 1,
 		/obj/item/shield/energy = 1,
 		/obj/item/handcuffs = 1,
 		/obj/item/grenade/flashbang = 1,
@@ -261,8 +125,6 @@
 
 /datum/outfit/admin/deathsquad/syndicate/leader
 	name = "Syndicate Commando Lead"
-
-	l_pocket = /obj/item/pinpointer
 
 /datum/outfit/admin/deathsquad/get_id_access()
 	return get_all_accesses()

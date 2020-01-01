@@ -186,12 +186,8 @@
 		if(prob(find_prob))
 			user.visible_message("<span class='notice'>[user] takes something out of incision on [target]'s [affected.name] with \the [tool].</span>", \
 				"<span class='notice'>You take [obj] out of incision on [target]'s [affected.name]s with \the [tool].</span>" )
-<<<<<<< HEAD
 			affected.implants -= obj
-
 			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
-
-
 			obj.forceMove(get_turf(target))
 			obj.add_blood(target)
 			obj.update_icon()

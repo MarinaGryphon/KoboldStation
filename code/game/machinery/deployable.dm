@@ -266,3 +266,47 @@ for reference:
 		spark(src, 2, alldirs)
 		visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 		return 1
+
+/obj/item/deployable_kit
+	name = "Emergency Floodlight Kit"
+	desc = "A do-it-yourself kit for constructing the finest of emergency floodlights."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "inf_box"
+	item_state = "syringe_kit"
+	var/kit_product = /obj/machinery/floodlight
+	var/assembly_time = 8 SECONDS
+
+/obj/item/deployable_kit/attack_self(mob/user)
+	to_chat(user, span("notice","You start assembling \the [src]..."))
+	if(do_after(user, assembly_time))
+		assemble_kit(user)
+		qdel(src)
+
+/obj/item/deployable_kit/proc/assemble_kit(mob/user)
+	playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, 1)
+	var/atom/A = new kit_product(user.loc)
+	user.visible_message(span("notice","[user] assembles \a [A]."),span("notice","You assemble \a [A]."))
+	A.add_fingerprint(user)
+
+/obj/item/deployable_kit/surgery_table
+	name = "surgery table assembly kit"
+	desc = "A quick assembly kit to deploy a surgery table in the field. Cannot be put together again after being unfolded, choose your spot wisely."
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "table_deployable"
+	item_state = "table_parts"
+	w_class = 4
+	kit_product = /obj/machinery/optable
+	assembly_time = 20 SECONDS
+
+/obj/item/deployable_kit/surgery_table/assemble_kit(mob/user)
+	..()
+	var/free_spot = null
+	for(var/check_dir in cardinal)
+		var/turf/T = get_step(src, check_dir)
+		if(turf_clear(T))
+			free_spot = T
+			break
+	if(!free_spot)
+		free_spot = src.loc
+	new /obj/structure/curtain/open/medical(free_spot, src)
+	new /obj/structure/curtain/open/medical(free_spot, src)

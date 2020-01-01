@@ -15,7 +15,7 @@
 	var/strength = 4 // How much damage it deals per unit
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(strength && alien != IS_DIONA)
+	if(strength)
 		var/dam = (strength * removed)
 		M.add_chemical_effect(CE_TOXIN, dam)
 		if(target_organ && ishuman(M))
@@ -390,7 +390,7 @@
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/mob/living/carbon/human/H = M
-	if((istype(H) && (H.species.flags & NO_BLOOD)) || alien == IS_DIONA)
+	if((istype(H) && (H.species.flags & NO_BLOOD)))
 		return
 	M.add_chemical_effect(CE_PULSE, -2)
 	if(dose < 1)
@@ -607,7 +607,7 @@
 		to_chat(M, span("warning", "Your limbs start to feel numb and weak, and your legs wobble as it becomes hard to stand..."))
 		M.confused = max(M.confused, 250)
 	M.add_chemical_effect(CE_UNDEXTROUS, 1)
-	if(dose > 0.2)	
+	if(dose > 0.2)
 		M.Weaken(10)
 
 /datum/reagent/toxin/dextrotoxin/Destroy()

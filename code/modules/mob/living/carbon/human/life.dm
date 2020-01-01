@@ -1053,10 +1053,6 @@
 		if (T.get_lumcount() < 0.01)	// give a little bit of tolerance for near-dark areas.
 			playsound_simple(null, pick(scarySounds), 50, TRUE)
 
-/mob/living/carbon/human/proc/handle_changeling()
-	if(mind && mind.changeling)
-		mind.changeling.regenerate()
-
 /mob/living/carbon/human/proc/handle_shock()
 	..()
 	if(status_flags & GODMODE)

@@ -33,18 +33,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/toff = 0 //If 1, messenger disabled
 	var/tnote[0]  //Current Texts
 	var/last_text //No text spamming
-	var/last_honk //Also no honk spamming that's bad too
 	var/ttone = "beep" //The PDA ringtone!
 	var/newstone = "beep, beep" //The news ringtone!
 	var/lock_code = "" // Lockcode to unlock uplink
-	var/honkamt = 0 //How many honks left when infected with honk.exe
-	var/mimeamt = 0 //How many silence left when infected with mime.exe
 	var/note = "Congratulations, your station has chosen the Thinktronic 5230 Personal Data Assistant!" //Current note in the notepad function
 	var/notehtml = ""
 	var/cart = "" //A place to stick cartridge menu information
 	var/detonate = 1 // Can the PDA be blown up?
 	var/hidden = 0 // Is the PDA hidden from the PDA list?
-	var/has_pen = 1 // Does the PDA have a pen + penslot?
+	var/has_inserted_item = TRUE // Does the PDA have a pen + penslot?
 	var/tmp/active_conversation = null // New variable that allows us to only view a single conversation.
 	var/tmp/list/conversations = list()    // For keeping up with who we have PDA messsages from.
 	var/new_message = 0			//To remove hackish overlay check
@@ -64,7 +61,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/ownjob = null //related to above - this is assignment (potentially alt title)
 	var/ownrank = null // this one is rank, never alt title
 
-	var/obj/item/pen/pen
+	var/list/contained_item = list(/obj/item/pen,
+								   /obj/item/lipstick,
+								   /obj/item/device/flashlight/pen,
+								   /obj/item/clothing/mask/smokable/cigarette
+								   )
+	var/obj/item/inserted_item
 	var/tmp/list/obj/machinery/requests_console/linked_consoles
 
 	var/flippable = 1
@@ -351,13 +353,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			HTML += addtext("<i><b>&larr; From <a href='byond://?src=\ref[src];choice=Message;notap=1;target=",index["target"],"'>", index["owner"],"</a>:</b></i><br>", index["message"], "<br>")
 	HTML +="</body></html>"
 	usr << browse(HTML, "window=log;size=400x444;border=1;can_resize=1;can_close=1;can_minimize=0")
-
-/obj/item/device/pda/ai/attack_self(mob/user as mob)
-	if ((honkamt > 0) && (prob(60)))//For clown virus.
-		honkamt--
-		playsound(loc, 'sound/items/bikehorn.ogg', 30, 1)
-	return
-
 
 /obj/item/device/pda/ai/pai
 	ttone = "assist"
@@ -726,10 +721,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				scanmode = 0
 			else if((!isnull(cartridge)) && (cartridge.access_engine))
 				scanmode = 4
-		if("Honk")
-			if ( !(last_honk && world.time < last_honk + 20) )
-				playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
-				last_honk = world.time
 		if("Gas Scan")
 			if(scanmode == 5)
 				scanmode = 0
@@ -819,35 +810,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if(f["name"] == n)
 					active_feed = f
 					mode=61
-		if("Send Honk")//Honk virus
-			if(cartridge && cartridge.access_clown)//Cartridge checks are kind of unnecessary since everything is done through switch.
-				var/obj/item/device/pda/P = locate(href_list["target"])//Leaving it alone in case it may do something useful, I guess.
-				if(!isnull(P))
-					if (!P.toff && cartridge.charges > 0)
-						cartridge.charges--
-						U.show_message("<span class='notice'>Virus sent!</span>", 1)
-						P.honkamt = (rand(15,20))
-				else
-					to_chat(U, "PDA not found.")
-			else
-				ui.close()
-				return 0
-		if("Send Silence")//Silent virus
-			if(cartridge && cartridge.access_mime)
-				var/obj/item/device/pda/P = locate(href_list["target"])
-				if(!isnull(P))
-					if (!P.toff && cartridge.charges > 0)
-						cartridge.charges--
-						U.show_message("<span class='notice'>Virus sent!</span>", 1)
-						P.message_silent = 1
-						P.news_silent = 1
-						P.ttone = "silence"
-						P.newstone = "silence"
-				else
-					to_chat(U, "PDA not found.")
-			else
-				ui.close()
-				return 0
 
 
 //SYNDICATE FUNCTIONS===================================
@@ -921,10 +883,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if (mode == 6||mode == 61)//To clear news overlays.
 		new_news = 0
 		update_icon()
-
-	if ((honkamt > 0) && (prob(60)))//For clown virus.
-		honkamt--
-		playsound(loc, 'sound/items/bikehorn.ogg', 30, 1)
 
 	return 1 // return 1 tells it to refresh the UI in NanoUI
 
@@ -1346,12 +1304,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
-	else if(istype(C, /obj/item/device/paicard) && !src.pai)
-		user.drop_from_inventory(C,src)
-		pai = C
-		pai.update_location()//This notifies the pAI that they've been slotted into a PDA
-		to_chat(user, "<span class='notice'>You slot \the [C] into [src].</span>")
-		SSnanoui.update_uis(src) // update all UIs attached to src
 	else if(is_type_in_list(C, contained_item)) //Checks if there is a pen
 		if(inserted_item)
 			to_chat(user, "<span class='notice'>There is already \a [inserted_item] in \the [src].</span>")

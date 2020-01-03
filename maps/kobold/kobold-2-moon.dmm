@@ -11,15 +11,15 @@
 /turf/simulated/floor,
 /area/kobold/mine)
 "h" = (
-/obj/machinery/mineral/output,
-/obj/machinery/mineral/stacking_unit_console{
+/obj/machinery/hopper/output,
+/obj/machinery/mineralconsole/stacking_unit{
 	pixel_y = -32
 	},
 /turf/simulated/floor,
 /area/kobold/mine)
 "i" = (
-/obj/machinery/mineral/output,
-/obj/machinery/mineral/input,
+/obj/machinery/hopper/output,
+/obj/machinery/hopper/input,
 /turf/simulated/floor,
 /area/kobold/mine)
 "j" = (
@@ -31,8 +31,8 @@
 /turf/simulated/floor,
 /area/kobold/mine)
 "n" = (
-/obj/machinery/mineral/input,
-/obj/machinery/mineral/processing_unit_console{
+/obj/machinery/hopper/input,
+/obj/machinery/mineralconsole/processing_unit{
 	pixel_y = 32
 	},
 /turf/simulated/floor,
@@ -43,14 +43,6 @@
 	},
 /turf/simulated/floor,
 /area/kobold/mine)
-"q" = (
-/turf/unsimulated/chasm_mask,
-/obj/machinery/atmospherics/pipe/vent/high_volume{
-	icon_state = "intact";
-	dir = 4
-	},
-/turf/simulated/floor/rocky,
-/area/mine/unexplored)
 "r" = (
 /turf/simulated/wall/rusty,
 /area/kobold/mine)
@@ -152,9 +144,9 @@
 /area/kobold/mine)
 "Z" = (
 /turf/unsimulated/chasm_mask,
-/obj/machinery/atmospherics/pipe/simple/visible/black{
-	icon_state = "intact";
-	dir = 8
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_out";
+	dir = 4
 	},
 /turf/simulated/floor/rocky,
 /area/mine/unexplored)
@@ -30613,7 +30605,7 @@ a
 a
 a
 a
-q
+f
 a
 a
 a

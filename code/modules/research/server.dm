@@ -6,8 +6,8 @@
 	var/health = 100
 	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.
 	var/list/id_with_download = list()	//List of R&D consoles with download from server access.
-	var/id_with_upload_string = ""		//String versions for easy editing in map editor.
-	var/id_with_download_string = ""
+	var/tmp/id_with_upload_string = ""		//String versions for easy editing in map editor.
+	var/tmp/id_with_download_string = ""
 	var/server_id = 0
 	var/produces_heat = 1
 	idle_power_usage = 800
@@ -19,10 +19,6 @@
 		/obj/item/stock_parts/scanning_module,
 		/obj/item/stack/cable_coil = 2
 	)
-
-/obj/machinery/r_n_d/server/Destroy()
-	griefProtection()
-	return ..()
 
 /obj/machinery/r_n_d/server/RefreshParts()
 	var/tot_rating = 0
@@ -60,7 +56,6 @@
 		if((T20C + 20) to (T0C + 70))
 			health = max(0, health - 1)
 	if(health <= 0)
-		griefProtection() //I dont like putting this in process() but it's the best I can do without re-writing a chunk of rd servers.
 		files.known_designs = list()
 		for(var/datum/tech/T in files.known_tech)
 			if(prob(1))
@@ -72,23 +67,6 @@
 		produce_heat()
 		delay = initial(delay)
 
-/obj/machinery/r_n_d/server/emp_act(severity)
-	griefProtection()
-	..()
-
-/obj/machinery/r_n_d/server/ex_act(severity)
-	griefProtection()
-	..()
-
-//Backup files to centcomm to help admins recover data after greifer attacks
-/obj/machinery/r_n_d/server/proc/griefProtection()
-	for(var/obj/machinery/r_n_d/server/centcom/C in SSmachinery.all_machines)
-		for(var/datum/tech/T in files.known_tech)
-			C.files.AddTech2Known(T)
-		for(var/datum/design/D in files.known_designs)
-			C.files.AddDesign2Known(D)
-		C.files.RefreshResearch()
-
 /obj/machinery/r_n_d/server/proc/produce_heat()
 	if(!produces_heat)
 		return
@@ -96,21 +74,23 @@
 	if(!use_power)
 		return
 
-	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from telecoms
-		var/turf/simulated/L = loc
-		if(istype(L))
-			var/datum/gas_mixture/env = L.return_air()
+	if((stat & (NOPOWER|BROKEN))) //Blatantly stolen from telecoms
+		return
 
-			var/transfer_moles = 0.25 * env.total_moles
+	var/turf/simulated/L = loc
+	if(istype(L))
+		var/datum/gas_mixture/env = L.return_air()
 
-			var/datum/gas_mixture/removed = env.remove(transfer_moles)
+		var/transfer_moles = 0.25 * env.total_moles
 
-			if(removed)
-				var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
+		var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
-				removed.add_thermal_energy(heat_produced)
+		if(removed)
+			var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
 
-			env.merge(removed)
+			removed.add_thermal_energy(heat_produced)
+
+		env.merge(removed)
 
 /obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(default_deconstruction_screwdriver(user, O))
@@ -119,53 +99,6 @@
 		return
 	if(default_part_replacement(user, O))
 		return
-
-/obj/machinery/r_n_d/server/centcom
-	name = "Central R&D Database"
-	server_id = -1
-
-/obj/machinery/r_n_d/server/centcom/setup()
-	..()
-	var/list/no_id_servers = list()
-	var/list/server_ids = list()
-	for(var/obj/machinery/r_n_d/server/S in SSmachinery.all_machines)
-		switch(S.server_id)
-			if(-1)
-				continue
-			if(0)
-				no_id_servers += S
-			else
-				server_ids += S.server_id
-
-	for(var/obj/machinery/r_n_d/server/S in no_id_servers)
-		var/num = 1
-		while(!S.server_id)
-			if(num in server_ids)
-				num++
-			else
-				S.server_id = num
-				server_ids += num
-		no_id_servers -= S
-
-/obj/machinery/r_n_d/server/centcom/machinery_process()
-	return PROCESS_KILL //don't need process()
-
-/obj/machinery/r_n_d/server/advanced //an advanced server that starts with higher tech levels
-
-/obj/machinery/r_n_d/server/advanced/setup()
-	if(!files)
-		files = new /datum/research/hightech(src)
-	var/list/temp_list
-	if(!id_with_upload.len)
-		temp_list = list()
-		temp_list = text2list(id_with_upload_string, ";")
-		for(var/N in temp_list)
-			id_with_upload += text2num(N)
-	if(!id_with_download.len)
-		temp_list = list()
-		temp_list = text2list(id_with_download_string, ";")
-		for(var/N in temp_list)
-			id_with_download += text2num(N)
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
@@ -177,7 +110,6 @@
 	var/obj/machinery/r_n_d/server/temp_server
 	var/list/servers = list()
 	var/list/consoles = list()
-	var/badmin = 0
 
 /obj/machinery/computer/rdservercontrol/Topic(href, href_list)
 	if(..())
@@ -186,7 +118,7 @@
 	add_fingerprint(usr)
 	usr.set_machine(src)
 	if(!allowed(usr) && !emagged)
-		to_chat(usr, "<span class='warning'>You do not have the required access level</span>")
+		to_chat(usr, "<span class='warning'>You do not have the required access level.</span>")
 		return
 
 	if(href_list["main"])
@@ -260,28 +192,24 @@
 			dat += "Connected Servers:<BR><BR>"
 
 			for(var/obj/machinery/r_n_d/server/S in SSmachinery.all_machines)
-				if(istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin)
-					continue
 				dat += "[S.name] || "
 				dat += "<A href='?src=\ref[src];access=[S.server_id]'> Access Rights</A> | "
-				dat += "<A href='?src=\ref[src];data=[S.server_id]'>Data Management</A>"
-				if(badmin) dat += " | <A href='?src=\ref[src];transfer=[S.server_id]'>Server-to-Server Transfer</A>"
+				dat += "<A href='?src=\ref[src];data=[S.server_id]'>Data Management</A> | "
+				dat += "<A href='?src=\ref[src];transfer=[S.server_id]'>Server Transfer</A>"
 				dat += "<BR>"
 
 		if(1) //Access rights menu
 			dat += "[temp_server.name] Access Rights<BR><BR>"
 			dat += "Consoles with Upload Access<BR>"
 			for(var/obj/machinery/computer/rdconsole/C in consoles)
-				var/turf/console_turf = get_turf(C)
-				dat += "* <A href='?src=\ref[src];upload_toggle=[C.id]'>[console_turf.loc]" //FYI, these are all numeric ids, eventually.
+				dat += "* <A href='?src=\ref[src];upload_toggle=[C.id]'>\[0x[num2hex(C.id,6)]\]" //FYI, these are all numeric ids, eventually.
 				if(C.id in temp_server.id_with_upload)
 					dat += " (Remove)</A><BR>"
 				else
 					dat += " (Add)</A><BR>"
 			dat += "Consoles with Download Access<BR>"
 			for(var/obj/machinery/computer/rdconsole/C in consoles)
-				var/turf/console_turf = get_turf(C)
-				dat += "* <A href='?src=\ref[src];download_toggle=[C.id]'>[console_turf.loc]"
+				dat += "* <A href='?src=\ref[src];download_toggle=[C.id]'>\[0x[num2hex(C.id,8)]\]"
 				if(C.id in temp_server.id_with_download)
 					dat += " (Remove)</A><BR>"
 				else
@@ -301,10 +229,10 @@
 			dat += "<HR><A href='?src=\ref[src];main=1'>Main Menu</A>"
 
 		if(3) //Server Data Transfer
-			dat += "[temp_server.name] Server to Server Transfer<BR><BR>"
-			dat += "Send Data to what server?<BR>"
+			dat += "\[0x[num2hex(temp_server.id, 8)]\] Server Transfer<BR><BR>"
+			dat += "Send data to which server?<BR>"
 			for(var/obj/machinery/r_n_d/server/S in servers)
-				dat += "[S.name] <A href='?src=\ref[src];send_to=[S.server_id]'> (Transfer)</A><BR>"
+				dat += "[num2hex(S.server_id,8)] <A href='?src=\ref[src];send_to=[S.server_id]'> (Transfer)</A><BR>"
 			dat += "<HR><A href='?src=\ref[src];main=1'>Main Menu</A>"
 	user << browse("<TITLE>R&D Server Control</TITLE><HR>[dat]", "window=server_control;size=575x400")
 	onclose(user, "server_control")
@@ -314,7 +242,7 @@
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
-		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
+		to_chat(user, "<span class='notice'>You disable the security protocols.</span>")
 		src.updateUsrDialog()
 		return 1
 

@@ -79,13 +79,6 @@
 	},
 /turf/unsimulated/floor/planet/sand,
 /area/mine/explored)
-"j" = (
-/obj/machinery/atmospherics/pipe/vent/high_volume{
-	icon_state = "intact";
-	dir = 1
-	},
-/turf/unsimulated/floor/planet/sand,
-/area/mine/explored)
 "m" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -220,7 +213,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
 /turf/unsimulated/floor/planet/sand,
 /area/mine/explored)
 "H" = (
@@ -31583,7 +31578,7 @@ X
 f
 X
 G
-j
+a
 a
 a
 a

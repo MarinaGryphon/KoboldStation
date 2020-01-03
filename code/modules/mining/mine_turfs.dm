@@ -430,7 +430,7 @@ var/list/mineral_can_smooth_with = list(
 
 	//Add some rubble,  you did just clear out a big chunk of rock.
 	ChangeTurf(mined_turf)
-	
+
 	if(rand(1,500) == 1)
 		visible_message("<span class='notice'>An old dusty crate was buried within!</span>")
 		new /obj/structure/closet/crate/secure/loot(src)
@@ -507,12 +507,12 @@ var/list/mineral_can_smooth_with = list(
 	var/mineralSpawnChanceList = list(
 		ORE_URANIUM = 2,
 		ORE_PLATINUM = 2,
-		ORE_IRON = 8,
+		ORE_IRON = 2,
 		ORE_COAL = 8,
 		ORE_DIAMOND = 1,
 		ORE_GOLD = 2,
 		ORE_SILVER = 2,
-		ORE_PHORON = 5
+		ORE_PHORON = 0
 	)
 	var/mineralChance = 55
 
@@ -531,11 +531,11 @@ var/list/mineral_can_smooth_with = list(
 		ORE_URANIUM = 2,
 		ORE_PLATINUM = 2,
 		ORE_IRON = 2,
-		ORE_COAL = 2,
+		ORE_COAL = 3,
 		ORE_DIAMOND = 1,
 		ORE_GOLD = 2,
 		ORE_SILVER = 2,
-		ORE_PHORON = 3
+		ORE_PHORON = 0
 	)
 	mineralChance = 55
 
@@ -544,11 +544,11 @@ var/list/mineral_can_smooth_with = list(
 		ORE_URANIUM = 3,
 		ORE_PLATINUM = 3,
 		ORE_IRON = 1,
-		ORE_COAL = 1,
+		ORE_COAL = 2,
 		ORE_DIAMOND = 1,
 		ORE_GOLD = 3,
 		ORE_SILVER = 3,
-		ORE_PHORON = 2
+		ORE_PHORON = 0
 	)
 	mineralChance = 75
 

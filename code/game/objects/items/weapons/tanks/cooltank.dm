@@ -1,6 +1,7 @@
 /obj/item/tank/cooler
 	name = "\improper gas cooler"
 	desc = "A large, bulky setup that looks suspiciously like an air tank. It has a system of tubes, heatsinks, and radiators to cool air for poor, unfortunate Loamers and elves to breathe."
+	icon_state = "oxygen_f"
 	volume = 1 // one litre buffer
 	processes = FALSE
 
@@ -14,6 +15,8 @@
 		H = loc
 	else if(istype(loc.loc, /mob/living/carbon/human))
 		H = loc.loc
+	if(!H)
+		return
 	air_contents.temperature = (H.bodytemperature + turfair.temperature)/2
 	air_contents.update_values()
 	. = ..()

@@ -9,6 +9,9 @@
 	temperature = TEMPERATURE_NAARVAT
 	roof_type = null
 
+/turf/unsimulated/floor/planet/sand/is_plating()
+	return TRUE
+
 /turf/unsimulated/floor/planet/attackby(obj/item/W as obj, mob/user as mob)
 	if(!W || !user)
 		return 0
@@ -36,6 +39,9 @@
 	var/digging
 	has_resources = 1
 	roof_type = null
+
+/turf/simulated/floor/rocky/is_plating()
+	return TRUE
 
 /turf/simulated/floor/rocky/ex_act(severity)
 	switch(severity)

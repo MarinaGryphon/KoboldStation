@@ -1,5 +1,5 @@
 /*
-General Explination:
+General Explanation:
 The research datum is the "folder" where all the research information is stored in a R&D console. It's also a holder for all the
 various procs used to manipulate it. It has four variables and seven procs:
 
@@ -46,7 +46,7 @@ research holder datum.
 
 /datum/research								//Holder for all the existing, archived, and known tech. Individual to console.
 	var/list/known_tech = list()			//List of locally known tech. Datum/tech go here.
-	var/list/possible_designs = list()		//List of all designs.
+	var/tmp/list/possible_designs = list()		//List of all designs.
 	var/list/known_designs = list()			//List of available designs.
 
 /datum/research/New()		//Insert techs into possible_tech here. Known_tech automatically updated.

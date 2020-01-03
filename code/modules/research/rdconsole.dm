@@ -20,8 +20,7 @@ this dire fate:
 it's data to every other device in the game. Each console has a "disconnect from network" option that'll will cause data base sync
 operations to skip that console. This is useful if you want to make a "public" R&D console or, for example, give the engineers
 a circuit imprinter with certain designs on it and don't want it accidentally updating. The downside of this method is that you have
-to have physical access to the other console to send data back. Note: An R&D console is on CentCom so if a random griffan happens to
-cause a ton of data to be lost, an admin can go send it back.
+to have physical access to the other console to send data back.
 - The second method is with Technology Disks and Design Disks. Each of these disks can hold a single technology or design datum in
 it's entirety. You can then take the disk to any R&D console and upload it's data to it. This method is a lot more secure (since it
 won't update every console in existence) but it's more of a hassle to do. Also, the disks can be stolen.
@@ -92,40 +91,28 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	if(src)
 		for(var/obj/machinery/r_n_d/server/S in SSmachinery.all_machines)
 			var/server_processed = 0
-			if((id in S.id_with_upload) || istype(S, /obj/machinery/r_n_d/server/centcom))
+			if((id in S.id_with_upload))
 				for(var/datum/tech/T in files.known_tech)
 					S.files.AddTech2Known(T)
 				for(var/datum/design/D in files.known_designs)
 					S.files.AddDesign2Known(D)
 				S.files.RefreshResearch()
 				server_processed = 1
-			if((id in S.id_with_download) && !istype(S, /obj/machinery/r_n_d/server/centcom))
+			if((id in S.id_with_download))
 				for(var/datum/tech/T in S.files.known_tech)
 					files.AddTech2Known(T)
 				for(var/datum/design/D in S.files.known_designs)
 					files.AddDesign2Known(D)
 				files.RefreshResearch()
 				server_processed = 1
-			if(!istype(S, /obj/machinery/r_n_d/server/centcom) && server_processed)
+			if(server_processed)
 				S.produce_heat()
 		screen = 1.6
 		updateUsrDialog()
 
-/obj/machinery/computer/rdconsole/proc/griefProtection() //Have it automatically push research to the centcomm server so wild griffins can't fuck up R&D's work
-	for(var/obj/machinery/r_n_d/server/centcom/C in SSmachinery.all_machines)
-		for(var/datum/tech/T in files.known_tech)
-			C.files.AddTech2Known(T)
-		for(var/datum/design/D in files.known_designs)
-			C.files.AddDesign2Known(D)
-		C.files.RefreshResearch()
-
 /obj/machinery/computer/rdconsole/Initialize()
 	. = ..()
 	files = new /datum/research(src) //Setup the research data holder.
-	if(!id)
-		for(var/obj/machinery/r_n_d/server/centcom/S in SSmachinery.all_machines)
-			S.setup()
-			break
 	SyncRDevices()
 	addtimer(CALLBACK(src, .proc/SyncTechs), 30)
 
@@ -188,7 +175,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			screen = 1.2
 			files.AddTech2Known(t_disk.stored)
 			updateUsrDialog()
-			griefProtection() //Update centcomm too
 
 	else if(href_list["clear_tech"]) //Erase data on the technology disk.
 		t_disk.stored = null
@@ -211,7 +197,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			screen = 1.4
 			files.AddDesign2Known(d_disk.blueprint)
 			updateUsrDialog()
-			griefProtection() //Update centcomm too
 
 	else if(href_list["clear_design"]) //Erases data on the design disk.
 		d_disk.blueprint = null
@@ -298,7 +283,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(!sync)
 			to_chat(usr, "<span class='notice'>You must connect to the network first.</span>")
 		else
-			griefProtection() //Putting this here because I dont trust the sync process
 			addtimer(CALLBACK(src, .proc/SyncTechs), 30)
 
 	else if(href_list["togglesync"]) //Prevents the console from being synced by other consoles. Can still send data.
@@ -391,7 +375,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				linked_imprinter = null
 
 	else if(href_list["reset"]) //Reset the R&D console's database.
-		griefProtection()
 		var/choice = alert("R&D Console Database Reset", "Are you sure you want to reset the R&D console's database? Data lost cannot be recovered.", "Continue", "Cancel")
 		if(choice == "Continue")
 			screen = 0.0

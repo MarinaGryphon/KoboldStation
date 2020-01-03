@@ -2,413 +2,269 @@
 "a" = (
 /turf/unsimulated/chasm_mask,
 /area/mine/unexplored)
-"f" = (
-/turf/unsimulated/chasm_mask,
-/turf/simulated/floor/rocky,
-/area/mine/unexplored)
-"g" = (
-/obj/item/hoist_kit,
-/turf/simulated/floor,
-/area/kobold/mine)
-"h" = (
-/obj/machinery/hopper/output,
-/obj/machinery/mineralconsole/stacking_unit{
-	pixel_y = -32
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"i" = (
-/obj/machinery/hopper/output,
-/obj/machinery/hopper/input,
-/turf/simulated/floor,
-/area/kobold/mine)
-"j" = (
-/obj/machinery/mineral/processing_unit,
-/turf/simulated/floor,
-/area/kobold/mine)
-"k" = (
-/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos,
-/turf/simulated/floor,
-/area/kobold/mine)
-"n" = (
-/obj/machinery/hopper/input,
-/obj/machinery/mineralconsole/processing_unit{
-	pixel_y = 32
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"o" = (
-/obj/structure/window/basic{
-	dir = 4
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"r" = (
-/turf/simulated/wall/rusty,
-/area/kobold/mine)
-"s" = (
-/obj/structure/reagent_dispensers/watertank,
-/obj/machinery/light/small/emergency{
-	dir = 8
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"v" = (
-/obj/structure/reagent_dispensers/fueltank,
-/turf/simulated/floor,
-/area/kobold/mine)
-"w" = (
-/turf/simulated/wall/iron,
-/area/kobold/mine)
-"y" = (
-/turf/simulated/floor,
-/area/kobold/mine)
-"B" = (
-/obj/machinery/light/small/emergency{
-	dir = 1
-	},
-/obj/structure/closet/excavation,
-/turf/simulated/floor,
-/area/kobold/mine)
-"E" = (
-/obj/machinery/atmospherics/trinary/filter/m_filter{
-	icon_state = "mmap";
-	dir = 1
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"F" = (
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
-	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"H" = (
-/obj/machinery/door/airlock/external,
-/obj/machinery/atmospherics/pipe/simple/visible/black{
-	icon_state = "intact";
-	dir = 8
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"K" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"M" = (
-/obj/structure/stairs/north,
-/turf/simulated/floor,
-/area/kobold/mine)
-"N" = (
-/obj/machinery/autolathe,
-/turf/simulated/floor,
-/area/kobold/mine)
-"R" = (
-/obj/machinery/mineral/stacking_machine,
-/turf/simulated/floor,
-/area/kobold/mine)
-"T" = (
-/obj/structure/reagent_dispensers/extinguisher,
-/turf/simulated/floor,
-/area/kobold/mine)
-"V" = (
-/obj/structure/window/basic,
-/obj/machinery/light/small/emergency{
-	dir = 1
-	},
-/obj/structure/closet/firecloset/full,
-/turf/simulated/floor,
-/area/kobold/mine)
-"W" = (
-/obj/structure/cable{
-	d1 = 0;
-	d2 = 16;
-	dir = 1;
-	icon_state = "12-0"
-	},
-/obj/structure/cable,
-/obj/machinery/light/small/emergency{
-	icon_state = "bulb1";
-	dir = 4
-	},
-/turf/simulated/floor,
-/area/kobold/mine)
-"Z" = (
-/turf/unsimulated/chasm_mask,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	icon_state = "map_vent_out";
-	dir = 4
-	},
-/turf/simulated/floor/rocky,
+"b" = (
+/turf/unsimulated/mineral/asteroid,
 /area/mine/unexplored)
 
 (1,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
 "}
 (2,1,1) = {"
+b
 a
 a
 a
@@ -662,10 +518,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (3,1,1) = {"
+b
 a
 a
 a
@@ -919,10 +775,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (4,1,1) = {"
+b
 a
 a
 a
@@ -1176,10 +1032,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (5,1,1) = {"
+b
 a
 a
 a
@@ -1433,10 +1289,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (6,1,1) = {"
+b
 a
 a
 a
@@ -1690,10 +1546,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (7,1,1) = {"
+b
 a
 a
 a
@@ -1947,10 +1803,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (8,1,1) = {"
+b
 a
 a
 a
@@ -2204,10 +2060,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (9,1,1) = {"
+b
 a
 a
 a
@@ -2461,10 +2317,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (10,1,1) = {"
+b
 a
 a
 a
@@ -2718,10 +2574,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (11,1,1) = {"
+b
 a
 a
 a
@@ -2975,10 +2831,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (12,1,1) = {"
+b
 a
 a
 a
@@ -3232,10 +3088,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (13,1,1) = {"
+b
 a
 a
 a
@@ -3489,10 +3345,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (14,1,1) = {"
+b
 a
 a
 a
@@ -3746,10 +3602,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (15,1,1) = {"
+b
 a
 a
 a
@@ -4003,10 +3859,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (16,1,1) = {"
+b
 a
 a
 a
@@ -4260,10 +4116,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (17,1,1) = {"
+b
 a
 a
 a
@@ -4517,10 +4373,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (18,1,1) = {"
+b
 a
 a
 a
@@ -4774,10 +4630,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (19,1,1) = {"
+b
 a
 a
 a
@@ -5031,10 +4887,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (20,1,1) = {"
+b
 a
 a
 a
@@ -5288,10 +5144,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (21,1,1) = {"
+b
 a
 a
 a
@@ -5545,10 +5401,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (22,1,1) = {"
+b
 a
 a
 a
@@ -5802,10 +5658,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (23,1,1) = {"
+b
 a
 a
 a
@@ -6059,10 +5915,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (24,1,1) = {"
+b
 a
 a
 a
@@ -6316,10 +6172,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (25,1,1) = {"
+b
 a
 a
 a
@@ -6573,10 +6429,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (26,1,1) = {"
+b
 a
 a
 a
@@ -6830,10 +6686,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (27,1,1) = {"
+b
 a
 a
 a
@@ -7087,10 +6943,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (28,1,1) = {"
+b
 a
 a
 a
@@ -7344,10 +7200,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (29,1,1) = {"
+b
 a
 a
 a
@@ -7601,10 +7457,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (30,1,1) = {"
+b
 a
 a
 a
@@ -7858,10 +7714,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (31,1,1) = {"
+b
 a
 a
 a
@@ -8115,10 +7971,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (32,1,1) = {"
+b
 a
 a
 a
@@ -8372,10 +8228,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (33,1,1) = {"
+b
 a
 a
 a
@@ -8629,10 +8485,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (34,1,1) = {"
+b
 a
 a
 a
@@ -8886,10 +8742,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (35,1,1) = {"
+b
 a
 a
 a
@@ -9143,10 +8999,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (36,1,1) = {"
+b
 a
 a
 a
@@ -9400,10 +9256,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (37,1,1) = {"
+b
 a
 a
 a
@@ -9657,10 +9513,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (38,1,1) = {"
+b
 a
 a
 a
@@ -9914,10 +9770,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (39,1,1) = {"
+b
 a
 a
 a
@@ -10171,10 +10027,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (40,1,1) = {"
+b
 a
 a
 a
@@ -10428,10 +10284,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (41,1,1) = {"
+b
 a
 a
 a
@@ -10685,10 +10541,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (42,1,1) = {"
+b
 a
 a
 a
@@ -10942,10 +10798,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (43,1,1) = {"
+b
 a
 a
 a
@@ -11199,10 +11055,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (44,1,1) = {"
+b
 a
 a
 a
@@ -11456,10 +11312,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (45,1,1) = {"
+b
 a
 a
 a
@@ -11713,10 +11569,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (46,1,1) = {"
+b
 a
 a
 a
@@ -11970,10 +11826,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (47,1,1) = {"
+b
 a
 a
 a
@@ -12227,10 +12083,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (48,1,1) = {"
+b
 a
 a
 a
@@ -12484,10 +12340,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (49,1,1) = {"
+b
 a
 a
 a
@@ -12741,10 +12597,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (50,1,1) = {"
+b
 a
 a
 a
@@ -12998,10 +12854,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (51,1,1) = {"
+b
 a
 a
 a
@@ -13255,10 +13111,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (52,1,1) = {"
+b
 a
 a
 a
@@ -13512,10 +13368,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (53,1,1) = {"
+b
 a
 a
 a
@@ -13769,10 +13625,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (54,1,1) = {"
+b
 a
 a
 a
@@ -14026,10 +13882,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (55,1,1) = {"
+b
 a
 a
 a
@@ -14283,10 +14139,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (56,1,1) = {"
+b
 a
 a
 a
@@ -14540,10 +14396,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (57,1,1) = {"
+b
 a
 a
 a
@@ -14797,10 +14653,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (58,1,1) = {"
+b
 a
 a
 a
@@ -15054,10 +14910,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (59,1,1) = {"
+b
 a
 a
 a
@@ -15311,10 +15167,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (60,1,1) = {"
+b
 a
 a
 a
@@ -15568,10 +15424,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (61,1,1) = {"
+b
 a
 a
 a
@@ -15825,10 +15681,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (62,1,1) = {"
+b
 a
 a
 a
@@ -16082,10 +15938,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (63,1,1) = {"
+b
 a
 a
 a
@@ -16339,10 +16195,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (64,1,1) = {"
+b
 a
 a
 a
@@ -16596,10 +16452,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (65,1,1) = {"
+b
 a
 a
 a
@@ -16853,10 +16709,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (66,1,1) = {"
+b
 a
 a
 a
@@ -17110,10 +16966,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (67,1,1) = {"
+b
 a
 a
 a
@@ -17367,10 +17223,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (68,1,1) = {"
+b
 a
 a
 a
@@ -17624,10 +17480,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (69,1,1) = {"
+b
 a
 a
 a
@@ -17881,10 +17737,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (70,1,1) = {"
+b
 a
 a
 a
@@ -18138,10 +17994,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (71,1,1) = {"
+b
 a
 a
 a
@@ -18395,10 +18251,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (72,1,1) = {"
+b
 a
 a
 a
@@ -18652,10 +18508,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (73,1,1) = {"
+b
 a
 a
 a
@@ -18909,10 +18765,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (74,1,1) = {"
+b
 a
 a
 a
@@ -19166,10 +19022,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (75,1,1) = {"
+b
 a
 a
 a
@@ -19423,10 +19279,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (76,1,1) = {"
+b
 a
 a
 a
@@ -19680,10 +19536,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (77,1,1) = {"
+b
 a
 a
 a
@@ -19937,10 +19793,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (78,1,1) = {"
+b
 a
 a
 a
@@ -20194,10 +20050,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (79,1,1) = {"
+b
 a
 a
 a
@@ -20451,10 +20307,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (80,1,1) = {"
+b
 a
 a
 a
@@ -20708,10 +20564,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (81,1,1) = {"
+b
 a
 a
 a
@@ -20965,10 +20821,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (82,1,1) = {"
+b
 a
 a
 a
@@ -21222,10 +21078,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (83,1,1) = {"
+b
 a
 a
 a
@@ -21479,10 +21335,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (84,1,1) = {"
+b
 a
 a
 a
@@ -21736,10 +21592,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (85,1,1) = {"
+b
 a
 a
 a
@@ -21993,10 +21849,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (86,1,1) = {"
+b
 a
 a
 a
@@ -22250,10 +22106,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (87,1,1) = {"
+b
 a
 a
 a
@@ -22507,10 +22363,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (88,1,1) = {"
+b
 a
 a
 a
@@ -22764,10 +22620,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (89,1,1) = {"
+b
 a
 a
 a
@@ -23021,10 +22877,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (90,1,1) = {"
+b
 a
 a
 a
@@ -23278,10 +23134,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (91,1,1) = {"
+b
 a
 a
 a
@@ -23535,10 +23391,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (92,1,1) = {"
+b
 a
 a
 a
@@ -23792,10 +23648,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (93,1,1) = {"
+b
 a
 a
 a
@@ -24049,10 +23905,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (94,1,1) = {"
+b
 a
 a
 a
@@ -24306,10 +24162,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (95,1,1) = {"
+b
 a
 a
 a
@@ -24563,10 +24419,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (96,1,1) = {"
+b
 a
 a
 a
@@ -24820,10 +24676,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (97,1,1) = {"
+b
 a
 a
 a
@@ -25077,10 +24933,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (98,1,1) = {"
+b
 a
 a
 a
@@ -25334,10 +25190,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (99,1,1) = {"
+b
 a
 a
 a
@@ -25591,10 +25447,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (100,1,1) = {"
+b
 a
 a
 a
@@ -25848,10 +25704,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (101,1,1) = {"
+b
 a
 a
 a
@@ -26105,10 +25961,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (102,1,1) = {"
+b
 a
 a
 a
@@ -26362,10 +26218,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (103,1,1) = {"
+b
 a
 a
 a
@@ -26619,10 +26475,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (104,1,1) = {"
+b
 a
 a
 a
@@ -26876,10 +26732,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (105,1,1) = {"
+b
 a
 a
 a
@@ -27133,10 +26989,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (106,1,1) = {"
+b
 a
 a
 a
@@ -27390,10 +27246,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (107,1,1) = {"
+b
 a
 a
 a
@@ -27647,10 +27503,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (108,1,1) = {"
+b
 a
 a
 a
@@ -27904,10 +27760,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (109,1,1) = {"
+b
 a
 a
 a
@@ -28161,10 +28017,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (110,1,1) = {"
+b
 a
 a
 a
@@ -28418,10 +28274,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (111,1,1) = {"
+b
 a
 a
 a
@@ -28675,10 +28531,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (112,1,1) = {"
+b
 a
 a
 a
@@ -28932,10 +28788,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (113,1,1) = {"
+b
 a
 a
 a
@@ -29189,10 +29045,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (114,1,1) = {"
+b
 a
 a
 a
@@ -29446,10 +29302,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (115,1,1) = {"
+b
 a
 a
 a
@@ -29703,10 +29559,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (116,1,1) = {"
+b
 a
 a
 a
@@ -29960,10 +29816,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (117,1,1) = {"
+b
 a
 a
 a
@@ -30217,10 +30073,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (118,1,1) = {"
+b
 a
 a
 a
@@ -30474,10 +30330,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (119,1,1) = {"
+b
 a
 a
 a
@@ -30605,7 +30461,6 @@ a
 a
 a
 a
-f
 a
 a
 a
@@ -30732,9 +30587,10 @@ a
 a
 a
 a
-a
+b
 "}
 (120,1,1) = {"
+b
 a
 a
 a
@@ -30862,8 +30718,6 @@ a
 a
 a
 a
-Z
-f
 a
 a
 a
@@ -30990,8 +30844,10 @@ a
 a
 a
 a
+b
 "}
 (121,1,1) = {"
+b
 a
 a
 a
@@ -31116,13 +30972,6 @@ a
 a
 a
 a
-r
-w
-w
-H
-w
-w
-w
 a
 a
 a
@@ -31247,8 +31096,15 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+b
 "}
 (122,1,1) = {"
+b
 a
 a
 a
@@ -31373,13 +31229,6 @@ a
 a
 a
 a
-r
-B
-k
-E
-K
-s
-r
 a
 a
 a
@@ -31504,8 +31353,15 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+b
 "}
 (123,1,1) = {"
+b
 a
 a
 a
@@ -31630,13 +31486,6 @@ a
 a
 a
 a
-r
-y
-y
-y
-y
-T
-r
 a
 a
 a
@@ -31761,8 +31610,15 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+b
 "}
 (124,1,1) = {"
+b
 a
 a
 a
@@ -31887,17 +31743,6 @@ a
 a
 a
 a
-w
-N
-y
-y
-y
-v
-r
-r
-r
-w
-w
 a
 a
 a
@@ -32018,8 +31863,19 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+b
 "}
 (125,1,1) = {"
+b
 a
 a
 a
@@ -32144,17 +32000,6 @@ a
 a
 a
 a
-w
-g
-o
-y
-y
-y
-y
-y
-y
-y
-w
 a
 a
 a
@@ -32275,8 +32120,19 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+b
 "}
 (126,1,1) = {"
+b
 a
 a
 a
@@ -32401,17 +32257,6 @@ a
 a
 a
 a
-w
-V
-M
-y
-F
-W
-w
-n
-r
-h
-w
 a
 a
 a
@@ -32532,8 +32377,19 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+b
 "}
 (127,1,1) = {"
+b
 a
 a
 a
@@ -32658,17 +32514,6 @@ a
 a
 a
 a
-w
-w
-r
-r
-r
-r
-w
-j
-i
-R
-w
 a
 a
 a
@@ -32789,8 +32634,19 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+b
 "}
 (128,1,1) = {"
+b
 a
 a
 a
@@ -32921,11 +32777,6 @@ a
 a
 a
 a
-w
-w
-w
-w
-w
 a
 a
 a
@@ -33046,8 +32897,13 @@ a
 a
 a
 a
+a
+a
+a
+b
 "}
 (129,1,1) = {"
+b
 a
 a
 a
@@ -33301,10 +33157,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (130,1,1) = {"
+b
 a
 a
 a
@@ -33558,10 +33414,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (131,1,1) = {"
+b
 a
 a
 a
@@ -33815,10 +33671,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (132,1,1) = {"
+b
 a
 a
 a
@@ -34072,10 +33928,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (133,1,1) = {"
+b
 a
 a
 a
@@ -34329,10 +34185,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (134,1,1) = {"
+b
 a
 a
 a
@@ -34586,10 +34442,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (135,1,1) = {"
+b
 a
 a
 a
@@ -34843,10 +34699,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (136,1,1) = {"
+b
 a
 a
 a
@@ -35100,10 +34956,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (137,1,1) = {"
+b
 a
 a
 a
@@ -35357,10 +35213,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (138,1,1) = {"
+b
 a
 a
 a
@@ -35614,10 +35470,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (139,1,1) = {"
+b
 a
 a
 a
@@ -35871,10 +35727,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (140,1,1) = {"
+b
 a
 a
 a
@@ -36128,10 +35984,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (141,1,1) = {"
+b
 a
 a
 a
@@ -36385,10 +36241,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (142,1,1) = {"
+b
 a
 a
 a
@@ -36642,10 +36498,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (143,1,1) = {"
+b
 a
 a
 a
@@ -36899,10 +36755,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (144,1,1) = {"
+b
 a
 a
 a
@@ -37156,10 +37012,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (145,1,1) = {"
+b
 a
 a
 a
@@ -37413,10 +37269,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (146,1,1) = {"
+b
 a
 a
 a
@@ -37670,10 +37526,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (147,1,1) = {"
+b
 a
 a
 a
@@ -37927,10 +37783,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (148,1,1) = {"
+b
 a
 a
 a
@@ -38184,10 +38040,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (149,1,1) = {"
+b
 a
 a
 a
@@ -38441,10 +38297,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (150,1,1) = {"
+b
 a
 a
 a
@@ -38698,10 +38554,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (151,1,1) = {"
+b
 a
 a
 a
@@ -38955,10 +38811,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (152,1,1) = {"
+b
 a
 a
 a
@@ -39212,10 +39068,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (153,1,1) = {"
+b
 a
 a
 a
@@ -39469,10 +39325,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (154,1,1) = {"
+b
 a
 a
 a
@@ -39726,10 +39582,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (155,1,1) = {"
+b
 a
 a
 a
@@ -39983,10 +39839,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (156,1,1) = {"
+b
 a
 a
 a
@@ -40240,10 +40096,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (157,1,1) = {"
+b
 a
 a
 a
@@ -40497,10 +40353,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (158,1,1) = {"
+b
 a
 a
 a
@@ -40754,10 +40610,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (159,1,1) = {"
+b
 a
 a
 a
@@ -41011,10 +40867,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (160,1,1) = {"
+b
 a
 a
 a
@@ -41268,10 +41124,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (161,1,1) = {"
+b
 a
 a
 a
@@ -41525,10 +41381,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (162,1,1) = {"
+b
 a
 a
 a
@@ -41782,10 +41638,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (163,1,1) = {"
+b
 a
 a
 a
@@ -42039,10 +41895,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (164,1,1) = {"
+b
 a
 a
 a
@@ -42296,10 +42152,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (165,1,1) = {"
+b
 a
 a
 a
@@ -42553,10 +42409,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (166,1,1) = {"
+b
 a
 a
 a
@@ -42810,10 +42666,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (167,1,1) = {"
+b
 a
 a
 a
@@ -43067,10 +42923,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (168,1,1) = {"
+b
 a
 a
 a
@@ -43324,10 +43180,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (169,1,1) = {"
+b
 a
 a
 a
@@ -43581,10 +43437,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (170,1,1) = {"
+b
 a
 a
 a
@@ -43838,10 +43694,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (171,1,1) = {"
+b
 a
 a
 a
@@ -44095,10 +43951,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (172,1,1) = {"
+b
 a
 a
 a
@@ -44352,10 +44208,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (173,1,1) = {"
+b
 a
 a
 a
@@ -44609,10 +44465,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (174,1,1) = {"
+b
 a
 a
 a
@@ -44866,10 +44722,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (175,1,1) = {"
+b
 a
 a
 a
@@ -45123,10 +44979,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (176,1,1) = {"
+b
 a
 a
 a
@@ -45380,10 +45236,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (177,1,1) = {"
+b
 a
 a
 a
@@ -45637,10 +45493,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (178,1,1) = {"
+b
 a
 a
 a
@@ -45894,10 +45750,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (179,1,1) = {"
+b
 a
 a
 a
@@ -46151,10 +46007,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (180,1,1) = {"
+b
 a
 a
 a
@@ -46408,10 +46264,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (181,1,1) = {"
+b
 a
 a
 a
@@ -46665,10 +46521,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (182,1,1) = {"
+b
 a
 a
 a
@@ -46922,10 +46778,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (183,1,1) = {"
+b
 a
 a
 a
@@ -47179,10 +47035,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (184,1,1) = {"
+b
 a
 a
 a
@@ -47436,10 +47292,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (185,1,1) = {"
+b
 a
 a
 a
@@ -47693,10 +47549,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (186,1,1) = {"
+b
 a
 a
 a
@@ -47950,10 +47806,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (187,1,1) = {"
+b
 a
 a
 a
@@ -48207,10 +48063,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (188,1,1) = {"
+b
 a
 a
 a
@@ -48464,10 +48320,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (189,1,1) = {"
+b
 a
 a
 a
@@ -48721,10 +48577,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (190,1,1) = {"
+b
 a
 a
 a
@@ -48978,10 +48834,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (191,1,1) = {"
+b
 a
 a
 a
@@ -49235,10 +49091,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (192,1,1) = {"
+b
 a
 a
 a
@@ -49492,10 +49348,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (193,1,1) = {"
+b
 a
 a
 a
@@ -49749,10 +49605,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (194,1,1) = {"
+b
 a
 a
 a
@@ -50006,10 +49862,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (195,1,1) = {"
+b
 a
 a
 a
@@ -50263,10 +50119,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (196,1,1) = {"
+b
 a
 a
 a
@@ -50520,10 +50376,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (197,1,1) = {"
+b
 a
 a
 a
@@ -50777,10 +50633,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (198,1,1) = {"
+b
 a
 a
 a
@@ -51034,10 +50890,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (199,1,1) = {"
+b
 a
 a
 a
@@ -51291,10 +51147,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (200,1,1) = {"
+b
 a
 a
 a
@@ -51548,10 +51404,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (201,1,1) = {"
+b
 a
 a
 a
@@ -51805,10 +51661,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (202,1,1) = {"
+b
 a
 a
 a
@@ -52062,10 +51918,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (203,1,1) = {"
+b
 a
 a
 a
@@ -52319,10 +52175,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (204,1,1) = {"
+b
 a
 a
 a
@@ -52576,10 +52432,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (205,1,1) = {"
+b
 a
 a
 a
@@ -52833,10 +52689,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (206,1,1) = {"
+b
 a
 a
 a
@@ -53090,10 +52946,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (207,1,1) = {"
+b
 a
 a
 a
@@ -53347,10 +53203,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (208,1,1) = {"
+b
 a
 a
 a
@@ -53604,10 +53460,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (209,1,1) = {"
+b
 a
 a
 a
@@ -53861,10 +53717,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (210,1,1) = {"
+b
 a
 a
 a
@@ -54118,10 +53974,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (211,1,1) = {"
+b
 a
 a
 a
@@ -54375,10 +54231,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (212,1,1) = {"
+b
 a
 a
 a
@@ -54632,10 +54488,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (213,1,1) = {"
+b
 a
 a
 a
@@ -54889,10 +54745,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (214,1,1) = {"
+b
 a
 a
 a
@@ -55146,10 +55002,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (215,1,1) = {"
+b
 a
 a
 a
@@ -55403,10 +55259,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (216,1,1) = {"
+b
 a
 a
 a
@@ -55660,10 +55516,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (217,1,1) = {"
+b
 a
 a
 a
@@ -55917,10 +55773,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (218,1,1) = {"
+b
 a
 a
 a
@@ -56174,10 +56030,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (219,1,1) = {"
+b
 a
 a
 a
@@ -56431,10 +56287,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (220,1,1) = {"
+b
 a
 a
 a
@@ -56688,10 +56544,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (221,1,1) = {"
+b
 a
 a
 a
@@ -56945,10 +56801,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (222,1,1) = {"
+b
 a
 a
 a
@@ -57202,10 +57058,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (223,1,1) = {"
+b
 a
 a
 a
@@ -57459,10 +57315,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (224,1,1) = {"
+b
 a
 a
 a
@@ -57716,10 +57572,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (225,1,1) = {"
+b
 a
 a
 a
@@ -57973,10 +57829,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (226,1,1) = {"
+b
 a
 a
 a
@@ -58230,10 +58086,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (227,1,1) = {"
+b
 a
 a
 a
@@ -58487,10 +58343,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (228,1,1) = {"
+b
 a
 a
 a
@@ -58744,10 +58600,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (229,1,1) = {"
+b
 a
 a
 a
@@ -59001,10 +58857,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (230,1,1) = {"
+b
 a
 a
 a
@@ -59258,10 +59114,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (231,1,1) = {"
+b
 a
 a
 a
@@ -59515,10 +59371,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (232,1,1) = {"
+b
 a
 a
 a
@@ -59772,10 +59628,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (233,1,1) = {"
+b
 a
 a
 a
@@ -60029,10 +59885,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (234,1,1) = {"
+b
 a
 a
 a
@@ -60286,10 +60142,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (235,1,1) = {"
+b
 a
 a
 a
@@ -60543,10 +60399,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (236,1,1) = {"
+b
 a
 a
 a
@@ -60800,10 +60656,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (237,1,1) = {"
+b
 a
 a
 a
@@ -61057,10 +60913,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (238,1,1) = {"
+b
 a
 a
 a
@@ -61314,10 +61170,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (239,1,1) = {"
+b
 a
 a
 a
@@ -61571,10 +61427,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (240,1,1) = {"
+b
 a
 a
 a
@@ -61828,10 +61684,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (241,1,1) = {"
+b
 a
 a
 a
@@ -62085,10 +61941,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (242,1,1) = {"
+b
 a
 a
 a
@@ -62342,10 +62198,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (243,1,1) = {"
+b
 a
 a
 a
@@ -62599,10 +62455,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (244,1,1) = {"
+b
 a
 a
 a
@@ -62856,10 +62712,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (245,1,1) = {"
+b
 a
 a
 a
@@ -63113,10 +62969,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (246,1,1) = {"
+b
 a
 a
 a
@@ -63370,10 +63226,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (247,1,1) = {"
+b
 a
 a
 a
@@ -63627,10 +63483,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (248,1,1) = {"
+b
 a
 a
 a
@@ -63884,10 +63740,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (249,1,1) = {"
+b
 a
 a
 a
@@ -64141,10 +63997,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (250,1,1) = {"
+b
 a
 a
 a
@@ -64398,10 +64254,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (251,1,1) = {"
+b
 a
 a
 a
@@ -64655,10 +64511,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (252,1,1) = {"
+b
 a
 a
 a
@@ -64912,10 +64768,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (253,1,1) = {"
+b
 a
 a
 a
@@ -65169,10 +65025,10 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (254,1,1) = {"
+b
 a
 a
 a
@@ -65426,263 +65282,262 @@ a
 a
 a
 a
-a
-a
+b
 "}
 (255,1,1) = {"
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
+b
 "}

@@ -27,8 +27,10 @@
 
 /turf/simulated/floor/rocky
 	name = "rocky sand"
-	icon = 'icons/turf/smooth/rocky_ash.dmi'
+	icon = 'icons/turf/map_placeholders.dmi'
 	icon_state = "rockyash"
+	base_icon_state = "rockyash"
+	base_icon = 'icons/turf/smooth/rocky_ash.dmi'
 	desc = "A fine grey sand. Seems to contain medium-sized rocks."
 	oxygen = MOLES_OXYGEN_NAARVAT
 	nitrogen = MOLES_NITROGEN_NAARVAT

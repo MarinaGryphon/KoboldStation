@@ -60,6 +60,8 @@ var/list/global/random_stock_rare = list()
 var/list/global/random_stock_large = list()
 
 /proc/spawn_cargo_stock()
+	if(SSatlas.loaded_save)
+		return
 	var/start_time = world.timeofday
 	new /datum/cargospawner()
 	admin_notice("<span class='danger'>Cargo Stock generation completed in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</span>", R_DEBUG)

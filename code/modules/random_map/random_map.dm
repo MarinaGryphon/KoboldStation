@@ -181,7 +181,7 @@ var/global/list/map_count = list()
 		return 0
 	if(target_area_type && !istype(T.loc, target_area_type))
 		return 0
-	if(must_be_clear && (locate(obj) in T))
+	if(must_be_clear && !turf_clear(T))
 		return 0
 	var/newpath = get_appropriate_path(map[tmp_cell])
 	if(newpath)

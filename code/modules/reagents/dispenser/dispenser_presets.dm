@@ -92,7 +92,6 @@
 			/obj/item/reagent_containers/chem_disp_cartridge/lime,
 			/obj/item/reagent_containers/chem_disp_cartridge/apple,
 			/obj/item/reagent_containers/chem_disp_cartridge/watermelon,
-			/obj/item/reagent_containers/chem_disp_cartridge/clean_kois,
 			/obj/item/reagent_containers/chem_disp_cartridge/banana
 		)
 

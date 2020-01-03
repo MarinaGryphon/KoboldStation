@@ -21,10 +21,13 @@ var/datum/controller/subsystem/sun/sun
 	NEW_SS_GLOBAL(sun)
 	LAZYINITLIST(solars)
 
+/datum/controller/subsystem/sun/Initialize(timeofday)
 	solar_next_update = world.time	// init the timer
 	fire()
 
 /datum/controller/subsystem/sun/proc/update_angle(var/ang)
+	if(!SSsunlight)
+		return
 	angle = ang
 	dz = sin(angle) // vertical component
 	dx = SIGN(cos(angle)) // sign of horizontal component

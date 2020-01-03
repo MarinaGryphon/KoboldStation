@@ -26,16 +26,14 @@
 /obj/item/frame/button/access/attack_self(mob/user)
 	side = side == "interior" ? "exterior" : "interior"
 	to_chat(user, span("notice", "You set \the [src] to [side]."))
+	switch(side)
+		if("interior")
+			build_machine_type = /obj/machinery/access_button/airlock_interior
+		if("exterior")
+			build_machine_type = /obj/machinery/access_button/airlock_exterior
 
 /obj/item/frame/button/access/attackby(obj/item/C, mob/user)
 	if(istype(C,/obj/item/device/debugger))
 		var/new_tag = sanitize(input(user, "Enter a new master ID tag.", "Master Tag Control") as null|text)
 		if(new_tag)
 			master_tag = new_tag
-
-/obj/item/frame/button/access/try_build(turf/on_wall, mob/user)
-	if(side == "interior")
-		build_machine_type = /obj/machinery/access_button/airlock_interior
-	if(side == "exterior")
-		build_machine_type = /obj/machinery/access_button/airlock_exterior
-	. = ..()

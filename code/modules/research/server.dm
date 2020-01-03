@@ -217,19 +217,19 @@
 			dat += "<HR><A href='?src=\ref[src];main=1'>Main Menu</A>"
 
 		if(2) //Data Management menu
-			dat += "[temp_server.name] Data ManagementP<BR><BR>"
-			dat += "Known Technologies<BR>"
+			dat += "[temp_server.name] Data Management<BR><BR>"
+			dat += "Known Technologies<BR><ul>"
 			for(var/datum/tech/T in temp_server.files.known_tech)
-				dat += "* [T.name] "
-				dat += "<A href='?src=\ref[src];reset_tech=[T.id]'>(Reset)</A><BR>" //FYI, these are all strings.
-			dat += "Known Designs<BR>"
+				dat += "<li> [T.name] "
+				dat += "<A href='?src=\ref[src];reset_tech=[T.id]'>(Reset)</A></li>" //FYI, these are all strings.
+			dat += "</ul><BR>Known Designs<BR><ul>"
 			for(var/datum/design/D in temp_server.files.known_designs)
-				dat += "* [D.name] "
-				dat += "<A href='?src=\ref[src];reset_design=[D.id]'>(Delete)</A><BR>"
-			dat += "<HR><A href='?src=\ref[src];main=1'>Main Menu</A>"
+				dat += "<li> [D.name] "
+				dat += "<A href='?src=\ref[src];reset_design=[D.id]'>(Delete)</A></li>"
+			dat += "</ul><HR><A href='?src=\ref[src];main=1'>Main Menu</A>"
 
 		if(3) //Server Data Transfer
-			dat += "\[0x[num2hex(temp_server.id, 8)]\] Server Transfer<BR><BR>"
+			dat += "[temp_server.name] Server Transfer<BR><BR>"
 			dat += "Send data to which server?<BR>"
 			for(var/obj/machinery/r_n_d/server/S in servers)
 				dat += "[num2hex(S.server_id,8)] <A href='?src=\ref[src];send_to=[S.server_id]'> (Transfer)</A><BR>"

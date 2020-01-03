@@ -5,17 +5,18 @@
 
 	lobby_screens = list("aurora_asteroid", "aurora_postcard")
 
-	station_levels = list(1, 2, 3)
+	station_levels = list(1, 2, 3, 4)
 	admin_levels = list()
-	contact_levels = list(1, 2, 3)
-	player_levels = list(1, 2, 3)
-	persist_levels = list(1, 2, 3)
+	contact_levels = list(1, 2, 3, 4)
+	player_levels = list(1, 2, 3, 4)
+	persist_levels = list(1, 2, 3, 4)
 	restricted_levels = list()
 	accessible_z_levels = list()
 	base_turf_by_z = list(
 		"1" = /turf/simulated/floor/rocky,
 		"2" = /turf/simulated/floor/rocky,
-		"3" = /turf/unsimulated/floor/planet/sand
+		"3" = /turf/simulated/floor/rocky,
+		"4" = /turf/unsimulated/floor/planet/sand
 	)
 
 	has_space_ruins = FALSE

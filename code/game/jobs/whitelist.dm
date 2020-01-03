@@ -121,6 +121,9 @@ var/list/whitelist = list()
 
 	if (!istype(C) || C.holder)
 		return 0
+	
+	if(C.player_age == "Requires database")
+		return 0
 
 	var/age_to_beat = 0
 

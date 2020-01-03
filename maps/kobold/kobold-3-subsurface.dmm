@@ -52,8 +52,7 @@
 "ak" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/central_one)
@@ -61,8 +60,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/central_one)
@@ -89,8 +87,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -107,7 +104,6 @@
 	dir = 1;
 	is_critical = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/machinery/power/terminal{
@@ -116,8 +112,7 @@
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
@@ -196,8 +191,7 @@
 "aD" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
@@ -232,8 +226,7 @@
 	dir = 1;
 	icon_state = "tube1";
 	name = "adjusted light fixture";
-	pixel_x = -16;
-	pixel_y = 0
+	pixel_x = -16
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
@@ -260,7 +253,6 @@
 "aM" = (
 /obj/structure/closet/secure_closet/medical_wall{
 	name = "O- Blood Locker";
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/item/reagent_containers/blood/OMinus,
@@ -293,13 +285,11 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/terminal{
 	icon_state = "term";
@@ -344,8 +334,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/medical/reception)
@@ -385,7 +374,6 @@
 	dir = 1;
 	is_critical = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/machinery/power/terminal{
@@ -394,8 +382,7 @@
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/kitchen)
@@ -407,9 +394,7 @@
 "bg" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/bodybags,
-/obj/item/storage/box/masks{
-	step_y = 0
-	},
+/obj/item/storage/box/masks,
 /turf/simulated/floor/tiled,
 /area/medical/reception)
 "bh" = (
@@ -439,8 +424,8 @@
 /obj/item/paper_bin,
 /obj/item/pen/blue,
 /obj/item/pen{
-	step_x = 2;
-	step_y = 3
+	pixel_x = 2;
+	pixel_y = 3
 	},
 /turf/simulated/floor/tiled,
 /area/medical/reception)
@@ -505,7 +490,7 @@
 /area/medical/reception)
 "bw" = (
 /obj/machinery/alarm/cold{
-	step_y = 26
+	pixel_y = 26
 	},
 /obj/machinery/light{
 	dir = 1;
@@ -580,8 +565,7 @@
 	},
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/medical/reception)
@@ -640,8 +624,7 @@
 "bN" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/medical/reception)
@@ -661,8 +644,7 @@
 	},
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/medical/reception)
@@ -793,8 +775,7 @@
 /area/hydroponics)
 "ci" = (
 /obj/structure/sink/kitchen{
-	pixel_y = 25;
-	step_y = 0
+	pixel_y = 25
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/kitchen)
@@ -808,8 +789,8 @@
 /obj/item/paper_bin,
 /obj/item/pen/blue,
 /obj/item/pen{
-	step_x = 2;
-	step_y = 3
+	pixel_x = 2;
+	pixel_y = 3
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
@@ -830,13 +811,11 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/terminal{
 	icon_state = "term";
@@ -853,8 +832,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/kitchen)
@@ -906,8 +884,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
@@ -916,7 +893,6 @@
 	dir = 8;
 	icon_state = "tube1";
 	name = "adjusted light fixture";
-	pixel_x = 0;
 	pixel_y = -16
 	},
 /turf/simulated/floor/tiled,
@@ -936,8 +912,7 @@
 "cB" = (
 /obj/machinery/alarm{
 	dir = 8;
-	pixel_x = 25;
-	pixel_y = 0
+	pixel_x = 25
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/kitchen)
@@ -947,7 +922,6 @@
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 25;
-	pixel_y = 0;
 	req_one_access = list(24,11,28)
 	},
 /turf/simulated/floor/tiled,
@@ -975,7 +949,7 @@
 /obj/machinery/door/window{
 	name = "Tool Storage";
 	dir = 8;
-	step_x = 27;
+	pixel_x = 27;
 	req_access = list(150)
 	},
 /obj/item/clothing/suit/space/void/engineering,
@@ -987,7 +961,7 @@
 /area/engineering/foyer)
 "cG" = (
 /obj/structure/noticeboard{
-	step_x = 31
+	pixel_x = 31
 	},
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
@@ -1108,8 +1082,7 @@
 "cX" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/kitchen)
@@ -1121,8 +1094,7 @@
 /obj/structure/kitchenspike,
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/kitchen)
@@ -1137,8 +1109,8 @@
 	},
 /obj/machinery/button/remote/airlock{
 	name = "Door Bolt Control";
-	step_x = 18;
-	step_y = -16;
+	pixel_x = 18;
+	pixel_y = -16;
 	pixel_x = 5;
 	pixel_y = 25;
 	req_access = null;
@@ -1219,8 +1191,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/effect/landmark/start,
 /turf/simulated/floor/tiled,
@@ -1237,7 +1208,6 @@
 /obj/structure/sign/directions/cryo{
 	dir = 4;
 	icon_state = "direction_cryo";
-	pixel_x = 0;
 	pixel_y = 4
 	},
 /turf/simulated/wall,
@@ -1249,8 +1219,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/sleep/cryo)
@@ -1274,8 +1243,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
@@ -1320,8 +1288,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -1391,16 +1358,14 @@
 	icon_state = "tube1"
 	},
 /obj/structure/noticeboard{
-	step_x = 0;
-	step_y = 31
+	pixel_y = 31
 	},
 /turf/simulated/floor/tiled,
 /area/medical/reception)
 "dD" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/central_one)
@@ -1445,7 +1410,7 @@
 /area/hallway/primary/central_one)
 "dJ" = (
 /obj/structure/sign/directions/medical{
-	step_x = -30
+	pixel_x = -30
 	},
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -1478,10 +1443,10 @@
 /area/medical/reception)
 "dN" = (
 /obj/structure/sink{
-	step_y = 18
+	pixel_y = 18
 	},
 /obj/structure/mirror{
-	step_y = 31
+	pixel_y = 31
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/central_one)
@@ -1574,8 +1539,8 @@
 	pixel_y = 25;
 	req_access = null;
 	specialfunctions = 4;
-	step_x = 18;
-	step_y = -16
+	pixel_x = 18;
+	pixel_y = -16
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -1586,8 +1551,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/machinery/light{
 	dir = 4;
@@ -1698,8 +1662,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/rnd/lab)
@@ -1738,10 +1701,7 @@
 "es" = (
 /obj/structure/table/standard,
 /obj/item/paper_bin,
-/obj/item/pen{
-	step_x = 0;
-	step_y = 0
-	},
+/obj/item/pen,
 /turf/simulated/floor/tiled,
 /area/rnd/lab)
 "et" = (
@@ -1763,8 +1723,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/rnd/lab)
@@ -1818,8 +1777,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1917,8 +1875,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
@@ -1927,8 +1884,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
@@ -1937,8 +1893,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
@@ -1957,8 +1912,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining_main)
@@ -1967,7 +1921,6 @@
 	dir = 8;
 	icon_state = "tube1";
 	name = "adjusted light fixture";
-	pixel_x = 0;
 	pixel_y = -16
 	},
 /obj/structure/closet/crate,
@@ -1984,8 +1937,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining_main)
@@ -2049,8 +2001,7 @@
 "ff" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining_main)
@@ -2064,8 +2015,7 @@
 	},
 /obj/machinery/light{
 	dir = 1;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/crate,
@@ -2141,7 +2091,6 @@
 	dir = 8;
 	icon_state = "tube1";
 	name = "adjusted light fixture";
-	pixel_x = 0;
 	pixel_y = -16
 	},
 /turf/simulated/floor/tiled,
@@ -2281,8 +2230,7 @@
 "fJ" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/structure/table/rack,
 /obj/item/shovel,
@@ -2481,7 +2429,7 @@
 /obj/structure/table/standard,
 /obj/item/reagent_containers/glass/beaker/sulphuric,
 /obj/structure/reagent_dispensers/acid{
-	step_y = 22
+	pixel_y = 22
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2582,8 +2530,7 @@
 "gu" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -2639,8 +2586,7 @@
 "gB" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -2651,8 +2597,7 @@
 "gC" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
@@ -2676,8 +2621,7 @@
 "gG" = (
 /obj/machinery/light{
 	dir = 2;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/reception)

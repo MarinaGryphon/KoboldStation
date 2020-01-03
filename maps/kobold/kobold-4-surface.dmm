@@ -90,13 +90,11 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/maintenance/interstitial_main)
@@ -420,7 +418,6 @@
 	frequency = 1379;
 	id_tag = "mining_east_airlock";
 	tag_interior_door = "mining_east_inner";
-	pixel_x = 0;
 	pixel_y = -25;
 	tag_chamber_sensor = "mining_east_sensor"
 	},
@@ -438,7 +435,6 @@
 	frequency = 1379;
 	id_tag = "mining_east_sensor";
 	master_tag = "mining_east_airlock";
-	pixel_x = 0;
 	pixel_y = -25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
@@ -505,8 +501,8 @@
 /area/maintenance/interstitial_main)
 "bc" = (
 /obj/item/storage/firstaid/fire{
-	step_x = 4;
-	step_y = 4
+	pixel_x = 4;
+	pixel_y = 4
 	},
 /obj/structure/table/steel,
 /obj/effect/decal/cleanable/dirt,
@@ -626,8 +622,7 @@
 /obj/structure/cable/cyan,
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/maintenance/solarmaint)
